@@ -1,0 +1,8 @@
+{
+  "track_id": "scaffolding_20260714",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-07-14T00:33:00Z",
+  "updated_at": "2026-07-14T00:33:00Z",
+  "description": "Core Project Scaffolding (TRACK-001) — Godot project setup, directory structure, autoload stubs, asset import, gd-tools toolchain initialization"
+}

@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "gd-tools": {
+      "source": "mansyar/gd-tools",
+      "sourceType": "github",
+      "skillPath": "skills/gd-tools/SKILL.md",
+      "computedHash": "0f89ea2fc29eb43e50658924b9cd6dfbc4f1a8e2a43f2c5b2c6e90453d832667"
+    }
+  }
+}

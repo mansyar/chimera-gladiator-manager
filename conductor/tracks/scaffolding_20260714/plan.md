@@ -1,0 +1,62 @@
+# Track: scaffolding_20260714 — Implementation Plan
+
+## Track Description
+
+Core Project Scaffolding (TRACK-001) — Godot project setup, directory structure, autoload stubs, asset import settings, gd-tools toolchain initialization.
+
+## Context
+
+- **Spec:** [./spec.md](./spec.md)
+- **ROADMAP:** `docs/ROADMAP.md` TRACK-001
+- **TDD Reference:** Section 1 (Project Configuration), Section 2 (Directory Structure)
+- **GDD Reference:** Section 1 (Executive Summary), Section 3 (Kenney Asset Mapping)
+
+---
+
+## Phase 1: Project Setup
+
+- [ ] Task: Initialize Godot project and configure `project.godot`
+    - [ ] Create `project.godot` with Compatibility renderer, GDScript
+    - [ ] Configure display settings (1280x720 default, 960x540 minimum, windowed resizable)
+    - [ ] Configure pixel art settings (Nearest filter, snap 2D transforms, lossless compression, mipmaps off)
+    - [ ] Configure stretch mode (`canvas_items`, aspect `keep`)
+    - [ ] Register Kenney Future font as default project font
+    - [ ] Configure input map (`ui_accept`, `ui_cancel`, `ui_select`, `navigate_up/down/left/right`, `pause`)
+- [ ] Task: Create full directory tree per TDD Section 2
+    - [ ] Create `scenes/` with subdirs: `combat/`, `ui/screens/`, `ui/widgets/`, `lab/`
+    - [ ] Create `scripts/` with subdirs: `autoload/`, `data/`, `combat/`, `ai/states/`, `systems/`, `ui/screens/`
+    - [ ] Create `resources/` with subdirs: `parts/head/`, `parts/torso/`, `parts/arms/`, `parts/legs/`, `abilities/head/`, `abilities/torso/`, `abilities/arms/`, `abilities/legs/`, `abilities/combos/`, `behaviors/`, `starters/`
+    - [ ] Create `tests/` with subdirs: `data/`, `combat/`, `ai/`, `systems/`, `ui/`
+    - [ ] Create root scene `scenes/main.tscn` skeleton (empty root node)
+- [ ] Task: Conductor - User Manual Verification 'Phase 1: Project Setup' (Protocol in workflow.md)
+
+---
+
+## Phase 2: Assets & Toolchain
+
+- [ ] Task: Apply asset import settings to all 5 Kenney packs
+    - [ ] Verify all 5 packs present in `assets/` (monster-builder, roguelike-rpg, ui-pack, ui-pack-rpg-expansion, particle-pack)
+    - [ ] Apply Nearest filter, lossless compression, mipmaps off to all PNG textures
+- [ ] Task: Create TileSet resource from Roguelike RPG pack
+    - [ ] Create TileSet from spritesheet (16x16 tiles, 1px margin)
+    - [ ] Save TileSet resource to `resources/`
+- [ ] Task: Initialize gd-tools toolchain
+    - [ ] Run `gd-tools init` (installs GUT, coverage addon, generates `gd-tools.toml`, `.gutconfig.json`, `gdlintrc`, `gdformatrc`)
+    - [ ] Run `gd-tools doctor` and verify all 9 checks pass (exit 0)
+- [ ] Task: Conductor - User Manual Verification 'Phase 2: Assets & Toolchain' (Protocol in workflow.md)
+
+---
+
+## Phase 3: Autoloads
+
+- [ ] Task: Create autoload stub scripts in correct load order
+    - [ ] Create `scripts/autoload/event_bus.gd` (stub: prints "EventBus ready")
+    - [ ] Create `scripts/autoload/game_state.gd` (stub: prints "GameState ready")
+    - [ ] Create `scripts/autoload/save_manager.gd` (stub: prints "SaveManager ready")
+    - [ ] Create `scripts/autoload/combat_manager.gd` (stub: prints "CombatManager ready")
+    - [ ] Register all 4 autoloads in `project.godot` with correct load order: EventBus -> GameState -> SaveManager -> CombatManager
+- [ ] Task: Verify project boots without errors
+    - [ ] Run `gd-tools lint` and verify exit 0
+    - [ ] Run `gd-tools format --check` and verify exit 0
+    - [ ] Boot project in Godot and confirm autoload print order (EventBus -> GameState -> SaveManager -> CombatManager)
+- [ ] Task: Conductor - User Manual Verification 'Phase 3: Autoloads' (Protocol in workflow.md)

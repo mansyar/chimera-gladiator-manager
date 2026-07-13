@@ -1,0 +1,26 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+/builds/
+
+# Imported translations (automatically generated)
+*.translation
+
+# System/tool-specific
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+*.swp
+*~
+
+# Python (gd-tools)
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Editor configs
+.vscode/
+.idea/
