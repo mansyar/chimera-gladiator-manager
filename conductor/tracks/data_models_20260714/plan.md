@@ -5,43 +5,43 @@
 
 > Data-only classes — exempt from TDD per workflow rules (pure enum declarations and `@export` variable definitions without logic). Dependency order: GameEnums → AbilityEffect → BehaviorModuleData → PartData → AbilityData → PartDatabase stub.
 
-- [ ] Task: Read context documents before starting Phase 1
-    - [ ] Read `conductor/tracks/data_models_20260714/spec.md`
-    - [ ] Read `conductor/workflow.md`
+- [x] Task: Read context documents before starting Phase 1
+    - [x] Read `conductor/tracks/data_models_20260714/spec.md`
+    - [x] Read `conductor/workflow.md`
 
-- [ ] Task: Create GameEnums (`scripts/data/enums.gd`)
-    - [ ] Implement `class_name GameEnums` with all 8 enums: Strain (7 values incl NEUTRAL), Rarity (4), PartSlot (4), Instability (4), AbilityType (2), AbilityCategory (4), TargetingMode (6), Positioning (3)
-    - [ ] Verify class compiles without errors
+- [x] Task: Create GameEnums (`scripts/data/enums.gd`) [28b28bf]
+    - [x] Implement `class_name GameEnums` with all 8 enums: Strain (7 values incl NEUTRAL), Rarity (4), PartSlot (4), Instability (4), AbilityType (2), AbilityCategory (4), TargetingMode (6), Positioning (3)
+    - [x] Verify class compiles without errors
 
-- [ ] Task: Create AbilityEffect resource (`scripts/data/ability_effect.gd`)
-    - [ ] Implement `class_name AbilityEffect extends Resource`
-    - [ ] Implement `enum EffectType` with 11 types: DAMAGE, HEAL, BUFF_STAT, DEBUFF_STAT, REPOSITION, SHIELD, CLEANSE, REVIVE, ENRAGE, STAT_MUTATION, RANDOM_EFFECT
-    - [ ] Implement `@export var effect_type: EffectType` and `@export var params: Dictionary`
-    - [ ] Verify class is inspector-editable (can create .tres instance)
+- [x] Task: Create AbilityEffect resource (`scripts/data/ability_effect.gd`) [28b28bf]
+    - [x] Implement `class_name AbilityEffect extends Resource`
+    - [x] Implement `enum EffectType` with 11 types: DAMAGE, HEAL, BUFF_STAT, DEBUFF_STAT, REPOSITION, SHIELD, CLEANSE, REVIVE, ENRAGE, STAT_MUTATION, RANDOM_EFFECT
+    - [x] Implement `@export var effect_type: EffectType` and `@export var params: Dictionary`
+    - [x] Verify class is inspector-editable (can create .tres instance)
 
-- [ ] Task: Create BehaviorModuleData resource (`scripts/data/behavior_module_data.gd`)
-    - [ ] Implement `class_name BehaviorModuleData extends Resource`
-    - [ ] Implement @export vars: module_name (String), detail_type (String), targeting (GameEnums.TargetingMode), ability_priority (Array[GameEnums.AbilityCategory]), positioning (GameEnums.Positioning)
-    - [ ] Verify class is inspector-editable
+- [x] Task: Create BehaviorModuleData resource (`scripts/data/behavior_module_data.gd`) [28b28bf]
+    - [x] Implement `class_name BehaviorModuleData extends Resource`
+    - [x] Implement @export vars: module_name (String), detail_type (String), targeting (GameEnums.TargetingMode), ability_priority (Array[GameEnums.AbilityCategory]), positioning (GameEnums.Positioning)
+    - [x] Verify class is inspector-editable
 
-- [ ] Task: Create PartData resource (`scripts/data/part_data.gd`)
-    - [ ] Implement `class_name PartData extends Resource`
-    - [ ] Implement @export vars: slot, shape_id, strain, rarity, sprite_path, hp_bonus, attack_bonus, defense_bonus, speed_bonus, ability_id, behavior_module (BehaviorModuleData), attack_range (float = 32.0)
-    - [ ] Verify class is inspector-editable
+- [x] Task: Create PartData resource (`scripts/data/part_data.gd`) [28b28bf]
+    - [x] Implement `class_name PartData extends Resource`
+    - [x] Implement @export vars: slot, shape_id, strain, rarity, sprite_path, hp_bonus, attack_bonus, defense_bonus, speed_bonus, ability_id, behavior_module (BehaviorModuleData), attack_range (float = 32.0)
+    - [x] Verify class is inspector-editable
 
-- [ ] Task: Create AbilityData resource (`scripts/data/ability_data.gd`)
-    - [ ] Implement `class_name AbilityData extends Resource`
-    - [ ] Implement @export vars: id, name, description, type (GameEnums.AbilityType), category (GameEnums.AbilityCategory), cooldown (float = 0.0), targeting (String), range (float = 0.0), effects (Array[AbilityEffect])
-    - [ ] Verify class is inspector-editable
+- [x] Task: Create AbilityData resource (`scripts/data/ability_data.gd`) [28b28bf]
+    - [x] Implement `class_name AbilityData extends Resource`
+    - [x] Implement @export vars: id, name, description, type (GameEnums.AbilityType), category (GameEnums.AbilityCategory), cooldown (float = 0.0), targeting (String), range (float = 0.0), effects (Array[AbilityEffect])
+    - [x] Verify class is inspector-editable
 
-- [ ] Task: Create PartDatabase stub (`scripts/systems/part_database.gd`)
-    - [ ] Implement `class_name PartDatabase` with static vars: part_templates (Dictionary = {}), ability_templates (Dictionary = {})
-    - [ ] Implement static methods returning null/empty: get_part() -> null, get_ability() -> null, get_base_stats() -> {}, generate_random_part() -> null, get_strain_combo() -> null
-    - [ ] Verify class compiles without errors
+- [x] Task: Create PartDatabase stub (`scripts/systems/part_database.gd`) [28b28bf]
+    - [x] Implement `class_name PartDatabase` with static vars: part_templates (Dictionary = {}), ability_templates (Dictionary = {})
+    - [x] Implement static methods returning null/empty: get_part() -> null, get_ability() -> null, get_base_stats() -> {}, generate_random_part() -> null, get_strain_combo() -> null
+    - [x] Verify class compiles without errors
 
-- [ ] Task: Verify Phase 1 code quality
-    - [ ] Run `gd-tools lint` — must exit 0
-    - [ ] Run `gd-tools format --check` — must exit 0
+- [x] Task: Verify Phase 1 code quality [28b28bf]
+    - [x] Run `gd-tools lint` — must exit 0
+    - [x] Run `gd-tools format --check` — must exit 0
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Enums & Base Resource Classes' (Protocol in workflow.md)
 
