@@ -42,9 +42,9 @@ Core Project Scaffolding (TRACK-001) — Godot project setup, directory structur
 - [x] Task: Create TileSet resource from Roguelike RPG pack (ada0152)
     - [x] Create TileSet from spritesheet (16x16 tiles, 1px margin)
     - [x] Save TileSet resource to `resources/`
-- [ ] Task: Initialize gd-tools toolchain
-    - [ ] Run `gd-tools init` (installs GUT, coverage addon, generates `gd-tools.toml`, `.gutconfig.json`, `gdlintrc`, `gdformatrc`)
-    - [ ] Run `gd-tools doctor` and verify all 9 checks pass (exit 0)
+- [x] Task: Initialize gd-tools toolchain (a048fcf)
+    - [x] Run `gd-tools init` (installs GUT, coverage addon, generates `gd-tools.toml`, `.gutconfig.json`, `gdlintrc`, `gdformatrc`)
+    - [x] Run `gd-tools doctor` and verify all 9 checks pass (exit 0)
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Assets & Toolchain' (Protocol in workflow.md)
 
 ---
