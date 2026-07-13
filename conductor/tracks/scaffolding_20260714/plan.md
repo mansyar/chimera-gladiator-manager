@@ -59,8 +59,8 @@ Core Project Scaffolding (TRACK-001) — Godot project setup, directory structur
     - [x] Create `scripts/autoload/save_manager.gd` (stub: prints "SaveManager ready")
     - [x] Create `scripts/autoload/combat_manager.gd` (stub: prints "CombatManager ready")
     - [x] Register all 4 autoloads in `project.godot` with correct load order: EventBus -> GameState -> SaveManager -> CombatManager
-- [ ] Task: Verify project boots without errors
-    - [ ] Run `gd-tools lint` and verify exit 0
-    - [ ] Run `gd-tools format --check` and verify exit 0
-    - [ ] Boot project in Godot and confirm autoload print order (EventBus -> GameState -> SaveManager -> CombatManager)
+- [x] Task: Verify project boots without errors
+    - [x] Run `gd-tools lint` and verify exit 0
+    - [x] Run `gd-tools format --check` and verify exit 0
+    - [x] Boot project in Godot and confirm autoload print order (EventBus -> GameState -> SaveManager -> CombatManager)
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Autoloads' (Protocol in workflow.md)
