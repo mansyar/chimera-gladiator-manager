@@ -1,3 +1,4 @@
+<protect>
 # Track Specification: Data Models & Enums (TRACK-002)
 
 ## Overview
@@ -247,3 +248,4 @@ Tests verify:
 - AI state machine (TRACK-006)
 - GameState, EventBus, SaveManager, CombatManager autoloads (TRACK-004)
 - Sprite path construction / ChimeraSprite composition (TRACK-005)
+</protect>

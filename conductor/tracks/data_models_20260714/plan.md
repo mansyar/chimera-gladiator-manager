@@ -1,8 +1,13 @@
+<protect>
 # Implementation Plan: Data Models & Enums (TRACK-002)
 
 ## Phase 1: Enums & Base Resource Classes
 
 > Data-only classes — exempt from TDD per workflow rules (pure enum declarations and `@export` variable definitions without logic). Dependency order: GameEnums → AbilityEffect → BehaviorModuleData → PartData → AbilityData → PartDatabase stub.
+
+- [ ] Task: Read context documents before starting Phase 1
+    - [ ] Read `conductor/tracks/data_models_20260714/spec.md`
+    - [ ] Read `conductor/workflow.md`
 
 - [ ] Task: Create GameEnums (`scripts/data/enums.gd`)
     - [ ] Implement `class_name GameEnums` with all 8 enums: Strain (7 values incl NEUTRAL), Rarity (4), PartSlot (4), Instability (4), AbilityType (2), AbilityCategory (4), TargetingMode (6), Positioning (3)
@@ -43,6 +48,10 @@
 ## Phase 2: Chimera & Combat State
 
 > Classes with testable logic — TDD applies. Class structure (properties) created first as data scaffolding with empty method stubs, then logic methods follow Red-Green TDD cycle. Dependency order: ChimeraData → ActiveEffect → CombatState.
+
+- [ ] Task: Read context documents before starting Phase 2
+    - [ ] Read `conductor/tracks/data_models_20260714/spec.md`
+    - [ ] Read `conductor/workflow.md`
 
 - [ ] Task: Implement ChimeraData with TDD (`scripts/data/chimera_data.gd`)
     - [ ] Create class structure: `class_name ChimeraData extends Resource`, @export vars (nickname, head/torso/arms/legs as 4 separate PartData), derived stat declarations, ability declarations, persistent state, `const PUREBRED_STAT_MULTIPLIER: float = 1.2`, empty method stubs (get_parts, get_part, recalculate_stats, calculate_instability, get_combo_ability)
@@ -97,6 +106,10 @@
 
 > EffectComponent has testable logic (add_effect, tick, recalculate_modifiers, get_modified_stat, cleanse) — TDD applies. Depends on ActiveEffect (Phase 2) and AbilityEffect (Phase 1).
 
+- [ ] Task: Read context documents before starting Phase 3
+    - [ ] Read `conductor/tracks/data_models_20260714/spec.md`
+    - [ ] Read `conductor/workflow.md`
+
 - [ ] Task: Implement EffectComponent with TDD (`scripts/combat/effect_component.gd`)
     - [ ] Create class structure: `class_name EffectComponent extends Node`, properties (active_effects: Array[ActiveEffect], stat_modifiers: Dictionary), empty method stubs (add_effect, tick, recalculate_modifiers, get_modified_stat, cleanse)
     - [ ] Write failing tests (`tests/combat/test_effect_component.gd`) (Red phase):
@@ -122,3 +135,4 @@
     - [ ] Verify all 12 acceptance criteria tests from spec pass
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Effect Component' (Protocol in workflow.md)
+</protect>
