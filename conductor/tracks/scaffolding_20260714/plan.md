@@ -15,13 +15,13 @@ Core Project Scaffolding (TRACK-001) — Godot project setup, directory structur
 
 ## Phase 1: Project Setup
 
-- [ ] Task: Initialize Godot project and configure `project.godot`
-    - [ ] Create `project.godot` with Compatibility renderer, GDScript
-    - [ ] Configure display settings (1280x720 default, 960x540 minimum, windowed resizable)
-    - [ ] Configure pixel art settings (Nearest filter, snap 2D transforms, lossless compression, mipmaps off)
-    - [ ] Configure stretch mode (`canvas_items`, aspect `keep`)
-    - [ ] Register Kenney Future font as default project font
-    - [ ] Configure input map (`ui_accept`, `ui_cancel`, `ui_select`, `navigate_up/down/left/right`, `pause`)
+- [x] Task: Initialize Godot project and configure `project.godot` (ad8f844)
+    - [x] Create `project.godot` with Compatibility renderer, GDScript
+    - [x] Configure display settings (1280x720 default, 960x540 minimum, windowed resizable)
+    - [x] Configure pixel art settings (Nearest filter, snap 2D transforms, lossless compression, mipmaps off)
+    - [x] Configure stretch mode (`canvas_items`, aspect `keep`)
+    - [x] Register Kenney Future font as default project font
+    - [x] Configure input map (`ui_accept`, `ui_cancel`, `ui_select`, `navigate_up/down/left/right`, `pause`)
 - [ ] Task: Create full directory tree per TDD Section 2
     - [ ] Create `scenes/` with subdirs: `combat/`, `ui/screens/`, `ui/widgets/`, `lab/`
     - [ ] Create `scripts/` with subdirs: `autoload/`, `data/`, `combat/`, `ai/states/`, `systems/`, `ui/screens/`
