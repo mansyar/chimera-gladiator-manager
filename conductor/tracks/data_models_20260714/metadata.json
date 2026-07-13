@@ -1,0 +1,8 @@
+{
+  "track_id": "data_models_20260714",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-07-14T09:33:42Z",
+  "updated_at": "2026-07-14T09:33:42Z",
+  "description": "TRACK-002: Data Models & Enums — implement foundational data model layer (GameEnums, PartData, AbilityData, AbilityEffect, BehaviorModuleData, ChimeraData, CombatState, ActiveEffect, EffectComponent, PartDatabase stub)"
+}
