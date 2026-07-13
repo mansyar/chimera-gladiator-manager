@@ -39,9 +39,9 @@ Core Project Scaffolding (TRACK-001) — Godot project setup, directory structur
 - [x] Task: Apply asset import settings to all 5 Kenney packs (9f22270)
     - [x] Verify all 5 packs present in `assets/` (monster-builder, roguelike-rpg, ui-pack, ui-pack-rpg-expansion, particle-pack)
     - [x] Apply Nearest filter, lossless compression, mipmaps off to all PNG textures
-- [ ] Task: Create TileSet resource from Roguelike RPG pack
-    - [ ] Create TileSet from spritesheet (16x16 tiles, 1px margin)
-    - [ ] Save TileSet resource to `resources/`
+- [x] Task: Create TileSet resource from Roguelike RPG pack (ada0152)
+    - [x] Create TileSet from spritesheet (16x16 tiles, 1px margin)
+    - [x] Save TileSet resource to `resources/`
 - [ ] Task: Initialize gd-tools toolchain
     - [ ] Run `gd-tools init` (installs GUT, coverage addon, generates `gd-tools.toml`, `.gutconfig.json`, `gdlintrc`, `gdformatrc`)
     - [ ] Run `gd-tools doctor` and verify all 9 checks pass (exit 0)
