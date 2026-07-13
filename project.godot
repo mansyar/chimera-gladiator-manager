@@ -83,3 +83,11 @@ renderer/rendering_method.mobile="gl_compatibility"
 textures/lossless_compression/force_png=true
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.gd")
+
+[autoload]
+
+_GDTCoverage="*res://addons/gd-tools-coverage/coverage.gd"

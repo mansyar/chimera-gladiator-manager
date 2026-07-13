@@ -24,3 +24,8 @@ venv/
 # Editor configs
 .vscode/
 .idea/
+
+.gd-tools/
+
+# CodeGraph index
+.codegraph/
