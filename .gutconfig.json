@@ -1,6 +1,5 @@
 {
   "dirs": [
-    "res://test/",
     "res://tests/"
   ],
   "include_subdirs": true,
