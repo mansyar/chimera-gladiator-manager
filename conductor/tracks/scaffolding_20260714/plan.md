@@ -28,7 +28,7 @@ Core Project Scaffolding (TRACK-001) — Godot project setup, directory structur
     - [x] Create `resources/` with subdirs: `parts/head/`, `parts/torso/`, `parts/arms/`, `parts/legs/`, `abilities/head/`, `abilities/torso/`, `abilities/arms/`, `abilities/legs/`, `abilities/combos/`, `behaviors/`, `starters/`
     - [x] Create `tests/` with subdirs: `data/`, `combat/`, `ai/`, `systems/`, `ui/`
     - [x] Create root scene `scenes/main.tscn` skeleton (empty root node)
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Project Setup' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Project Setup' (Protocol in workflow.md)
 
 ---
 
