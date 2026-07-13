@@ -36,9 +36,9 @@ Core Project Scaffolding (TRACK-001) — Godot project setup, directory structur
 
 ## Phase 2: Assets & Toolchain
 
-- [ ] Task: Apply asset import settings to all 5 Kenney packs
-    - [ ] Verify all 5 packs present in `assets/` (monster-builder, roguelike-rpg, ui-pack, ui-pack-rpg-expansion, particle-pack)
-    - [ ] Apply Nearest filter, lossless compression, mipmaps off to all PNG textures
+- [x] Task: Apply asset import settings to all 5 Kenney packs (9f22270)
+    - [x] Verify all 5 packs present in `assets/` (monster-builder, roguelike-rpg, ui-pack, ui-pack-rpg-expansion, particle-pack)
+    - [x] Apply Nearest filter, lossless compression, mipmaps off to all PNG textures
 - [ ] Task: Create TileSet resource from Roguelike RPG pack
     - [ ] Create TileSet from spritesheet (16x16 tiles, 1px margin)
     - [ ] Save TileSet resource to `resources/`
