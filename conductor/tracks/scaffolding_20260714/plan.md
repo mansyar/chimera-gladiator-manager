@@ -22,12 +22,12 @@ Core Project Scaffolding (TRACK-001) — Godot project setup, directory structur
     - [x] Configure stretch mode (`canvas_items`, aspect `keep`)
     - [x] Register Kenney Future font as default project font
     - [x] Configure input map (`ui_accept`, `ui_cancel`, `ui_select`, `navigate_up/down/left/right`, `pause`)
-- [ ] Task: Create full directory tree per TDD Section 2
-    - [ ] Create `scenes/` with subdirs: `combat/`, `ui/screens/`, `ui/widgets/`, `lab/`
-    - [ ] Create `scripts/` with subdirs: `autoload/`, `data/`, `combat/`, `ai/states/`, `systems/`, `ui/screens/`
-    - [ ] Create `resources/` with subdirs: `parts/head/`, `parts/torso/`, `parts/arms/`, `parts/legs/`, `abilities/head/`, `abilities/torso/`, `abilities/arms/`, `abilities/legs/`, `abilities/combos/`, `behaviors/`, `starters/`
-    - [ ] Create `tests/` with subdirs: `data/`, `combat/`, `ai/`, `systems/`, `ui/`
-    - [ ] Create root scene `scenes/main.tscn` skeleton (empty root node)
+- [x] Task: Create full directory tree per TDD Section 2 (4ef752c)
+    - [x] Create `scenes/` with subdirs: `combat/`, `ui/screens/`, `ui/widgets/`, `lab/`
+    - [x] Create `scripts/` with subdirs: `autoload/`, `data/`, `combat/`, `ai/states/`, `systems/`, `ui/screens/`
+    - [x] Create `resources/` with subdirs: `parts/head/`, `parts/torso/`, `parts/arms/`, `parts/legs/`, `abilities/head/`, `abilities/torso/`, `abilities/arms/`, `abilities/legs/`, `abilities/combos/`, `behaviors/`, `starters/`
+    - [x] Create `tests/` with subdirs: `data/`, `combat/`, `ai/`, `systems/`, `ui/`
+    - [x] Create root scene `scenes/main.tscn` skeleton (empty root node)
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Project Setup' (Protocol in workflow.md)
 
 ---
