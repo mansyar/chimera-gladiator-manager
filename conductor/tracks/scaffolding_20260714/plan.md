@@ -66,3 +66,9 @@ Core Project Scaffolding (TRACK-001) — Godot project setup, directory structur
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Autoloads' (Protocol in workflow.md)
 
 > **Phase 3 Checkpoint:** 3e4249e — Verified (automated: lint/format/doctor 9/9 passed; manual: user confirmed autoloads registered, print order correct, no errors)
+
+---
+
+## Phase: Review Fixes
+
+- [x] Task: Apply review suggestions (137e4be)
