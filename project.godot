@@ -90,4 +90,8 @@ enabled=PackedStringArray("res://addons/gut/plugin.gd")
 
 [autoload]
 
+EventBus="*res://scripts/autoload/event_bus.gd"
+GameState="*res://scripts/autoload/game_state.gd"
+SaveManager="*res://scripts/autoload/save_manager.gd"
+CombatManager="*res://scripts/autoload/combat_manager.gd"
 _GDTCoverage="*res://addons/gd-tools-coverage/coverage.gd"
