@@ -45,7 +45,9 @@ Core Project Scaffolding (TRACK-001) — Godot project setup, directory structur
 - [x] Task: Initialize gd-tools toolchain (a048fcf)
     - [x] Run `gd-tools init` (installs GUT, coverage addon, generates `gd-tools.toml`, `.gutconfig.json`, `gdlintrc`, `gdformatrc`)
     - [x] Run `gd-tools doctor` and verify all 9 checks pass (exit 0)
-- [~] Task: Conductor - User Manual Verification 'Phase 2: Assets & Toolchain' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Assets & Toolchain' (Protocol in workflow.md)
+
+> **Phase 2 Checkpoint:** 5eb624b — Verified (automated: lint/format/doctor 9/9 passed; manual: user confirmed TileSet loads, GUT plugin visible, asset import settings correct)
 
 ---
 
