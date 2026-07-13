@@ -30,6 +30,8 @@ Core Project Scaffolding (TRACK-001) — Godot project setup, directory structur
     - [x] Create root scene `scenes/main.tscn` skeleton (empty root node)
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Project Setup' (Protocol in workflow.md)
 
+> **Phase 1 Checkpoint:** e74e311 — Verified (automated: lint/format/headless boot passed; manual: user confirmed project opens correctly in Godot editor)
+
 ---
 
 ## Phase 2: Assets & Toolchain
