@@ -23,7 +23,7 @@ Before initializing individual tracks, the following foundational context files 
 ## Milestone 1: Environment & Foundations
 
 ### TRACK-001: Core Project Scaffolding
-*   **Status:** `Pending`
+*   **Status:** `Complete`
 *   **Dependencies:** None
 *   **Estimated Effort:** 1-2 Days
 
@@ -60,9 +60,9 @@ Before initializing individual tracks, the following foundational context files 
 *   **Phase 3 (Autoloads):** Register 4 autoload stub scripts in correct load order, verify project boots without errors
 
 #### Verification & Definition of Done (DoD)
-*   [ ] **Manual Checkpoint:** Project opens in Godot 4.5+ with zero errors. Directory structure matches TDD Section 2. Autoloads print confirmation in order on boot. Font renders as Kenney Future. Pixel art textures display with Nearest filtering. Stretch mode preserves aspect ratio on window resize.
-*   [ ] **Automated Tests:** `gd-tools doctor` exits 0 (all 9 checks pass). `gd-tools lint` exits 0. `gd-tools format --check` exits 0.
-*   [ ] **Conductor Review:** Project boots clean, directory tree verified against TDD, autoload order confirmed, gd-tools environment healthy.
+*   [x] **Manual Checkpoint:** Project opens in Godot 4.5+ with zero errors. Directory structure matches TDD Section 2. Autoloads print confirmation in order on boot. Font renders as Kenney Future. Pixel art textures display with Nearest filtering. Stretch mode preserves aspect ratio on window resize.
+*   [x] **Automated Tests:** `gd-tools doctor` exits 0 (all 9 checks pass). `gd-tools lint` exits 0. `gd-tools format --check` exits 0.
+*   [x] **Conductor Review:** Project boots clean, directory tree verified against TDD, autoload order confirmed, gd-tools environment healthy.
 
 ---
 
