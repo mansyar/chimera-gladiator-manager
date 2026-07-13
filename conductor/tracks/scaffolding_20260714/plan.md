@@ -64,3 +64,5 @@ Core Project Scaffolding (TRACK-001) — Godot project setup, directory structur
     - [x] Run `gd-tools format --check` and verify exit 0
     - [x] Boot project in Godot and confirm autoload print order (EventBus -> GameState -> SaveManager -> CombatManager)
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Autoloads' (Protocol in workflow.md)
+
+> **Phase 3 Checkpoint:** 3e4249e — Verified (automated: lint/format/doctor 9/9 passed; manual: user confirmed autoloads registered, print order correct, no errors)
