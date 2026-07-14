@@ -17,8 +17,8 @@
 
 ## Phase 2: Unit Test Expansion — Systems Modules
 
-- [ ] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
-- [ ] Task: Expand `test_economy.gd` for `scripts/systems/economy.gd`
+- [x] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
+- [~] Task: Expand `test_economy.gd` for `scripts/systems/economy.gd`
     - [ ] Write tests for untested branches (e.g., losing streak rubber-band bonus, edge cases for tier 0/invalid tier)
     - [ ] Run tests and verify they pass (if any fail, document as source bug per NFR-3)
     - [ ] Verify coverage for economy module is 95%+
