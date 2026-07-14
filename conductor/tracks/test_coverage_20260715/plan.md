@@ -78,11 +78,11 @@
     - [x] Write tests for untested branches (e.g., save serialization, load deserialization, PartDatabase reconstruction, corrupt save handling)
     - [x] Run tests and verify they pass
     - [x] Verify coverage for save_manager module is 95%+
-- [ ] Task: Expand `test_combat_manager.gd` for `scripts/autoload/combat_manager.gd` using mocked combat entities
-    - [ ] Set up GUT doubles for CombatState and combat entities
-    - [ ] Write tests for untested branches (e.g., match start/end lifecycle, entity placement, reward distribution, signal emission)
-    - [ ] Run tests and verify they pass
-    - [ ] Verify coverage for combat_manager module is 95%+
+- [x] Task: Expand `test_combat_manager.gd` for `scripts/autoload/combat_manager.gd` using mocked combat entities
+    - [x] Set up GUT doubles for CombatState and combat entities
+    - [x] Write tests for untested branches (e.g., match start/end lifecycle, entity placement, reward distribution, signal emission)
+    - [x] Run tests and verify they pass
+    - [x] Verify coverage for combat_manager module is 95%+
 - [ ] Task: Conductor - User Manual Verification 'Unit Test Expansion — Autoload Modules' (Protocol in workflow.md)
 
 ## Phase 5: Integration Tests
