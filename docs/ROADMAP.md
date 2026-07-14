@@ -69,7 +69,7 @@ Before initializing individual tracks, the following foundational context files 
 ## Milestone 2: Data Layer & Core Infrastructure
 
 ### TRACK-002: Data Models & Enums
-*   **Status:** `Pending`
+*   **Status:** `Complete`
 *   **Dependencies:** TRACK-001
 *   **Estimated Effort:** 2-3 Days
 
@@ -104,9 +104,9 @@ Before initializing individual tracks, the following foundational context files 
 *   **Phase 3 (Effect Component):** Create EffectComponent. Write tests for stat modifier recalculation and effect expiration.
 
 #### Verification & Definition of Done (DoD)
-*   [ ] **Manual Checkpoint:** Can create .tres instances of PartData, AbilityData, AbilityEffect, BehaviorModuleData in inspector. ChimeraData with 4 parts assigned shows correct derived stats in a test scene.
-*   [ ] **Automated Tests:** `gd-tools test --coverage --min 80` exits 0. Tests verify: (1) recalculate_stats sums stats from 4 parts, (2) calculate_instability returns 0 for 4 same-strain, 3 for 4 different, (3) get_combo_ability returns correct tier for 2/3/4 same-strain, (4) CombatState.take_damage reduces HP and sets is_dead at 0, (5) ActiveEffect.tick returns true when expired, (6) EffectComponent.add_effect updates stat_modifiers, (7) EffectComponent.cleanse removes only debuffs.
-*   [ ] **Conductor Review:** All classes compile. Resource exports work in inspector. `gd-tools lint` and `gd-tools format --check` pass. Coverage >= 80%.
+*   [x] **Manual Checkpoint:** Can create .tres instances of PartData, AbilityData, AbilityEffect, BehaviorModuleData in inspector. ChimeraData with 4 parts assigned shows correct derived stats in a test scene.
+*   [x] **Automated Tests:** `gd-tools test --coverage --min 80` exits 0. Tests verify: (1) recalculate_stats sums stats from 4 parts, (2) calculate_instability returns 0 for 4 same-strain, 3 for 4 different, (3) get_combo_ability returns correct tier for 2/3/4 same-strain, (4) CombatState.take_damage reduces HP and sets is_dead at 0, (5) ActiveEffect.tick returns true when expired, (6) EffectComponent.add_effect updates stat_modifiers, (7) EffectComponent.cleanse removes only debuffs.
+*   [x] **Conductor Review:** All classes compile. Resource exports work in inspector. `gd-tools lint` and `gd-tools format --check` pass. Coverage >= 80%.
 
 ---
 
