@@ -28,6 +28,7 @@
 - **Formatter:** gdformat (via `gd-tools format --check`)
 - **Coverage:** Coverage addon (via `gd-tools test --coverage --min 80`)
   - *Note (2026-07-15):* Coverage enabled with `min_percent = 80` in `gd-tools.toml`. Five pure data/enum source files are excluded from coverage calculation (they contain no testable logic per workflow rules): `scripts/data/enums.gd`, `scripts/data/part_data.gd`, `scripts/data/ability_data.gd`, `scripts/data/ability_effect.gd`, `scripts/data/behavior_module_data.gd`.
+  - *Note (2026-07-15):* gd-tools updated to v0.3.0; coverage addon v0.3.0. Modified `addons/gd-tools-coverage/coverage.gd` line 105: changed `script.reload()` to `script.reload(true)` to fix autoload instrumentation. Godot creates all autoload instances before calling `_ready()` on any of them, so `reload()` without `keep_state=true` fails with `ERR_ALREADY_IN_USE` for autoload scripts. `_GDTCoverage` autoload moved to first position (before EventBus) so instrumentation runs in its `_ready()` before other autoloads initialize. This is a tooling fix in `addons/`, not game source code.
 - **Doctor:** `gd-tools doctor` (9 environment checks, must exit 0)
 - **Test Location:** `res://tests/` mirroring `scripts/` structure
 
