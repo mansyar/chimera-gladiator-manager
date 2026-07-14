@@ -89,11 +89,11 @@
     - [x] Implement refresh_market() delegating to market.gd.generate_rotating_stock
     - [x] Verify tests pass
 
-- [ ] Task: Implement GameState ascension methods
-    - [ ] Write failing tests for can_ascend (true at 10+ wins, false below)
-    - [ ] Write failing tests for ascend_chimera (moves to hall_of_fame, grants 1 RP, replaces with starter, emits chimera_ascended)
-    - [ ] Implement can_ascend() and ascend_chimera()
-    - [ ] Verify tests pass
+- [x] Task: Implement GameState ascension methods [987e186]
+    - [x] Write failing tests for can_ascend (true at 10+ wins, false below)
+    - [x] Write failing tests for ascend_chimera (moves to hall_of_fame, grants 1 RP, replaces with starter, emits chimera_ascended)
+    - [x] Implement can_ascend() and ascend_chimera()
+    - [x] Verify tests pass
 
 - [ ] Task: Implement GameState research methods
     - [ ] Write failing tests for get_research_level (returns 0 for unlocked, correct level for unlocked)
