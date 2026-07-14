@@ -81,3 +81,20 @@ func test_heal_caps_at_max_hp() -> void:
 	state.take_damage(10.0)
 	state.heal(50.0)
 	assert_eq(state.current_hp, 100.0, "current_hp should not exceed max_hp")
+
+
+func test_take_damage_zero_does_not_set_dead() -> void:
+	var data := _make_chimera(100.0)
+	var state := CombatState.new()
+	state.initialize(data, 0)
+	state.take_damage(0.0)
+	assert_eq(state.current_hp, 100.0, "current_hp should be unchanged")
+	assert_false(state.is_dead, "is_dead should be false for zero damage")
+
+
+func test_initialize_with_zero_max_hp() -> void:
+	var data := _make_chimera(0.0)
+	var state := CombatState.new()
+	state.initialize(data, 0)
+	assert_eq(state.current_hp, 0.0, "current_hp should be 0")
+	assert_false(state.is_dead, "is_dead should be false (set only by take_damage)")
