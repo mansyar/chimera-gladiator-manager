@@ -13,10 +13,10 @@
     - [x] Implement all 13 signal declarations in event_bus.gd
     - [x] Verify tests pass
 
-- [ ] Task: Implement CombatManager stub
-    - [ ] Set match_active property to false
-    - [ ] Implement _process() early return when !match_active
-    - [ ] Verify project boots without errors
+- [x] Task: Implement CombatManager stub (7d25f7d)
+    - [x] Set match_active property to false
+    - [x] Implement _process() early return when !match_active
+    - [x] Verify project boots without errors
 
 - [ ] Task: Implement economy.gd static utility
     - [ ] Write failing tests for calculate_match_reward (Regular win/loss, Tournament win/loss with multipliers)
