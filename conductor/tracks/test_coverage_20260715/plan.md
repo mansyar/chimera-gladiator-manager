@@ -47,7 +47,7 @@
     - [ ] Write tests for untested branches (e.g., stat aggregation from equipped parts, instability calculation, combo ability lookup, part equip/unequip)
     - [ ] Run tests and verify they pass
     - [ ] Verify coverage for chimera_data module is 95%+
-- [ ] Task: Expand `test_combat_state.gd` for `scripts/combat/combat_state.gd`
+- [x] Task: Expand `test_combat_state.gd` for `scripts/combat/combat_state.gd` [c4ec9f3]
     - [ ] Write tests for untested branches (e.g., HP boundary conditions, berserk trigger/reset, cooldown management, effect application/removal)
     - [ ] Run tests and verify they pass
     - [ ] Verify coverage for combat_state module is 95%+
