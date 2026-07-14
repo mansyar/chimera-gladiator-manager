@@ -81,3 +81,43 @@ func spend_gold(amount: int) -> bool:
 func add_infamy(amount: int) -> void:
 	infamy += amount
 	EventBus.infamy_changed.emit(infamy)
+
+
+# --- Roster Management ---
+
+
+## Get a chimera from the roster by index.[br]
+## Returns [code]null[/code] if index is out of bounds.[br]
+## [param index] The roster slot index (0-2).
+func get_chimera(index: int) -> ChimeraData:
+	if index < 0 or index >= roster.size():
+		return null
+	return roster[index]
+
+
+## Replace a chimera in the roster.[br]
+## Does nothing if index is out of bounds.[br]
+## [param index] The roster slot index.[br]
+## [param new_chimera] The new ChimeraData to place in the slot.[br]
+## Emits [signal EventBus.chimera_modified].
+func replace_chimera(index: int, new_chimera: ChimeraData) -> void:
+	if index < 0 or index >= roster.size():
+		return
+	roster[index] = new_chimera
+	EventBus.chimera_modified.emit(new_chimera)
+
+
+# --- Inventory Management ---
+
+
+## Add a part to the player's inventory.[br]
+## [param part] The PartData to add.
+func add_part(part: PartData) -> void:
+	inventory.append(part)
+
+
+## Remove a part from the player's inventory.[br]
+## Does nothing if the part is not in inventory.[br]
+## [param part] The PartData to remove.
+func remove_part(part: PartData) -> void:
+	inventory.erase(part)
