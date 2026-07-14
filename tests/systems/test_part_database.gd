@@ -606,6 +606,55 @@ func test_all_neutral_chimera_is_pure() -> void:
 	assert_null(combo, "All-NEUTRAL chimera should have no combo ability")
 
 
+# --- Edge Case Tests ---
+
+
+func test_load_dir_nonexistent_directory() -> void:
+	var result := PartDatabase._load_dir("res://nonexistent_dir_xyz/")
+	assert_eq(result, [], "Should return empty array for nonexistent directory")
+	assert_push_warning("PartDatabase: Directory not found")
+
+
+func test_load_dir_failed_resource_load() -> void:
+	var temp_dir := "res://tests/temp_pd_test/"
+	DirAccess.make_dir_recursive_absolute(temp_dir)
+	var file := FileAccess.open(temp_dir + "invalid.tres", FileAccess.WRITE)
+	file.store_string("[invalid resource content]")
+	file.close()
+	var result := PartDatabase._load_dir(temp_dir)
+	assert_eq(result, [], "Should return empty array for corrupt .tres file")
+	assert_engine_error_count(2, "Should have 2 engine errors from failed resource load")
+	assert_push_warning("PartDatabase: Failed to load resource")
+	# Cleanup
+	DirAccess.remove_absolute(temp_dir + "invalid.tres")
+	DirAccess.remove_absolute(temp_dir)
+
+
+func test_pick_weighted_rarity_empty_weights() -> void:
+	var result := PartDatabase._pick_weighted_rarity({})
+	assert_eq(result, GameEnums.Rarity.COMMON, "Should return COMMON for empty weights")
+
+
+func test_pick_weighted_rarity_zero_weights() -> void:
+	var weights := {
+		GameEnums.Rarity.COMMON: 0,
+		GameEnums.Rarity.LEGENDARY: 0,
+	}
+	var result := PartDatabase._pick_weighted_rarity(weights)
+	assert_eq(result, GameEnums.Rarity.COMMON, "Should return COMMON when all weights are zero")
+
+
+func test_generate_random_part_invalid_slot() -> void:
+	var invalid_slot: GameEnums.PartSlot = 99
+	var result := PartDatabase.generate_random_part(invalid_slot, {})
+	assert_null(result, "Should return null for slot with no templates")
+
+
+func test_get_sprite_path_no_underscore() -> void:
+	var result := PartDatabase.get_sprite_path("singleword", GameEnums.Strain.UNDEAD)
+	assert_eq(result, "", "Should return empty string for shape_id without underscore")
+
+
 # --- Helper Methods ---
 
 
