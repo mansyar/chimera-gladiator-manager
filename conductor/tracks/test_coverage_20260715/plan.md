@@ -55,7 +55,7 @@
     - [ ] Write tests for untested branches (e.g., effect tick processing, duration expiry, stat modification application/removal)
     - [ ] Run tests and verify they pass
     - [ ] Verify coverage for active_effect module is 95%+
-- [ ] Task: Expand `test_effect_component.gd` for `scripts/combat/effect_component.gd`
+- [x] Task: Expand `test_effect_component.gd` for `scripts/combat/effect_component.gd` [cdcfd20]
     - [ ] Write tests for untested branches (e.g., multiple simultaneous effects, effect stacking rules, component signal emissions)
     - [ ] Run tests and verify they pass
     - [ ] Verify coverage for effect_component module is 95%+
