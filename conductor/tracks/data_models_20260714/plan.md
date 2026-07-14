@@ -72,18 +72,18 @@
     - [x] Implement logic methods to pass tests (Green phase): get_parts(), get_part() with match, calculate_instability() (count distinct strains, set instability/strain_count/dominant_strain), recalculate_stats() (sum stats, apply purebred bonus, apply research, set derived properties), get_combo_ability() (count strains, determine tier, call PartDatabase.get_strain_combo())
     - [x] Verify coverage > 80% for chimera_data.gd (DEFERRED — gd-tools coverage addon fails on autoload scripts; user will fix separately. 17/17 tests pass without --coverage flag.)
 
-- [ ] Task: Implement ActiveEffect with TDD (`scripts/combat/active_effect.gd`)
-    - [ ] Create class structure: `class_name ActiveEffect extends RefCounted`, properties (effect_type, stat_name, amount, duration, source_id), empty method stub (tick)
-    - [ ] Write failing tests (`tests/combat/test_active_effect.gd`) (Red phase):
+- [x] Task: Implement ActiveEffect with TDD (`scripts/combat/active_effect.gd`) [b540b78]
+    - [x] Create class structure: `class_name ActiveEffect extends RefCounted`, properties (effect_type, stat_name, amount, duration, source_id), empty method stub (tick)
+    - [x] Write failing tests (`tests/combat/test_active_effect.gd`) (Red phase):
         - tick() decrements duration by delta
         - tick() returns true when duration reaches 0 (expired)
         - tick() returns false when duration > 0 (not expired)
-    - [ ] Implement tick(delta) -> bool: decrement duration, return duration <= 0.0 (Green phase)
-    - [ ] Verify coverage > 80% for active_effect.gd
+    - [x] Implement tick(delta) -> bool: decrement duration, return duration <= 0.0 (Green phase)
+    - [x] Verify coverage > 80% for active_effect.gd (DEFERRED — coverage addon issue; user will fix separately)
 
-- [ ] Task: Implement CombatState with TDD (`scripts/combat/combat_state.gd`)
-    - [ ] Create class structure: `class_name CombatState extends RefCounted`, all properties (chimera_data, current_hp, max_hp, attack, defense, speed, is_berserk, berserk timers, berserk_modifiers, ability_cooldowns, active_effects, is_dead, team), empty method stubs (initialize, take_damage, heal)
-    - [ ] Write failing tests (`tests/combat/test_combat_state.gd`) (Red phase):
+- [x] Task: Implement CombatState with TDD (`scripts/combat/combat_state.gd`) [06c3770]
+    - [x] Create class structure: `class_name CombatState extends RefCounted`, all properties (chimera_data, current_hp, max_hp, attack, defense, speed, is_berserk, berserk timers, berserk_modifiers, ability_cooldowns, active_effects, is_dead, team), empty method stubs (initialize, take_damage, heal)
+    - [x] Write failing tests (`tests/combat/test_combat_state.gd`) (Red phase):
         - initialize() snapshots max_hp, attack, defense, speed from ChimeraData
         - initialize() sets current_hp = max_hp
         - initialize() sets team correctly
@@ -92,8 +92,8 @@
         - take_damage() does not reduce current_hp below 0
         - heal() increases current_hp by amount
         - heal() caps at max_hp
-    - [ ] Implement logic methods (Green phase): initialize(data, team_id), take_damage(amount), heal(amount)
-    - [ ] Verify coverage > 80% for combat_state.gd
+    - [x] Implement logic methods (Green phase): initialize(data, team_id), take_damage(amount), heal(amount)
+    - [x] Verify coverage > 80% for combat_state.gd (DEFERRED — coverage addon issue; user will fix separately)
 
 - [ ] Task: Verify Phase 2 code quality
     - [ ] Run `gd-tools lint` — must exit 0
