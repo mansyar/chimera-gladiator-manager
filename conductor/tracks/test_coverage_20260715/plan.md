@@ -1,7 +1,9 @@
+<protect>
 # Implementation Plan: Increase Test Coverage
 
 ## Phase 1: Coverage Tool Configuration
 
+- [ ] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
 - [ ] Task: Update `gd-tools.toml` coverage settings
     - [ ] Set `[coverage] enabled = true`
     - [ ] Set `[coverage] min_percent = 80`
@@ -15,6 +17,7 @@
 
 ## Phase 2: Unit Test Expansion — Systems Modules
 
+- [ ] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
 - [ ] Task: Expand `test_economy.gd` for `scripts/systems/economy.gd`
     - [ ] Write tests for untested branches (e.g., losing streak rubber-band bonus, edge cases for tier 0/invalid tier)
     - [ ] Run tests and verify they pass (if any fail, document as source bug per NFR-3)
@@ -39,6 +42,7 @@
 
 ## Phase 3: Unit Test Expansion — Data & Combat Modules
 
+- [ ] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
 - [ ] Task: Expand `test_chimera_data.gd` for `scripts/data/chimera_data.gd`
     - [ ] Write tests for untested branches (e.g., stat aggregation from equipped parts, instability calculation, combo ability lookup, part equip/unequip)
     - [ ] Run tests and verify they pass
@@ -59,6 +63,7 @@
 
 ## Phase 4: Unit Test Expansion — Autoload Modules (with Mocking)
 
+- [ ] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
 - [ ] Task: Expand `test_event_bus.gd` for `scripts/autoload/event_bus.gd`
     - [ ] Write tests for untested branches (e.g., signal parameter validation, multi-signal emission sequences, disconnect cleanup)
     - [ ] Run tests and verify they pass
@@ -82,6 +87,7 @@
 
 ## Phase 5: Integration Tests
 
+- [ ] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
 - [ ] Task: Create `tests/integration/test_economy_flow.gd`
     - [ ] Write integration test: buy_part → gold deduction → inventory add → save → load → verify state
     - [ ] Run test and verify it passes
@@ -95,6 +101,7 @@
 
 ## Phase 6: Edge Case Tests
 
+- [ ] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
 - [ ] Task: Write berserk edge case tests (in relevant test files or `tests/edge/test_berserk_edge_cases.gd`)
     - [ ] Test purebred immunity to berserk
     - [ ] Test event modifier accumulation and reset
@@ -117,6 +124,7 @@
 
 ## Phase 7: Final Verification & Coverage Gate
 
+- [ ] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
 - [ ] Task: Run full verification suite
     - [ ] Run `gd-tools lint` and confirm exit 0
     - [ ] Run `gd-tools format --check` and confirm exit 0
@@ -126,3 +134,4 @@
     - [ ] If below 95%, add targeted tests for remaining uncovered branches
     - [ ] Re-run coverage to confirm 95%+ achieved (or document why 95% is impractical for specific modules)
 - [ ] Task: Conductor - User Manual Verification 'Final Verification & Coverage Gate' (Protocol in workflow.md)
+</protect>

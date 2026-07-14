@@ -1,3 +1,4 @@
+<protect>
 # Track Specification: Increase Test Coverage
 
 ## Overview
@@ -110,3 +111,4 @@ This track focuses on maximizing test coverage across the Chimera Gladiator Mana
 7. Edge case tests covering berserk, decay, combo tiers, save/load, and formation grid
 8. Autoload singletons tested using GUT mocking/doubling
 9. Overall coverage on testable files is 80%+ (stretch: 95%+)
+</protect>
