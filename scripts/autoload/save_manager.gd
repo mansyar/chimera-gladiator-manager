@@ -22,6 +22,9 @@ func save_game() -> void:
 		"game_state": _serialize_game_state(),
 	}
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	if file == null:
+		push_error("SaveManager: Failed to open save file for writing: " + SAVE_PATH)
+		return
 	file.store_string(JSON.stringify(save_data, "\t"))
 
 
@@ -34,6 +37,9 @@ func load_game() -> bool:
 	if not FileAccess.file_exists(SAVE_PATH):
 		return false
 	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
+	if file == null:
+		push_error("SaveManager: Failed to open save file for reading: " + SAVE_PATH)
+		return false
 	var json_text := file.get_as_text()
 	var parsed: Variant = JSON.parse_string(json_text)
 	if parsed == null or not (parsed is Dictionary):
@@ -197,6 +203,9 @@ func _deserialize_game_state(gs: Dictionary) -> void:
 
 func _deserialize_part(data: Dictionary) -> PartData:
 	if data.is_empty():
+		return null
+	if not data.has("shape_id") or not data.has("strain") or not data.has("rarity"):
+		push_warning("SaveManager: Corrupted part data — missing required keys")
 		return null
 	return (
 		PartDatabase

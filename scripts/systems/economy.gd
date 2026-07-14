@@ -62,6 +62,9 @@ static func calculate_match_reward(
 ## [param tier] - Tournament tier 1-4
 ## [returns] Entry fee in Gold
 static func calculate_tournament_entry_fee(tier: int) -> int:
+	if tier < 1 or tier > TOURNAMENT_ENTRY_FEES.size():
+		push_error("Economy: Invalid tournament tier %d" % tier)
+		return 0
 	return TOURNAMENT_ENTRY_FEES[tier - 1]
 
 
@@ -69,6 +72,9 @@ static func calculate_tournament_entry_fee(tier: int) -> int:
 ## [param tier] - Tournament tier 1-4
 ## [returns] Multiplier (1, 2, 4, or 8)
 static func get_tournament_multiplier(tier: int) -> int:
+	if tier < 1 or tier > TOURNAMENT_MULTIPLIERS.size():
+		push_error("Economy: Invalid tournament tier %d" % tier)
+		return 0
 	return TOURNAMENT_MULTIPLIERS[tier - 1]
 
 
@@ -76,4 +82,7 @@ static func get_tournament_multiplier(tier: int) -> int:
 ## [param tier] - Tournament tier 1-4
 ## [returns] Required infamy
 static func get_tournament_infamy_threshold(tier: int) -> int:
+	if tier < 1 or tier > TOURNAMENT_INFAMY_THRESHOLDS.size():
+		push_error("Economy: Invalid tournament tier %d" % tier)
+		return 0
 	return TOURNAMENT_INFAMY_THRESHOLDS[tier - 1]
