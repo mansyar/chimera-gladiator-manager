@@ -22,7 +22,7 @@
     - [x] Write tests for untested branches (e.g., losing streak rubber-band bonus, edge cases for tier 0/invalid tier)
     - [x] Run tests and verify they pass (if any fail, document as source bug per NFR-3)
     - [x] Verify coverage for economy module is 95%+
-- [ ] Task: Expand `test_decay.gd` for `scripts/systems/decay.gd`
+- [x] Task: Expand `test_decay.gd` for `scripts/systems/decay.gd` [abf3f6f]
     - [ ] Write tests for untested branches (e.g., decay accumulation thresholds, repair cost edge cases, purebred immunity)
     - [ ] Run tests and verify they pass
     - [ ] Verify coverage for decay module is 95%+
