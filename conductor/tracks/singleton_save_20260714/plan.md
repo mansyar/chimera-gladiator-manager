@@ -101,7 +101,7 @@
     - [x] Implement get_research_level() and spend_research_point() delegating to research.gd
     - [x] Verify tests pass
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: GameState Full Implementation' (Protocol in workflow.md)
+- [~] Task: Conductor - User Manual Verification 'Phase 2: GameState Full Implementation' (Protocol in workflow.md)
 
 ## Phase 3: Save System & Final Integration
 
