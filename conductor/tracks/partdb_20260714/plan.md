@@ -31,8 +31,8 @@
 
 ## Phase 2: PartDatabase Implementation (TDD)
 
-- [ ] Task: Read spec.md and workflow.md to align with current requirements and TDD protocol
-- [ ] Task: Implement PartDatabase lookup methods with TDD
+- [x] Task: Read spec.md and workflow.md to align with current requirements and TDD protocol
+- [~] Task: Implement PartDatabase lookup methods with TDD
     - [ ] Write failing tests for get_part, get_ability, get_base_stats, get_behavior_module, get_strain_combo
     - [ ] Implement static vars, template loading from .tres files, and all lookup methods
     - [ ] Write failing tests for get_sprite_path handling both naming patterns (body_blueA.png vs detail_blue_horn_large.png)
