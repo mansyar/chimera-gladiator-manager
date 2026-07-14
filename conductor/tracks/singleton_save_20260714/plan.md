@@ -81,13 +81,13 @@
     - [x] Implement _init_new_game() with starting state (calls market.gd.generate_initial_stock())
     - [x] Verify tests pass
 
-- [ ] Task: Implement GameState market delegation methods
-    - [ ] Write failing tests for buy_part (validates via market.gd, deducts gold, adds to inventory, emits part_purchased)
-    - [ ] Write failing tests for buy_part failure (insufficient gold, Legendary Infamy gate)
-    - [ ] Write failing tests for refresh_market (generates new rotating stock, emits market_refreshed)
-    - [ ] Implement buy_part() delegating to market.gd.validate_purchase and market.gd.calculate_price
-    - [ ] Implement refresh_market() delegating to market.gd.generate_rotating_stock
-    - [ ] Verify tests pass
+- [x] Task: Implement GameState market delegation methods (145de64)
+    - [x] Write failing tests for buy_part (validates via market.gd, deducts gold, adds to inventory, emits part_purchased)
+    - [x] Write failing tests for buy_part failure (insufficient gold, Legendary Infamy gate)
+    - [x] Write failing tests for refresh_market (generates new rotating stock, emits market_refreshed)
+    - [x] Implement buy_part() delegating to market.gd.validate_purchase and market.gd.calculate_price
+    - [x] Implement refresh_market() delegating to market.gd.generate_rotating_stock
+    - [x] Verify tests pass
 
 - [ ] Task: Implement GameState ascension methods
     - [ ] Write failing tests for can_ascend (true at 10+ wins, false below)
