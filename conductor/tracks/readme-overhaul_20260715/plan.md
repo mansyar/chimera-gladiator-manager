@@ -2,7 +2,7 @@
 
 ## Phase 1: Relocate Development Content to DEVELOPMENT.md
 
-- [ ] Task: Create `DEVELOPMENT.md` at repository root containing all development-focused content moved out of README.md
+- [~] Task: Create `DEVELOPMENT.md` at repository root containing all development-focused content moved out of README.md
     - [ ] Create `DEVELOPMENT.md` with a top-level heading and intro linking back to the README
     - [ ] Move the Tech Stack section (engine, language, testing, assets, save system, architecture)
     - [ ] Move the Source Documents table (GDD, TDD, ROADMAP)
@@ -10,7 +10,7 @@
     - [ ] Move the Setup section (Prerequisites, Installation, Running Tests, verification order note)
     - [ ] Move the Development Workflow section (Conductor methodology + ROADMAP link)
     - [ ] Move the Current Status / track table
-- [ ] Task: Verify relocated content is complete and internally consistent in DEVELOPMENT.md
+- [~] Task: Verify relocated content is complete and internally consistent in DEVELOPMENT.md
     - [ ] Confirm all seven dev sections are present and none were dropped
     - [ ] Confirm internal links (docs/ROADMAP.md, conductor/workflow.md, etc.) resolve correctly
 - [ ] Task: Conductor - User Manual Verification 'Relocate Development Content to DEVELOPMENT.md' (Protocol in workflow.md)
