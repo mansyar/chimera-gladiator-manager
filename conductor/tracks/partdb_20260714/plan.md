@@ -38,10 +38,10 @@
     - [x] Write failing tests for get_sprite_path handling both naming patterns (body_blueA.png vs detail_blue_horn_large.png)
     - [x] Implement get_sprite_path fix
     - [x] Run tests and verify all pass
-- [ ] Task: Implement rarity modifier system with TDD
-    - [ ] Write failing tests for stat multipliers (x1.0/x1.25/x1.5/x2.0) and ability potency (Rare -15% CD, Legendary -25% CD + +20% effect)
-    - [ ] Implement rarity modifiers in get_part()
-    - [ ] Run tests and verify they pass
+- [x] Task: Implement rarity modifier system with TDD (SHA: eb69761)
+    - [x] Write failing tests for stat multipliers (x1.0/x1.25/x1.5/x2.0) and ability potency (Rare -15% CD, Legendary -25% CD + +20% effect)
+    - [x] Implement rarity modifiers in get_part()
+    - [x] Run tests and verify they pass
 - [ ] Task: Implement generate_random_part and starter chimera loading with TDD
     - [ ] Write failing tests for generate_random_part (valid shape/strain/rarity), get_starter_chimeras (3 starters with correct stats), Neutral strain (no combo, same strain for instability)
     - [ ] Implement generate_random_part and get_starter_chimeras methods
