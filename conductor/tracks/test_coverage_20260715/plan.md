@@ -15,7 +15,7 @@
     - [x] Add dated note explaining coverage exclusion for pure data/enum files
 - [x] Task: Conductor - User Manual Verification 'Coverage Tool Configuration' (Protocol in workflow.md)
 
-## Phase 2: Unit Test Expansion — Systems Modules
+## Phase 2: Unit Test Expansion — Systems Modules [checkpoint: 083ebf2]
 
 - [x] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
 - [x] Task: Expand `test_economy.gd` for `scripts/systems/economy.gd` [ae4ea60]
