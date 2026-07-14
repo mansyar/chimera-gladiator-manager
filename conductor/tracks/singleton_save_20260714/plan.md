@@ -95,11 +95,11 @@
     - [x] Implement can_ascend() and ascend_chimera()
     - [x] Verify tests pass
 
-- [~] Task: Implement GameState research methods
-    - [ ] Write failing tests for get_research_level (returns 0 for unlocked, correct level for unlocked)
-    - [ ] Write failing tests for spend_research_point (unlocks node, deducts point, emits research_unlocked, fails when no points)
-    - [ ] Implement get_research_level() and spend_research_point() delegating to research.gd
-    - [ ] Verify tests pass
+- [x] Task: Implement GameState research methods [442e691]
+    - [x] Write failing tests for get_research_level (returns 0 for unlocked, correct level for unlocked)
+    - [x] Write failing tests for spend_research_point (unlocks node, deducts point, emits research_unlocked, fails when no points)
+    - [x] Implement get_research_level() and spend_research_point() delegating to research.gd
+    - [x] Verify tests pass
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: GameState Full Implementation' (Protocol in workflow.md)
 
