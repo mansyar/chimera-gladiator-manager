@@ -1,6 +1,6 @@
 # Implementation Plan: README Overhaul — Player-Facing Game README
 
-## Phase 1: Relocate Development Content to DEVELOPMENT.md
+## Phase 1: Relocate Development Content to DEVELOPMENT.md [checkpoint: cdba1c6]
 
 - [x] Task: Create `DEVELOPMENT.md` at repository root containing all development-focused content moved out of README.md (54540f6)
     - [ ] Create `DEVELOPMENT.md` with a top-level heading and intro linking back to the README
@@ -13,7 +13,7 @@
 - [x] Task: Verify relocated content is complete and internally consistent in DEVELOPMENT.md (54540f6)
     - [ ] Confirm all seven dev sections are present and none were dropped
     - [ ] Confirm internal links (docs/ROADMAP.md, conductor/workflow.md, etc.) resolve correctly
-- [ ] Task: Conductor - User Manual Verification 'Relocate Development Content to DEVELOPMENT.md' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Relocate Development Content to DEVELOPMENT.md' (Protocol in workflow.md) (cdba1c6)
 
 ## Phase 2: Rewrite README.md as Player-Facing Game README
 
