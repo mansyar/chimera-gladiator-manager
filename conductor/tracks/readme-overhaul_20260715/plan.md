@@ -15,7 +15,7 @@
     - [ ] Confirm internal links (docs/ROADMAP.md, conductor/workflow.md, etc.) resolve correctly
 - [x] Task: Conductor - User Manual Verification 'Relocate Development Content to DEVELOPMENT.md' (Protocol in workflow.md) (cdba1c6)
 
-## Phase 2: Rewrite README.md as Player-Facing Game README
+## Phase 2: Rewrite README.md as Player-Facing Game README [checkpoint: a801f63]
 
 - [x] Task: Replace README.md with a clean, player-facing game landing page (e64f37b)
     - [ ] Add game title and a one-line tagline/pitch
@@ -25,4 +25,4 @@
 - [x] Task: Verify README contains no development-focused content (e64f37b)
     - [ ] Confirm no Tech Stack, Setup, Running Tests, Project Structure, Workflow, or Status sections remain
     - [ ] Confirm all gameplay descriptions are consistent with `docs/GDD.md` and `conductor/product.md`
-- [ ] Task: Conductor - User Manual Verification 'Rewrite README.md as Player-Facing Game README' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Rewrite README.md as Player-Facing Game README' (Protocol in workflow.md) (a801f63)
