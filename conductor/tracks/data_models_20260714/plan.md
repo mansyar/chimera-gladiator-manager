@@ -49,13 +49,13 @@
 
 > Classes with testable logic — TDD applies. Class structure (properties) created first as data scaffolding with empty method stubs, then logic methods follow Red-Green TDD cycle. Dependency order: ChimeraData → ActiveEffect → CombatState.
 
-- [ ] Task: Read context documents before starting Phase 2
-    - [ ] Read `conductor/tracks/data_models_20260714/spec.md`
-    - [ ] Read `conductor/workflow.md`
+- [x] Task: Read context documents before starting Phase 2
+    - [x] Read `conductor/tracks/data_models_20260714/spec.md`
+    - [x] Read `conductor/workflow.md`
 
-- [ ] Task: Implement ChimeraData with TDD (`scripts/data/chimera_data.gd`)
-    - [ ] Create class structure: `class_name ChimeraData extends Resource`, @export vars (nickname, head/torso/arms/legs as 4 separate PartData), derived stat declarations, ability declarations, persistent state, `const PUREBRED_STAT_MULTIPLIER: float = 1.2`, empty method stubs (get_parts, get_part, recalculate_stats, calculate_instability, get_combo_ability)
-    - [ ] Write failing tests (`tests/data/test_chimera_data.gd`) (Red phase):
+- [x] Task: Implement ChimeraData with TDD (`scripts/data/chimera_data.gd`) [d037bff]
+    - [x] Create class structure: `class_name ChimeraData extends Resource`, @export vars (nickname, head/torso/arms/legs as 4 separate PartData), derived stat declarations, ability declarations, persistent state, `const PUREBRED_STAT_MULTIPLIER: float = 1.2`, empty method stubs (get_parts, get_part, recalculate_stats, calculate_instability, get_combo_ability)
+    - [x] Write failing tests (`tests/data/test_chimera_data.gd`) (Red phase):
         - get_parts() returns [head, torso, arms, legs]
         - get_part() returns correct PartData for each PartSlot value
         - recalculate_stats() sums hp/attack/defense/speed bonuses from 4 parts
@@ -69,8 +69,8 @@
         - get_combo_ability() sets combo_tier=2 for 3 same-strain (Enhanced)
         - get_combo_ability() sets combo_tier=3 for 4 same-strain (Ultimate)
         - get_combo_ability() returns null for all-different strains
-    - [ ] Implement logic methods to pass tests (Green phase): get_parts(), get_part() with match, calculate_instability() (count distinct strains, set instability/strain_count/dominant_strain), recalculate_stats() (sum stats, apply purebred bonus, apply research, set derived properties), get_combo_ability() (count strains, determine tier, call PartDatabase.get_strain_combo())
-    - [ ] Verify coverage > 80% for chimera_data.gd
+    - [x] Implement logic methods to pass tests (Green phase): get_parts(), get_part() with match, calculate_instability() (count distinct strains, set instability/strain_count/dominant_strain), recalculate_stats() (sum stats, apply purebred bonus, apply research, set derived properties), get_combo_ability() (count strains, determine tier, call PartDatabase.get_strain_combo())
+    - [x] Verify coverage > 80% for chimera_data.gd (DEFERRED — gd-tools coverage addon fails on autoload scripts; user will fix separately. 17/17 tests pass without --coverage flag.)
 
 - [ ] Task: Implement ActiveEffect with TDD (`scripts/combat/active_effect.gd`)
     - [ ] Create class structure: `class_name ActiveEffect extends RefCounted`, properties (effect_type, stat_name, amount, duration, source_id), empty method stub (tick)
