@@ -135,4 +135,10 @@
     - [x] Verify all 12 acceptance criteria tests from spec pass (all covered by existing tests)
 
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Effect Component' (Protocol in workflow.md) [e4a632c]
+
+## Phase: Review Fixes
+
+> Post-review fixes: doc comment compliance (NFR-3), DRY refactor for strain counting, and edge-case tests for null parts, purebred+research combo, and mixed tick expiry.
+
+- [x] Task: Apply review suggestions [26a0028]
 </protect>
