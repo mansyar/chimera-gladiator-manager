@@ -1,0 +1,8 @@
+{
+  "track_id": "test_coverage_20260715",
+  "type": "chore",
+  "status": "new",
+  "created_at": "2026-07-15T07:16:23Z",
+  "updated_at": "2026-07-15T07:16:23Z",
+  "description": "Increasing test coverage as much as possible, min 80%, preferably above 95%"
+}
