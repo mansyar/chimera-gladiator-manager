@@ -50,7 +50,7 @@
     - [x] Implement all research.gd functions including node definitions
     - [x] Verify tests pass
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: EventBus, CombatManager Stub & System Utilities' (Protocol in workflow.md)
+- [~] Task: Conductor - User Manual Verification 'Phase 1: EventBus, CombatManager Stub & System Utilities' (Protocol in workflow.md)
 
 ## Phase 2: GameState Full Implementation
 
