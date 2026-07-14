@@ -855,3 +855,108 @@ func test_spend_research_point_failure_no_save() -> void:
 	GameState.research_points = 0
 	GameState.spend_research_point(Research.BRANCH_STRAIN_MASTERY, "undead")
 	assert_false(SaveManager.has_save())
+
+
+# --- Signal Integration ---
+
+
+func test_integration_all_signals_fire_in_game_flow() -> void:
+	# Set up state for a full game flow
+	GameState.gold = 1000
+	GameState.infamy = 50
+	GameState.research_points = 3
+	var starters := PartDatabase.get_starter_chimeras().duplicate()
+	GameState.roster = starters
+	GameState.market_stock = Market.generate_initial_stock()
+	# Watch all signals on EventBus
+	watch_signals(EventBus)
+	# Exercise each signal-emitting method
+	GameState.add_gold(100)  # gold_changed
+	GameState.add_infamy(5)  # infamy_changed
+	var part := PartDatabase.generate_random_part(
+		GameEnums.PartSlot.HEAD, {GameEnums.Rarity.COMMON: 100}
+	)
+	GameState.buy_part(part)  # part_purchased + gold_changed
+	var new_chimera: ChimeraData = starters[0].duplicate()
+	GameState.replace_chimera(0, new_chimera)  # chimera_modified
+	GameState.refresh_market()  # market_refreshed
+	GameState.spend_research_point(Research.BRANCH_STRAIN_MASTERY, "undead")  # research_unlocked
+	starters[1].match_wins = 10
+	GameState.ascend_chimera(starters[1])  # chimera_ascended
+	# Verify all 7 signals were emitted
+	assert_signal_emitted(EventBus, "gold_changed")
+	assert_signal_emitted(EventBus, "infamy_changed")
+	assert_signal_emitted(EventBus, "part_purchased")
+	assert_signal_emitted(EventBus, "chimera_modified")
+	assert_signal_emitted(EventBus, "market_refreshed")
+	assert_signal_emitted(EventBus, "research_unlocked")
+	assert_signal_emitted(EventBus, "chimera_ascended")
+
+
+func test_integration_no_signals_on_failed_operations() -> void:
+	# Set up state where operations will fail
+	GameState.gold = 10  # insufficient gold
+	GameState.research_points = 0  # no research points
+	var starters := PartDatabase.get_starter_chimeras().duplicate()
+	GameState.roster = starters
+	# Watch all signals
+	watch_signals(EventBus)
+	# Failed buy_part (insufficient gold)
+	var part := PartDatabase.generate_random_part(
+		GameEnums.PartSlot.HEAD, {GameEnums.Rarity.COMMON: 100}
+	)
+	GameState.buy_part(part)
+	# Failed replace_chimera (out of bounds)
+	GameState.replace_chimera(99, starters[0].duplicate())
+	# Failed spend_research_point (no points)
+	GameState.spend_research_point(Research.BRANCH_STRAIN_MASTERY, "undead")
+	# Failed ascend_chimera (not in roster)
+	var orphan: ChimeraData = starters[0].duplicate()
+	orphan.match_wins = 10
+	GameState.ascend_chimera(orphan)
+	# Verify no specific signals emitted
+	assert_signal_not_emitted(EventBus, "part_purchased")
+	assert_signal_not_emitted(EventBus, "chimera_modified")
+	assert_signal_not_emitted(EventBus, "research_unlocked")
+	assert_signal_not_emitted(EventBus, "chimera_ascended")
+
+
+func test_integration_signal_parameter_types() -> void:
+	GameState.gold = 1000
+	GameState.infamy = 50
+	GameState.research_points = 1
+	var starters := PartDatabase.get_starter_chimeras().duplicate()
+	GameState.roster = starters
+	GameState.market_stock = Market.generate_initial_stock()
+	watch_signals(EventBus)
+	# gold_changed emits int
+	GameState.add_gold(100)
+	var params: Array = get_signal_parameters(EventBus, "gold_changed")
+	assert_eq(typeof(params[0]), TYPE_INT)
+	# infamy_changed emits int
+	GameState.add_infamy(5)
+	params = get_signal_parameters(EventBus, "infamy_changed")
+	assert_eq(typeof(params[0]), TYPE_INT)
+	# part_purchased emits PartData
+	var part := PartDatabase.generate_random_part(
+		GameEnums.PartSlot.HEAD, {GameEnums.Rarity.COMMON: 100}
+	)
+	GameState.buy_part(part)
+	params = get_signal_parameters(EventBus, "part_purchased")
+	assert_true(params[0] is PartData)
+	# chimera_modified emits ChimeraData
+	var new_chimera: ChimeraData = starters[0].duplicate()
+	GameState.replace_chimera(0, new_chimera)
+	params = get_signal_parameters(EventBus, "chimera_modified")
+	assert_true(params[0] is ChimeraData)
+	# research_unlocked emits String, String, int
+	GameState.spend_research_point(Research.BRANCH_STRAIN_MASTERY, "undead")
+	params = get_signal_parameters(EventBus, "research_unlocked")
+	assert_eq(typeof(params[0]), TYPE_STRING)
+	assert_eq(typeof(params[1]), TYPE_STRING)
+	assert_eq(typeof(params[2]), TYPE_INT)
+	# chimera_ascended emits ChimeraData
+	starters[1].match_wins = 10
+	GameState.ascend_chimera(starters[1])
+	params = get_signal_parameters(EventBus, "chimera_ascended")
+	assert_true(params[0] is ChimeraData)
