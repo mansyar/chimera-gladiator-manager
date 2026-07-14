@@ -39,7 +39,10 @@ const TOURNAMENT_LOSS_INFAMY: int = 0
 ## [param losing_streak] - Current losing streak (reserved for future use)[br]
 ## [returns] Dictionary with "gold" and "infamy" keys
 static func calculate_match_reward(
-	match_type: String, won: bool, tournament_tier: int, losing_streak: int  # gdlint:ignore=unused-argument
+	match_type: String,
+	won: bool,
+	tournament_tier: int,
+	losing_streak: int,  # gdlint:ignore=unused-argument
 ) -> Dictionary:
 	if match_type == "tournament":
 		if won:
