@@ -73,13 +73,13 @@
     - [x] Implement get_chimera(), replace_chimera(), add_part(), remove_part()
     - [x] Verify tests pass
 
-- [ ] Task: Implement GameState new game initialization
-    - [ ] Write failing tests for new game state (200G, 0 Infamy, 3 starters from PartDatabase)
-    - [ ] Write failing tests for market_stock initialization (24 base + 6-10 rotating)
-    - [ ] Write failing tests for empty research_progress, hall_of_fame, match_history
-    - [ ] Implement _ready() auto-init logic (calls SaveManager.load_game(), falls back to _init_new_game())
-    - [ ] Implement _init_new_game() with starting state (calls market.gd.generate_initial_stock())
-    - [ ] Verify tests pass
+- [x] Task: Implement GameState new game initialization (41a4a9f)
+    - [x] Write failing tests for new game state (200G, 0 Infamy, 3 starters from PartDatabase)
+    - [x] Write failing tests for market_stock initialization (24 base + 6-10 rotating)
+    - [x] Write failing tests for empty research_progress, hall_of_fame, match_history
+    - [x] Implement _ready() auto-init logic (calls SaveManager.load_game(), falls back to _init_new_game())
+    - [x] Implement _init_new_game() with starting state (calls market.gd.generate_initial_stock())
+    - [x] Verify tests pass
 
 - [ ] Task: Implement GameState market delegation methods
     - [ ] Write failing tests for buy_part (validates via market.gd, deducts gold, adds to inventory, emits part_purchased)
