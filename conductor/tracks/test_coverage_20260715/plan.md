@@ -34,10 +34,10 @@
     - [x] Write tests for untested branches (e.g., rotating stock refresh, rarity filtering, infamy-gated legendary parts)
     - [x] Run tests and verify they pass
     - [x] Verify coverage for market module is 95%+
-- [ ] Task: Expand `test_part_database.gd` for `scripts/systems/part_database.gd`
-    - [ ] Write tests for untested branches (e.g., lookup by shape_id+strain+rarity, missing part fallback, ability lookup by ability_id)
-    - [ ] Run tests and verify they pass
-    - [ ] Verify coverage for part_database module is 95%+
+- [x] Task: Expand `test_part_database.gd` for `scripts/systems/part_database.gd` [e647aec]
+    - [x] Write tests for untested branches (e.g., lookup by shape_id+strain+rarity, missing part fallback, ability lookup by ability_id)
+    - [x] Run tests and verify they pass
+    - [x] Verify coverage for part_database module is 95%+
 - [ ] Task: Conductor - User Manual Verification 'Unit Test Expansion — Systems Modules' (Protocol in workflow.md)
 
 ## Phase 3: Unit Test Expansion — Data & Combat Modules
