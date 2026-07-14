@@ -283,3 +283,111 @@ func test_remove_part_empty_inventory_no_crash() -> void:
 	var part := PartData.new()
 	GameState.remove_part(part)
 	assert_eq(GameState.inventory.size(), 0)
+
+
+# --- New Game Initialization ---
+
+
+func test_init_new_game_sets_gold_to_200() -> void:
+	GameState.gold = 0
+	GameState._init_new_game()
+	assert_eq(GameState.gold, 200)
+
+
+func test_init_new_game_sets_infamy_to_0() -> void:
+	GameState.infamy = 50
+	GameState._init_new_game()
+	assert_eq(GameState.infamy, 0)
+
+
+func test_init_new_game_sets_roster_to_3_starters() -> void:
+	GameState.roster = []
+	GameState._init_new_game()
+	assert_eq(GameState.roster.size(), 3)
+
+
+func test_init_new_game_roster_contains_chimera_data() -> void:
+	GameState.roster = []
+	GameState._init_new_game()
+	for i in range(GameState.roster.size()):
+		assert_not_null(GameState.roster[i])
+
+
+func test_init_new_game_sets_empty_inventory() -> void:
+	var part := PartData.new()
+	GameState.inventory = [part]
+	GameState._init_new_game()
+	assert_eq(GameState.inventory.size(), 0)
+
+
+func test_init_new_game_sets_market_stock() -> void:
+	GameState.market_stock = {}
+	GameState._init_new_game()
+	assert_true(GameState.market_stock.has("base"))
+	assert_true(GameState.market_stock.has("rotating"))
+
+
+func test_init_new_game_market_base_has_24_parts() -> void:
+	GameState._init_new_game()
+	var base: Array = GameState.market_stock["base"]
+	assert_eq(base.size(), 24)
+
+
+func test_init_new_game_market_rotating_6_to_10() -> void:
+	GameState._init_new_game()
+	var rotating: Array = GameState.market_stock["rotating"]
+	assert_true(rotating.size() >= 6)
+	assert_true(rotating.size() <= 10)
+
+
+func test_init_new_game_sets_empty_research_progress() -> void:
+	GameState.research_progress = {"branch": {"node": 1}}
+	GameState._init_new_game()
+	assert_eq(GameState.research_progress.size(), 0)
+
+
+func test_init_new_game_sets_research_points_to_0() -> void:
+	GameState.research_points = 5
+	GameState._init_new_game()
+	assert_eq(GameState.research_points, 0)
+
+
+func test_init_new_game_sets_empty_hall_of_fame() -> void:
+	var chimera := ChimeraData.new()
+	GameState.hall_of_fame = [chimera]
+	GameState._init_new_game()
+	assert_eq(GameState.hall_of_fame.size(), 0)
+
+
+func test_init_new_game_sets_empty_match_history() -> void:
+	GameState.match_history = [{"test": true}]
+	GameState._init_new_game()
+	assert_eq(GameState.match_history.size(), 0)
+
+
+func test_init_new_game_sets_losing_streak_to_0() -> void:
+	GameState.losing_streak = 5
+	GameState._init_new_game()
+	assert_eq(GameState.losing_streak, 0)
+
+
+func test_init_new_game_sets_empty_current_tournament() -> void:
+	GameState.current_tournament = {"tier": 1}
+	GameState._init_new_game()
+	assert_eq(GameState.current_tournament.size(), 0)
+
+
+func test_ready_skips_init_during_coverage_runs() -> void:
+	# During coverage-instrumented test runs (GD_TOOLS_COVERAGE_ACTIVE=1),
+	# _ready() skips _init_new_game() to allow the coverage tool to instrument
+	# scripts without active instances.
+	var coverage_active: bool = OS.get_environment("GD_TOOLS_COVERAGE_ACTIVE") in ["1", "true"]
+	GameState.gold = 0
+	GameState.roster = []
+	GameState._ready()
+	if coverage_active:
+		assert_eq(GameState.gold, 0)
+		assert_eq(GameState.roster.size(), 0)
+	else:
+		assert_eq(GameState.gold, 200)
+		assert_eq(GameState.roster.size(), 3)

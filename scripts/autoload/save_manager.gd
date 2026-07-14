@@ -5,5 +5,8 @@
 extends Node
 
 
-func _ready() -> void:
-	print("SaveManager ready")
+## Load game from save file.[br]
+## Returns [code]false[/code] if no save exists.[br]
+## [returns] [code]true[/code] if loaded successfully, [code]false[/code] otherwise.
+func load_game() -> bool:
+	return false

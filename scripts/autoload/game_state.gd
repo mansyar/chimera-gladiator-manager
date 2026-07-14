@@ -121,3 +121,37 @@ func add_part(part: PartData) -> void:
 ## [param part] The PartData to remove.
 func remove_part(part: PartData) -> void:
 	inventory.erase(part)
+
+
+# --- Initialization ---
+
+
+## Auto-initialize on boot.[br]
+## Attempts to load save game. If no save exists, starts a new game.[br]
+## Skips initialization during coverage-instrumented test runs to allow
+## the coverage tool to instrument scripts without active instances.
+func _ready() -> void:
+	if OS.get_environment("GD_TOOLS_COVERAGE_ACTIVE") in ["1", "true"]:
+		return
+	if not SaveManager.load_game():
+		_init_new_game()
+
+
+## Initialize a new game with starting state.[br]
+## Sets gold=200, infamy=0, roster=3 starter chimeras from PartDatabase,[br]
+## empty inventory, generated market stock, and empty campaign progress.
+func _init_new_game() -> void:
+	gold = 200
+	infamy = 0
+	roster.clear()
+	var starters := PartDatabase.get_starter_chimeras()
+	for starter in starters:
+		roster.append(starter.duplicate())
+	inventory = []
+	market_stock = Market.generate_initial_stock()
+	research_progress = {}
+	research_points = 0
+	hall_of_fame = []
+	current_tournament = {}
+	match_history = []
+	losing_streak = 0
