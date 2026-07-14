@@ -40,7 +40,7 @@
     - [x] Verify coverage for part_database module is 95%+
 - [ ] Task: Conductor - User Manual Verification 'Unit Test Expansion — Systems Modules' (Protocol in workflow.md)
 
-## Phase 3: Unit Test Expansion — Data & Combat Modules
+## Phase 3: Unit Test Expansion — Data & Combat Modules [checkpoint: 9f1575a]
 
 - [x] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
 - [x] Task: Expand `test_chimera_data.gd` for `scripts/data/chimera_data.gd` [2acbdba]
