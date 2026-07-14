@@ -1,7 +1,6 @@
+# gdlint:ignore=max-public-methods
 ## Tests for Market static utility (TRACK-004).
 extends GutTest
-
-# gdlint:ignore=max-public-methods
 
 # --- Helper ---
 
@@ -160,3 +159,12 @@ func test_apply_market_connections_discount_level_2_30_percent_off() -> void:
 func test_apply_market_connections_discount_capped_at_level_2() -> void:
 	var discounted := Market.apply_market_connections_discount(100, 5)
 	assert_eq(discounted, 70, "Discount should cap at level 2 (30% off)")
+
+
+func test_validate_purchase_legendary_infamy_takes_priority_over_gold() -> void:
+	var part := _make_part(GameEnums.Rarity.LEGENDARY)
+	var result := Market.validate_purchase(part, 10, 0)
+	assert_false(result["valid"], "Should be invalid when both infamy and gold are insufficient")
+	assert_true(
+		result["reason"].find("infamy") >= 0, "Infamy check should take priority over gold check"
+	)
