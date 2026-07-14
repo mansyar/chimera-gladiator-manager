@@ -182,3 +182,36 @@ func buy_part(part: PartData) -> bool:
 func refresh_market() -> void:
 	market_stock["rotating"] = Market.generate_rotating_stock()
 	EventBus.market_refreshed.emit()
+
+
+# --- Ascension ---
+
+
+## Check if a chimera is eligible for ascension.[br]
+## A chimera can ascend when it has 10 or more match wins.[br]
+## [param chimera] The chimera to check.[br]
+## [returns] [code]true[/code] if eligible, [code]false[/code] otherwise.
+func can_ascend(chimera: ChimeraData) -> bool:
+	return chimera.match_wins >= 10
+
+
+## Ascend a chimera to the hall of fame.[br]
+## Moves the chimera to hall_of_fame, grants 1 research point, replaces the[br]
+## roster slot with a free common starter, and emits[br]
+## [signal EventBus.chimera_ascended].[br]
+## [param chimera] The chimera to ascend.[br]
+## [returns] Research points gained (1 on success, 0 if chimera not in roster).
+func ascend_chimera(chimera: ChimeraData) -> int:
+	var slot_index := -1
+	for i in range(roster.size()):
+		if roster[i] == chimera:
+			slot_index = i
+			break
+	if slot_index == -1:
+		return 0
+	hall_of_fame.append(chimera)
+	research_points += 1
+	var starters := PartDatabase.get_starter_chimeras()
+	roster[slot_index] = starters[randi() % starters.size()].duplicate()
+	EventBus.chimera_ascended.emit(chimera)
+	return 1

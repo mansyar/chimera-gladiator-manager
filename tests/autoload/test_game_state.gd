@@ -11,6 +11,8 @@ func before_each() -> void:
 	GameState.roster = []
 	GameState.inventory = []
 	GameState.market_stock = {}
+	GameState.hall_of_fame = []
+	GameState.research_points = 0
 
 
 # --- Properties ---
@@ -526,3 +528,126 @@ func test_refresh_market_emits_market_refreshed() -> void:
 	watch_signals(EventBus)
 	GameState.refresh_market()
 	assert_signal_emitted(EventBus, "market_refreshed")
+
+
+# --- can_ascend ---
+
+
+func test_can_ascend_true_at_10_wins() -> void:
+	var chimera := ChimeraData.new()
+	chimera.match_wins = 10
+	var result: bool = GameState.can_ascend(chimera)
+	assert_true(result)
+
+
+func test_can_ascend_false_below_10_wins() -> void:
+	var chimera := ChimeraData.new()
+	chimera.match_wins = 9
+	var result: bool = GameState.can_ascend(chimera)
+	assert_false(result)
+
+
+func test_can_ascend_false_at_0_wins() -> void:
+	var chimera := ChimeraData.new()
+	chimera.match_wins = 0
+	var result: bool = GameState.can_ascend(chimera)
+	assert_false(result)
+
+
+func test_can_ascend_true_above_10_wins() -> void:
+	var chimera := ChimeraData.new()
+	chimera.match_wins = 15
+	var result: bool = GameState.can_ascend(chimera)
+	assert_true(result)
+
+
+# --- ascend_chimera ---
+
+
+func test_ascend_chimera_returns_rp_gained() -> void:
+	var chimera := ChimeraData.new()
+	chimera.match_wins = 10
+	GameState.roster = [chimera]
+	var rp: int = GameState.ascend_chimera(chimera)
+	assert_eq(rp, 1)
+
+
+func test_ascend_chimera_moves_to_hall_of_fame() -> void:
+	var chimera := ChimeraData.new()
+	chimera.match_wins = 10
+	GameState.roster = [chimera]
+	GameState.ascend_chimera(chimera)
+	assert_eq(GameState.hall_of_fame.size(), 1)
+	assert_eq(GameState.hall_of_fame[0], chimera)
+
+
+func test_ascend_chimera_grants_1_rp() -> void:
+	var chimera := ChimeraData.new()
+	chimera.match_wins = 10
+	GameState.roster = [chimera]
+	GameState.research_points = 0
+	GameState.ascend_chimera(chimera)
+	assert_eq(GameState.research_points, 1)
+
+
+func test_ascend_chimera_replaces_roster_slot() -> void:
+	var chimera := ChimeraData.new()
+	chimera.match_wins = 10
+	chimera.nickname = "AscendedOne"
+	GameState.roster = [chimera]
+	GameState.ascend_chimera(chimera)
+	assert_eq(GameState.roster.size(), 1)
+	assert_ne(GameState.roster[0], chimera)
+	assert_not_null(GameState.roster[0])
+
+
+func test_ascend_chimera_replacement_is_chimera_data() -> void:
+	var chimera := ChimeraData.new()
+	chimera.match_wins = 10
+	GameState.roster = [chimera]
+	GameState.ascend_chimera(chimera)
+	assert_true(GameState.roster[0] is ChimeraData)
+
+
+func test_ascend_chimera_emits_chimera_ascended() -> void:
+	var chimera := ChimeraData.new()
+	chimera.match_wins = 10
+	GameState.roster = [chimera]
+	watch_signals(EventBus)
+	GameState.ascend_chimera(chimera)
+	assert_signal_emitted(EventBus, "chimera_ascended")
+
+
+func test_ascend_chimera_emits_correct_chimera() -> void:
+	var chimera := ChimeraData.new()
+	chimera.match_wins = 10
+	GameState.roster = [chimera]
+	watch_signals(EventBus)
+	GameState.ascend_chimera(chimera)
+	assert_signal_emitted_with_parameters(EventBus, "chimera_ascended", [chimera])
+
+
+func test_ascend_chimera_not_in_roster_returns_0() -> void:
+	var chimera := ChimeraData.new()
+	chimera.match_wins = 10
+	GameState.roster = []
+	var rp: int = GameState.ascend_chimera(chimera)
+	assert_eq(rp, 0)
+
+
+func test_ascend_chimera_not_in_roster_no_hall_of_fame_add() -> void:
+	var chimera := ChimeraData.new()
+	chimera.match_wins = 10
+	GameState.roster = []
+	GameState.ascend_chimera(chimera)
+	assert_eq(GameState.hall_of_fame.size(), 0)
+
+
+func test_ascend_chimera_preserves_other_slots() -> void:
+	var chimera := ChimeraData.new()
+	chimera.match_wins = 10
+	var other := ChimeraData.new()
+	other.nickname = "OtherChimera"
+	GameState.roster = [chimera, other]
+	GameState.ascend_chimera(chimera)
+	assert_eq(GameState.roster[1], other)
