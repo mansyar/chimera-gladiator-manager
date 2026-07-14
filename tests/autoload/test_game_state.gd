@@ -6,6 +6,7 @@ extends GutTest
 
 
 func before_each() -> void:
+	SaveManager.delete_save()
 	GameState.gold = 200
 	GameState.infamy = 0
 	GameState.roster = []
@@ -14,6 +15,10 @@ func before_each() -> void:
 	GameState.hall_of_fame = []
 	GameState.research_progress = {}
 	GameState.research_points = 0
+
+
+func after_each() -> void:
+	SaveManager.delete_save()
 
 
 # --- Properties ---
@@ -779,3 +784,74 @@ func test_spend_research_point_multiple_unlocks() -> void:
 	# Fourth attempt: at max level, should fail
 	var result: bool = GameState.spend_research_point(Research.BRANCH_STRAIN_MASTERY, "beast")
 	assert_false(result)
+
+
+# --- Save Triggers ---
+
+
+func test_buy_part_triggers_save_on_success() -> void:
+	GameState.gold = 1000
+	var part := PartDatabase.generate_random_part(
+		GameEnums.PartSlot.HEAD, {GameEnums.Rarity.COMMON: 100}
+	)
+	GameState.buy_part(part)
+	assert_true(SaveManager.has_save())
+
+
+func test_buy_part_no_save_on_failure() -> void:
+	GameState.gold = 10
+	var part := PartDatabase.generate_random_part(
+		GameEnums.PartSlot.HEAD, {GameEnums.Rarity.COMMON: 100}
+	)
+	GameState.buy_part(part)
+	assert_false(SaveManager.has_save())
+
+
+func test_replace_chimera_triggers_save() -> void:
+	var starters := PartDatabase.get_starter_chimeras().duplicate()
+	GameState.roster = starters
+	var new_chimera: ChimeraData = starters[0].duplicate()
+	GameState.replace_chimera(0, new_chimera)
+	assert_true(SaveManager.has_save())
+
+
+func test_replace_chimera_oob_no_save() -> void:
+	var starters := PartDatabase.get_starter_chimeras().duplicate()
+	GameState.roster = starters
+	GameState.replace_chimera(99, starters[0].duplicate())
+	assert_false(SaveManager.has_save())
+
+
+func test_refresh_market_triggers_save() -> void:
+	GameState.market_stock = Market.generate_initial_stock()
+	GameState.refresh_market()
+	assert_true(SaveManager.has_save())
+
+
+func test_ascend_chimera_triggers_save() -> void:
+	var starters := PartDatabase.get_starter_chimeras().duplicate()
+	GameState.roster = starters
+	starters[0].match_wins = 10
+	GameState.ascend_chimera(starters[0])
+	assert_true(SaveManager.has_save())
+
+
+func test_ascend_chimera_not_in_roster_no_save() -> void:
+	var starters := PartDatabase.get_starter_chimeras().duplicate()
+	GameState.roster = starters
+	var orphan: ChimeraData = starters[0].duplicate()
+	orphan.match_wins = 10
+	GameState.ascend_chimera(orphan)
+	assert_false(SaveManager.has_save())
+
+
+func test_spend_research_point_triggers_save() -> void:
+	GameState.research_points = 1
+	GameState.spend_research_point(Research.BRANCH_STRAIN_MASTERY, "undead")
+	assert_true(SaveManager.has_save())
+
+
+func test_spend_research_point_failure_no_save() -> void:
+	GameState.research_points = 0
+	GameState.spend_research_point(Research.BRANCH_STRAIN_MASTERY, "undead")
+	assert_false(SaveManager.has_save())

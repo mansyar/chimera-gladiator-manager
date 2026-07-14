@@ -59,6 +59,15 @@ func delete_save() -> void:
 		DirAccess.remove_absolute(SAVE_PATH)
 
 
+# --- Lifecycle ---
+
+
+## Save game on exit.[br]
+## Called by the engine when the SaveManager node is removed from the tree.
+func _exit_tree() -> void:
+	save_game()
+
+
 # --- Migration ---
 
 

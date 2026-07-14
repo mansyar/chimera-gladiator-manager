@@ -105,6 +105,7 @@ func replace_chimera(index: int, new_chimera: ChimeraData) -> void:
 		return
 	roster[index] = new_chimera
 	EventBus.chimera_modified.emit(new_chimera)
+	SaveManager.save_game()
 
 
 # --- Inventory Management ---
@@ -173,6 +174,7 @@ func buy_part(part: PartData) -> bool:
 	spend_gold(price)
 	add_part(part)
 	EventBus.part_purchased.emit(part)
+	SaveManager.save_game()
 	return true
 
 
@@ -182,6 +184,7 @@ func buy_part(part: PartData) -> bool:
 func refresh_market() -> void:
 	market_stock["rotating"] = Market.generate_rotating_stock()
 	EventBus.market_refreshed.emit()
+	SaveManager.save_game()
 
 
 # --- Ascension ---
@@ -214,6 +217,7 @@ func ascend_chimera(chimera: ChimeraData) -> int:
 	var starters := PartDatabase.get_starter_chimeras()
 	roster[slot_index] = starters[randi() % starters.size()].duplicate()
 	EventBus.chimera_ascended.emit(chimera)
+	SaveManager.save_game()
 	return 1
 
 
@@ -250,4 +254,5 @@ func spend_research_point(branch: String, node: String) -> bool:
 		research_progress[branch] = {}
 	research_progress[branch][node] = new_level
 	EventBus.research_unlocked.emit(branch, node, new_level)
+	SaveManager.save_game()
 	return true

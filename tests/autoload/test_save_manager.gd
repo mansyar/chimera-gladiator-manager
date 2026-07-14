@@ -320,3 +320,21 @@ func test_migrate_returns_data_unchanged_for_version_1() -> void:
 	var result: Dictionary = SaveManager._migrate(1, data)
 	assert_eq(result["version"], 1)
 	assert_eq(result["game_state"]["gold"], 100)
+
+
+# --- _exit_tree ---
+
+
+func test_exit_tree_saves_game() -> void:
+	_setup_test_state()
+	assert_false(SaveManager.has_save())
+	SaveManager._exit_tree()
+	assert_true(SaveManager.has_save())
+
+
+func test_exit_tree_creates_valid_save() -> void:
+	_setup_test_state()
+	SaveManager._exit_tree()
+	var data := _read_save_file()
+	assert_eq(data["version"], SaveManager.CURRENT_VERSION)
+	assert_eq(data["game_state"]["gold"], 500)
