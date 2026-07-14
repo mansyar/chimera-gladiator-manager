@@ -87,7 +87,7 @@
 
 ## Phase 5: Integration Tests
 
-- [ ] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
+- [x] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
 - [ ] Task: Create `tests/integration/test_economy_flow.gd`
     - [ ] Write integration test: buy_part → gold deduction → inventory add → save → load → verify state
     - [ ] Run test and verify it passes
