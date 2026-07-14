@@ -33,14 +33,14 @@
     - [x] Implement all market.gd functions
     - [x] Verify tests pass
 
-- [ ] Task: Implement decay.gd static utility
-    - [ ] Write failing tests for check_decay (purebreds never decay, probability per instability)
-    - [ ] Write failing tests for apply_decay (all stats reduced uniformly)
-    - [ ] Write failing tests for calculate_repair_cost (matches values per instability, reduced by research)
-    - [ ] Write failing tests for repair_chimera (resets decay_level, recalculates stats)
-    - [ ] Write failing tests for salvage_chimera (produces Neutral parts, all-Neutral = Pure)
-    - [ ] Implement all decay.gd functions
-    - [ ] Verify tests pass
+- [x] Task: Implement decay.gd static utility (35ba222)
+    - [x] Write failing tests for check_decay (purebreds never decay, probability per instability)
+    - [x] Write failing tests for apply_decay (all stats reduced uniformly)
+    - [x] Write failing tests for calculate_repair_cost (matches values per instability, reduced by research)
+    - [x] Write failing tests for repair_chimera (resets decay_level, recalculates stats)
+    - [x] Write failing tests for salvage_chimera (produces Neutral parts, all-Neutral = Pure)
+    - [x] Implement all decay.gd functions
+    - [x] Verify tests pass
 
 - [ ] Task: Implement research.gd static utility
     - [ ] Write failing tests for can_unlock (insufficient points, at max level, valid unlock)
