@@ -42,14 +42,14 @@
     - [x] Write failing tests for stat multipliers (x1.0/x1.25/x1.5/x2.0) and ability potency (Rare -15% CD, Legendary -25% CD + +20% effect)
     - [x] Implement rarity modifiers in get_part()
     - [x] Run tests and verify they pass
-- [ ] Task: Implement generate_random_part and starter chimera loading with TDD
-    - [ ] Write failing tests for generate_random_part (valid shape/strain/rarity), get_starter_chimeras (3 starters with correct stats), Neutral strain (no combo, same strain for instability)
-    - [ ] Implement generate_random_part and get_starter_chimeras methods
-    - [ ] Run tests and verify they pass
-- [ ] Task: Verify coverage and quality gates
-    - [ ] Run gd-tools test --coverage --min 80
-    - [ ] Run gd-tools lint
-    - [ ] Run gd-tools format --check
+- [x] Task: Implement generate_random_part and starter chimera loading with TDD (SHA: b374290)
+    - [x] Write failing tests for generate_random_part (valid shape/strain/rarity), get_starter_chimeras (3 starters with correct stats), Neutral strain (no combo, same strain for instability)
+    - [x] Implement generate_random_part and get_starter_chimeras methods
+    - [x] Run tests and verify they pass
+- [x] Task: Verify coverage and quality gates
+    - [x] Run gd-tools test --coverage --min 80 (92/92 pass, 96.4% line, 100% branch)
+    - [x] Run gd-tools lint (clean)
+    - [x] Run gd-tools format --check (all 19 files formatted)
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: PartDatabase Implementation' (Protocol in workflow.md)
 
 ## Phase 3: Integration Tests & Final Verification
