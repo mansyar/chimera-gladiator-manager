@@ -58,6 +58,13 @@ func _read_save_file() -> Dictionary:
 	return {}
 
 
+func _write_save_file(data: Dictionary) -> void:
+	DirAccess.make_dir_recursive_absolute("user://saves")
+	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	file.store_string(JSON.stringify(data, "\t"))
+	file = null
+
+
 # --- has_save ---
 
 
@@ -338,3 +345,60 @@ func test_exit_tree_creates_valid_save() -> void:
 	var data := _read_save_file()
 	assert_eq(data["version"], SaveManager.CURRENT_VERSION)
 	assert_eq(data["game_state"]["gold"], 500)
+
+
+# --- load_game: error handling ---
+
+
+func test_load_game_returns_false_for_corrupt_json() -> void:
+	DirAccess.make_dir_recursive_absolute("user://saves")
+	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	file.store_string("not valid json {{{")
+	file = null
+	assert_false(SaveManager.load_game(), "load_game should return false for corrupt JSON")
+	assert_engine_error_count(1)
+
+
+func test_load_game_migrates_old_version_save() -> void:
+	_setup_test_state()
+	SaveManager.save_game()
+	var data := _read_save_file()
+	data["version"] = 99
+	_write_save_file(data)
+	assert_true(SaveManager.load_game(), "load_game should succeed with migration")
+
+
+# --- _deserialize_part: edge cases ---
+
+
+func test_deserialize_part_empty_data_returns_null() -> void:
+	assert_null(SaveManager._deserialize_part({}))
+
+
+func test_deserialize_part_missing_keys_returns_null() -> void:
+	assert_null(SaveManager._deserialize_part({"shape_id": "test"}))
+	assert_push_warning("SaveManager: Corrupted part data")
+
+
+# --- load_game: hall of fame ---
+
+
+func test_load_game_restores_hall_of_fame() -> void:
+	_setup_test_state()
+	var starters := PartDatabase.get_starter_chimeras()
+	var chimera := ChimeraData.new()
+	chimera.nickname = "HallOfFamer"
+	chimera.match_wins = 10
+	chimera.head = starters[0].head
+	chimera.torso = starters[0].torso
+	chimera.arms = starters[0].arms
+	chimera.legs = starters[0].legs
+	chimera.calculate_instability()
+	chimera.recalculate_stats()
+	GameState.hall_of_fame = [chimera]
+	SaveManager.save_game()
+	GameState.hall_of_fame = []
+	SaveManager.load_game()
+	assert_eq(GameState.hall_of_fame.size(), 1)
+	assert_eq(GameState.hall_of_fame[0].nickname, "HallOfFamer")
+	assert_eq(GameState.hall_of_fame[0].match_wins, 10)
