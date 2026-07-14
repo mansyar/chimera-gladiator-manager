@@ -1,7 +1,7 @@
 <protect>
 # Implementation Plan: Data Models & Enums (TRACK-002)
 
-## Phase 1: Enums & Base Resource Classes
+## Phase 1: Enums & Base Resource Classes [checkpoint: 835a82f]
 
 > Data-only classes — exempt from TDD per workflow rules (pure enum declarations and `@export` variable definitions without logic). Dependency order: GameEnums → AbilityEffect → BehaviorModuleData → PartData → AbilityData → PartDatabase stub.
 
@@ -43,7 +43,7 @@
     - [x] Run `gd-tools lint` — must exit 0
     - [x] Run `gd-tools format --check` — must exit 0
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Enums & Base Resource Classes' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Enums & Base Resource Classes' (Protocol in workflow.md) [835a82f]
 
 ## Phase 2: Chimera & Combat State
 
