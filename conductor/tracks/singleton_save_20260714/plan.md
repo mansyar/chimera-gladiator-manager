@@ -141,12 +141,12 @@
     - [x] Wire EventBus signal emissions in all GameState methods
     - [x] Verify integration tests pass
 
-- [ ] Task: Final quality gate verification
-    - [ ] Run gd-tools lint (must exit 0)
-    - [ ] Run gd-tools format --check (must exit 0)
-    - [ ] Run gd-tools test --coverage --min 80 (must exit 0)
-    - [ ] Verify autoload init order on boot (EventBus -> GameState -> SaveManager -> CombatManager)
-    - [ ] Verify GameState auto-inits new game when no save exists
+- [x] Task: Final quality gate verification
+    - [x] Run gd-tools lint (must exit 0)
+    - [x] Run gd-tools format --check (must exit 0)
+    - [x] Run gd-tools test --coverage --min 80 (must exit 0)
+    - [x] Verify autoload init order on boot (EventBus -> GameState -> SaveManager -> CombatManager)
+    - [x] Verify GameState auto-inits new game when no save exists
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Save System & Final Integration' (Protocol in workflow.md)
 
