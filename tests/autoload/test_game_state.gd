@@ -10,6 +10,7 @@ func before_each() -> void:
 	GameState.infamy = 0
 	GameState.roster = []
 	GameState.inventory = []
+	GameState.market_stock = {}
 
 
 # --- Properties ---
@@ -391,3 +392,137 @@ func test_ready_skips_init_during_coverage_runs() -> void:
 	else:
 		assert_eq(GameState.gold, 200)
 		assert_eq(GameState.roster.size(), 3)
+
+
+# --- buy_part ---
+
+
+func test_buy_part_success_returns_true() -> void:
+	var part := PartData.new()
+	part.rarity = GameEnums.Rarity.COMMON
+	GameState.gold = 1000
+	var result: bool = GameState.buy_part(part)
+	assert_true(result)
+
+
+func test_buy_part_deducts_gold() -> void:
+	var part := PartData.new()
+	part.rarity = GameEnums.Rarity.COMMON
+	GameState.gold = 1000
+	GameState.buy_part(part)
+	# Common price range: 50-100
+	assert_true(GameState.gold >= 900)
+	assert_true(GameState.gold <= 950)
+
+
+func test_buy_part_adds_to_inventory() -> void:
+	var part := PartData.new()
+	part.rarity = GameEnums.Rarity.COMMON
+	GameState.gold = 1000
+	GameState.buy_part(part)
+	assert_eq(GameState.inventory.size(), 1)
+	assert_eq(GameState.inventory[0], part)
+
+
+func test_buy_part_emits_part_purchased() -> void:
+	var part := PartData.new()
+	part.rarity = GameEnums.Rarity.COMMON
+	GameState.gold = 1000
+	watch_signals(EventBus)
+	GameState.buy_part(part)
+	assert_signal_emitted(EventBus, "part_purchased")
+
+
+func test_buy_part_emits_correct_part() -> void:
+	var part := PartData.new()
+	part.rarity = GameEnums.Rarity.COMMON
+	GameState.gold = 1000
+	watch_signals(EventBus)
+	GameState.buy_part(part)
+	assert_signal_emitted_with_parameters(EventBus, "part_purchased", [part])
+
+
+func test_buy_part_emits_gold_changed() -> void:
+	var part := PartData.new()
+	part.rarity = GameEnums.Rarity.COMMON
+	GameState.gold = 1000
+	watch_signals(EventBus)
+	GameState.buy_part(part)
+	assert_signal_emitted(EventBus, "gold_changed")
+
+
+func test_buy_part_insufficient_gold_returns_false() -> void:
+	var part := PartData.new()
+	part.rarity = GameEnums.Rarity.COMMON
+	GameState.gold = 10
+	var result: bool = GameState.buy_part(part)
+	assert_false(result)
+
+
+func test_buy_part_insufficient_gold_no_deduction() -> void:
+	var part := PartData.new()
+	part.rarity = GameEnums.Rarity.COMMON
+	GameState.gold = 10
+	GameState.buy_part(part)
+	assert_eq(GameState.gold, 10)
+
+
+func test_buy_part_insufficient_gold_no_inventory_add() -> void:
+	var part := PartData.new()
+	part.rarity = GameEnums.Rarity.COMMON
+	GameState.gold = 10
+	GameState.buy_part(part)
+	assert_eq(GameState.inventory.size(), 0)
+
+
+func test_buy_part_insufficient_gold_no_signal() -> void:
+	var part := PartData.new()
+	part.rarity = GameEnums.Rarity.COMMON
+	GameState.gold = 10
+	watch_signals(EventBus)
+	GameState.buy_part(part)
+	assert_signal_not_emitted(EventBus, "part_purchased")
+
+
+func test_buy_part_legendary_infamy_gate_returns_false() -> void:
+	var part := PartData.new()
+	part.rarity = GameEnums.Rarity.LEGENDARY
+	GameState.gold = 5000
+	GameState.infamy = 0
+	var result: bool = GameState.buy_part(part)
+	assert_false(result)
+
+
+func test_buy_part_legendary_with_sufficient_infamy_succeeds() -> void:
+	var part := PartData.new()
+	part.rarity = GameEnums.Rarity.LEGENDARY
+	GameState.gold = 5000
+	GameState.infamy = 50
+	var result: bool = GameState.buy_part(part)
+	assert_true(result)
+
+
+# --- refresh_market ---
+
+
+func test_refresh_market_generates_new_rotating_stock() -> void:
+	GameState.market_stock = Market.generate_initial_stock()
+	GameState.refresh_market()
+	var new_rotating: Array = GameState.market_stock["rotating"]
+	assert_true(new_rotating.size() >= 6)
+	assert_true(new_rotating.size() <= 10)
+
+
+func test_refresh_market_preserves_base_stock() -> void:
+	GameState.market_stock = Market.generate_initial_stock()
+	var old_base: Array = GameState.market_stock["base"]
+	GameState.refresh_market()
+	var new_base: Array = GameState.market_stock["base"]
+	assert_eq(new_base.size(), old_base.size())
+
+
+func test_refresh_market_emits_market_refreshed() -> void:
+	GameState.market_stock = Market.generate_initial_stock()
+	watch_signals(EventBus)
+	GameState.refresh_market()
+	assert_signal_emitted(EventBus, "market_refreshed")

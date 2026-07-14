@@ -155,3 +155,30 @@ func _init_new_game() -> void:
 	current_tournament = {}
 	match_history = []
 	losing_streak = 0
+
+
+# --- Market Delegation ---
+
+
+## Buy a part from the market.[br]
+## Validates purchase via [class Market], deducts gold, adds part to inventory,[br]
+## and emits [signal EventBus.part_purchased].[br]
+## [param part] The PartData to purchase.[br]
+## [returns] [code]true[/code] if purchase succeeded, [code]false[/code] if invalid.
+func buy_part(part: PartData) -> bool:
+	var result := Market.validate_purchase(part, gold, infamy)
+	if not result["valid"]:
+		return false
+	var price: int = result["price"]
+	spend_gold(price)
+	add_part(part)
+	EventBus.part_purchased.emit(part)
+	return true
+
+
+## Refresh the market's rotating stock.[br]
+## Generates new rotating parts via [class Market] and emits[br]
+## [signal EventBus.market_refreshed].
+func refresh_market() -> void:
+	market_stock["rotating"] = Market.generate_rotating_stock()
+	EventBus.market_refreshed.emit()
