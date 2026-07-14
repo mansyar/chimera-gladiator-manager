@@ -51,7 +51,7 @@
     - [ ] Write tests for untested branches (e.g., HP boundary conditions, berserk trigger/reset, cooldown management, effect application/removal)
     - [ ] Run tests and verify they pass
     - [ ] Verify coverage for combat_state module is 95%+
-- [ ] Task: Expand `test_active_effect.gd` for `scripts/combat/active_effect.gd`
+- [x] Task: Expand `test_active_effect.gd` for `scripts/combat/active_effect.gd` [5fefb5e]
     - [ ] Write tests for untested branches (e.g., effect tick processing, duration expiry, stat modification application/removal)
     - [ ] Run tests and verify they pass
     - [ ] Verify coverage for active_effect module is 95%+
