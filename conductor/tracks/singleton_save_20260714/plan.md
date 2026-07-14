@@ -66,12 +66,12 @@
     - [x] Implement add_gold(), spend_gold(), add_infamy() with EventBus signal emissions
     - [x] Verify tests pass
 
-- [~] Task: Implement GameState roster and inventory management
-    - [ ] Write failing tests for get_chimera (returns correct chimera by index)
-    - [ ] Write failing tests for replace_chimera (updates roster, emits chimera_modified)
-    - [ ] Write failing tests for add_part and remove_part (inventory management)
-    - [ ] Implement get_chimera(), replace_chimera(), add_part(), remove_part()
-    - [ ] Verify tests pass
+- [x] Task: Implement GameState roster and inventory management
+    - [x] Write failing tests for get_chimera (returns correct chimera by index)
+    - [x] Write failing tests for replace_chimera (updates roster, emits chimera_modified)
+    - [x] Write failing tests for add_part and remove_part (inventory management)
+    - [x] Implement get_chimera(), replace_chimera(), add_part(), remove_part()
+    - [x] Verify tests pass
 
 - [ ] Task: Implement GameState new game initialization
     - [ ] Write failing tests for new game state (200G, 0 Infamy, 3 starters from PartDatabase)
