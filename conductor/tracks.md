@@ -4,7 +4,4 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [x] **Track: TRACK-004: Singleton Architecture, Signals & Save System**
-*Link: [./tracks/singleton_save_20260714/](./tracks/singleton_save_20260714/)*
-
 
