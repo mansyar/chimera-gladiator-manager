@@ -105,9 +105,9 @@
 
 ## Phase 3: Save System & Final Integration
 
-- [ ] Task: Read spec.md and workflow.md before starting phase implementation
-    - [ ] Read `./spec.md` to review all functional requirements and acceptance criteria
-    - [ ] Read `conductor/workflow.md` to review TDD workflow and task lifecycle rules
+- [x] Task: Read spec.md and workflow.md before starting phase implementation
+    - [x] Read `./spec.md` to review all functional requirements and acceptance criteria
+    - [x] Read `conductor/workflow.md` to review TDD workflow and task lifecycle rules
 
 - [ ] Task: Implement SaveManager JSON serialization
     - [ ] Write failing tests for save_game() creating valid JSON at user://saves/save_default.json
