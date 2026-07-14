@@ -28,6 +28,14 @@ const STRAIN_NAMES := {
 	GameEnums.Strain.ABERRANT: "aberrant",
 }
 
+## Stat multipliers per rarity tier.
+const RARITY_STAT_MULTIPLIERS := {
+	GameEnums.Rarity.COMMON: 1.0,
+	GameEnums.Rarity.UNCOMMON: 1.25,
+	GameEnums.Rarity.RARE: 1.5,
+	GameEnums.Rarity.LEGENDARY: 2.0,
+}
+
 ## Cached part templates keyed by shape_id.
 static var part_templates: Dictionary = {}
 
@@ -121,6 +129,12 @@ static func get_part(
 	part.strain = strain
 	part.rarity = rarity
 	part.sprite_path = get_sprite_path(shape_id, strain)
+	# Apply rarity stat multipliers
+	var multiplier: float = RARITY_STAT_MULTIPLIERS.get(rarity, 1.0)
+	part.hp_bonus *= multiplier
+	part.attack_bonus *= multiplier
+	part.defense_bonus *= multiplier
+	part.speed_bonus *= multiplier
 	return part
 
 
@@ -128,6 +142,28 @@ static func get_part(
 static func get_ability(ability_id: String) -> AbilityData:
 	_ensure_loaded()
 	return ability_templates.get(ability_id)
+
+
+## Retrieve an ability with rarity potency modifiers applied.
+##
+## Returns a duplicate AbilityData with adjusted cooldown and effect amounts:
+## - Rare: -15% cooldown
+## - Legendary: -25% cooldown + +20% effect amount
+static func get_ability_with_rarity(ability_id: String, rarity: GameEnums.Rarity) -> AbilityData:
+	_ensure_loaded()
+	var template: AbilityData = ability_templates.get(ability_id)
+	if template == null:
+		return null
+	var ability := template.duplicate(true)
+	match rarity:
+		GameEnums.Rarity.RARE:
+			ability.cooldown *= 0.85
+		GameEnums.Rarity.LEGENDARY:
+			ability.cooldown *= 0.75
+			for effect in ability.effects:
+				if effect.params.has("amount"):
+					effect.params["amount"] = float(effect.params["amount"]) * 1.2
+	return ability
 
 
 ## Retrieve base stats for a shape variant.

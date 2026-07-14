@@ -231,3 +231,96 @@ func test_get_sprite_path_all_strain_colors() -> void:
 		"res://assets/kenney-monster-builder-pack/PNG/Default/body_yellowA.png",
 		"ABERRANT=yellow"
 	)
+
+
+# --- Rarity stat multiplier tests ---
+
+
+func test_get_part_common_stats_unchanged() -> void:
+	var part := PartDatabase.get_part(
+		"detail_horn_large", GameEnums.Strain.BEAST, GameEnums.Rarity.COMMON
+	)
+	assert_eq(part.hp_bonus, 5.0, "COMMON hp_bonus should be base (x1.0)")
+	assert_eq(part.defense_bonus, 3.0, "COMMON defense_bonus should be base (x1.0)")
+
+
+func test_get_part_uncommon_stats_multiplied() -> void:
+	var part := PartDatabase.get_part(
+		"detail_horn_large", GameEnums.Strain.BEAST, GameEnums.Rarity.UNCOMMON
+	)
+	assert_almost_eq(part.hp_bonus, 6.25, 0.01, "UNCOMMON hp_bonus should be x1.25")
+	assert_almost_eq(part.defense_bonus, 3.75, 0.01, "UNCOMMON defense_bonus should be x1.25")
+
+
+func test_get_part_rare_stats_multiplied() -> void:
+	var part := PartDatabase.get_part(
+		"detail_horn_large", GameEnums.Strain.BEAST, GameEnums.Rarity.RARE
+	)
+	assert_almost_eq(part.hp_bonus, 7.5, 0.01, "RARE hp_bonus should be x1.5")
+	assert_almost_eq(part.defense_bonus, 4.5, 0.01, "RARE defense_bonus should be x1.5")
+
+
+func test_get_part_legendary_stats_multiplied() -> void:
+	var part := PartDatabase.get_part(
+		"detail_horn_large", GameEnums.Strain.BEAST, GameEnums.Rarity.LEGENDARY
+	)
+	assert_almost_eq(part.hp_bonus, 10.0, 0.01, "LEGENDARY hp_bonus should be x2.0")
+	assert_almost_eq(part.defense_bonus, 6.0, 0.01, "LEGENDARY defense_bonus should be x2.0")
+
+
+# --- Ability potency tests ---
+
+
+func test_get_ability_with_rarity_common_unchanged() -> void:
+	var ability := PartDatabase.get_ability_with_rarity(
+		"head_horn_large_ability", GameEnums.Rarity.COMMON
+	)
+	assert_eq(ability.cooldown, 8.0, "COMMON cooldown should be base")
+
+
+func test_get_ability_with_rarity_uncommon_unchanged() -> void:
+	var ability := PartDatabase.get_ability_with_rarity(
+		"head_horn_large_ability", GameEnums.Rarity.UNCOMMON
+	)
+	assert_eq(ability.cooldown, 8.0, "UNCOMMON cooldown should be base")
+
+
+func test_get_ability_with_rarity_rare_cooldown_reduced() -> void:
+	var ability := PartDatabase.get_ability_with_rarity(
+		"head_horn_large_ability", GameEnums.Rarity.RARE
+	)
+	assert_almost_eq(ability.cooldown, 6.8, 0.01, "RARE cooldown should be -15% (8.0 * 0.85)")
+
+
+func test_get_ability_with_rarity_legendary_cooldown_reduced() -> void:
+	var ability := PartDatabase.get_ability_with_rarity(
+		"head_horn_large_ability", GameEnums.Rarity.LEGENDARY
+	)
+	assert_almost_eq(ability.cooldown, 6.0, 0.01, "LEGENDARY cooldown should be -25% (8.0 * 0.75)")
+
+
+func test_get_ability_with_rarity_legendary_effect_increased() -> void:
+	var ability := PartDatabase.get_ability_with_rarity(
+		"head_horn_large_ability", GameEnums.Rarity.LEGENDARY
+	)
+	# head_horn_large_ability has DEBUFF_STAT with amount=0.3
+	assert_almost_eq(
+		ability.effects[0].params["amount"],
+		0.36,
+		0.01,
+		"LEGENDARY effect amount should be +20% (0.3 * 1.2)"
+	)
+
+
+func test_get_ability_with_rarity_does_not_modify_template() -> void:
+	PartDatabase.get_ability_with_rarity("head_horn_large_ability", GameEnums.Rarity.LEGENDARY)
+	var original := PartDatabase.get_ability("head_horn_large_ability")
+	assert_eq(original.cooldown, 8.0, "Template cooldown should be unchanged")
+	assert_eq(
+		original.effects[0].params["amount"], 0.3, "Template effect amount should be unchanged"
+	)
+
+
+func test_get_ability_with_rarity_returns_null_for_unknown() -> void:
+	var ability := PartDatabase.get_ability_with_rarity("nonexistent", GameEnums.Rarity.COMMON)
+	assert_null(ability, "Should return null for unknown ability")
