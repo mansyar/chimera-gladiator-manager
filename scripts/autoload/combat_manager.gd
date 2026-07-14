@@ -4,6 +4,11 @@
 ## Handles combat lifecycle: setup, execution, resolution.
 extends Node
 
+## Whether a combat match is currently active.
+## When false, _process returns early (no combat simulation).
+var match_active: bool = false
 
-func _ready() -> void:
-	print("CombatManager ready")
+
+func _process(delta: float) -> void:  # gdlint:ignore=unused-argument
+	if not match_active:
+		return
