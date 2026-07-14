@@ -102,7 +102,7 @@
 ## Phase 6: Edge Case Tests
 
 - [x] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
-- [ ] Task: Write berserk edge case tests (in relevant test files or `tests/edge/test_berserk_edge_cases.gd`)
+- [x] Task: Write berserk edge case tests (in relevant test files or `tests/edge/test_berserk_edge_cases.gd`) [a248d23]
     - [ ] Test purebred immunity to berserk
     - [ ] Test event modifier accumulation and reset
     - [ ] Test 5s duration transition (berserk start → expire)
