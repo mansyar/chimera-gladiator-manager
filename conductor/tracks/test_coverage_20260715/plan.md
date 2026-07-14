@@ -91,9 +91,9 @@
 - [x] Task: Create `tests/integration/test_economy_flow.gd` [1952fe2]
     - [x] Write integration test: buy_part → gold deduction → inventory add → save → load → verify state
     - [x] Run test and verify it passes
-- [ ] Task: Create `tests/integration/test_assembly_flow.gd`
-    - [ ] Write integration test: equip part → recalculate_stats → update instability → combo lookup → save
-    - [ ] Run test and verify it passes
+- [x] Task: Create `tests/integration/test_assembly_flow.gd` [bfe814e]
+    - [x] Write integration test: equip part → recalculate_stats → update instability → combo lookup → save
+    - [x] Run test and verify it passes
 - [ ] Task: Create `tests/integration/test_combat_lifecycle.gd`
     - [ ] Write integration test: start_match → entity placement → AI/combat execution → end_match → rewards → save
     - [ ] Run test and verify it passes
