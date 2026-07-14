@@ -64,10 +64,10 @@
 ## Phase 4: Unit Test Expansion — Autoload Modules (with Mocking)
 
 - [x] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase [e6584f4]
-- [ ] Task: Expand `test_event_bus.gd` for `scripts/autoload/event_bus.gd`
-    - [ ] Write tests for untested branches (e.g., signal parameter validation, multi-signal emission sequences, disconnect cleanup)
-    - [ ] Run tests and verify they pass
-    - [ ] Verify coverage for event_bus module is 95%+
+- [x] Task: Expand `test_event_bus.gd` for `scripts/autoload/event_bus.gd`
+    - [x] Write tests for untested branches (e.g., signal parameter validation, multi-signal emission sequences, disconnect cleanup)
+    - [x] Run tests and verify they pass
+    - [x] Verify coverage for event_bus module is 95%+
 - [ ] Task: Expand `test_game_state.gd` for `scripts/autoload/game_state.gd` using GUT doubling
     - [ ] Set up GUT `double()` for SaveManager and EventBus dependencies
     - [ ] Write tests for untested branches (e.g., gold/infamy modification, roster management, inventory operations, state persistence calls)
