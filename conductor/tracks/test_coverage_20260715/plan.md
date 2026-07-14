@@ -43,7 +43,7 @@
 ## Phase 3: Unit Test Expansion — Data & Combat Modules
 
 - [x] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
-- [ ] Task: Expand `test_chimera_data.gd` for `scripts/data/chimera_data.gd`
+- [x] Task: Expand `test_chimera_data.gd` for `scripts/data/chimera_data.gd` [2acbdba]
     - [ ] Write tests for untested branches (e.g., stat aggregation from equipped parts, instability calculation, combo ability lookup, part equip/unequip)
     - [ ] Run tests and verify they pass
     - [ ] Verify coverage for chimera_data module is 95%+
