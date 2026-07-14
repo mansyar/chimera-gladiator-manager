@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BehaviorModuleData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/behavior_module_data.gd" id="1_cdgjp"]
+
+[resource]
+script = ExtResource("1_cdgjp")
+module_name = "Stalker"
+detail_type = "eye"
+targeting = 5
+ability_priority = Array[int]([0, 2, 1, 3])
+positioning = 2

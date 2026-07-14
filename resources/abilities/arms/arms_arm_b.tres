@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_6rui5"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_uacmq"]
+
+[sub_resource type="Resource" id="Resource_15mm5"]
+script = ExtResource("1_6rui5")
+params = {
+"amount": 1.0
+}
+
+[sub_resource type="Resource" id="Resource_7p10x"]
+script = ExtResource("1_6rui5")
+effect_type = 3
+params = {
+"amount": 0.3,
+"duration": 3.0,
+"stat": "defense"
+}
+
+[resource]
+script = ExtResource("2_uacmq")
+id = "arms_arm_b_ability"
+name = "Armor Break"
+description = "Deals damage and reduces target defense by 30% for 3 seconds."
+cooldown = 5.0
+targeting = "TARGET"
+range = 32.0
+effects = Array[ExtResource("1_6rui5")]([SubResource("Resource_15mm5"), SubResource("Resource_7p10x")])

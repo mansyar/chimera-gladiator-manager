@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_23fow"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_iupk0"]
+
+[sub_resource type="Resource" id="Resource_eg8vg"]
+script = ExtResource("1_23fow")
+effect_type = 2
+params = {
+"amount": 0.6,
+"duration": 2.0,
+"stat": "speed"
+}
+
+[resource]
+script = ExtResource("2_iupk0")
+id = "legs_leg_e_ability"
+name = "Burst Sprint"
+description = "Increases speed by 60% for 2 seconds."
+category = 1
+cooldown = 10.0
+targeting = "SELF"
+effects = Array[ExtResource("1_23fow")]([SubResource("Resource_eg8vg")])

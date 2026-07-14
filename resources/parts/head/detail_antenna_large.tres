@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PartData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/behavior_module_data.gd" id="1_1ynte"]
+[ext_resource type="Script" path="res://scripts/data/part_data.gd" id="2_dktah"]
+
+[sub_resource type="Resource" id="Resource_4stth"]
+script = ExtResource("1_1ynte")
+module_name = "Caster"
+detail_type = "antenna_large"
+targeting = 2
+ability_priority = Array[int]([2, 0, 3, 1])
+positioning = 2
+
+[resource]
+script = ExtResource("2_dktah")
+shape_id = "detail_antenna_large"
+strain = 6
+hp_bonus = 3.0
+defense_bonus = 2.0
+ability_id = "head_antenna_large_ability"
+behavior_module = SubResource("Resource_4stth")

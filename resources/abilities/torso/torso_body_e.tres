@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_bxhu5"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_xiccv"]
+
+[sub_resource type="Resource" id="Resource_4rsb3"]
+script = ExtResource("1_bxhu5")
+effect_type = 1
+params = {
+"amount": 25.0
+}
+
+[resource]
+script = ExtResource("2_xiccv")
+id = "torso_body_e_ability"
+name = "Emergency Repair"
+description = "Instantly restores 25 HP."
+category = 3
+cooldown = 8.0
+targeting = "SELF"
+effects = Array[ExtResource("1_bxhu5")]([SubResource("Resource_4rsb3")])

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_iwkdh"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_k8buy"]
+
+[sub_resource type="Resource" id="Resource_7er55"]
+script = ExtResource("1_iwkdh")
+params = {
+"amount": 1.2
+}
+
+[resource]
+script = ExtResource("2_k8buy")
+id = "arms_arm_c_ability"
+name = "Quick Jab"
+description = "Deals 120% attack damage with fast cooldown."
+cooldown = 3.0
+targeting = "TARGET"
+range = 32.0
+effects = Array[ExtResource("1_iwkdh")]([SubResource("Resource_7er55")])

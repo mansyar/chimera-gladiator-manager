@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_f8iku"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_itv1c"]
+
+[sub_resource type="Resource" id="Resource_l602r"]
+script = ExtResource("1_f8iku")
+effect_type = 8
+params = {
+"attack_bonus": 0.5,
+"defense_penalty": 0.2,
+"duration": 5.0
+}
+
+[resource]
+script = ExtResource("2_itv1c")
+id = "draconic_2"
+name = "Dragon Rage"
+description = "Enrages when HP is low, gaining 50% attack but losing 20% defense."
+type = 1
+targeting = "SELF"
+effects = Array[ExtResource("1_f8iku")]([SubResource("Resource_l602r")])

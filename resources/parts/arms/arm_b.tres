@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PartData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/part_data.gd" id="1_112pw"]
+
+[resource]
+script = ExtResource("1_112pw")
+slot = 2
+shape_id = "arm_b"
+strain = 6
+attack_bonus = 18.0
+ability_id = "arms_arm_b_ability"

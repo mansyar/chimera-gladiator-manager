@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_mji0p"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_5ukwc"]
+
+[sub_resource type="Resource" id="Resource_wvrg0"]
+script = ExtResource("1_mji0p")
+effect_type = 5
+params = {
+"amount": 10.0
+}
+
+[resource]
+script = ExtResource("2_5ukwc")
+id = "elemental_3"
+name = "Static Field"
+description = "Passively maintains a 10 HP shield."
+type = 1
+category = 3
+targeting = "SELF"
+effects = Array[ExtResource("1_mji0p")]([SubResource("Resource_wvrg0")])

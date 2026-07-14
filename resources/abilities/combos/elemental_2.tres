@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_dfubd"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_rpajp"]
+
+[sub_resource type="Resource" id="Resource_h38qk"]
+script = ExtResource("1_dfubd")
+effect_type = 5
+params = {
+"amount": 40.0,
+"duration": 5.0
+}
+
+[resource]
+script = ExtResource("2_rpajp")
+id = "elemental_2"
+name = "Energy Shield"
+description = "Creates a shield absorbing 40 damage for 5 seconds."
+category = 3
+cooldown = 8.0
+targeting = "SELF"
+effects = Array[ExtResource("1_dfubd")]([SubResource("Resource_h38qk")])

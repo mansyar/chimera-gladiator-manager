@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PartData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/behavior_module_data.gd" id="1_uxk5j"]
+[ext_resource type="Script" path="res://scripts/data/part_data.gd" id="2_wjr76"]
+
+[sub_resource type="Resource" id="Resource_dm8fs"]
+script = ExtResource("1_uxk5j")
+module_name = "Stalker"
+detail_type = "eye"
+targeting = 5
+ability_priority = Array[int]([0, 2, 1, 3])
+positioning = 2
+
+[resource]
+script = ExtResource("2_wjr76")
+shape_id = "detail_eye"
+strain = 6
+hp_bonus = 4.0
+defense_bonus = 2.0
+ability_id = "head_eye_ability"
+behavior_module = SubResource("Resource_dm8fs")

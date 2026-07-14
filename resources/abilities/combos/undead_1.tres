@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_03xvr"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_6d6s2"]
+
+[sub_resource type="Resource" id="Resource_vwho4"]
+script = ExtResource("1_03xvr")
+params = {
+"amount": 1.0
+}
+
+[sub_resource type="Resource" id="Resource_4nqa8"]
+script = ExtResource("1_03xvr")
+effect_type = 1
+params = {
+"amount": 15.0
+}
+
+[resource]
+script = ExtResource("2_6d6s2")
+id = "undead_1"
+name = "Life Steal"
+description = "Deals damage and heals for 15 HP."
+cooldown = 6.0
+targeting = "TARGET"
+range = 32.0
+effects = Array[ExtResource("1_03xvr")]([SubResource("Resource_vwho4"), SubResource("Resource_4nqa8")])

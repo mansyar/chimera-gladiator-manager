@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_cigxg"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_xwf12"]
+
+[sub_resource type="Resource" id="Resource_di6xp"]
+script = ExtResource("1_cigxg")
+effect_type = 2
+params = {
+"amount": 0.5,
+"duration": 3.0,
+"stat": "speed"
+}
+
+[resource]
+script = ExtResource("2_xwf12")
+id = "beast_1"
+name = "Speed Surge"
+description = "Increases speed by 50% for 3 seconds."
+category = 1
+cooldown = 5.0
+targeting = "SELF"
+effects = Array[ExtResource("1_cigxg")]([SubResource("Resource_di6xp")])

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_nb8xi"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_k62ym"]
+
+[sub_resource type="Resource" id="Resource_ttw42"]
+script = ExtResource("1_nb8xi")
+effect_type = 4
+params = {
+"direction": "backward",
+"distance": 48.0
+}
+
+[resource]
+script = ExtResource("2_k62ym")
+id = "legs_leg_c_ability"
+name = "Tactical Retreat"
+description = "Moves backward to escape."
+category = 1
+cooldown = 6.0
+targeting = "SELF"
+effects = Array[ExtResource("1_nb8xi")]([SubResource("Resource_ttw42")])

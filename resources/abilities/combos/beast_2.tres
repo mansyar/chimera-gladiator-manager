@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_1tdpb"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_r0d57"]
+
+[sub_resource type="Resource" id="Resource_rlu4e"]
+script = ExtResource("1_1tdpb")
+effect_type = 1
+params = {
+"amount": 0.2
+}
+
+[resource]
+script = ExtResource("2_r0d57")
+id = "beast_2"
+name = "Bloodlust"
+description = "Passively heals for 20% of damage dealt."
+type = 1
+targeting = "SELF"
+effects = Array[ExtResource("1_1tdpb")]([SubResource("Resource_rlu4e")])

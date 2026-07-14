@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_hwmwa"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_j81i5"]
+
+[sub_resource type="Resource" id="Resource_358xa"]
+script = ExtResource("1_hwmwa")
+effect_type = 7
+params = {
+"duration": 10.0
+}
+
+[resource]
+script = ExtResource("2_j81i5")
+id = "undead_3"
+name = "Reanimate"
+description = "Revives a fallen ally for 10 seconds."
+category = 2
+cooldown = 12.0
+targeting = "AOE_ALLIES"
+range = 96.0
+effects = Array[ExtResource("1_hwmwa")]([SubResource("Resource_358xa")])

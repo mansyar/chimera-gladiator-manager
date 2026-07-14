@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PartData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/part_data.gd" id="1_pim7c"]
+
+[resource]
+script = ExtResource("1_pim7c")
+slot = 3
+shape_id = "leg_b"
+strain = 6
+speed_bonus = 25.0
+ability_id = "legs_leg_b_ability"

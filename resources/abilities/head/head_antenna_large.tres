@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_gqka3"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_ea6s1"]
+
+[sub_resource type="Resource" id="Resource_j26i8"]
+script = ExtResource("1_gqka3")
+effect_type = 3
+params = {
+"amount": 0.25,
+"duration": 4.0,
+"stat": "defense"
+}
+
+[resource]
+script = ExtResource("2_ea6s1")
+id = "head_antenna_large_ability"
+name = "Psychic Wave"
+description = "Reduces defense of all nearby enemies by 25% for 4 seconds."
+category = 2
+cooldown = 10.0
+targeting = "AOE_ENEMIES"
+range = 96.0
+effects = Array[ExtResource("1_gqka3")]([SubResource("Resource_j26i8")])

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BehaviorModuleData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/behavior_module_data.gd" id="1_68o2h"]
+
+[resource]
+script = ExtResource("1_68o2h")
+module_name = "Caster"
+detail_type = "antenna_large"
+targeting = 2
+ability_priority = Array[int]([2, 0, 3, 1])
+positioning = 2

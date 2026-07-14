@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BehaviorModuleData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/behavior_module_data.gd" id="1_30tk3"]
+
+[resource]
+script = ExtResource("1_30tk3")
+module_name = "Skirmisher"
+detail_type = "horn_small"
+targeting = 1
+ability_priority = Array[int]([1, 0, 2, 3])
+positioning = 1

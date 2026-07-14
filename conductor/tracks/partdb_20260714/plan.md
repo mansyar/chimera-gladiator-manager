@@ -3,30 +3,30 @@
 
 ## Phase 1: Data Files
 
-- [ ] Task: Read spec.md and workflow.md to align with current requirements and TDD protocol
-- [ ] Task: Create 23 part ability .tres files
-    - [ ] Create 7 HEAD ability files (utility & disruption theme, active 5-10s CD, effects: DEBUFF_STAT/CLEANSE/REPOSITION/BUFF_STAT)
-    - [ ] Create 6 TORSO ability files (defense & sustain, mix active 8-12s CD + passive, effects: SHIELD/HEAL/BUFF_STAT/DAMAGE)
-    - [ ] Create 5 ARMS ability files (offense theme, active 3-6s CD, effects: DAMAGE/DEBUFF_STAT/BUFF_STAT)
-    - [ ] Create 5 LEGS ability files (mobility & positioning, active 5-10s CD, effects: REPOSITION/BUFF_STAT)
-- [ ] Task: Create 18 strain combo ability .tres files
-    - [ ] Create 3 Undead combos (necrotic drain: life steal -> +heal -> +reanimate)
-    - [ ] Create 3 Robotic combos (overcharge: burst -> +overclock -> +tradeoff)
-    - [ ] Create 3 Draconic combos (dragon fury: AoE fire -> +enrage -> +aura)
-    - [ ] Create 3 Beast combos (savagery: speed surge -> +lifesteal -> +crit bonus)
-    - [ ] Create 3 Elemental combos (surge: chain damage -> +shield -> +persistent)
-    - [ ] Create 3 Aberrant combos (chaos: random effect -> +mutation -> +persistent)
-- [ ] Task: Create 7 behavior module .tres files
-    - [ ] Create all 7 modules matching GDD Section 2.4 table (Charger/Skirmisher/Caster/Controller/Sentinel/Guardian/Stalker with correct targeting/ability_priority/positioning)
-- [ ] Task: Create 23 base part template .tres files
-    - [ ] Create 7 HEAD templates (with behavior_module ref, minor HP/Def bonuses, ability_id)
-    - [ ] Create 6 TORSO templates (primary HP, moderate Defense, ability_id)
-    - [ ] Create 5 ARMS templates (primary Attack, attack_range melee 32px/ranged 96px, ability_id)
-    - [ ] Create 5 LEGS templates (primary Speed, ability_id)
-- [ ] Task: Create 3 starter chimera definitions
-    - [ ] Create Tank starter (Beast purebred, detail_ear_round/Guardian, high HP/Def, low Speed)
-    - [ ] Create DPS starter (Draconic purebred, detail_horn_large/Charger, high Attack, moderate HP/Speed)
-    - [ ] Create Utility starter (Elemental purebred, detail_antenna_large/Caster, balanced stats)
+- [x] Task: Read spec.md and workflow.md to align with current requirements and TDD protocol
+- [x] Task: Create 23 part ability .tres files
+    - [x] Create 7 HEAD ability files (utility & disruption theme, active 5-10s CD, effects: DEBUFF_STAT/CLEANSE/REPOSITION/BUFF_STAT)
+    - [x] Create 6 TORSO ability files (defense & sustain, mix active 8-12s CD + passive, effects: SHIELD/HEAL/BUFF_STAT/DAMAGE)
+    - [x] Create 5 ARMS ability files (offense theme, active 3-6s CD, effects: DAMAGE/DEBUFF_STAT/BUFF_STAT)
+    - [x] Create 5 LEGS ability files (mobility & positioning, active 5-10s CD, effects: REPOSITION/BUFF_STAT)
+- [x] Task: Create 18 strain combo ability .tres files
+    - [x] Create 3 Undead combos (necrotic drain: life steal -> +heal -> +reanimate)
+    - [x] Create 3 Robotic combos (overcharge: burst -> +overclock -> +tradeoff)
+    - [x] Create 3 Draconic combos (dragon fury: AoE fire -> +enrage -> +aura)
+    - [x] Create 3 Beast combos (savagery: speed surge -> +lifesteal -> +crit bonus)
+    - [x] Create 3 Elemental combos (surge: chain damage -> +shield -> +persistent)
+    - [x] Create 3 Aberrant combos (chaos: random effect -> +mutation -> +persistent)
+- [x] Task: Create 7 behavior module .tres files
+    - [x] Create all 7 modules matching GDD Section 2.4 table (Charger/Skirmisher/Caster/Controller/Sentinel/Guardian/Stalker with correct targeting/ability_priority/positioning)
+- [x] Task: Create 23 base part template .tres files
+    - [x] Create 7 HEAD templates (with behavior_module ref, minor HP/Def bonuses, ability_id)
+    - [x] Create 6 TORSO templates (primary HP, moderate Defense, ability_id)
+    - [x] Create 5 ARMS templates (primary Attack, attack_range melee 32px/ranged 96px, ability_id)
+    - [x] Create 5 LEGS templates (primary Speed, ability_id)
+- [x] Task: Create 3 starter chimera definitions
+    - [x] Create Tank starter (Beast purebred, detail_ear_round/Guardian, high HP/Def, low Speed)
+    - [x] Create DPS starter (Draconic purebred, detail_horn_large/Charger, high Attack, moderate HP/Speed)
+    - [x] Create Utility starter (Elemental purebred, detail_antenna_large/Caster, balanced stats)
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Data Files' (Protocol in workflow.md)
 
 ## Phase 2: PartDatabase Implementation (TDD)

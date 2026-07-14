@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_y4tq0"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_bjpoy"]
+
+[sub_resource type="Resource" id="Resource_cdv26"]
+script = ExtResource("1_y4tq0")
+effect_type = 2
+params = {
+"amount": 0.4,
+"duration": 4.0,
+"stat": "defense"
+}
+
+[resource]
+script = ExtResource("2_bjpoy")
+id = "head_ear_ability"
+name = "Alert Stance"
+description = "Increases own defense by 40% for 4 seconds."
+category = 3
+cooldown = 5.0
+targeting = "SELF"
+effects = Array[ExtResource("1_y4tq0")]([SubResource("Resource_cdv26")])

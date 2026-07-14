@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_m1ena"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_2ec7a"]
+
+[sub_resource type="Resource" id="Resource_fc0xo"]
+script = ExtResource("1_m1ena")
+effect_type = 3
+params = {
+"amount": 0.35,
+"duration": 3.0,
+"stat": "speed"
+}
+
+[resource]
+script = ExtResource("2_2ec7a")
+id = "head_eye_ability"
+name = "Petrifying Gaze"
+description = "Reduces target's speed by 35% for 3 seconds."
+category = 2
+cooldown = 7.0
+targeting = "TARGET"
+range = 64.0
+effects = Array[ExtResource("1_m1ena")]([SubResource("Resource_fc0xo")])

@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_2prgk"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_kq3bd"]
+
+[sub_resource type="Resource" id="Resource_bi2gp"]
+script = ExtResource("1_2prgk")
+effect_type = 2
+params = {
+"amount": 0.5,
+"duration": 4.0,
+"stat": "attack"
+}
+
+[sub_resource type="Resource" id="Resource_iwu2y"]
+script = ExtResource("1_2prgk")
+effect_type = 3
+params = {
+"amount": 0.2,
+"duration": 4.0,
+"stat": "defense"
+}
+
+[resource]
+script = ExtResource("2_kq3bd")
+id = "robotic_2"
+name = "Overclock"
+description = "Increases attack by 50% but reduces defense by 20% for 4 seconds."
+cooldown = 8.0
+targeting = "SELF"
+effects = Array[ExtResource("1_2prgk")]([SubResource("Resource_bi2gp"), SubResource("Resource_iwu2y")])

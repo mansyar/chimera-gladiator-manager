@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="ChimeraData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/part_data.gd" id="1_rquah"]
+[ext_resource type="Script" path="res://scripts/data/behavior_module_data.gd" id="2_6seh5"]
+[ext_resource type="Script" path="res://scripts/data/chimera_data.gd" id="3_4vgj1"]
+
+[sub_resource type="Resource" id="Resource_egslo"]
+script = ExtResource("1_rquah")
+slot = 2
+shape_id = "arm_b"
+strain = 2
+sprite_path = "res://assets/kenney-monster-builder-pack/PNG/Default/arm_redB.png"
+attack_bonus = 18.0
+ability_id = "arms_arm_b_ability"
+
+[sub_resource type="Resource" id="Resource_t5c3d"]
+script = ExtResource("2_6seh5")
+module_name = "Charger"
+detail_type = "horn_large"
+ability_priority = Array[int]([0, 1, 2, 3])
+
+[sub_resource type="Resource" id="Resource_64ysk"]
+script = ExtResource("1_rquah")
+shape_id = "detail_horn_large"
+strain = 2
+sprite_path = "res://assets/kenney-monster-builder-pack/PNG/Default/detail_red_horn_large.png"
+hp_bonus = 5.0
+defense_bonus = 3.0
+ability_id = "head_horn_large_ability"
+behavior_module = SubResource("Resource_t5c3d")
+
+[sub_resource type="Resource" id="Resource_sge6w"]
+script = ExtResource("1_rquah")
+slot = 3
+shape_id = "leg_b"
+strain = 2
+sprite_path = "res://assets/kenney-monster-builder-pack/PNG/Default/leg_redB.png"
+speed_bonus = 25.0
+ability_id = "legs_leg_b_ability"
+
+[sub_resource type="Resource" id="Resource_cvtpg"]
+script = ExtResource("1_rquah")
+slot = 1
+shape_id = "body_e"
+strain = 2
+sprite_path = "res://assets/kenney-monster-builder-pack/PNG/Default/body_redE.png"
+hp_bonus = 32.0
+defense_bonus = 10.0
+ability_id = "torso_body_e_ability"
+
+[resource]
+script = ExtResource("3_4vgj1")
+nickname = "Ignis"
+head = SubResource("Resource_64ysk")
+torso = SubResource("Resource_cvtpg")
+arms = SubResource("Resource_egslo")
+legs = SubResource("Resource_sge6w")

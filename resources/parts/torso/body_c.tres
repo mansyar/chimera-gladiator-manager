@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PartData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/part_data.gd" id="1_oes3e"]
+
+[resource]
+script = ExtResource("1_oes3e")
+slot = 1
+shape_id = "body_c"
+strain = 6
+hp_bonus = 40.0
+defense_bonus = 12.0
+ability_id = "torso_body_c_ability"

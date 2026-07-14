@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="ChimeraData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/part_data.gd" id="1_cah2l"]
+[ext_resource type="Script" path="res://scripts/data/behavior_module_data.gd" id="2_j17ux"]
+[ext_resource type="Script" path="res://scripts/data/chimera_data.gd" id="3_ru0mv"]
+
+[sub_resource type="Resource" id="Resource_s0mu8"]
+script = ExtResource("1_cah2l")
+slot = 2
+shape_id = "arm_a"
+strain = 3
+sprite_path = "res://assets/kenney-monster-builder-pack/PNG/Default/arm_greenA.png"
+attack_bonus = 15.0
+ability_id = "arms_arm_a_ability"
+
+[sub_resource type="Resource" id="Resource_tcbv5"]
+script = ExtResource("2_j17ux")
+module_name = "Guardian"
+detail_type = "ear_round"
+targeting = 4
+ability_priority = Array[int]([3, 2, 1, 0])
+
+[sub_resource type="Resource" id="Resource_hvqlv"]
+script = ExtResource("1_cah2l")
+shape_id = "detail_ear_round"
+strain = 3
+sprite_path = "res://assets/kenney-monster-builder-pack/PNG/Default/detail_green_ear_round.png"
+hp_bonus = 8.0
+defense_bonus = 5.0
+ability_id = "head_ear_round_ability"
+behavior_module = SubResource("Resource_tcbv5")
+
+[sub_resource type="Resource" id="Resource_1mro2"]
+script = ExtResource("1_cah2l")
+slot = 3
+shape_id = "leg_c"
+strain = 3
+sprite_path = "res://assets/kenney-monster-builder-pack/PNG/Default/leg_greenC.png"
+speed_bonus = 18.0
+ability_id = "legs_leg_c_ability"
+
+[sub_resource type="Resource" id="Resource_53eny"]
+script = ExtResource("1_cah2l")
+slot = 1
+shape_id = "body_a"
+strain = 3
+sprite_path = "res://assets/kenney-monster-builder-pack/PNG/Default/body_greenA.png"
+hp_bonus = 30.0
+defense_bonus = 10.0
+ability_id = "torso_body_a_ability"
+
+[resource]
+script = ExtResource("3_ru0mv")
+nickname = "Bastion"
+head = SubResource("Resource_hvqlv")
+torso = SubResource("Resource_53eny")
+arms = SubResource("Resource_s0mu8")
+legs = SubResource("Resource_1mro2")

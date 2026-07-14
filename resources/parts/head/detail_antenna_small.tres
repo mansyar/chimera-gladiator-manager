@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PartData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/behavior_module_data.gd" id="1_lks36"]
+[ext_resource type="Script" path="res://scripts/data/part_data.gd" id="2_jap8g"]
+
+[sub_resource type="Resource" id="Resource_i043o"]
+script = ExtResource("1_lks36")
+module_name = "Controller"
+detail_type = "antenna_small"
+targeting = 3
+ability_priority = Array[int]([2, 1, 3, 0])
+positioning = 1
+
+[resource]
+script = ExtResource("2_jap8g")
+shape_id = "detail_antenna_small"
+strain = 6
+hp_bonus = 3.0
+defense_bonus = 3.0
+ability_id = "head_antenna_small_ability"
+behavior_module = SubResource("Resource_i043o")

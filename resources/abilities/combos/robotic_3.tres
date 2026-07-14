@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_70xf3"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_jrpx6"]
+
+[sub_resource type="Resource" id="Resource_keg75"]
+script = ExtResource("1_70xf3")
+effect_type = 2
+params = {
+"amount": 0.8,
+"duration": 5.0,
+"stat": "attack"
+}
+
+[sub_resource type="Resource" id="Resource_mj7gq"]
+script = ExtResource("1_70xf3")
+effect_type = 3
+params = {
+"amount": 0.4,
+"duration": 5.0,
+"stat": "defense"
+}
+
+[resource]
+script = ExtResource("2_jrpx6")
+id = "robotic_3"
+name = "Critical Overload"
+description = "Increases attack by 80% but reduces defense by 40% for 5 seconds."
+cooldown = 10.0
+targeting = "SELF"
+effects = Array[ExtResource("1_70xf3")]([SubResource("Resource_keg75"), SubResource("Resource_mj7gq")])

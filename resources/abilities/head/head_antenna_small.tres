@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_djjx2"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_wtf5i"]
+
+[sub_resource type="Resource" id="Resource_tee37"]
+script = ExtResource("1_djjx2")
+effect_type = 6
+
+[resource]
+script = ExtResource("2_wtf5i")
+id = "head_antenna_small_ability"
+name = "Cleanse Pulse"
+description = "Removes all negative effects from self."
+category = 2
+cooldown = 7.0
+targeting = "SELF"
+effects = Array[ExtResource("1_djjx2")]([SubResource("Resource_tee37")])

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_556uw"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_b5lvm"]
+
+[sub_resource type="Resource" id="Resource_kq3sj"]
+script = ExtResource("1_556uw")
+params = {
+"amount": 15.0
+}
+
+[resource]
+script = ExtResource("2_b5lvm")
+id = "torso_body_d_ability"
+name = "Thorn Armor"
+description = "Deals 15 damage to nearby enemies."
+cooldown = 10.0
+targeting = "AOE_ENEMIES"
+range = 48.0
+effects = Array[ExtResource("1_556uw")]([SubResource("Resource_kq3sj")])

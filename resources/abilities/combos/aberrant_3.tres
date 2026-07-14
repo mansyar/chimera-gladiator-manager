@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_kxlo2"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_73xdw"]
+
+[sub_resource type="Resource" id="Resource_nfx5h"]
+script = ExtResource("1_kxlo2")
+effect_type = 10
+
+[resource]
+script = ExtResource("2_73xdw")
+id = "aberrant_3"
+name = "Entropy Field"
+description = "Passively triggers random effects."
+type = 1
+category = 2
+targeting = "SELF"
+effects = Array[ExtResource("1_kxlo2")]([SubResource("Resource_nfx5h")])

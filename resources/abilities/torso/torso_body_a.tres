@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_wdw41"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_vfcui"]
+
+[sub_resource type="Resource" id="Resource_hhock"]
+script = ExtResource("1_wdw41")
+effect_type = 5
+params = {
+"amount": 30.0,
+"duration": 5.0
+}
+
+[resource]
+script = ExtResource("2_vfcui")
+id = "torso_body_a_ability"
+name = "Energy Shield"
+description = "Creates a shield absorbing 30 damage for 5 seconds."
+category = 3
+cooldown = 10.0
+targeting = "SELF"
+effects = Array[ExtResource("1_wdw41")]([SubResource("Resource_hhock")])

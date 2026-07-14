@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_1jcj0"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_xn10t"]
+
+[sub_resource type="Resource" id="Resource_mh4pt"]
+script = ExtResource("1_1jcj0")
+effect_type = 4
+params = {
+"direction": "away",
+"distance": 48.0
+}
+
+[resource]
+script = ExtResource("2_xn10t")
+id = "head_horn_small_ability"
+name = "Charge Knockback"
+description = "Knocks the target back."
+category = 2
+cooldown = 6.0
+targeting = "TARGET"
+range = 32.0
+effects = Array[ExtResource("1_1jcj0")]([SubResource("Resource_mh4pt")])

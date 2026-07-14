@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PartData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/behavior_module_data.gd" id="1_7alka"]
+[ext_resource type="Script" path="res://scripts/data/part_data.gd" id="2_y7q2o"]
+
+[sub_resource type="Resource" id="Resource_1llpl"]
+script = ExtResource("1_7alka")
+module_name = "Skirmisher"
+detail_type = "horn_small"
+targeting = 1
+ability_priority = Array[int]([1, 0, 2, 3])
+positioning = 1
+
+[resource]
+script = ExtResource("2_y7q2o")
+shape_id = "detail_horn_small"
+strain = 6
+hp_bonus = 4.0
+defense_bonus = 2.0
+ability_id = "head_horn_small_ability"
+behavior_module = SubResource("Resource_1llpl")

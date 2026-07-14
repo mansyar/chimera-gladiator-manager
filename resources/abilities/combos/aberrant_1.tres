@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_5mwep"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_qd2n4"]
+
+[sub_resource type="Resource" id="Resource_yr5vc"]
+script = ExtResource("1_5mwep")
+effect_type = 10
+
+[resource]
+script = ExtResource("2_qd2n4")
+id = "aberrant_1"
+name = "Wild Magic"
+description = "Triggers a random effect on the target."
+category = 2
+cooldown = 5.0
+targeting = "TARGET"
+range = 64.0
+effects = Array[ExtResource("1_5mwep")]([SubResource("Resource_yr5vc")])

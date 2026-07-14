@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_ljpkd"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_ei8v1"]
+
+[sub_resource type="Resource" id="Resource_krqar"]
+script = ExtResource("1_ljpkd")
+effect_type = 4
+params = {
+"direction": "forward",
+"distance": 64.0
+}
+
+[resource]
+script = ExtResource("2_ei8v1")
+id = "legs_leg_a_ability"
+name = "Forward Dash"
+description = "Dashes forward quickly."
+category = 1
+cooldown = 5.0
+targeting = "SELF"
+effects = Array[ExtResource("1_ljpkd")]([SubResource("Resource_krqar")])

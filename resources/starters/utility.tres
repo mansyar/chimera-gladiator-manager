@@ -1,0 +1,60 @@
+[gd_resource type="Resource" script_class="ChimeraData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/part_data.gd" id="1_8afcf"]
+[ext_resource type="Script" path="res://scripts/data/behavior_module_data.gd" id="2_j3yar"]
+[ext_resource type="Script" path="res://scripts/data/chimera_data.gd" id="3_isbv8"]
+
+[sub_resource type="Resource" id="Resource_mrjp5"]
+script = ExtResource("1_8afcf")
+slot = 2
+shape_id = "arm_d"
+strain = 4
+sprite_path = "res://assets/kenney-monster-builder-pack/PNG/Default/arm_blueD.png"
+attack_bonus = 14.0
+ability_id = "arms_arm_d_ability"
+attack_range = 96.0
+
+[sub_resource type="Resource" id="Resource_4stth"]
+script = ExtResource("2_j3yar")
+module_name = "Caster"
+detail_type = "antenna_large"
+targeting = 2
+ability_priority = Array[int]([2, 0, 3, 1])
+positioning = 2
+
+[sub_resource type="Resource" id="Resource_dejie"]
+script = ExtResource("1_8afcf")
+shape_id = "detail_antenna_large"
+strain = 4
+sprite_path = "res://assets/kenney-monster-builder-pack/PNG/Default/detail_blue_antenna_large.png"
+hp_bonus = 3.0
+defense_bonus = 2.0
+ability_id = "head_antenna_large_ability"
+behavior_module = SubResource("Resource_4stth")
+
+[sub_resource type="Resource" id="Resource_du3ef"]
+script = ExtResource("1_8afcf")
+slot = 3
+shape_id = "leg_d"
+strain = 4
+sprite_path = "res://assets/kenney-monster-builder-pack/PNG/Default/leg_blueD.png"
+speed_bonus = 22.0
+ability_id = "legs_leg_d_ability"
+
+[sub_resource type="Resource" id="Resource_sf6fr"]
+script = ExtResource("1_8afcf")
+slot = 1
+shape_id = "body_c"
+strain = 4
+sprite_path = "res://assets/kenney-monster-builder-pack/PNG/Default/body_blueC.png"
+hp_bonus = 40.0
+defense_bonus = 12.0
+ability_id = "torso_body_c_ability"
+
+[resource]
+script = ExtResource("3_isbv8")
+nickname = "Cipher"
+head = SubResource("Resource_dejie")
+torso = SubResource("Resource_sf6fr")
+arms = SubResource("Resource_mrjp5")
+legs = SubResource("Resource_du3ef")

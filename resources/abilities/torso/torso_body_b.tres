@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_qg324"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_gga0j"]
+
+[sub_resource type="Resource" id="Resource_1m3h6"]
+script = ExtResource("1_qg324")
+effect_type = 1
+params = {
+"amount": 5.0,
+"duration": 1.0
+}
+
+[resource]
+script = ExtResource("2_gga0j")
+id = "torso_body_b_ability"
+name = "Regeneration"
+description = "Passively restores 5 HP per second."
+type = 1
+category = 3
+targeting = "SELF"
+effects = Array[ExtResource("1_qg324")]([SubResource("Resource_1m3h6")])

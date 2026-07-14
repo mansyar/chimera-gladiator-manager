@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_qhy46"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_5fmn5"]
+
+[sub_resource type="Resource" id="Resource_lwty2"]
+script = ExtResource("1_qhy46")
+params = {
+"amount": 0.8
+}
+
+[resource]
+script = ExtResource("2_5fmn5")
+id = "arms_arm_d_ability"
+name = "Fan Spray"
+description = "Deals 80% attack damage to all enemies in range."
+cooldown = 6.0
+targeting = "AOE_ENEMIES"
+range = 96.0
+effects = Array[ExtResource("1_qhy46")]([SubResource("Resource_lwty2")])

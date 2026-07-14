@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_jopvb"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_3g20x"]
+
+[sub_resource type="Resource" id="Resource_5a6io"]
+script = ExtResource("1_jopvb")
+effect_type = 2
+params = {
+"amount": 0.5,
+"stat": "crit_damage"
+}
+
+[resource]
+script = ExtResource("2_3g20x")
+id = "beast_3"
+name = "Killing Blow"
+description = "Passively increases crit damage by 50%."
+type = 1
+targeting = "SELF"
+effects = Array[ExtResource("1_jopvb")]([SubResource("Resource_5a6io")])

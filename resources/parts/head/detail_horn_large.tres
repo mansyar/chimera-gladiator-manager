@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="PartData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/behavior_module_data.gd" id="1_4dthe"]
+[ext_resource type="Script" path="res://scripts/data/part_data.gd" id="2_okyqn"]
+
+[sub_resource type="Resource" id="Resource_t5c3d"]
+script = ExtResource("1_4dthe")
+module_name = "Charger"
+detail_type = "horn_large"
+ability_priority = Array[int]([0, 1, 2, 3])
+
+[resource]
+script = ExtResource("2_okyqn")
+shape_id = "detail_horn_large"
+strain = 6
+hp_bonus = 5.0
+defense_bonus = 3.0
+ability_id = "head_horn_large_ability"
+behavior_module = SubResource("Resource_t5c3d")

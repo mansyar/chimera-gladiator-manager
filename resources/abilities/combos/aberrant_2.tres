@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_pt2h8"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_lysxl"]
+
+[sub_resource type="Resource" id="Resource_xpoqj"]
+script = ExtResource("1_pt2h8")
+effect_type = 9
+params = {
+"amount": 0.3
+}
+
+[resource]
+script = ExtResource("2_lysxl")
+id = "aberrant_2"
+name = "Genetic Mutation"
+description = "Mutates stats, increasing a random stat by 30%."
+category = 2
+cooldown = 7.0
+targeting = "SELF"
+effects = Array[ExtResource("1_pt2h8")]([SubResource("Resource_xpoqj")])

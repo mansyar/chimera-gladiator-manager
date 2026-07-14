@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/ability_effect.gd" id="1_7ntjn"]
+[ext_resource type="Script" path="res://scripts/data/ability_data.gd" id="2_2tmv0"]
+
+[sub_resource type="Resource" id="Resource_8ti6m"]
+script = ExtResource("1_7ntjn")
+effect_type = 3
+params = {
+"amount": 0.3,
+"duration": 3.0,
+"stat": "attack"
+}
+
+[resource]
+script = ExtResource("2_2tmv0")
+id = "head_horn_large_ability"
+name = "Intimidating Roar"
+description = "Reduces target's attack by 30% for 3 seconds."
+category = 2
+cooldown = 8.0
+targeting = "TARGET"
+range = 64.0
+effects = Array[ExtResource("1_7ntjn")]([SubResource("Resource_8ti6m")])

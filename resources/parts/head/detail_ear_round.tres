@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="PartData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/behavior_module_data.gd" id="1_3tb8f"]
+[ext_resource type="Script" path="res://scripts/data/part_data.gd" id="2_es1wr"]
+
+[sub_resource type="Resource" id="Resource_tcbv5"]
+script = ExtResource("1_3tb8f")
+module_name = "Guardian"
+detail_type = "ear_round"
+targeting = 4
+ability_priority = Array[int]([3, 2, 1, 0])
+
+[resource]
+script = ExtResource("2_es1wr")
+shape_id = "detail_ear_round"
+strain = 6
+hp_bonus = 8.0
+defense_bonus = 5.0
+ability_id = "head_ear_round_ability"
+behavior_module = SubResource("Resource_tcbv5")

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="PartData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/behavior_module_data.gd" id="1_ja5ry"]
+[ext_resource type="Script" path="res://scripts/data/part_data.gd" id="2_8owtj"]
+
+[sub_resource type="Resource" id="Resource_0mmvr"]
+script = ExtResource("1_ja5ry")
+module_name = "Sentinel"
+detail_type = "ear"
+targeting = 4
+ability_priority = Array[int]([3, 2, 0, 1])
+
+[resource]
+script = ExtResource("2_8owtj")
+shape_id = "detail_ear"
+strain = 6
+hp_bonus = 6.0
+defense_bonus = 4.0
+ability_id = "head_ear_ability"
+behavior_module = SubResource("Resource_0mmvr")
