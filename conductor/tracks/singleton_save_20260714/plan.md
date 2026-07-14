@@ -18,11 +18,11 @@
     - [x] Implement _process() early return when !match_active
     - [x] Verify project boots without errors
 
-- [ ] Task: Implement economy.gd static utility
-    - [ ] Write failing tests for calculate_match_reward (Regular win/loss, Tournament win/loss with multipliers)
-    - [ ] Write failing tests for calculate_tournament_entry_fee, get_tournament_multiplier, get_tournament_infamy_threshold
-    - [ ] Implement all economy.gd functions
-    - [ ] Verify tests pass
+- [x] Task: Implement economy.gd static utility (d049302)
+    - [x] Write failing tests for calculate_match_reward (Regular win/loss, Tournament win/loss with multipliers)
+    - [x] Write failing tests for calculate_tournament_entry_fee, get_tournament_multiplier, get_tournament_infamy_threshold
+    - [x] Implement all economy.gd functions
+    - [x] Verify tests pass
 
 - [ ] Task: Implement market.gd static utility
     - [ ] Write failing tests for validate_purchase (sufficient gold, insufficient gold, Legendary Infamy gate)
