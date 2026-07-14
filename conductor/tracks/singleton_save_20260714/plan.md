@@ -109,7 +109,7 @@
     - [x] Read `./spec.md` to review all functional requirements and acceptance criteria
     - [x] Read `conductor/workflow.md` to review TDD workflow and task lifecycle rules
 
-- [ ] Task: Implement SaveManager JSON serialization
+- [x] Task: Implement SaveManager JSON serialization [d4d774c]
     - [ ] Write failing tests for save_game() creating valid JSON at user://saves/save_default.json
     - [ ] Write failing tests for save structure (version, timestamp, game_state with all fields)
     - [ ] Write failing tests for parts saved by reference (shape_id + strain + rarity + slot)
