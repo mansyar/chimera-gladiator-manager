@@ -3,16 +3,16 @@
 
 ## Phase 1: Coverage Tool Configuration
 
-- [ ] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
-- [ ] Task: Update `gd-tools.toml` coverage settings
-    - [ ] Set `[coverage] enabled = true`
-    - [ ] Set `[coverage] min_percent = 80`
-    - [ ] Add 5 exempt files to `[coverage] exclude` list: `scripts/data/enums.gd`, `scripts/data/part_data.gd`, `scripts/data/ability_data.gd`, `scripts/data/ability_effect.gd`, `scripts/data/behavior_module_data.gd`
-- [ ] Task: Run baseline coverage to verify exempt files are excluded
-    - [ ] Run `gd-tools test --coverage --min 80` and confirm exempt files do not appear in coverage report
-    - [ ] Record baseline coverage percentage for each module
-- [ ] Task: Document configuration change in `tech-stack.md`
-    - [ ] Add dated note explaining coverage exclusion for pure data/enum files
+- [x] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
+- [x] Task: Update `gd-tools.toml` coverage settings [66a64a1]
+    - [x] Set `[coverage] enabled = true`
+    - [x] Set `[coverage] min_percent = 80`
+    - [x] Add 5 exempt files to `[coverage] exclude` list: `scripts/data/enums.gd`, `scripts/data/part_data.gd`, `scripts/data/ability_data.gd`, `scripts/data/ability_effect.gd`, `scripts/data/behavior_module_data.gd`
+- [x] Task: Run baseline coverage to verify exempt files are excluded [66a64a1]
+    - [x] Run `gd-tools test --coverage --min 80` and confirm exempt files do not appear in coverage report
+    - [x] Record baseline coverage percentage for each module
+- [x] Task: Document configuration change in `tech-stack.md` [66a64a1]
+    - [x] Add dated note explaining coverage exclusion for pure data/enum files
 - [ ] Task: Conductor - User Manual Verification 'Coverage Tool Configuration' (Protocol in workflow.md)
 
 ## Phase 2: Unit Test Expansion — Systems Modules
