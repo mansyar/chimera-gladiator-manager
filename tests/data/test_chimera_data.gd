@@ -1,3 +1,4 @@
+# gdlint:ignore=max-public-methods
 extends GutTest
 
 ## Tests for ChimeraData class.
@@ -261,3 +262,23 @@ func test_recalculate_stats_purebred_with_research() -> void:
 	assert_almost_eq(chimera.attack, 48.0, 0.01, "purebred+research attack")
 	assert_almost_eq(chimera.defense, 14.4, 0.01, "purebred-only defense")
 	assert_almost_eq(chimera.speed, 33.6, 0.01, "purebred-only speed")
+
+
+func test_get_part_invalid_slot_returns_null() -> void:
+	var invalid_slot: GameEnums.PartSlot = 99
+	assert_null(chimera.get_part(invalid_slot), "Invalid slot should return null")
+
+
+func test_recalculate_stats_defense_and_speed_research_bonuses() -> void:
+	_setup_mixed(
+		[
+			GameEnums.Strain.UNDEAD,
+			GameEnums.Strain.ROBOTIC,
+			GameEnums.Strain.DRACONIC,
+			GameEnums.Strain.BEAST,
+		]
+	)
+	chimera.calculate_instability()
+	chimera.recalculate_stats({"defense": 1.5, "speed": 2.0})
+	assert_eq(chimera.defense, 18.0, "defense should have research multiplier")
+	assert_eq(chimera.speed, 56.0, "speed should have research multiplier")
