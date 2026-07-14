@@ -85,7 +85,7 @@
     - [x] Verify coverage for combat_manager module is 95%+
 - [x] Task: Conductor - User Manual Verification 'Unit Test Expansion — Autoload Modules' (Protocol in workflow.md)
 
-## Phase 5: Integration Tests
+## Phase 5: Integration Tests [checkpoint: 33935c4]
 
 - [x] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
 - [x] Task: Create `tests/integration/test_economy_flow.gd` [1952fe2]
