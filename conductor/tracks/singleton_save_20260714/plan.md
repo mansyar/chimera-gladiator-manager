@@ -54,9 +54,9 @@
 
 ## Phase 2: GameState Full Implementation
 
-- [ ] Task: Read spec.md and workflow.md before starting phase implementation
-    - [ ] Read `./spec.md` to review all functional requirements and acceptance criteria
-    - [ ] Read `conductor/workflow.md` to review TDD workflow and task lifecycle rules
+- [x] Task: Read spec.md and workflow.md before starting phase implementation
+    - [x] Read `./spec.md` to review all functional requirements and acceptance criteria
+    - [x] Read `conductor/workflow.md` to review TDD workflow and task lifecycle rules
 
 - [ ] Task: Implement GameState properties and gold/infamy management
     - [ ] Write failing tests for add_gold (increases gold, emits gold_changed)
