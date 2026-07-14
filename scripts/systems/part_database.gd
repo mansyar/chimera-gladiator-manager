@@ -101,6 +101,7 @@ static func _load_dir(dir_path: String) -> Array[Resource]:
 	var resources: Array[Resource] = []
 	var dir := DirAccess.open(dir_path)
 	if dir == null:
+		push_warning("PartDatabase: Directory not found: %s" % dir_path)
 		return resources
 	dir.list_dir_begin()
 	var file_name := dir.get_next()
@@ -109,6 +110,8 @@ static func _load_dir(dir_path: String) -> Array[Resource]:
 			var resource := load(dir_path + file_name)
 			if resource != null:
 				resources.append(resource)
+			else:
+				push_warning("PartDatabase: Failed to load resource: %s%s" % [dir_path, file_name])
 		file_name = dir.get_next()
 	dir.list_dir_end()
 	return resources
