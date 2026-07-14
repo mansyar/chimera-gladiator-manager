@@ -1,3 +1,5 @@
+<protect>
+
 # Track Specification: Singleton Architecture, Signals & Save System
 
 ## Overview
@@ -200,3 +202,5 @@ EventBus -> GameState -> SaveManager -> CombatManager (verified on boot).
 - Tournament bracket logic — TRACK-015
 - Research effect consumption in combat (tracking + values defined here, applied in combat tracks)
 - Rubber-band difficulty formula (losing_streak tracked here, formula in TRACK-008)
+
+</protect>

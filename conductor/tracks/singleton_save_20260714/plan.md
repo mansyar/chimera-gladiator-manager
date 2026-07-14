@@ -1,6 +1,12 @@
+<protect>
+
 # Implementation Plan: Singleton Architecture, Signals & Save System
 
 ## Phase 1: EventBus, CombatManager Stub & System Utilities
+
+- [ ] Task: Read spec.md and workflow.md before starting phase implementation
+    - [ ] Read `./spec.md` to review all functional requirements and acceptance criteria
+    - [ ] Read `conductor/workflow.md` to review TDD workflow and task lifecycle rules
 
 - [ ] Task: Implement EventBus with all 13 signals
     - [ ] Write failing tests verifying all 13 signals can be emitted and connected
@@ -47,6 +53,10 @@
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: EventBus, CombatManager Stub & System Utilities' (Protocol in workflow.md)
 
 ## Phase 2: GameState Full Implementation
+
+- [ ] Task: Read spec.md and workflow.md before starting phase implementation
+    - [ ] Read `./spec.md` to review all functional requirements and acceptance criteria
+    - [ ] Read `conductor/workflow.md` to review TDD workflow and task lifecycle rules
 
 - [ ] Task: Implement GameState properties and gold/infamy management
     - [ ] Write failing tests for add_gold (increases gold, emits gold_changed)
@@ -95,6 +105,10 @@
 
 ## Phase 3: Save System & Final Integration
 
+- [ ] Task: Read spec.md and workflow.md before starting phase implementation
+    - [ ] Read `./spec.md` to review all functional requirements and acceptance criteria
+    - [ ] Read `conductor/workflow.md` to review TDD workflow and task lifecycle rules
+
 - [ ] Task: Implement SaveManager JSON serialization
     - [ ] Write failing tests for save_game() creating valid JSON at user://saves/save_default.json
     - [ ] Write failing tests for save structure (version, timestamp, game_state with all fields)
@@ -135,3 +149,5 @@
     - [ ] Verify GameState auto-inits new game when no save exists
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Save System & Final Integration' (Protocol in workflow.md)
+
+</protect>
