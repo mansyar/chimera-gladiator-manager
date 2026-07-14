@@ -12,6 +12,7 @@ func before_each() -> void:
 	GameState.inventory = []
 	GameState.market_stock = {}
 	GameState.hall_of_fame = []
+	GameState.research_progress = {}
 	GameState.research_points = 0
 
 
@@ -651,3 +652,130 @@ func test_ascend_chimera_preserves_other_slots() -> void:
 	GameState.roster = [chimera, other]
 	GameState.ascend_chimera(chimera)
 	assert_eq(GameState.roster[1], other)
+
+
+# --- get_research_level ---
+
+
+func test_get_research_level_returns_0_for_unlocked() -> void:
+	var level: int = GameState.get_research_level(Research.BRANCH_STRAIN_MASTERY, "beast")
+	assert_eq(level, 0)
+
+
+func test_get_research_level_returns_correct_level() -> void:
+	GameState.research_progress = {Research.BRANCH_STRAIN_MASTERY: {"beast": 2}}
+	var level: int = GameState.get_research_level(Research.BRANCH_STRAIN_MASTERY, "beast")
+	assert_eq(level, 2)
+
+
+func test_get_research_level_returns_0_for_unknown_branch() -> void:
+	GameState.research_progress = {Research.BRANCH_STRAIN_MASTERY: {"beast": 1}}
+	var level: int = GameState.get_research_level("unknown_branch", "beast")
+	assert_eq(level, 0)
+
+
+func test_get_research_level_returns_0_for_unknown_node() -> void:
+	GameState.research_progress = {Research.BRANCH_STRAIN_MASTERY: {"beast": 1}}
+	var level: int = GameState.get_research_level(Research.BRANCH_STRAIN_MASTERY, "unknown_node")
+	assert_eq(level, 0)
+
+
+func test_get_research_level_returns_correct_after_unlock() -> void:
+	GameState.research_points = 1
+	GameState.spend_research_point(Research.BRANCH_LAB_ENGINEERING, "market_connections")
+	var level: int = GameState.get_research_level(
+		Research.BRANCH_LAB_ENGINEERING, "market_connections"
+	)
+	assert_eq(level, 1)
+
+
+# --- spend_research_point ---
+
+
+func test_spend_research_point_success_returns_true() -> void:
+	GameState.research_points = 1
+	var result: bool = GameState.spend_research_point(Research.BRANCH_STRAIN_MASTERY, "beast")
+	assert_true(result)
+
+
+func test_spend_research_point_deducts_rp() -> void:
+	GameState.research_points = 3
+	GameState.spend_research_point(Research.BRANCH_STRAIN_MASTERY, "beast")
+	assert_eq(GameState.research_points, 2)
+
+
+func test_spend_research_point_increments_level() -> void:
+	GameState.research_points = 1
+	GameState.spend_research_point(Research.BRANCH_STRAIN_MASTERY, "beast")
+	var level: int = GameState.get_research_level(Research.BRANCH_STRAIN_MASTERY, "beast")
+	assert_eq(level, 1)
+
+
+func test_spend_research_point_emits_research_unlocked() -> void:
+	GameState.research_points = 1
+	watch_signals(EventBus)
+	GameState.spend_research_point(Research.BRANCH_STRAIN_MASTERY, "beast")
+	assert_signal_emitted(EventBus, "research_unlocked")
+
+
+func test_spend_research_point_emits_correct_params() -> void:
+	GameState.research_points = 1
+	watch_signals(EventBus)
+	GameState.spend_research_point(Research.BRANCH_STRAIN_MASTERY, "beast")
+	assert_signal_emitted_with_parameters(
+		EventBus, "research_unlocked", [Research.BRANCH_STRAIN_MASTERY, "beast", 1]
+	)
+
+
+func test_spend_research_point_no_points_returns_false() -> void:
+	GameState.research_points = 0
+	var result: bool = GameState.spend_research_point(Research.BRANCH_STRAIN_MASTERY, "beast")
+	assert_false(result)
+
+
+func test_spend_research_point_at_max_level_returns_false() -> void:
+	# Combat Doctrine max level is 1
+	GameState.research_progress = {Research.BRANCH_COMBAT_DOCTRINE: {"tactical_ai": 1}}
+	GameState.research_points = 5
+	var result: bool = GameState.spend_research_point(
+		Research.BRANCH_COMBAT_DOCTRINE, "tactical_ai"
+	)
+	assert_false(result)
+
+
+func test_spend_research_point_unknown_branch_returns_false() -> void:
+	GameState.research_points = 5
+	var result: bool = GameState.spend_research_point("unknown_branch", "beast")
+	assert_false(result)
+
+
+func test_spend_research_point_no_points_no_deduction() -> void:
+	GameState.research_points = 0
+	GameState.spend_research_point(Research.BRANCH_STRAIN_MASTERY, "beast")
+	assert_eq(GameState.research_points, 0)
+
+
+func test_spend_research_point_failure_no_signal() -> void:
+	GameState.research_points = 0
+	watch_signals(EventBus)
+	GameState.spend_research_point(Research.BRANCH_STRAIN_MASTERY, "beast")
+	assert_signal_not_emitted(EventBus, "research_unlocked")
+
+
+func test_spend_research_point_multiple_unlocks() -> void:
+	GameState.research_points = 3
+	# First unlock: level 0 -> 1
+	GameState.spend_research_point(Research.BRANCH_STRAIN_MASTERY, "beast")
+	assert_eq(GameState.get_research_level(Research.BRANCH_STRAIN_MASTERY, "beast"), 1)
+	assert_eq(GameState.research_points, 2)
+	# Second unlock: level 1 -> 2
+	GameState.spend_research_point(Research.BRANCH_STRAIN_MASTERY, "beast")
+	assert_eq(GameState.get_research_level(Research.BRANCH_STRAIN_MASTERY, "beast"), 2)
+	assert_eq(GameState.research_points, 1)
+	# Third unlock: level 2 -> 3 (max for Strain Mastery)
+	GameState.spend_research_point(Research.BRANCH_STRAIN_MASTERY, "beast")
+	assert_eq(GameState.get_research_level(Research.BRANCH_STRAIN_MASTERY, "beast"), 3)
+	assert_eq(GameState.research_points, 0)
+	# Fourth attempt: at max level, should fail
+	var result: bool = GameState.spend_research_point(Research.BRANCH_STRAIN_MASTERY, "beast")
+	assert_false(result)

@@ -215,3 +215,39 @@ func ascend_chimera(chimera: ChimeraData) -> int:
 	roster[slot_index] = starters[randi() % starters.size()].duplicate()
 	EventBus.chimera_ascended.emit(chimera)
 	return 1
+
+
+# --- Research ---
+
+
+## Get the current research level for a node.[br]
+## Returns 0 if the node has not been unlocked.[br]
+## [param branch] The research branch (e.g. "strain_mastery").[br]
+## [param node] The node name within the branch.[br]
+## [returns] The current research level (0 if not unlocked).
+func get_research_level(branch: String, node: String) -> int:
+	if not research_progress.has(branch):
+		return 0
+	var branch_progress: Dictionary = research_progress[branch]
+	if not branch_progress.has(node):
+		return 0
+	return branch_progress[node]
+
+
+## Spend a research point to unlock or upgrade a node.[br]
+## Validates via [class Research], deducts 1 RP, increments the level,[br]
+## and emits [signal EventBus.research_unlocked].[br]
+## [param branch] The research branch.[br]
+## [param node] The node name within the branch.[br]
+## [returns] [code]true[/code] if successful, [code]false[/code] if invalid.
+func spend_research_point(branch: String, node: String) -> bool:
+	var current_level: int = get_research_level(branch, node)
+	if not Research.can_unlock(branch, node, current_level, research_points):
+		return false
+	research_points -= 1
+	var new_level: int = current_level + 1
+	if not research_progress.has(branch):
+		research_progress[branch] = {}
+	research_progress[branch][node] = new_level
+	EventBus.research_unlocked.emit(branch, node, new_level)
+	return true
