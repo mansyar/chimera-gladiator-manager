@@ -106,13 +106,13 @@
 
 > EffectComponent has testable logic (add_effect, tick, recalculate_modifiers, get_modified_stat, cleanse) — TDD applies. Depends on ActiveEffect (Phase 2) and AbilityEffect (Phase 1).
 
-- [ ] Task: Read context documents before starting Phase 3
-    - [ ] Read `conductor/tracks/data_models_20260714/spec.md`
-    - [ ] Read `conductor/workflow.md`
+- [x] Task: Read context documents before starting Phase 3
+    - [x] Read `conductor/tracks/data_models_20260714/spec.md`
+    - [x] Read `conductor/workflow.md`
 
-- [ ] Task: Implement EffectComponent with TDD (`scripts/combat/effect_component.gd`)
-    - [ ] Create class structure: `class_name EffectComponent extends Node`, properties (active_effects: Array[ActiveEffect], stat_modifiers: Dictionary), empty method stubs (add_effect, tick, recalculate_modifiers, get_modified_stat, cleanse)
-    - [ ] Write failing tests (`tests/combat/test_effect_component.gd`) (Red phase):
+- [x] Task: Implement EffectComponent with TDD (`scripts/combat/effect_component.gd`) [d08925b]
+    - [x] Create class structure: `class_name EffectComponent extends Node`, properties (active_effects: Array[ActiveEffect], stat_modifiers: Dictionary), empty method stubs (add_effect, tick, recalculate_modifiers, get_modified_stat, cleanse)
+    - [x] Write failing tests (`tests/combat/test_effect_component.gd`) (Red phase): 8/12 failed
         - add_effect() appends effect to active_effects
         - add_effect() updates stat_modifiers (BUFF_STAT with positive amount)
         - add_effect() updates stat_modifiers (DEBUFF_STAT with negative amount)
@@ -125,8 +125,8 @@
         - cleanse() removes only DEBUFF_STAT effects
         - cleanse() keeps BUFF_STAT effects in active_effects
         - cleanse() calls recalculate_modifiers() after removal
-    - [ ] Implement logic methods (Green phase): add_effect(), tick(), recalculate_modifiers(), get_modified_stat(), cleanse()
-    - [ ] Verify coverage > 80% for effect_component.gd
+    - [x] Implement logic methods (Green phase): add_effect(), tick(), recalculate_modifiers(), get_modified_stat(), cleanse()
+    - [x] Verify coverage > 80% for effect_component.gd (89.9% overall, PASS)
 
 - [ ] Task: Final verification — full quality gate
     - [ ] Run `gd-tools lint` — must exit 0
