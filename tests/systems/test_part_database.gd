@@ -439,3 +439,178 @@ func test_get_starter_chimeras_all_have_four_parts() -> void:
 		assert_not_null(chimera.torso, "Starter should have TORSO")
 		assert_not_null(chimera.arms, "Starter should have ARMS")
 		assert_not_null(chimera.legs, "Starter should have LEGS")
+
+
+# --- Integration Tests (Phase 3) ---
+
+
+func test_all_part_template_sprite_paths_resolve() -> void:
+	# Trigger lazy loading if not yet loaded
+	PartDatabase.get_ability("_load_trigger")
+	for shape_id in PartDatabase.part_templates:
+		for strain_val in range(7):
+			var part := PartDatabase.get_part(shape_id, strain_val, GameEnums.Rarity.COMMON)
+			assert_not_null(
+				part, "get_part should return a part for %s strain %d" % [shape_id, strain_val]
+			)
+			assert_true(
+				FileAccess.file_exists(part.sprite_path),
+				(
+					"Sprite path should resolve to actual file: %s (strain %d)"
+					% [part.sprite_path, strain_val]
+				)
+			)
+
+
+func test_all_part_template_ability_ids_resolve() -> void:
+	PartDatabase.get_ability("_load_trigger")
+	for shape_id in PartDatabase.part_templates:
+		var template: PartData = PartDatabase.part_templates[shape_id]
+		var ability := PartDatabase.get_ability(template.ability_id)
+		assert_not_null(
+			ability,
+			(
+				"ability_id '%s' in template '%s' should resolve via get_ability()"
+				% [template.ability_id, shape_id]
+			)
+		)
+
+
+func test_all_head_template_detail_types_resolve() -> void:
+	PartDatabase.get_ability("_load_trigger")
+	for shape_id in PartDatabase.part_templates:
+		var template: PartData = PartDatabase.part_templates[shape_id]
+		if template.slot != GameEnums.PartSlot.HEAD:
+			continue
+		assert_not_null(
+			template.behavior_module, "HEAD template '%s' should have a behavior_module" % shape_id
+		)
+		var behavior := PartDatabase.get_behavior_module(template.behavior_module.detail_type)
+		assert_not_null(
+			behavior,
+			(
+				"detail_type '%s' in HEAD template '%s' should resolve via get_behavior_module()"
+				% [template.behavior_module.detail_type, shape_id]
+			)
+		)
+
+
+func test_starter_tank_has_highest_hp() -> void:
+	var starters := PartDatabase.get_starter_chimeras()
+	var tank := _find_starter(starters, "Bastion")
+	var dps := _find_starter(starters, "Ignis")
+	var utility := _find_starter(starters, "Cipher")
+	tank.calculate_instability()
+	tank.recalculate_stats()
+	dps.calculate_instability()
+	dps.recalculate_stats()
+	utility.calculate_instability()
+	utility.recalculate_stats()
+	assert_true(tank.max_hp > dps.max_hp, "Tank should have more HP than DPS")
+	assert_true(tank.max_hp > utility.max_hp, "Tank should have more HP than Utility")
+
+
+func test_starter_tank_has_highest_defense() -> void:
+	var starters := PartDatabase.get_starter_chimeras()
+	var tank := _find_starter(starters, "Bastion")
+	var dps := _find_starter(starters, "Ignis")
+	var utility := _find_starter(starters, "Cipher")
+	tank.calculate_instability()
+	tank.recalculate_stats()
+	dps.calculate_instability()
+	dps.recalculate_stats()
+	utility.calculate_instability()
+	utility.recalculate_stats()
+	assert_true(tank.defense > dps.defense, "Tank should have more Defense than DPS")
+	assert_true(tank.defense > utility.defense, "Tank should have more Defense than Utility")
+
+
+func test_starter_dps_has_highest_attack() -> void:
+	var starters := PartDatabase.get_starter_chimeras()
+	var tank := _find_starter(starters, "Bastion")
+	var dps := _find_starter(starters, "Ignis")
+	var utility := _find_starter(starters, "Cipher")
+	tank.calculate_instability()
+	tank.recalculate_stats()
+	dps.calculate_instability()
+	dps.recalculate_stats()
+	utility.calculate_instability()
+	utility.recalculate_stats()
+	assert_true(dps.attack > tank.attack, "DPS should have more Attack than Tank")
+	assert_true(dps.attack > utility.attack, "DPS should have more Attack than Utility")
+
+
+func test_starter_tank_has_lowest_speed() -> void:
+	var starters := PartDatabase.get_starter_chimeras()
+	var tank := _find_starter(starters, "Bastion")
+	var dps := _find_starter(starters, "Ignis")
+	var utility := _find_starter(starters, "Cipher")
+	tank.calculate_instability()
+	tank.recalculate_stats()
+	dps.calculate_instability()
+	dps.recalculate_stats()
+	utility.calculate_instability()
+	utility.recalculate_stats()
+	assert_true(tank.speed < dps.speed, "Tank should have less Speed than DPS")
+	assert_true(tank.speed < utility.speed, "Tank should have less Speed than Utility")
+
+
+func test_starter_utility_is_balanced() -> void:
+	var starters := PartDatabase.get_starter_chimeras()
+	var tank := _find_starter(starters, "Bastion")
+	var dps := _find_starter(starters, "Ignis")
+	var utility := _find_starter(starters, "Cipher")
+	tank.calculate_instability()
+	tank.recalculate_stats()
+	dps.calculate_instability()
+	dps.recalculate_stats()
+	utility.calculate_instability()
+	utility.recalculate_stats()
+	# Utility should not have the highest HP (Tank does)
+	assert_true(utility.max_hp < tank.max_hp, "Utility should not have highest HP")
+	# Utility should not have the highest Attack (DPS does)
+	assert_true(utility.attack < dps.attack, "Utility should not have highest Attack")
+	# Utility should not have the highest Defense (Tank does)
+	assert_true(utility.defense < tank.defense, "Utility should not have highest Defense")
+
+
+func test_neutral_strain_has_no_combo() -> void:
+	assert_null(
+		PartDatabase.get_strain_combo(GameEnums.Strain.NEUTRAL, 1),
+		"NEUTRAL tier 1 should return null"
+	)
+	assert_null(
+		PartDatabase.get_strain_combo(GameEnums.Strain.NEUTRAL, 2),
+		"NEUTRAL tier 2 should return null"
+	)
+	assert_null(
+		PartDatabase.get_strain_combo(GameEnums.Strain.NEUTRAL, 3),
+		"NEUTRAL tier 3 should return null"
+	)
+
+
+func test_all_neutral_chimera_is_pure() -> void:
+	var chimera := ChimeraData.new()
+	chimera.head = PartDatabase.get_part(
+		"detail_horn_large", GameEnums.Strain.NEUTRAL, GameEnums.Rarity.COMMON
+	)
+	chimera.torso = PartDatabase.get_part(
+		"body_a", GameEnums.Strain.NEUTRAL, GameEnums.Rarity.COMMON
+	)
+	chimera.arms = PartDatabase.get_part("arm_a", GameEnums.Strain.NEUTRAL, GameEnums.Rarity.COMMON)
+	chimera.legs = PartDatabase.get_part("leg_a", GameEnums.Strain.NEUTRAL, GameEnums.Rarity.COMMON)
+	chimera.calculate_instability()
+	assert_eq(chimera.instability, GameEnums.Instability.PURE, "All-NEUTRAL chimera should be PURE")
+	assert_eq(chimera.strain_count, 1, "All-NEUTRAL should have 1 unique strain")
+	var combo := chimera.get_combo_ability()
+	assert_null(combo, "All-NEUTRAL chimera should have no combo ability")
+
+
+# --- Helper Methods ---
+
+
+func _find_starter(starters: Array[ChimeraData], nickname: String) -> ChimeraData:
+	for chimera in starters:
+		if chimera.nickname == nickname:
+			return chimera
+	return null
