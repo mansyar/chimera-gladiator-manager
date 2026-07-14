@@ -2,7 +2,7 @@
 ## Technical Architecture Document
 
 > **Status:** Draft v2 — 7 significant gaps + 6 minor issues resolved. Ready for implementation planning.
-> Last updated: 2026-07-13
+> Last updated: 2026-07-15
 
 ---
 
@@ -491,7 +491,8 @@ GameState
     ├── buy_part(part) -> bool
     ├── can_ascend(chimera) -> bool
     ├── ascend_chimera(chimera) -> int  # returns research points, fills slot with free common-rarity starter
-    └── get_research_level(branch, node) -> int
+    ├── get_research_level(branch, node) -> int
+    └── spend_research_point(branch, node) -> bool  # validates via research.gd, deducts RP, emits research_unlocked
 ```
 
 ### CombatManager (`scripts/autoload/combat_manager.gd`)
@@ -544,12 +545,16 @@ Handles serialization. Saves GameState to a JSON file in `user://saves/`.
 
 ```
 SaveManager (extends Node)
-├── save_slot: String = "default"
+├── SAVE_DIR := "user://saves"
+├── SAVE_PATH := "user://saves/save_default.json"
+├── CURRENT_VERSION := 1
 └── methods:
     ├── save_game() -> void          # Serialize GameState to JSON
-    ├── load_game() -> bool          # Deserialize JSON to GameState
+    ├── load_game() -> bool          # Deserialize JSON to GameState, calls _migrate() if version differs
     ├── has_save() -> bool
-    └── delete_save() -> void
+    ├── delete_save() -> void
+    ├── _exit_tree() -> void         # Save on game exit
+    └── _migrate(from_version, data) -> Dictionary  # Stub for version 1
 ```
 
 ---
@@ -1003,6 +1008,7 @@ Save data is serialized to a JSON file at `user://saves/save_default.json`. JSON
     "gold": 450,
     "infamy": 75,
     "losing_streak": 0,
+    "research_points": 2,
     "research_progress": {
       "strain_mastery": {"undead": 1, "beast": 0},
       "lab_engineering": {"reinforced_genetics": 1, "clinic_efficiency": 0},
@@ -1011,25 +1017,27 @@ Save data is serialized to a JSON file at `user://saves/save_default.json`. JSON
     "roster": [
       {
         "nickname": "Brute",
-        "parts": {
-          "HEAD": {"shape_id": "horn_large", "strain": "BEAST", "rarity": "COMMON"},
-          "TORSO": {"shape_id": "body_a", "strain": "BEAST", "rarity": "UNCOMMON"},
-          "ARMS": {"shape_id": "arm_b", "strain": "BEAST", "rarity": "COMMON"},
-          "LEGS": {"shape_id": "leg_a", "strain": "BEAST", "rarity": "COMMON"}
-        },
         "match_wins": 5,
-        "decay_level": 0
+        "decay_level": 0,
+        "parts": {
+          "head": {"shape_id": "horn_large", "strain": "BEAST", "rarity": "COMMON", "slot": "HEAD"},
+          "torso": {"shape_id": "body_a", "strain": "BEAST", "rarity": "UNCOMMON", "slot": "TORSO"},
+          "arms": {"shape_id": "arm_b", "strain": "BEAST", "rarity": "COMMON", "slot": "ARMS"},
+          "legs": {"shape_id": "leg_a", "strain": "BEAST", "rarity": "COMMON", "slot": "LEGS"}
+        }
       }
     ],
     "inventory": [
       {"shape_id": "horn_small", "strain": "UNDEAD", "rarity": "RARE", "slot": "HEAD"}
     ],
     "market_stock": {
+      "base": [...],
       "rotating": [
         {"shape_id": "body_c", "strain": "DRACONIC", "rarity": "UNCOMMON", "slot": "TORSO"}
       ]
     },
-    "hall_of_fame": []
+    "hall_of_fame": [],
+    "match_history": [{"result": "win", "gold": 30}]
   }
 }
 ```

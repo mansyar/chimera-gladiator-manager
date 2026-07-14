@@ -149,7 +149,7 @@ Before initializing individual tracks, the following foundational context files 
 ---
 
 ### TRACK-004: Singleton Architecture, Signals & Save System
-*   **Status:** `Pending`
+*   **Status:** `Complete`
 *   **Dependencies:** TRACK-002, TRACK-003
 *   **Estimated Effort:** 3-4 Days
 
@@ -178,9 +178,9 @@ Before initializing individual tracks, the following foundational context files 
 *   **Phase 3 (Save System):** Implement SaveManager with JSON serialization and save-by-reference. Implement 6 save triggers. Test round-trip.
 
 #### Verification & Definition of Done (DoD)
-*   [ ] **Manual Checkpoint:** New game initializes with 200G, 0 Infamy, 3 starter chimeras. buy_part deducts Gold and adds to inventory. spend_gold returns false when insufficient (no negative Gold). refresh_market generates base + 6-10 rotating parts. EventBus signals fire on all state changes.
-*   [ ] **Automated Tests:** `gd-tools test --coverage --min 80` exits 0. Tests verify: (1) starting state correct, (2) spend_gold fails on insufficient, (3) buy_part validates via Market and updates gold+inventory, (4) refresh_market generates valid stock, (5) decay probability matches GDD 4.2 table, (6) repair cost matches GDD 4.2, (7) can_ascend true at 10+ wins, (8) ascend_chimera moves to hall_of_fame + returns 1 RP, (9) save/load round-trip preserves all state, (10) save file is valid JSON per TDD Section 9.
-*   [ ] **Conductor Review:** Autoload order correct. System scripts are pure static (no state). Save reconstructs via PartDatabase. `gd-tools lint` and `gd-tools format --check` pass.
+*   [x] **Manual Checkpoint:** New game initializes with 200G, 0 Infamy, 3 starter chimeras. buy_part deducts Gold and adds to inventory. spend_gold returns false when insufficient (no negative Gold). refresh_market generates base + 6-10 rotating parts. EventBus signals fire on all state changes.
+*   [x] **Automated Tests:** `gd-tools test --coverage --min 80` exits 0. Tests verify: (1) starting state correct, (2) spend_gold fails on insufficient, (3) buy_part validates via Market and updates gold+inventory, (4) refresh_market generates valid stock, (5) decay probability matches GDD 4.2 table, (6) repair cost matches GDD 4.2, (7) can_ascend true at 10+ wins, (8) ascend_chimera moves to hall_of_fame + returns 1 RP, (9) save/load round-trip preserves all state, (10) save file is valid JSON per TDD Section 9.
+*   [x] **Conductor Review:** Autoload order correct. System scripts are pure static (no state). Save reconstructs via PartDatabase. `gd-tools lint` and `gd-tools format --check` pass.
 
 ---
 
