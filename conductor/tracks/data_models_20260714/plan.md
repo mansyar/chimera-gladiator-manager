@@ -102,7 +102,7 @@
 
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Chimera & Combat State' (Protocol in workflow.md) [85dee6b]
 
-## Phase 3: Effect Component
+## Phase 3: Effect Component [checkpoint: e4a632c]
 
 > EffectComponent has testable logic (add_effect, tick, recalculate_modifiers, get_modified_stat, cleanse) — TDD applies. Depends on ActiveEffect (Phase 2) and AbilityEffect (Phase 1).
 
@@ -134,5 +134,5 @@
     - [x] Run `gd-tools test --coverage --min 80` — must exit 0 (42/42 tests, 89.9% coverage)
     - [x] Verify all 12 acceptance criteria tests from spec pass (all covered by existing tests)
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Effect Component' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Effect Component' (Protocol in workflow.md) [e4a632c]
 </protect>
