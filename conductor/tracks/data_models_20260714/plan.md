@@ -128,11 +128,11 @@
     - [x] Implement logic methods (Green phase): add_effect(), tick(), recalculate_modifiers(), get_modified_stat(), cleanse()
     - [x] Verify coverage > 80% for effect_component.gd (89.9% overall, PASS)
 
-- [ ] Task: Final verification — full quality gate
-    - [ ] Run `gd-tools lint` — must exit 0
-    - [ ] Run `gd-tools format --check` — must exit 0
-    - [ ] Run `gd-tools test --coverage --min 80` — must exit 0
-    - [ ] Verify all 12 acceptance criteria tests from spec pass
+- [x] Task: Final verification — full quality gate
+    - [x] Run `gd-tools lint` — must exit 0 (0 errors)
+    - [x] Run `gd-tools format --check` — must exit 0 (18/18 compliant)
+    - [x] Run `gd-tools test --coverage --min 80` — must exit 0 (42/42 tests, 89.9% coverage)
+    - [x] Verify all 12 acceptance criteria tests from spec pass (all covered by existing tests)
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Effect Component' (Protocol in workflow.md)
 </protect>
