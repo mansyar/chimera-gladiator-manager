@@ -110,20 +110,20 @@
     - [x] Read `conductor/workflow.md` to review TDD workflow and task lifecycle rules
 
 - [x] Task: Implement SaveManager JSON serialization [d4d774c]
-    - [ ] Write failing tests for save_game() creating valid JSON at user://saves/save_default.json
-    - [ ] Write failing tests for save structure (version, timestamp, game_state with all fields)
-    - [ ] Write failing tests for parts saved by reference (shape_id + strain + rarity + slot)
-    - [ ] Write failing tests for load_game() returning false when no save exists
-    - [ ] Write failing tests for load_game() reconstructing parts via PartDatabase.get_part()
-    - [ ] Write failing tests for save/load round-trip preserving all state
-    - [ ] Write failing tests for has_save() and delete_save()
-    - [ ] Write failing tests for _migrate() stub (no-op for version 1)
-    - [ ] Implement save_game() with JSON serialization
-    - [ ] Implement serialize_part() and deserialize_part()
-    - [ ] Implement load_game() with JSON deserialization and PartDatabase reconstruction
-    - [ ] Implement _migrate() stub
-    - [ ] Implement has_save() and delete_save()
-    - [ ] Verify tests pass
+    - [x] Write failing tests for save_game() creating valid JSON at user://saves/save_default.json
+    - [x] Write failing tests for save structure (version, timestamp, game_state with all fields)
+    - [x] Write failing tests for parts saved by reference (shape_id + strain + rarity + slot)
+    - [x] Write failing tests for load_game() returning false when no save exists
+    - [x] Write failing tests for load_game() reconstructing parts via PartDatabase.get_part()
+    - [x] Write failing tests for save/load round-trip preserving all state
+    - [x] Write failing tests for has_save() and delete_save()
+    - [x] Write failing tests for _migrate() stub (no-op for version 1)
+    - [x] Implement save_game() with JSON serialization
+    - [x] Implement serialize_part() and deserialize_part()
+    - [x] Implement load_game() with JSON deserialization and PartDatabase reconstruction
+    - [x] Implement _migrate() stub
+    - [x] Implement has_save() and delete_save()
+    - [x] Verify tests pass
 
 - [x] Task: Implement save triggers [80d0fa6]
     - [x] Write failing tests for save trigger after buy_part succeeds
@@ -148,6 +148,6 @@
     - [x] Verify autoload init order on boot (EventBus -> GameState -> SaveManager -> CombatManager)
     - [x] Verify GameState auto-inits new game when no save exists
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Save System & Final Integration' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Save System & Final Integration' (Protocol in workflow.md)
 
 </protect>
