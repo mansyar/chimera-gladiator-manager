@@ -26,7 +26,7 @@
     - [ ] Write tests for untested branches (e.g., decay accumulation thresholds, repair cost edge cases, purebred immunity)
     - [ ] Run tests and verify they pass
     - [ ] Verify coverage for decay module is 95%+
-- [ ] Task: Expand `test_research.gd` for `scripts/systems/research.gd`
+- [x] Task: Expand `test_research.gd` for `scripts/systems/research.gd` [65e2800]
     - [ ] Write tests for untested branches (e.g., ascension branch unlocking, bonus stacking, prerequisite checks)
     - [ ] Run tests and verify they pass
     - [ ] Verify coverage for research module is 95%+
