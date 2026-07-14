@@ -1,7 +1,9 @@
+<protect>
 # Implementation Plan: Part Database & Data Definitions (TRACK-003)
 
 ## Phase 1: Data Files
 
+- [ ] Task: Read spec.md and workflow.md to align with current requirements and TDD protocol
 - [ ] Task: Create 23 part ability .tres files
     - [ ] Create 7 HEAD ability files (utility & disruption theme, active 5-10s CD, effects: DEBUFF_STAT/CLEANSE/REPOSITION/BUFF_STAT)
     - [ ] Create 6 TORSO ability files (defense & sustain, mix active 8-12s CD + passive, effects: SHIELD/HEAL/BUFF_STAT/DAMAGE)
@@ -29,6 +31,7 @@
 
 ## Phase 2: PartDatabase Implementation (TDD)
 
+- [ ] Task: Read spec.md and workflow.md to align with current requirements and TDD protocol
 - [ ] Task: Implement PartDatabase lookup methods with TDD
     - [ ] Write failing tests for get_part, get_ability, get_base_stats, get_behavior_module, get_strain_combo
     - [ ] Implement static vars, template loading from .tres files, and all lookup methods
@@ -51,6 +54,7 @@
 
 ## Phase 3: Integration Tests & Final Verification
 
+- [ ] Task: Read spec.md and workflow.md to align with current requirements and TDD protocol
 - [ ] Task: Write and verify integration tests
     - [ ] Write tests: all sprite_paths resolve to actual asset files
     - [ ] Write tests: all ability_id references resolve via get_ability()
@@ -63,3 +67,4 @@
     - [ ] Run gd-tools lint
     - [ ] Run gd-tools format --check
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Integration Tests & Final Verification' (Protocol in workflow.md)
+</protect>

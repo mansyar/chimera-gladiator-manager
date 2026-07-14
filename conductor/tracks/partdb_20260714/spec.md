@@ -1,3 +1,4 @@
+<protect>
 # Track: Part Database & Data Definitions (TRACK-003)
 
 ## Overview
@@ -180,3 +181,4 @@ Create 3 starter ChimeraData definitions (all purebred, COMMON rarity):
 - Ability execution in combat (TRACK-007)
 - Combat system and AI (TRACK-005, TRACK-006)
 - Balance tuning and playtesting
+</protect>
