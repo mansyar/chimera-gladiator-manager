@@ -58,13 +58,13 @@
     - [x] Read `./spec.md` to review all functional requirements and acceptance criteria
     - [x] Read `conductor/workflow.md` to review TDD workflow and task lifecycle rules
 
-- [ ] Task: Implement GameState properties and gold/infamy management
-    - [ ] Write failing tests for add_gold (increases gold, emits gold_changed)
-    - [ ] Write failing tests for spend_gold (returns false on insufficient, true on sufficient, no negative gold)
-    - [ ] Write failing tests for add_infamy (increases infamy, emits infamy_changed)
-    - [ ] Define all GameState properties (gold, infamy, roster, inventory, market_stock, research_progress, research_points, hall_of_fame, current_tournament, match_history, losing_streak)
-    - [ ] Implement add_gold(), spend_gold(), add_infamy() with EventBus signal emissions
-    - [ ] Verify tests pass
+- [x] Task: Implement GameState properties and gold/infamy management (21bcbdc)
+    - [x] Write failing tests for add_gold (increases gold, emits gold_changed)
+    - [x] Write failing tests for spend_gold (returns false on insufficient, true on sufficient, no negative gold)
+    - [x] Write failing tests for add_infamy (increases infamy, emits infamy_changed)
+    - [x] Define all GameState properties (gold, infamy, roster, inventory, market_stock, research_progress, research_points, hall_of_fame, current_tournament, match_history, losing_streak)
+    - [x] Implement add_gold(), spend_gold(), add_infamy() with EventBus signal emissions
+    - [x] Verify tests pass
 
 - [ ] Task: Implement GameState roster and inventory management
     - [ ] Write failing tests for get_chimera (returns correct chimera by index)
