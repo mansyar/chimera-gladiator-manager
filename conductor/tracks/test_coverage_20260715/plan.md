@@ -106,7 +106,7 @@
     - [ ] Test purebred immunity to berserk
     - [ ] Test event modifier accumulation and reset
     - [ ] Test 5s duration transition (berserk start → expire)
-- [ ] Task: Write decay edge case tests (in relevant test files or `tests/edge/test_decay_edge_cases.gd`)
+- [x] Task: Write decay edge case tests (in relevant test files or `tests/edge/test_decay_edge_cases.gd`) [a37f5ea]
     - [ ] Test decay accumulation across multiple matches
     - [ ] Test repair resets decay to zero
     - [ ] Test purebred immunity to decay
