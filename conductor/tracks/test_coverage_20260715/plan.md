@@ -73,11 +73,11 @@
     - [x] Write tests for untested branches (e.g., gold/infamy modification, roster management, inventory operations, state persistence calls)
     - [x] Run tests and verify they pass
     - [x] Verify coverage for game_state module is 95%+
-- [ ] Task: Expand `test_save_manager.gd` for `scripts/autoload/save_manager.gd` using mocked file I/O
-    - [ ] Set up mocked file I/O for `user://saves/` operations
-    - [ ] Write tests for untested branches (e.g., save serialization, load deserialization, PartDatabase reconstruction, corrupt save handling)
-    - [ ] Run tests and verify they pass
-    - [ ] Verify coverage for save_manager module is 95%+
+- [x] Task: Expand `test_save_manager.gd` for `scripts/autoload/save_manager.gd` using mocked file I/O [9464c76]
+    - [x] Set up mocked file I/O for `user://saves/` operations
+    - [x] Write tests for untested branches (e.g., save serialization, load deserialization, PartDatabase reconstruction, corrupt save handling)
+    - [x] Run tests and verify they pass
+    - [x] Verify coverage for save_manager module is 95%+
 - [ ] Task: Expand `test_combat_manager.gd` for `scripts/autoload/combat_manager.gd` using mocked combat entities
     - [ ] Set up GUT doubles for CombatState and combat entities
     - [ ] Write tests for untested branches (e.g., match start/end lifecycle, entity placement, reward distribution, signal emission)
