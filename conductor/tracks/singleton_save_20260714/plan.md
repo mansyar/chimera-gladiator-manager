@@ -136,10 +136,10 @@
     - [x] Implement SaveManager._exit_tree() save trigger
     - [x] Verify tests pass
 
-- [ ] Task: Verify EventBus signal integration
-    - [ ] Write integration tests for all signal emissions (gold_changed, infamy_changed, part_purchased, chimera_modified, market_refreshed, research_unlocked, chimera_ascended)
-    - [ ] Wire EventBus signal emissions in all GameState methods
-    - [ ] Verify integration tests pass
+- [x] Task: Verify EventBus signal integration [90e4c21]
+    - [x] Write integration tests for all signal emissions (gold_changed, infamy_changed, part_purchased, chimera_modified, market_refreshed, research_unlocked, chimera_ascended)
+    - [x] Wire EventBus signal emissions in all GameState methods
+    - [x] Verify integration tests pass
 
 - [ ] Task: Final quality gate verification
     - [ ] Run gd-tools lint (must exit 0)
