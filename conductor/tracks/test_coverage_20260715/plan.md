@@ -30,10 +30,10 @@
     - [ ] Write tests for untested branches (e.g., ascension branch unlocking, bonus stacking, prerequisite checks)
     - [ ] Run tests and verify they pass
     - [ ] Verify coverage for research module is 95%+
-- [ ] Task: Expand `test_market.gd` for `scripts/systems/market.gd`
-    - [ ] Write tests for untested branches (e.g., rotating stock refresh, rarity filtering, infamy-gated legendary parts)
-    - [ ] Run tests and verify they pass
-    - [ ] Verify coverage for market module is 95%+
+- [x] Task: Expand `test_market.gd` for `scripts/systems/market.gd` [c813b59]
+    - [x] Write tests for untested branches (e.g., rotating stock refresh, rarity filtering, infamy-gated legendary parts)
+    - [x] Run tests and verify they pass
+    - [x] Verify coverage for market module is 95%+
 - [ ] Task: Expand `test_part_database.gd` for `scripts/systems/part_database.gd`
     - [ ] Write tests for untested branches (e.g., lookup by shape_id+strain+rarity, missing part fallback, ability lookup by ability_id)
     - [ ] Run tests and verify they pass
