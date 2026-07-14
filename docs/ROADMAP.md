@@ -75,7 +75,7 @@ Before initializing individual tracks, the following foundational context files 
 
 #### Context Anchors (Traceability)
 *   **GDD Reference:** `docs/GDD.md` Section 2.1 (Modular Fusion — 4 slots, 6 strains, stat roles), Section 2.2 (Genetic Instability — 0-3 scale, purebred bonuses), Section 2.3 (Abilities — active/passive, 11 effect types, strain combo tiers), Section 2.4 (Behavior Modules — 7 modules, 6 targeting modes, 3 positioning tendencies)
-*   **TDD Reference:** `docs/TDD.md` Section 3 (Data Models — all class definitions: GameEnums, PartData, AbilityData, AbilityEffect, BehaviorModuleData, ChimeraData, CombatState, ActiveEffect, EffectComponent, PartDatabase stub, Stat Calculation Flow)
+*   **TDD Reference:** `docs/TDD.md` Section 3 (Data Models — all class definitions: GameEnums, PartData, AbilityData, AbilityEffect, BehaviorModuleData, ChimeraData, CombatState, ActiveEffect, EffectComponent, PartDatabase, Stat Calculation Flow)
 
 #### Track Tech Stack
 *   GDScript, Godot Resource system (.tres-compatible classes)
@@ -111,7 +111,7 @@ Before initializing individual tracks, the following foundational context files 
 ---
 
 ### TRACK-003: Part Database & Data Definitions
-*   **Status:** `Pending`
+*   **Status:** `Complete`
 *   **Dependencies:** TRACK-002
 *   **Estimated Effort:** 4-5 Days
 
@@ -142,9 +142,9 @@ Before initializing individual tracks, the following foundational context files 
 *   **Phase 3 (Parts & Starters):** Create 7 behavior module .tres files, 23 base part templates, rarity system, 3 starter chimera definitions. Verify starter stats.
 
 #### Verification & Definition of Done (DoD)
-*   [ ] **Manual Checkpoint:** PartDatabase loads all templates at startup. get_part("body_a", BEAST, COMMON) returns correct PartData. generate_random_part() produces valid parts. Starter chimeras instantiate with correct role-appropriate stats.
-*   [ ] **Automated Tests:** `gd-tools test --coverage --min 80` exits 0. Tests verify: (1) get_part returns correct base stats, (2) rarity modifiers apply correctly, (3) get_ability returns all 23+18 abilities, (4) generate_random_part produces valid combinations, (5) get_strain_combo returns correct tier, (6) Neutral parts have no combo and count as same strain, (7) all 7 behavior modules match GDD Section 2.4 table values.
-*   [ ] **Conductor Review:** All .tres files load without errors. Sprite paths resolve to actual files. `gd-tools lint` and `gd-tools format --check` pass.
+*   [x] **Manual Checkpoint:** PartDatabase loads all templates at startup. get_part("body_a", BEAST, COMMON) returns correct PartData. generate_random_part() produces valid parts. Starter chimeras instantiate with correct role-appropriate stats.
+*   [x] **Automated Tests:** `gd-tools test --coverage --min 80` exits 0. Tests verify: (1) get_part returns correct base stats, (2) rarity modifiers apply correctly, (3) get_ability returns all 23+18 abilities, (4) generate_random_part produces valid combinations, (5) get_strain_combo returns correct tier, (6) Neutral parts have no combo and count as same strain, (7) all 7 behavior modules match GDD Section 2.4 table values.
+*   [x] **Conductor Review:** All .tres files load without errors. Sprite paths resolve to actual files. `gd-tools lint` and `gd-tools format --check` pass.
 
 ---
 

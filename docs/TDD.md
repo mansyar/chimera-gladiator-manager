@@ -407,36 +407,49 @@ func tick(delta: float) -> bool:  # Returns true if expired
 
 ### Part Database (`scripts/systems/part_database.gd`)
 
-A lookup service for part templates and abilities. Maps shape_id → base stats, sprite path, and ability_id. Abilities are stored as separate `.tres` files in `resources/abilities/` — each PartData references its ability by `ability_id` string, and PartDatabase resolves the lookup. This avoids duplicating AbilityData across the 36 body parts (6 shapes × 6 colors) that share the same 6 body abilities.
+A static lookup service for part templates, abilities, behavior modules, strain combos, and starter chimeras. Loads all `.tres` resource files lazily on first access via `_ensure_loaded()` (idempotent — guarded by a `_loaded` flag). Maps shape_id → base stats, sprite path, and ability_id. Abilities are stored as separate `.tres` files in `resources/abilities/` — each PartData references its ability by `ability_id` string, and PartDatabase resolves the lookup. This avoids duplicating AbilityData across the 36 body parts (6 shapes × 6 colors) that share the same 6 body abilities.
 
 Used by:
 - Black Market generation (create parts from shape + strain + rarity)
 - Save system (reconstruct parts from saved references)
 - Starter chimera initialization
 - Ability lookup (resolve `ability_id` → `AbilityData` resource)
+- Strain combo lookup (resolve strain + tier → combo `AbilityData`)
+- Behavior module lookup (resolve detail_type → `BehaviorModuleData`)
 
 ```gdscript
 class_name PartDatabase
 
-# Registered at startup from .tres files
-static var part_templates: Dictionary = {}   # {shape_id: PartData (base template)}
-static var ability_templates: Dictionary = {} # {ability_id: AbilityData}
+# Constants
+const SPRITE_PATH_PREFIX := "res://assets/kenney-monster-builder-pack/PNG/Default/"
+const STRAIN_TO_COLOR := { ... }          # GameEnums.Strain → Kenney color string (NEUTRAL="dark")
+const STRAIN_NAMES := { ... }            # GameEnums.Strain → strain name string (excludes NEUTRAL)
+const RARITY_STAT_MULTIPLIERS := { ... }  # GameEnums.Rarity → float (COMMON=1.0, UNCOMMON=1.25, RARE=1.5, LEGENDARY=2.0)
 
+# Registered at startup from .tres files (lazy-loaded via _ensure_loaded())
+static var part_templates: Dictionary = {}        # {shape_id: PartData (base template)}
+static var ability_templates: Dictionary = {}      # {ability_id: AbilityData}
+static var behavior_templates: Dictionary = {}    # {detail_type: BehaviorModuleData}
+static var combo_templates: Dictionary = {}       # {"{strain}_{tier}": AbilityData}
+static var starter_chimeras: Array[ChimeraData] = []
+static var _loaded: bool = false
+
+# Lookups
 static func get_part(shape_id: String, strain: GameEnums.Strain, rarity: GameEnums.Rarity) -> PartData:
-    # Look up template, clone it, apply strain + rarity modifiers
-    pass
-
+    # Duplicates template, applies rarity stat multipliers, constructs sprite_path
 static func get_ability(ability_id: String) -> AbilityData:
-    # Look up ability by id, return cached AbilityData resource
-    pass
-
+static func get_ability_with_rarity(ability_id: String, rarity: GameEnums.Rarity) -> AbilityData:
+    # Rare: -15% cooldown; Legendary: -25% cooldown + +20% effect amount
 static func get_base_stats(shape_id: String) -> Dictionary:
-    # Return base stats for a shape variant (before strain/rarity modifiers)
-    pass
-
+    # Returns {hp_bonus, attack_bonus, defense_bonus, speed_bonus}
 static func generate_random_part(slot: GameEnums.PartSlot, rarity_weights: Dictionary) -> PartData:
-    # Pick random shape, random strain, apply rarity
-    pass
+    # Weighted random rarity, random shape for slot, random playable strain (0-5)
+static func get_strain_combo(strain: GameEnums.Strain, tier: int) -> AbilityData:
+    # Returns null for NEUTRAL strain
+static func get_behavior_module(detail_type: String) -> BehaviorModuleData:
+static func get_starter_chimeras() -> Array[ChimeraData]:
+static func get_sprite_path(shape_id: String, strain: GameEnums.Strain) -> String:
+    # Handles two Kenney naming patterns: detail_{color}_{variant}.png vs {category}_{color}{Variant}.png
 ```
 
 ---
