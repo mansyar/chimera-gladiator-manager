@@ -121,3 +121,36 @@ func test_infamy_threshold_tier4() -> void:
 	assert_eq(
 		Economy.get_tournament_infamy_threshold(4), 400, "Tier 4 infamy threshold should be 400"
 	)
+
+
+# --- Invalid tier edge cases (push_error + return 0 fallback) ---
+
+
+func test_entry_fee_invalid_tier_zero() -> void:
+	assert_eq(Economy.calculate_tournament_entry_fee(0), 0, "Tier 0 should return 0 (invalid)")
+	assert_push_error("Economy: Invalid tournament tier 0")
+
+
+func test_entry_fee_invalid_tier_five() -> void:
+	assert_eq(Economy.calculate_tournament_entry_fee(5), 0, "Tier 5 should return 0 (invalid)")
+	assert_push_error("Economy: Invalid tournament tier 5")
+
+
+func test_multiplier_invalid_tier_zero() -> void:
+	assert_eq(Economy.get_tournament_multiplier(0), 0, "Tier 0 should return 0 (invalid)")
+	assert_push_error("Economy: Invalid tournament tier 0")
+
+
+func test_multiplier_invalid_tier_five() -> void:
+	assert_eq(Economy.get_tournament_multiplier(5), 0, "Tier 5 should return 0 (invalid)")
+	assert_push_error("Economy: Invalid tournament tier 5")
+
+
+func test_infamy_threshold_invalid_tier_zero() -> void:
+	assert_eq(Economy.get_tournament_infamy_threshold(0), 0, "Tier 0 should return 0 (invalid)")
+	assert_push_error("Economy: Invalid tournament tier 0")
+
+
+func test_infamy_threshold_invalid_tier_five() -> void:
+	assert_eq(Economy.get_tournament_infamy_threshold(5), 0, "Tier 5 should return 0 (invalid)")
+	assert_push_error("Economy: Invalid tournament tier 5")
