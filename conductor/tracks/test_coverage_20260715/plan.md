@@ -18,10 +18,10 @@
 ## Phase 2: Unit Test Expansion — Systems Modules
 
 - [x] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
-- [~] Task: Expand `test_economy.gd` for `scripts/systems/economy.gd`
-    - [ ] Write tests for untested branches (e.g., losing streak rubber-band bonus, edge cases for tier 0/invalid tier)
-    - [ ] Run tests and verify they pass (if any fail, document as source bug per NFR-3)
-    - [ ] Verify coverage for economy module is 95%+
+- [x] Task: Expand `test_economy.gd` for `scripts/systems/economy.gd` [ae4ea60]
+    - [x] Write tests for untested branches (e.g., losing streak rubber-band bonus, edge cases for tier 0/invalid tier)
+    - [x] Run tests and verify they pass (if any fail, document as source bug per NFR-3)
+    - [x] Verify coverage for economy module is 95%+
 - [ ] Task: Expand `test_decay.gd` for `scripts/systems/decay.gd`
     - [ ] Write tests for untested branches (e.g., decay accumulation thresholds, repair cost edge cases, purebred immunity)
     - [ ] Run tests and verify they pass
