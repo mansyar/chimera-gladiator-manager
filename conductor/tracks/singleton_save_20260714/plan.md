@@ -4,11 +4,11 @@
 
 ## Phase 1: EventBus, CombatManager Stub & System Utilities
 
-- [ ] Task: Read spec.md and workflow.md before starting phase implementation
-    - [ ] Read `./spec.md` to review all functional requirements and acceptance criteria
-    - [ ] Read `conductor/workflow.md` to review TDD workflow and task lifecycle rules
+- [x] Task: Read spec.md and workflow.md before starting phase implementation
+    - [x] Read `./spec.md` to review all functional requirements and acceptance criteria
+    - [x] Read `conductor/workflow.md` to review TDD workflow and task lifecycle rules
 
-- [ ] Task: Implement EventBus with all 13 signals
+- [~] Task: Implement EventBus with all 13 signals
     - [ ] Write failing tests verifying all 13 signals can be emitted and connected
     - [ ] Implement all 13 signal declarations in event_bus.gd
     - [ ] Verify tests pass
