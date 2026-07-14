@@ -37,3 +37,11 @@ func test_tick_with_zero_duration() -> void:
 	effect.duration = 0.0
 	var expired: bool = effect.tick(1.0)
 	assert_true(expired, "tick should return true when starting at 0 duration")
+
+
+func test_tick_with_zero_delta() -> void:
+	var effect := ActiveEffect.new()
+	effect.duration = 5.0
+	var expired: bool = effect.tick(0.0)
+	assert_eq(effect.duration, 5.0, "duration should be unchanged with zero delta")
+	assert_false(expired, "tick should return false when duration > 0")
