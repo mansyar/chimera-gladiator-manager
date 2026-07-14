@@ -32,12 +32,12 @@
 ## Phase 2: PartDatabase Implementation (TDD)
 
 - [x] Task: Read spec.md and workflow.md to align with current requirements and TDD protocol
-- [~] Task: Implement PartDatabase lookup methods with TDD
-    - [ ] Write failing tests for get_part, get_ability, get_base_stats, get_behavior_module, get_strain_combo
-    - [ ] Implement static vars, template loading from .tres files, and all lookup methods
-    - [ ] Write failing tests for get_sprite_path handling both naming patterns (body_blueA.png vs detail_blue_horn_large.png)
-    - [ ] Implement get_sprite_path fix
-    - [ ] Run tests and verify all pass
+- [x] Task: Implement PartDatabase lookup methods with TDD (SHA: 32a1cd0)
+    - [x] Write failing tests for get_part, get_ability, get_base_stats, get_behavior_module, get_strain_combo
+    - [x] Implement static vars, template loading from .tres files, and all lookup methods
+    - [x] Write failing tests for get_sprite_path handling both naming patterns (body_blueA.png vs detail_blue_horn_large.png)
+    - [x] Implement get_sprite_path fix
+    - [x] Run tests and verify all pass
 - [ ] Task: Implement rarity modifier system with TDD
     - [ ] Write failing tests for stat multipliers (x1.0/x1.25/x1.5/x2.0) and ability potency (Rare -15% CD, Legendary -25% CD + +20% effect)
     - [ ] Implement rarity modifiers in get_part()
