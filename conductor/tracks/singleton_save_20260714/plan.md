@@ -24,14 +24,14 @@
     - [x] Implement all economy.gd functions
     - [x] Verify tests pass
 
-- [ ] Task: Implement market.gd static utility
-    - [ ] Write failing tests for validate_purchase (sufficient gold, insufficient gold, Legendary Infamy gate)
-    - [ ] Write failing tests for calculate_price (within GDD ranges per rarity)
-    - [ ] Write failing tests for generate_initial_stock (24 base + 6-10 rotating)
-    - [ ] Write failing tests for generate_rotating_stock (6-10 valid parts, correct rarity weights)
-    - [ ] Write failing tests for apply_market_connections_discount
-    - [ ] Implement all market.gd functions
-    - [ ] Verify tests pass
+- [x] Task: Implement market.gd static utility (dfdc69f)
+    - [x] Write failing tests for validate_purchase (sufficient gold, insufficient gold, Legendary Infamy gate)
+    - [x] Write failing tests for calculate_price (within GDD ranges per rarity)
+    - [x] Write failing tests for generate_initial_stock (24 base + 6-10 rotating)
+    - [x] Write failing tests for generate_rotating_stock (6-10 valid parts, correct rarity weights)
+    - [x] Write failing tests for apply_market_connections_discount
+    - [x] Implement all market.gd functions
+    - [x] Verify tests pass
 
 - [ ] Task: Implement decay.gd static utility
     - [ ] Write failing tests for check_decay (purebreds never decay, probability per instability)
