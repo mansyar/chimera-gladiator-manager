@@ -204,3 +204,21 @@ func test_get_effect_value_unknown_branch() -> void:
 
 func test_get_effect_value_unknown_node() -> void:
 	assert_almost_eq(Research.get_effect_value(BRANCH_STRAIN, "unknown", 1), 0.0, 0.001)
+
+
+# ==================== get_research_cost - Edge Cases ====================
+
+
+func test_get_research_cost_unknown_branch() -> void:
+	assert_eq(Research.get_research_cost("unknown", SM_BEAST, 0), 0)
+
+
+func test_get_research_cost_unknown_node() -> void:
+	assert_eq(Research.get_research_cost(BRANCH_STRAIN, "unknown", 0), 0)
+
+
+# ==================== _get_combat_doctrine_value - Edge Cases ====================
+
+
+func test_get_combat_doctrine_value_unknown_node() -> void:
+	assert_almost_eq(Research._get_combat_doctrine_value("unknown"), 0.0, 0.001)
