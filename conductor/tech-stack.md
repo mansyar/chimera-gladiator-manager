@@ -27,6 +27,7 @@
 - **Linter:** gdlint (via `gd-tools lint`)
 - **Formatter:** gdformat (via `gd-tools format --check`)
 - **Coverage:** Coverage addon (via `gd-tools test --coverage --min 80`)
+  - *Note (2026-07-15):* Coverage enabled with `min_percent = 80` in `gd-tools.toml`. Five pure data/enum source files are excluded from coverage calculation (they contain no testable logic per workflow rules): `scripts/data/enums.gd`, `scripts/data/part_data.gd`, `scripts/data/ability_data.gd`, `scripts/data/ability_effect.gd`, `scripts/data/behavior_module_data.gd`.
 - **Doctor:** `gd-tools doctor` (9 environment checks, must exit 0)
 - **Test Location:** `res://tests/` mirroring `scripts/` structure
 

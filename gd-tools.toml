@@ -28,8 +28,8 @@ exclude = [
 max_line_length = 100
 
 [coverage]
-enabled = false
-min_percent = 0
+enabled = true
+min_percent = 80
 format = "html"
 output_dir = ".gd-tools/coverage"
 exclude = [
@@ -37,6 +37,11 @@ exclude = [
     ".godot",
     ".gd-tools",
     ".git",
+    "scripts/data/enums.gd",
+    "scripts/data/part_data.gd",
+    "scripts/data/ability_data.gd",
+    "scripts/data/ability_effect.gd",
+    "scripts/data/behavior_module_data.gd",
 ]
 test_dirs = [
     "test",
