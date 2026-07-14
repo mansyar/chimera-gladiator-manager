@@ -1,22 +1,29 @@
-class_name ChimeraData
-extends Resource
-
 ## Persistent campaign state for a single chimera.
 ##
 ## Stores equipped parts, derived stats, abilities, and
 ## persistent match data. Combat state is handled separately
 ## by CombatState (transient, per-match).
+class_name ChimeraData
+extends Resource
 
 ## Multiplier applied to all base stats when instability is 0 (purebred).
 const PUREBRED_STAT_MULTIPLIER: float = 1.2
 
 # --- Exported Properties (inspector-editable) ---
 
+## Display name for this chimera.
 @export var nickname: String
 
+## Part equipped in the HEAD slot.
 @export var head: PartData
+
+## Part equipped in the TORSO slot.
 @export var torso: PartData
+
+## Part equipped in the ARMS slot.
 @export var arms: PartData
+
+## Part equipped in the LEGS slot.
 @export var legs: PartData
 
 # --- Derived Stats (recalculated on part change) ---
@@ -32,6 +39,8 @@ var dominant_strain: GameEnums.Strain
 
 # --- Abilities (derived from parts) ---
 
+## Abilities granted by equipped parts.
+## Populated in TRACK-003 once PartDatabase.get_ability() is implemented.
 var part_abilities: Array[AbilityData] = []
 var combo_ability: AbilityData
 var combo_tier: int = 0
@@ -103,15 +112,22 @@ func recalculate_stats(research_bonuses: Dictionary = {}) -> void:
 		attack_range = arms.attack_range
 
 
-## Calculates instability from strain diversity across equipped parts.
-## Sets [member instability], [member strain_count], and [member dominant_strain].
-func calculate_instability() -> void:
+## Returns a Dictionary mapping each equipped part's strain to its occurrence count.
+## Null parts are skipped.
+func _count_strains() -> Dictionary:
 	var strain_counts: Dictionary = {}
 	for part in get_parts():
 		if part == null:
 			continue
 		var s: int = part.strain
 		strain_counts[s] = strain_counts.get(s, 0) + 1
+	return strain_counts
+
+
+## Calculates instability from strain diversity across equipped parts.
+## Sets [member instability], [member strain_count], and [member dominant_strain].
+func calculate_instability() -> void:
+	var strain_counts: Dictionary = _count_strains()
 
 	strain_count = strain_counts.size()
 	if strain_count > 0:
@@ -131,12 +147,7 @@ func calculate_instability() -> void:
 ## Returns null if fewer than 2 parts share a strain.
 ## Sets [member combo_tier] based on dominant strain count.
 func get_combo_ability() -> AbilityData:
-	var strain_counts: Dictionary = {}
-	for part in get_parts():
-		if part == null:
-			continue
-		var s: int = part.strain
-		strain_counts[s] = strain_counts.get(s, 0) + 1
+	var strain_counts: Dictionary = _count_strains()
 
 	var max_count: int = 0
 	var dominant: int = 0

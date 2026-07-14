@@ -114,3 +114,21 @@ func test_cleanse_recalculates_modifiers_after_removal() -> void:
 	_effect_component.cleanse()
 	assert_false(_effect_component.stat_modifiers.has("defense"))
 	assert_eq(_effect_component.stat_modifiers["attack"], 10.0)
+
+
+func test_tick_with_mixed_expired_and_non_expired() -> void:
+	var expired := _make_effect(AbilityEffect.EffectType.BUFF_STAT, "attack", 10.0, 1.0)
+	var alive := _make_effect(AbilityEffect.EffectType.BUFF_STAT, "defense", 5.0, 10.0)
+	_effect_component.add_effect(expired)
+	_effect_component.add_effect(alive)
+	_effect_component.tick(2.0)
+	assert_eq(_effect_component.active_effects.size(), 1, "Only non-expired effect should remain")
+	assert_eq(
+		_effect_component.active_effects[0].stat_name,
+		"defense",
+		"Remaining effect should be the defense buff"
+	)
+	assert_eq(_effect_component.stat_modifiers["defense"], 5.0, "defense modifier should remain")
+	assert_false(
+		_effect_component.stat_modifiers.has("attack"), "attack modifier should be removed"
+	)

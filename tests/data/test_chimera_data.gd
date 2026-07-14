@@ -234,3 +234,30 @@ func test_get_combo_ability_returns_null_for_all_different() -> void:
 	var result := chimera.get_combo_ability()
 	assert_null(result, "All-different should return null")
 	assert_eq(chimera.combo_tier, 0, "All-different should have combo_tier 0")
+
+
+# --- Edge case tests ---
+
+
+func test_recalculate_stats_handles_null_parts() -> void:
+	# No parts at all
+	chimera.calculate_instability()
+	chimera.recalculate_stats()
+	assert_eq(chimera.max_hp, 0.0, "max_hp should be 0 with no parts")
+	# Some null parts (mixed strains to avoid purebred bonus)
+	chimera.head = _make_part(GameEnums.PartSlot.HEAD, GameEnums.Strain.UNDEAD)
+	chimera.torso = _make_part(GameEnums.PartSlot.TORSO, GameEnums.Strain.ROBOTIC)
+	chimera.calculate_instability()
+	chimera.recalculate_stats()
+	assert_eq(chimera.max_hp, 20.0, "max_hp should sum only non-null parts")
+	assert_eq(chimera.attack, 10.0, "attack should sum only non-null parts")
+
+
+func test_recalculate_stats_purebred_with_research() -> void:
+	_setup_purebred(GameEnums.Strain.UNDEAD)
+	chimera.calculate_instability()
+	chimera.recalculate_stats({"max_hp": 1.5, "attack": 2.0})
+	assert_almost_eq(chimera.max_hp, 72.0, 0.01, "purebred+research max_hp")
+	assert_almost_eq(chimera.attack, 48.0, 0.01, "purebred+research attack")
+	assert_almost_eq(chimera.defense, 14.4, 0.01, "purebred-only defense")
+	assert_almost_eq(chimera.speed, 33.6, 0.01, "purebred-only speed")
