@@ -63,7 +63,7 @@
 
 ## Phase 4: Unit Test Expansion — Autoload Modules (with Mocking)
 
-- [ ] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
+- [~] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
 - [ ] Task: Expand `test_event_bus.gd` for `scripts/autoload/event_bus.gd`
     - [ ] Write tests for untested branches (e.g., signal parameter validation, multi-signal emission sequences, disconnect cleanup)
     - [ ] Run tests and verify they pass
