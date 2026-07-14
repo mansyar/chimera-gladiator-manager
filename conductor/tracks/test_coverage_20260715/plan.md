@@ -61,7 +61,7 @@
     - [ ] Verify coverage for effect_component module is 95%+
 - [ ] Task: Conductor - User Manual Verification 'Unit Test Expansion — Data & Combat Modules' (Protocol in workflow.md)
 
-## Phase 4: Unit Test Expansion — Autoload Modules (with Mocking)
+## Phase 4: Unit Test Expansion — Autoload Modules (with Mocking) [checkpoint: 474fe51]
 
 - [x] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase [e6584f4]
 - [x] Task: Expand `test_event_bus.gd` for `scripts/autoload/event_bus.gd`
@@ -83,7 +83,7 @@
     - [x] Write tests for untested branches (e.g., match start/end lifecycle, entity placement, reward distribution, signal emission)
     - [x] Run tests and verify they pass
     - [x] Verify coverage for combat_manager module is 95%+
-- [ ] Task: Conductor - User Manual Verification 'Unit Test Expansion — Autoload Modules' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Unit Test Expansion — Autoload Modules' (Protocol in workflow.md)
 
 ## Phase 5: Integration Tests
 
