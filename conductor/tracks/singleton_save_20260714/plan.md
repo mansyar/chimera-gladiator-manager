@@ -125,16 +125,16 @@
     - [ ] Implement has_save() and delete_save()
     - [ ] Verify tests pass
 
-- [ ] Task: Implement save triggers
-    - [ ] Write failing tests for save trigger after buy_part succeeds
-    - [ ] Write failing tests for save trigger after replace_chimera
-    - [ ] Write failing tests for save trigger after refresh_market
-    - [ ] Write failing tests for save trigger after ascend_chimera
-    - [ ] Write failing tests for save trigger after spend_research_point
-    - [ ] Write failing tests for save trigger on game exit (_exit_tree)
-    - [ ] Add SaveManager.save_game() calls to GameState methods (buy_part, replace_chimera, refresh_market, ascend_chimera, spend_research_point)
-    - [ ] Implement SaveManager._exit_tree() save trigger
-    - [ ] Verify tests pass
+- [x] Task: Implement save triggers [80d0fa6]
+    - [x] Write failing tests for save trigger after buy_part succeeds
+    - [x] Write failing tests for save trigger after replace_chimera
+    - [x] Write failing tests for save trigger after refresh_market
+    - [x] Write failing tests for save trigger after ascend_chimera
+    - [x] Write failing tests for save trigger after spend_research_point
+    - [x] Write failing tests for save trigger on game exit (_exit_tree)
+    - [x] Add SaveManager.save_game() calls to GameState methods (buy_part, replace_chimera, refresh_market, ascend_chimera, spend_research_point)
+    - [x] Implement SaveManager._exit_tree() save trigger
+    - [x] Verify tests pass
 
 - [ ] Task: Verify EventBus signal integration
     - [ ] Write integration tests for all signal emissions (gold_changed, infamy_changed, part_purchased, chimera_modified, market_refreshed, research_unlocked, chimera_ascended)
