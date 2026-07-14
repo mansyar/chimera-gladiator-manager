@@ -8,10 +8,10 @@
     - [x] Read `./spec.md` to review all functional requirements and acceptance criteria
     - [x] Read `conductor/workflow.md` to review TDD workflow and task lifecycle rules
 
-- [~] Task: Implement EventBus with all 13 signals
-    - [ ] Write failing tests verifying all 13 signals can be emitted and connected
-    - [ ] Implement all 13 signal declarations in event_bus.gd
-    - [ ] Verify tests pass
+- [x] Task: Implement EventBus with all 13 signals
+    - [x] Write failing tests verifying all 13 signals can be emitted and connected
+    - [x] Implement all 13 signal declarations in event_bus.gd
+    - [x] Verify tests pass
 
 - [ ] Task: Implement CombatManager stub
     - [ ] Set match_active property to false
