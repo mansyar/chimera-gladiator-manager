@@ -42,13 +42,13 @@
     - [x] Implement all decay.gd functions
     - [x] Verify tests pass
 
-- [ ] Task: Implement research.gd static utility
-    - [ ] Write failing tests for can_unlock (insufficient points, at max level, valid unlock)
-    - [ ] Write failing tests for get_max_level (3 for Strain Mastery, 2 for Lab Engineering, 1 for Combat Doctrine)
-    - [ ] Write failing tests for get_effect_value (correct values per node/level)
-    - [ ] Write failing tests for get_research_cost (1 RP per level)
-    - [ ] Implement all research.gd functions including node definitions
-    - [ ] Verify tests pass
+- [x] Task: Implement research.gd static utility (fa96344)
+    - [x] Write failing tests for can_unlock (insufficient points, at max level, valid unlock)
+    - [x] Write failing tests for get_max_level (3 for Strain Mastery, 2 for Lab Engineering, 1 for Combat Doctrine)
+    - [x] Write failing tests for get_effect_value (correct values per node/level)
+    - [x] Write failing tests for get_research_cost (1 RP per level)
+    - [x] Implement all research.gd functions including node definitions
+    - [x] Verify tests pass
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: EventBus, CombatManager Stub & System Utilities' (Protocol in workflow.md)
 
