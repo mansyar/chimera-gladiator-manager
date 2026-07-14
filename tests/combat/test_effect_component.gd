@@ -132,3 +132,14 @@ func test_tick_with_mixed_expired_and_non_expired() -> void:
 	assert_false(
 		_effect_component.stat_modifiers.has("attack"), "attack modifier should be removed"
 	)
+
+
+func test_tick_with_no_effects() -> void:
+	_effect_component.tick(1.0)
+	assert_eq(_effect_component.active_effects.size(), 0, "Should have no effects after tick")
+
+
+func test_cleanse_with_no_effects() -> void:
+	_effect_component.cleanse()
+	assert_eq(_effect_component.active_effects.size(), 0, "Should have no effects after cleanse")
+	assert_eq(_effect_component.stat_modifiers.size(), 0, "stat_modifiers should be empty")
