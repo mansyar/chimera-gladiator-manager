@@ -2,7 +2,7 @@
 
 # Implementation Plan: Singleton Architecture, Signals & Save System
 
-## Phase 1: EventBus, CombatManager Stub & System Utilities
+## Phase 1: EventBus, CombatManager Stub & System Utilities [checkpoint: a205b5d]
 
 - [x] Task: Read spec.md and workflow.md before starting phase implementation
     - [x] Read `./spec.md` to review all functional requirements and acceptance criteria
@@ -50,7 +50,7 @@
     - [x] Implement all research.gd functions including node definitions
     - [x] Verify tests pass
 
-- [~] Task: Conductor - User Manual Verification 'Phase 1: EventBus, CombatManager Stub & System Utilities' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: EventBus, CombatManager Stub & System Utilities' (Protocol in workflow.md)
 
 ## Phase 2: GameState Full Implementation
 
