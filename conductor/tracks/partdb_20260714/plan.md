@@ -54,17 +54,17 @@
 
 ## Phase 3: Integration Tests & Final Verification
 
-- [ ] Task: Read spec.md and workflow.md to align with current requirements and TDD protocol
-- [ ] Task: Write and verify integration tests
-    - [ ] Write tests: all sprite_paths resolve to actual asset files
-    - [ ] Write tests: all ability_id references resolve via get_ability()
-    - [ ] Write tests: all detail_type references resolve via get_behavior_module()
-    - [ ] Write tests: starter chimera stats match role expectations (Tank high HP/Def, DPS high Atk, Utility balanced)
-    - [ ] Write tests: Neutral strain parts have no combo and count as same strain
-    - [ ] Run all tests and verify they pass
-- [ ] Task: Final quality gate verification
-    - [ ] Run gd-tools test --coverage --min 80
-    - [ ] Run gd-tools lint
-    - [ ] Run gd-tools format --check
+- [x] Task: Read spec.md and workflow.md to align with current requirements and TDD protocol
+- [x] Task: Write and verify integration tests
+    - [x] Write tests: all sprite_paths resolve to actual asset files
+    - [x] Write tests: all ability_id references resolve via get_ability()
+    - [x] Write tests: all detail_type references resolve via get_behavior_module()
+    - [x] Write tests: starter chimera stats match role expectations (Tank high HP/Def, DPS high Atk, Utility balanced)
+    - [x] Write tests: Neutral strain parts have no combo and count as same strain
+    - [x] Run all tests and verify they pass
+- [x] Task: Final quality gate verification
+    - [x] Run gd-tools test --coverage --min 80 (102/102 pass, 96.4% line, 100% branch)
+    - [x] Run gd-tools lint (clean)
+    - [x] Run gd-tools format --check (all 19 files formatted)
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Integration Tests & Final Verification' (Protocol in workflow.md)
 </protect>
