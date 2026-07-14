@@ -391,3 +391,39 @@ func test_salvage_skips_null_parts() -> void:
 	assert_eq(salvaged.size(), 2)
 	for part in salvaged:
 		assert_eq(part.strain, GameEnums.Strain.NEUTRAL)
+
+
+# --- _get_decay_chance ---
+
+
+func test_get_decay_chance_pure_returns_zero() -> void:
+	assert_eq(Decay._get_decay_chance(0), Decay.DECAY_CHANCE_PURE)
+
+
+func test_get_decay_chance_volatile() -> void:
+	assert_eq(Decay._get_decay_chance(2), Decay.DECAY_CHANCE_VOLATILE)
+
+
+func test_get_decay_chance_invalid_returns_zero() -> void:
+	assert_eq(Decay._get_decay_chance(4), 0.0)
+	assert_eq(Decay._get_decay_chance(-1), 0.0)
+
+
+# --- _get_stat_loss_percent ---
+
+
+func test_get_stat_loss_percent_pure_returns_zero() -> void:
+	assert_eq(Decay._get_stat_loss_percent(0), Decay.STAT_LOSS_PURE)
+
+
+func test_get_stat_loss_percent_invalid_returns_zero() -> void:
+	assert_eq(Decay._get_stat_loss_percent(4), 0)
+	assert_eq(Decay._get_stat_loss_percent(-1), 0)
+
+
+# --- _get_base_repair_cost ---
+
+
+func test_get_base_repair_cost_invalid_returns_zero() -> void:
+	assert_eq(Decay._get_base_repair_cost(4), 0)
+	assert_eq(Decay._get_base_repair_cost(-1), 0)
