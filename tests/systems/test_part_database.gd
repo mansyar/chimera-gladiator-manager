@@ -324,3 +324,118 @@ func test_get_ability_with_rarity_does_not_modify_template() -> void:
 func test_get_ability_with_rarity_returns_null_for_unknown() -> void:
 	var ability := PartDatabase.get_ability_with_rarity("nonexistent", GameEnums.Rarity.COMMON)
 	assert_null(ability, "Should return null for unknown ability")
+
+
+# --- generate_random_part() tests ---
+
+
+func test_generate_random_part_returns_part_for_head_slot() -> void:
+	var weights := {GameEnums.Rarity.COMMON: 100}
+	var part := PartDatabase.generate_random_part(GameEnums.PartSlot.HEAD, weights)
+	assert_not_null(part, "Should return a part for HEAD slot")
+	assert_eq(part.slot, GameEnums.PartSlot.HEAD, "Slot should be HEAD")
+
+
+func test_generate_random_part_returns_part_for_torso_slot() -> void:
+	var weights := {GameEnums.Rarity.COMMON: 100}
+	var part := PartDatabase.generate_random_part(GameEnums.PartSlot.TORSO, weights)
+	assert_not_null(part, "Should return a part for TORSO slot")
+	assert_eq(part.slot, GameEnums.PartSlot.TORSO, "Slot should be TORSO")
+
+
+func test_generate_random_part_returns_part_for_arms_slot() -> void:
+	var weights := {GameEnums.Rarity.COMMON: 100}
+	var part := PartDatabase.generate_random_part(GameEnums.PartSlot.ARMS, weights)
+	assert_not_null(part, "Should return a part for ARMS slot")
+	assert_eq(part.slot, GameEnums.PartSlot.ARMS, "Slot should be ARMS")
+
+
+func test_generate_random_part_returns_part_for_legs_slot() -> void:
+	var weights := {GameEnums.Rarity.COMMON: 100}
+	var part := PartDatabase.generate_random_part(GameEnums.PartSlot.LEGS, weights)
+	assert_not_null(part, "Should return a part for LEGS slot")
+	assert_eq(part.slot, GameEnums.PartSlot.LEGS, "Slot should be LEGS")
+
+
+func test_generate_random_part_respects_common_weight() -> void:
+	var weights := {GameEnums.Rarity.COMMON: 100}
+	var part := PartDatabase.generate_random_part(GameEnums.PartSlot.HEAD, weights)
+	assert_eq(part.rarity, GameEnums.Rarity.COMMON, "Should be COMMON with 100% weight")
+
+
+func test_generate_random_part_respects_legendary_weight() -> void:
+	var weights := {GameEnums.Rarity.LEGENDARY: 100}
+	var part := PartDatabase.generate_random_part(GameEnums.PartSlot.HEAD, weights)
+	assert_eq(part.rarity, GameEnums.Rarity.LEGENDARY, "Should be LEGENDARY with 100% weight")
+
+
+func test_generate_random_part_has_valid_shape_id() -> void:
+	var weights := {GameEnums.Rarity.COMMON: 100}
+	var part := PartDatabase.generate_random_part(GameEnums.PartSlot.TORSO, weights)
+	var valid_shapes := ["body_a", "body_b", "body_c", "body_d", "body_e", "body_f"]
+	assert_true(valid_shapes.has(part.shape_id), "shape_id should be a valid torso shape")
+
+
+func test_generate_random_part_has_sprite_path() -> void:
+	var weights := {GameEnums.Rarity.COMMON: 100}
+	var part := PartDatabase.generate_random_part(GameEnums.PartSlot.HEAD, weights)
+	assert_true(part.sprite_path.length() > 0, "sprite_path should not be empty")
+
+
+func test_generate_random_part_returns_independent_instance() -> void:
+	var weights := {GameEnums.Rarity.COMMON: 100}
+	var part1 := PartDatabase.generate_random_part(GameEnums.PartSlot.HEAD, weights)
+	var part2 := PartDatabase.generate_random_part(GameEnums.PartSlot.HEAD, weights)
+	assert_ne(part1, part2, "Should return independent instances")
+
+
+# --- get_starter_chimeras() tests ---
+
+
+func test_get_starter_chimeras_returns_three() -> void:
+	var starters := PartDatabase.get_starter_chimeras()
+	assert_eq(starters.size(), 3, "Should return 3 starter chimeras")
+
+
+func test_get_starter_chimeras_has_tank() -> void:
+	var starters := PartDatabase.get_starter_chimeras()
+	var found := false
+	for chimera in starters:
+		if chimera.nickname == "Bastion":
+			found = true
+			assert_eq(chimera.head.strain, GameEnums.Strain.BEAST, "Tank HEAD should be BEAST")
+			break
+	assert_true(found, "Should find tank starter (Bastion)")
+
+
+func test_get_starter_chimeras_has_dps() -> void:
+	var starters := PartDatabase.get_starter_chimeras()
+	var found := false
+	for chimera in starters:
+		if chimera.nickname == "Ignis":
+			found = true
+			assert_eq(chimera.head.strain, GameEnums.Strain.DRACONIC, "DPS HEAD should be DRACONIC")
+			break
+	assert_true(found, "Should find DPS starter (Ignis)")
+
+
+func test_get_starter_chimeras_has_utility() -> void:
+	var starters := PartDatabase.get_starter_chimeras()
+	var found := false
+	for chimera in starters:
+		if chimera.nickname == "Cipher":
+			found = true
+			assert_eq(
+				chimera.head.strain, GameEnums.Strain.ELEMENTAL, "Utility HEAD should be ELEMENTAL"
+			)
+			break
+	assert_true(found, "Should find utility starter (Cipher)")
+
+
+func test_get_starter_chimeras_all_have_four_parts() -> void:
+	var starters := PartDatabase.get_starter_chimeras()
+	for chimera in starters:
+		assert_not_null(chimera.head, "Starter should have HEAD")
+		assert_not_null(chimera.torso, "Starter should have TORSO")
+		assert_not_null(chimera.arms, "Starter should have ARMS")
+		assert_not_null(chimera.legs, "Starter should have LEGS")

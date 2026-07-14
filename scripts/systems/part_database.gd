@@ -182,11 +182,45 @@ static func get_base_stats(shape_id: String) -> Dictionary:
 
 ## Generate a random part for a slot and rarity weights.
 ##
-## Returns null in this stub — full implementation pending.
-static func generate_random_part(
-	_slot: GameEnums.PartSlot, _rarity_weights: Dictionary
-) -> PartData:
-	return null
+## Picks a random shape from templates for the given slot,
+## a weighted random rarity, and a random playable strain.
+## Returns null if no templates exist for the slot.
+static func generate_random_part(slot: GameEnums.PartSlot, rarity_weights: Dictionary) -> PartData:
+	_ensure_loaded()
+	# Collect shape_ids for the given slot
+	var shape_ids: Array[String] = []
+	for shape_id in part_templates:
+		var template: PartData = part_templates[shape_id]
+		if template.slot == slot:
+			shape_ids.append(shape_id)
+	if shape_ids.is_empty():
+		return null
+	# Pick random shape
+	var shape_id: String = shape_ids[randi() % shape_ids.size()]
+	# Pick weighted random rarity
+	var rarity: GameEnums.Rarity = _pick_weighted_rarity(rarity_weights)
+	# Pick random playable strain (0-5 = UNDEAD through ABERRANT, excluding NEUTRAL=6)
+	var strain: GameEnums.Strain = randi() % 6
+	return get_part(shape_id, strain, rarity)
+
+
+## Pick a rarity based on weighted random selection.
+##
+## rarity_weights maps GameEnums.Rarity values to integer weights.
+## Returns COMMON if weights are empty or sum to zero.
+static func _pick_weighted_rarity(rarity_weights: Dictionary) -> GameEnums.Rarity:
+	var total_weight := 0
+	for weight in rarity_weights.values():
+		total_weight += int(weight)
+	if total_weight <= 0:
+		return GameEnums.Rarity.COMMON
+	var roll := randi() % total_weight
+	var cumulative := 0
+	for rarity_key in rarity_weights:
+		cumulative += int(rarity_weights[rarity_key])
+		if roll < cumulative:
+			return rarity_key
+	return GameEnums.Rarity.COMMON
 
 
 ## Retrieve the strain combo ability for a given tier.
