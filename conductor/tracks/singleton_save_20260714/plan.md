@@ -52,7 +52,7 @@
 
 - [x] Task: Conductor - User Manual Verification 'Phase 1: EventBus, CombatManager Stub & System Utilities' (Protocol in workflow.md)
 
-## Phase 2: GameState Full Implementation
+## Phase 2: GameState Full Implementation [checkpoint: 7613287]
 
 - [x] Task: Read spec.md and workflow.md before starting phase implementation
     - [x] Read `./spec.md` to review all functional requirements and acceptance criteria
@@ -101,7 +101,7 @@
     - [x] Implement get_research_level() and spend_research_point() delegating to research.gd
     - [x] Verify tests pass
 
-- [~] Task: Conductor - User Manual Verification 'Phase 2: GameState Full Implementation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: GameState Full Implementation' (Protocol in workflow.md) [7613287]
 
 ## Phase 3: Save System & Final Integration
 
