@@ -12,11 +12,11 @@
     - [x] Run tests and verify all pass (including existing TRACK-002 CombatState tests)
     - [x] Verify coverage >= 80%
 
-- [ ] Task: Create ChimeraSprite composition script (`scripts/combat/chimera_sprite.gd`)
-    - [ ] Write failing tests: `STRAIN_TO_COLOR` mapping returns correct color names for all 7 strains; `get_sprite_path()` constructs correct paths from shape_id + strain
-    - [ ] Implement: `chimera_sprite.gd` with `STRAIN_TO_COLOR` dict, `get_sprite_path()`, 8-layer Sprite2D setup with z-order (Body=0 through Eyebrows=7)
-    - [ ] Run tests and verify pass
-    - [ ] Verify coverage >= 80%
+- [x] Task: Create ChimeraSprite composition script (`scripts/combat/chimera_sprite.gd`) [e75bfc4]
+    - [x] Write failing tests: `STRAIN_TO_COLOR` mapping returns correct color names for all 7 strains; `get_sprite_path()` constructs correct paths from shape_id + strain
+    - [x] Implement: `chimera_sprite.gd` with `STRAIN_TO_COLOR` dict, `get_sprite_path()`, 8-layer Sprite2D setup with z-order (Body=0 through Eyebrows=7)
+    - [x] Run tests and verify pass
+    - [x] Verify coverage >= 80%
 
 - [ ] Task: Create AIController interface stub (`scripts/combat/ai_controller.gd`)
     - [ ] Write failing tests: `change_state()` does not error; `acquire_target()` returns null; `_process()` does not error
