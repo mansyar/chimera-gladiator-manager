@@ -35,7 +35,7 @@
     - [x] Attach git note with task summary
     - [x] Update plan.md: mark task complete with commit SHA
 
-- [ ] Task: Update ChimeraEntity with AI/AbilityComponent/CombatContext references
+- [x] Task: Update ChimeraEntity with AI/AbilityComponent/CombatContext references [eb91018]
     - [ ] Write failing tests for ChimeraEntity: ai_controller @onready reference, ability_component @onready reference, team property, combat_context property, died signal
     - [ ] Add to `scripts/combat/chimera_entity.gd`: @onready ai_controller, @onready ability_component, var team, var combat_context, signal died(entity)
     - [ ] Run tests — confirm green
