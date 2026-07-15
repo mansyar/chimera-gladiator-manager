@@ -1,3 +1,4 @@
+<protect>
 # Track Specification: AI System (FSM)
 
 ## Overview
@@ -153,3 +154,4 @@ This track builds on the TRACK-005 combat entity foundation (movement, damage re
 - Enemy generation logic (TRACK-008).
 - Pre-match formation grid UI (TRACK-013).
 - NavigationAgent2D pathfinding (arena is open field — direct movement only).
+</protect>
