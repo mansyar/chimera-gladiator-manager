@@ -53,7 +53,7 @@
     - [ ] Attach git note with task summary
     - [ ] Update plan.md: mark task complete with commit SHA
 
-- [ ] Task: Create 8 state scripts with transition logic
+- [x] Task: Create 8 state scripts with transition logic [99ac59c]
     - [ ] Write failing tests for FSM transition flow: IDLE->ACQUIRE_TARGET, ACQUIRE_TARGET null target->IDLE, ACQUIRE_TARGET found->MOVE_TO_TARGET, MOVE_TO_TARGET in range->IN_RANGE, IN_RANGE ability ready->USE_ABILITY, IN_RANGE no ability->ATTACK, ATTACK target dead->ACQUIRE_TARGET, ATTACK target alive->IN_RANGE, USE_ABILITY->ATTACK, BERSERK timer expired->ACQUIRE_TARGET, DEAD is terminal
     - [ ] Create `scripts/ai/states/idle_state.gd` — brief pause then ->ACQUIRE_TARGET
     - [ ] Create `scripts/ai/states/acquire_target_state.gd` — calls acquire_target(), ->MOVE_TO_TARGET or ->IDLE
