@@ -5,13 +5,18 @@ extends GutTest
 
 
 func _make_chimera(
-	max_hp: float = 100.0, atk: float = 10.0, def: float = 5.0, spd: float = 20.0
+	max_hp: float = 100.0,
+	atk: float = 10.0,
+	def: float = 5.0,
+	spd: float = 20.0,
+	atk_range: float = 32.0
 ) -> ChimeraData:
 	var data := ChimeraData.new()
 	data.max_hp = max_hp
 	data.attack = atk
 	data.defense = def
 	data.speed = spd
+	data.attack_range = atk_range
 	return data
 
 
@@ -37,6 +42,13 @@ func test_initialize_sets_team() -> void:
 	var state := CombatState.new()
 	state.initialize(data, 2)
 	assert_eq(state.team, 2, "team should be set from team_id")
+
+
+func test_initialize_snapshots_attack_range() -> void:
+	var data := _make_chimera(100.0, 10.0, 5.0, 20.0, 48.0)
+	var state := CombatState.new()
+	state.initialize(data, 0)
+	assert_eq(state.attack_range, 48.0, "attack_range should snapshot from ChimeraData")
 
 
 func test_take_damage_reduces_hp() -> void:

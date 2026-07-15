@@ -10,6 +10,7 @@ var max_hp: float
 var attack: float
 var defense: float
 var speed: float
+var attack_range: float
 var is_berserk: bool = false
 var berserk_timer: float = 0.0
 var berserk_check_timer: float = 0.0
@@ -28,6 +29,7 @@ func initialize(data: ChimeraData, team_id: int) -> void:
 	attack = data.attack
 	defense = data.defense
 	speed = data.speed
+	attack_range = data.attack_range
 	current_hp = max_hp
 	team = team_id
 
