@@ -52,22 +52,22 @@
 - [x] Task: Read spec.md and workflow.md to refresh context before starting Phase 2 implementation
 
 - [x] Task: Implement movement system [0032ebf]
-    - [ ] Write failing tests: `move_toward_target()` sets `velocity` to `direction * speed` without multiplying by delta
-    - [ ] Implement: `move_toward_target(target_position: Vector2)` in `chimera_entity.gd` — calls `move_and_slide()`
-    - [ ] Run tests and verify pass
-    - [ ] Verify coverage >= 80%
+    - [x] Write failing tests: `move_toward_target()` sets `velocity` to `direction * speed` without multiplying by delta
+    - [x] Implement: `move_toward_target(target_position: Vector2)` in `chimera_entity.gd` — calls `move_and_slide()`
+    - [x] Run tests and verify pass
+    - [x] Verify coverage >= 80%
 
 - [x] Task: Implement damage resolution [ea8b70d]
-    - [ ] Write failing tests: `calculate_damage()` normal case (atk - def, min 1); berserk attacker (+50% atk); berserk defender (-30% def); both berserk; EffectComponent modifiers applied to both attack and defense
-    - [ ] Implement: `calculate_damage(attacker: ChimeraEntity, defender: ChimeraEntity) -> float` in `chimera_entity.gd`
-    - [ ] Run tests and verify pass
-    - [ ] Verify coverage >= 80%
+    - [x] Write failing tests: `calculate_damage()` normal case (atk - def, min 1); berserk attacker (+50% atk); berserk defender (-30% def); both berserk; EffectComponent modifiers applied to both attack and defense
+    - [x] Implement: `calculate_damage(attacker: ChimeraEntity, defender: ChimeraEntity) -> float` in `chimera_entity.gd`
+    - [x] Run tests and verify pass
+    - [x] Verify coverage >= 80%
 
 - [x] Task: Implement attack cadence [63017fa]
-    - [ ] Write failing tests: interval = `1.0 / (speed * ATTACK_RATE_CONSTANT)` with RATE=0.1; timer resets after firing
-    - [ ] Implement: attack cadence timer in `chimera_entity.gd` with `ATTACK_RATE_CONSTANT = 0.1` and `MELEE_THRESHOLD = 48.0` constants
-    - [ ] Run tests and verify pass
-    - [ ] Verify coverage >= 80%
+    - [x] Write failing tests: interval = `1.0 / (speed * ATTACK_RATE_CONSTANT)` with RATE=0.1; timer resets after firing
+    - [x] Implement: attack cadence timer in `chimera_entity.gd` with `ATTACK_RATE_CONSTANT = 0.1` and `MELEE_THRESHOLD = 48.0` constants
+    - [x] Run tests and verify pass
+    - [x] Verify coverage >= 80%
 
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Movement & Damage' (Protocol in workflow.md) [checkpoint: beb9738]
 
@@ -87,5 +87,9 @@
     - [x] Verify coverage >= 80%
 
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Arena & Formation Grid' (Protocol in workflow.md) [checkpoint: bf2ad2d]
+
+## Phase: Review Fixes
+
+- [x] Task: Apply review suggestions [3ee239a]
 
 </protect>
