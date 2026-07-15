@@ -97,7 +97,7 @@
 
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Positioning & Targeting' (Protocol in workflow.md) [f252b21]
 
-## Phase 3: Ability Priority & Berserk System
+## Phase 3: Ability Priority & Berserk System [checkpoint: 2b14ad6]
 
 - [x] Task: Read spec.md and workflow.md to refresh context for Phase 3
     - [x] Read `conductor/tracks/ai_system_fsm_20260715/spec.md` (FR-7, FR-8, acceptance criteria)
@@ -132,5 +132,5 @@
     - [x] Attach git note with task summary
     - [x] Update plan.md: mark task complete with commit SHA
 
-- [~] Task: Conductor - User Manual Verification 'Phase 3: Ability Priority & Berserk System' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Ability Priority & Berserk System' (Protocol in workflow.md) [2b14ad6]
 </protect>
