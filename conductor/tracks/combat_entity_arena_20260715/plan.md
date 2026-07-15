@@ -4,13 +4,13 @@
 
 ## Phase 1: Scenes & ChimeraSprite Composition
 
-- [ ] Task: Read spec.md and workflow.md to refresh context before starting Phase 1 implementation
+- [x] Task: Read spec.md and workflow.md to refresh context before starting Phase 1 implementation
 
-- [ ] Task: Extend CombatState with attack_range property
-    - [ ] Write failing test: `initialize()` snapshots `attack_range` from `ChimeraData.attack_range`
-    - [ ] Implement: add `attack_range: float` property to CombatState, update `initialize()` to snapshot it
-    - [ ] Run tests and verify all pass (including existing TRACK-002 CombatState tests)
-    - [ ] Verify coverage >= 80%
+- [x] Task: Extend CombatState with attack_range property [ecf4de7]
+    - [x] Write failing test: `initialize()` snapshots `attack_range` from `ChimeraData.attack_range`
+    - [x] Implement: add `attack_range: float` property to CombatState, update `initialize()` to snapshot it
+    - [x] Run tests and verify all pass (including existing TRACK-002 CombatState tests)
+    - [x] Verify coverage >= 80%
 
 - [ ] Task: Create ChimeraSprite composition script (`scripts/combat/chimera_sprite.gd`)
     - [ ] Write failing tests: `STRAIN_TO_COLOR` mapping returns correct color names for all 7 strains; `get_sprite_path()` constructs correct paths from shape_id + strain
