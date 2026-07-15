@@ -28,11 +28,11 @@
     - [x] Implement: `ability_component.gd` with method signatures from TDD Section 8 returning defaults
     - [x] Run tests and verify pass
 
-- [ ] Task: Create minimal stub scripts (no testable logic — TDD exempt)
-    - [ ] Implement: `scripts/combat/health_bar.gd` (class_name only)
-    - [ ] Implement: `scripts/combat/status_effects.gd` (class_name only)
-    - [ ] Implement: `scripts/combat/vfx_spawner.gd` (class_name only)
-    - [ ] Implement: `scripts/combat/combat_hud.gd` (class_name only, CanvasLayer stub)
+- [x] Task: Create minimal stub scripts (no testable logic — TDD exempt) [05ab160]
+    - [x] Implement: `scripts/combat/health_bar.gd` (class_name only)
+    - [x] Implement: `scripts/combat/status_effects.gd` (class_name only)
+    - [x] Implement: `scripts/combat/vfx_spawner.gd` (class_name only)
+    - [x] Implement: `scripts/combat/combat_hud.gd` (class_name only, CanvasLayer stub)
 
 - [ ] Task: Create chimera_entity.tscn scene (`scenes/combat/chimera_entity.tscn`)
     - [ ] Build CharacterBody2D scene tree per FR-2: ChimeraSprite (8 Sprite2Ds), AttackRange (Area2D + CircleShape2D), BodyCollision, HealthBar, StatusEffects, AIController, AbilityComponent, EffectComponent, VFXSpawner
