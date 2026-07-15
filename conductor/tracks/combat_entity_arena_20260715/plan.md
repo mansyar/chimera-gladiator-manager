@@ -18,10 +18,10 @@
     - [x] Run tests and verify pass
     - [x] Verify coverage >= 80%
 
-- [ ] Task: Create AIController interface stub (`scripts/combat/ai_controller.gd`)
-    - [ ] Write failing tests: `change_state()` does not error; `acquire_target()` returns null; `_process()` does not error
-    - [ ] Implement: `ai_controller.gd` with method signatures from TDD Section 7 returning defaults
-    - [ ] Run tests and verify pass
+- [x] Task: Create AIController interface stub (`scripts/combat/ai_controller.gd`) [0df381c]
+    - [x] Write failing tests: `change_state()` does not error; `acquire_target()` returns null; `_process()` does not error
+    - [x] Implement: `ai_controller.gd` with method signatures from TDD Section 7 returning defaults
+    - [x] Run tests and verify pass
 
 - [ ] Task: Create AbilityComponent interface stub (`scripts/combat/ability_component.gd`)
     - [ ] Write failing tests: `is_off_cooldown()` returns false; `get_ready_abilities()` returns empty array; `initialize()` does not error
