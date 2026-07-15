@@ -124,11 +124,11 @@ func test_acquire_target_returns_null_stub() -> void:
 	assert_eq(target, null, "acquire_target should return null (stub)")
 
 
-func test_get_move_position_returns_zero_stub() -> void:
+func test_get_move_position_returns_zero_for_null_target() -> void:
 	var controller: AIController = AIController.new()
 	add_child_autofree(controller)
 	var pos: Vector2 = controller.get_move_position(null)
-	assert_eq(pos, Vector2.ZERO, "get_move_position should return Vector2.ZERO (stub)")
+	assert_eq(pos, Vector2.ZERO, "get_move_position should return ZERO for null target")
 
 
 func test_get_next_ready_ability_returns_null_stub() -> void:

@@ -59,9 +59,64 @@ func acquire_target() -> ChimeraEntity:
 
 
 ## Returns the move position for the given target based on positioning mode.
-## Full implementation in Phase 2 (FR-5).
-func get_move_position(_target: ChimeraEntity) -> Vector2:
-	return Vector2.ZERO
+## FRONT: melee closes distance, ranged kites when too close.
+## MID: ranged holds at 90% of attack range, melee approaches.
+## BACK: ranged flees if approached, melee holds if front-line allies exist.
+func get_move_position(target: ChimeraEntity) -> Vector2:
+	if target == null or entity == null or behavior_module == null:
+		return Vector2.ZERO
+	var distance: float = entity.global_position.distance_to(target.global_position)
+	var is_ranged: bool = combat_state.attack_range > ChimeraEntity.MELEE_THRESHOLD
+	var pos: Vector2 = entity.global_position
+
+	match behavior_module.positioning:
+		GameEnums.Positioning.FRONT:
+			if is_ranged and distance < combat_state.attack_range * 0.8:
+				var direction: Vector2 = (
+					(entity.global_position - target.global_position).normalized()
+				)
+				pos = target.global_position + direction * combat_state.attack_range
+			else:
+				pos = target.global_position
+
+		GameEnums.Positioning.MID:
+			if is_ranged:
+				var direction: Vector2 = (
+					(entity.global_position - target.global_position).normalized()
+				)
+				pos = (target.global_position + direction * combat_state.attack_range * 0.9)
+			else:
+				pos = target.global_position
+
+		GameEnums.Positioning.BACK:
+			if is_ranged:
+				if distance < combat_state.attack_range * 0.7:
+					var direction: Vector2 = (
+						(entity.global_position - target.global_position).normalized()
+					)
+					pos = entity.global_position + direction * 100.0
+				else:
+					pos = entity.global_position
+			elif has_front_line_allies():
+				pos = entity.global_position
+			else:
+				pos = target.global_position
+
+	return pos
+
+
+## Checks if any allies (excluding self) have FRONT positioning.
+func has_front_line_allies() -> bool:
+	if combat_context == null:
+		return false
+	var allies: Array[ChimeraEntity] = combat_context.get_allies_of(combat_state.team)
+	for ally in allies:
+		if ally == entity:
+			continue
+		if ally.ai_controller and ally.ai_controller.behavior_module:
+			if ally.ai_controller.behavior_module.positioning == GameEnums.Positioning.FRONT:
+				return true
+	return false
 
 
 ## Returns the next ready ability based on priority ordering.

@@ -262,7 +262,6 @@ func test_combat_context_property_can_be_set():
 func test_died_signal_emitted():
 	var entity := ChimeraEntity.new()
 	add_child_autofree(entity)
-	var signal_received := false
-	entity.died.connect(func(_e: ChimeraEntity) -> void: signal_received = true)
+	watch_signals(entity)
 	entity.died.emit(entity)
-	assert_true(signal_received, "died signal should be emitted and received")
+	assert_signal_emitted(entity, "died", "died signal should be emitted")
