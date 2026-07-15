@@ -34,11 +34,11 @@
     - [x] Implement: `scripts/combat/vfx_spawner.gd` (class_name only)
     - [x] Implement: `scripts/combat/combat_hud.gd` (class_name only, CanvasLayer stub)
 
-- [ ] Task: Create chimera_entity.tscn scene (`scenes/combat/chimera_entity.tscn`)
-    - [ ] Build CharacterBody2D scene tree per FR-2: ChimeraSprite (8 Sprite2Ds), AttackRange (Area2D + CircleShape2D), BodyCollision, HealthBar, StatusEffects, AIController, AbilityComponent, EffectComponent, VFXSpawner
-    - [ ] Configure collision layers per FR-5: entity layer 1 or 2 (set by team), AttackRange layer 4 masking opposing team
-    - [ ] Attach scripts to appropriate nodes
-    - [ ] Implement: `scripts/combat/chimera_entity.gd` with CombatState reference, EffectComponent tick in `_process`
+- [x] Task: Create chimera_entity.tscn scene (`scenes/combat/chimera_entity.tscn`) [a42c823]
+    - [x] Build CharacterBody2D scene tree per FR-2: ChimeraSprite (8 Sprite2Ds), AttackRange (Area2D + CircleShape2D), BodyCollision, HealthBar, StatusEffects, AIController, AbilityComponent, EffectComponent, VFXSpawner
+    - [x] Configure collision layers per FR-5: entity layer 1 or 2 (set by team), AttackRange layer 4 masking opposing team
+    - [x] Attach scripts to appropriate nodes
+    - [x] Implement: `scripts/combat/chimera_entity.gd` with CombatState reference, EffectComponent tick in `_process`
 
 - [ ] Task: Create arena.tscn scene (`scenes/combat/arena.tscn`)
     - [ ] Build Arena (Node2D) scene tree per FR-1: TileMap, FormationGridPlayer, FormationGridEnemy, Entities, CombatHUD (CanvasLayer), ArenaController
