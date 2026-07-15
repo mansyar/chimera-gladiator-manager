@@ -23,10 +23,10 @@
     - [x] Implement: `ai_controller.gd` with method signatures from TDD Section 7 returning defaults
     - [x] Run tests and verify pass
 
-- [ ] Task: Create AbilityComponent interface stub (`scripts/combat/ability_component.gd`)
-    - [ ] Write failing tests: `is_off_cooldown()` returns false; `get_ready_abilities()` returns empty array; `initialize()` does not error
-    - [ ] Implement: `ability_component.gd` with method signatures from TDD Section 8 returning defaults
-    - [ ] Run tests and verify pass
+- [x] Task: Create AbilityComponent interface stub (`scripts/combat/ability_component.gd`) [8a8ec6a]
+    - [x] Write failing tests: `is_off_cooldown()` returns false; `get_ready_abilities()` returns empty array; `initialize()` does not error
+    - [x] Implement: `ability_component.gd` with method signatures from TDD Section 8 returning defaults
+    - [x] Run tests and verify pass
 
 - [ ] Task: Create minimal stub scripts (no testable logic — TDD exempt)
     - [ ] Implement: `scripts/combat/health_bar.gd` (class_name only)
