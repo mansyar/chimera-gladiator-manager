@@ -69,7 +69,7 @@
     - [ ] Run tests and verify pass
     - [ ] Verify coverage >= 80%
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Movement & Damage' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Movement & Damage' (Protocol in workflow.md) [checkpoint: beb9738]
 
 ## Phase 3: Arena & Formation Grid
 
