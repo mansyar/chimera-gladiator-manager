@@ -115,7 +115,7 @@
     - [ ] Test 3-strain combo = Enhanced
     - [ ] Test 4-strain combo = Ultimate
     - [ ] Test all-different strains = null (no combo)
-- [ ] Task: Write save/load round-trip tests (in `tests/edge/test_save_load_edge_cases.gd`)
+- [x] Task: Write save/load round-trip tests (in `tests/edge/test_save_load_edge_cases.gd`) [3da557c]
     - [ ] Test full state preservation through save → load cycle
     - [ ] Test PartDatabase reconstruction from saved references (shape_id + strain + rarity)
 - [ ] Task: Write formation grid mapping tests (in `tests/edge/test_formation_edge_cases.gd`)
