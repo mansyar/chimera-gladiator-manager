@@ -125,10 +125,10 @@
 ## Phase 7: Final Verification & Coverage Gate
 
 - [x] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
-- [ ] Task: Run full verification suite
-    - [ ] Run `gd-tools lint` and confirm exit 0
-    - [ ] Run `gd-tools format --check` and confirm exit 0
-    - [ ] Run `gd-tools test --coverage --min 80` and confirm exit 0
+- [x] Task: Run full verification suite
+    - [x] Run `gd-tools lint` and confirm exit 0
+    - [x] Run `gd-tools format --check` and confirm exit 0
+    - [x] Run `gd-tools test --coverage --min 80` and confirm exit 0
 - [ ] Task: Verify stretch goal (95%+ coverage on testable files)
     - [ ] Review coverage report and identify any remaining gaps
     - [ ] If below 95%, add targeted tests for remaining uncovered branches
