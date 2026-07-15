@@ -270,12 +270,15 @@ func test_save_load_with_decay_level_preserved() -> void:
 	## decay_level should survive the save/load round-trip.
 	var starters := PartDatabase.get_starter_chimeras()
 	var chimera := starters[0].duplicate()
+	# Swap one part to a different strain — all starter chimeras are purebred
+	# (instability=0), which are immune to decay. Mixing strains guarantees
+	# instability > 0 so decay actually applies.
+	chimera.head = starters[1].head
 	chimera.calculate_instability()
 	chimera.recalculate_stats()
-	# Apply decay to set decay_level > 0
-	if chimera.instability > 0:
-		Decay.apply_decay(chimera)
-		Decay.apply_decay(chimera)
+	Decay.apply_decay(chimera)
+	Decay.apply_decay(chimera)
+	assert_gt(chimera.decay_level, 0, "decay_level should be > 0 after applying decay")
 	GameState.roster.append(chimera)
 	var saved_decay_level: int = chimera.decay_level
 

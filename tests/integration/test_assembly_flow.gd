@@ -85,9 +85,13 @@ func test_instability_changes_when_swapping_to_different_strain() -> void:
 	chimera.calculate_instability()
 	# Instability should reflect the new strain diversity
 	var instability_after := chimera.instability
-	# If the original head was a different strain, instability should change
-	# (starter chimeras are typically mixed, so instability >= 1)
-	assert_true(instability_after >= 0, "instability should be non-negative")
+	# Instability should change when swapping to a different strain.
+	# ABERRANT strain in head slot changes the strain composition.
+	assert_ne(
+		instability_after,
+		instability_before,
+		"instability should change when swapping to a different strain"
+	)
 
 
 func test_purebred_chimera_has_zero_instability() -> void:
