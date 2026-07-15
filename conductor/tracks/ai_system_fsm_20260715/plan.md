@@ -73,9 +73,9 @@
 
 ## Phase 2: Positioning & Targeting
 
-- [ ] Task: Read spec.md and workflow.md to refresh context for Phase 2
-    - [ ] Read `conductor/tracks/ai_system_fsm_20260715/spec.md` (FR-5, FR-6, acceptance criteria)
-    - [ ] Read `conductor/workflow.md` (TDD rules, Phase Completion Verification Protocol)
+- [x] Task: Read spec.md and workflow.md to refresh context for Phase 2
+    - [x] Read `conductor/tracks/ai_system_fsm_20260715/spec.md` (FR-5, FR-6, acceptance criteria)
+    - [x] Read `conductor/workflow.md` (TDD rules, Phase Completion Verification Protocol)
 
 - [ ] Task: Implement get_move_position() with 3 positioning modes
     - [ ] Write failing tests: FRONT melee returns target position, FRONT ranged kites away when too close, MID ranged holds at range, MID melee approaches, BACK ranged flees when approached, BACK ranged holds when safe, BACK melee holds if front-line allies exist, BACK melee approaches if no front-line allies
