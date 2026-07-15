@@ -15,8 +15,17 @@ func test_initialize_does_not_error() -> void:
 func test_is_off_cooldown_returns_false() -> void:
 	var component: AbilityComponent = AbilityComponent.new()
 	add_child_autofree(component)
-	var result: bool = component.is_off_cooldown("test_ability")
+	var ability := AbilityData.new()
+	var result: bool = component.is_off_cooldown(ability)
 	assert_eq(result, false, "is_off_cooldown should return false by default")
+
+
+func test_get_next_ready_ability_returns_null() -> void:
+	var component: AbilityComponent = AbilityComponent.new()
+	add_child_autofree(component)
+	var priority: Array[GameEnums.AbilityCategory] = []
+	var result: AbilityData = component.get_next_ready_ability(priority)
+	assert_eq(result, null, "get_next_ready_ability should return null by default")
 
 
 func test_get_ready_abilities_returns_empty() -> void:

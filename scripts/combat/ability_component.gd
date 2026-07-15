@@ -7,8 +7,9 @@ extends Node
 ##
 ## Method signatures match spec.md / TDD Section 8:
 ## - initialize(abilities: Array[AbilityData]) -> void
-## - is_off_cooldown(ability_id: String) -> bool
+## - is_off_cooldown(ability: AbilityData) -> bool
 ## - get_ready_abilities() -> Array[AbilityData]
+## - get_next_ready_ability(priority: Array) -> AbilityData
 ## - execute_ability(ability_id: String) -> void
 ## - apply_passives(combat_state: CombatState) -> void
 ## - update_cooldowns(delta: float) -> void
@@ -18,12 +19,19 @@ func initialize(_abilities: Array[AbilityData]) -> void:
 	pass
 
 
-func is_off_cooldown(_ability_id: String) -> bool:
+func is_off_cooldown(_ability: AbilityData) -> bool:
 	return false
 
 
 func get_ready_abilities() -> Array[AbilityData]:
 	return []
+
+
+## Returns the first off-cooldown ability matching the given priority order.
+## Stub — returns null. Full implementation in TRACK-007.
+## (FR-9: AbilityComponent stub interface adjustment)
+func get_next_ready_ability(_priority: Array) -> AbilityData:
+	return null
 
 
 func execute_ability(_ability_id: String) -> void:
