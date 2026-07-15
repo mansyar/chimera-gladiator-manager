@@ -1,9 +1,13 @@
+# gdlint:ignore=max-public-methods
 class_name AIController
 extends Node
 
 ## Finite state machine controller for chimera combat AI.
 ## Manages state transitions, target acquisition, and berserk checks.
 ## (FR-2: AIController node, TDD Section 7)
+
+const BERSERK_CHECK_INTERVAL: float = 5.0
+const BERSERK_DURATION: float = 5.0
 
 var current_state: AIState
 var behavior_module: BehaviorModuleData
@@ -231,6 +235,82 @@ func _process(delta: float) -> void:
 	check_berserk(delta)
 
 
-## Checks for berserk trigger. Full implementation in Phase 3 (FR-8).
-func check_berserk(_delta: float) -> void:
-	pass
+## Checks for berserk trigger based on instability level and accumulated modifiers.
+## Purebreds (instability == 0) are immune. Every BERSERK_CHECK_INTERVAL seconds,
+## rolls chance = base_probability + sum(modifiers). Modifiers cleared after roll.
+## Called every frame from _process (FR-8, GDD Section 2.4).
+func check_berserk(delta: float) -> void:
+	if combat_state == null:
+		return
+	var chimera_data: ChimeraData = combat_state.chimera_data
+	if chimera_data == null:
+		return
+	if chimera_data.instability == 0:
+		return
+	combat_state.berserk_check_timer += delta
+	if combat_state.berserk_check_timer >= BERSERK_CHECK_INTERVAL:
+		combat_state.berserk_check_timer = 0.0
+		var chance: float = get_berserk_chance()
+		combat_state.berserk_modifiers.clear()
+		if randf() < chance:
+			enter_berserk()
+
+
+## Returns the current berserk probability: base + sum of event modifiers.
+## Base: PURE=0%, STABLE=3%, VOLATILE=8%, CHAOTIC=15% (FR-8, GDD Section 2.4).
+func get_berserk_chance() -> float:
+	if combat_state == null or combat_state.chimera_data == null:
+		return 0.0
+	var base: float = 0.0
+	match combat_state.chimera_data.instability:
+		GameEnums.Instability.STABLE:
+			base = 0.03
+		GameEnums.Instability.VOLATILE:
+			base = 0.08
+		GameEnums.Instability.CHAOTIC:
+			base = 0.15
+		_:
+			base = 0.0
+	var modifier_sum: float = 0.0
+	for value in combat_state.berserk_modifiers.values():
+		modifier_sum += value
+	return base + modifier_sum
+
+
+## Adds a berserk modifier when HP drops below 30% (FR-8, GDD Section 2.4).
+func on_hp_low() -> void:
+	if combat_state != null:
+		combat_state.berserk_modifiers["hp_low"] = 0.15
+
+
+## Adds a berserk modifier when hit by a disruption ability (FR-8, GDD Section 2.4).
+func on_disrupted() -> void:
+	if combat_state != null:
+		combat_state.berserk_modifiers["disrupted"] = 0.10
+
+
+## Adds a berserk modifier when landing a killing blow (FR-8, GDD Section 2.4).
+func on_killing_blow() -> void:
+	if combat_state != null:
+		combat_state.berserk_modifiers["killing_blow"] = 0.05
+
+
+## Triggers an immediate berserk roll when an ally dies.
+## Uses accumulated modifiers + base. Modifiers cleared after roll (FR-8).
+func on_ally_death() -> void:
+	if combat_state == null:
+		return
+	var chimera_data: ChimeraData = combat_state.chimera_data
+	if chimera_data == null or chimera_data.instability == 0:
+		return
+	var chance: float = get_berserk_chance()
+	combat_state.berserk_modifiers.clear()
+	if randf() < chance:
+		enter_berserk()
+
+
+## Enters berserk state, setting is_berserk flag.
+## Full lifecycle (timer, state change, signal) implemented in Task 4 (FR-8).
+func enter_berserk() -> void:
+	if combat_state != null:
+		combat_state.is_berserk = true
