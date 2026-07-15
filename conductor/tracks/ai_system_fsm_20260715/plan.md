@@ -86,7 +86,7 @@
     - [ ] Attach git note with task summary
     - [ ] Update plan.md: mark task complete with commit SHA
 
-- [ ] Task: Implement 6 targeting functions
+- [x] Task: Implement 6 targeting functions [a2b98f6]
     - [ ] Write failing tests: find_nearest returns closest, find_lowest_hp_in_range returns lowest HP in range, find_highest_attack returns highest attack, find_highest_attack_targeting_ally returns highest-attack enemy targeting ally, find_enemy_attacking_ally returns enemy attacking any ally, find_lowest_hp returns lowest HP overall, all return null for empty list
     - [ ] Implement 6 targeting functions on AIController, wire acquire_target() to dispatch via behavior_module.targeting match
     - [ ] Run tests — confirm green
