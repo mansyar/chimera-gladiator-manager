@@ -110,7 +110,7 @@
     - [ ] Test decay accumulation across multiple matches
     - [ ] Test repair resets decay to zero
     - [ ] Test purebred immunity to decay
-- [ ] Task: Write combo tier edge case tests (in relevant test files or `tests/edge/test_combo_edge_cases.gd`)
+- [x] Task: Write combo tier edge case tests (in relevant test files or `tests/edge/test_combo_edge_cases.gd`) [f22d76e]
     - [ ] Test 2-strain combo = Basic
     - [ ] Test 3-strain combo = Enhanced
     - [ ] Test 4-strain combo = Ultimate
