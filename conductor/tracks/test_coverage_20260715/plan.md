@@ -124,7 +124,7 @@
 
 ## Phase 7: Final Verification & Coverage Gate
 
-- [ ] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
+- [x] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
 - [ ] Task: Run full verification suite
     - [ ] Run `gd-tools lint` and confirm exit 0
     - [ ] Run `gd-tools format --check` and confirm exit 0
