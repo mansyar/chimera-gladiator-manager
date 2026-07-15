@@ -132,5 +132,5 @@
     - [x] Attach git note with task summary
     - [x] Update plan.md: mark task complete with commit SHA
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Ability Priority & Berserk System' (Protocol in workflow.md)
+- [~] Task: Conductor - User Manual Verification 'Phase 3: Ability Priority & Berserk System' (Protocol in workflow.md)
 </protect>
