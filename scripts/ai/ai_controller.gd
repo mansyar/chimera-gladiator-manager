@@ -204,8 +204,24 @@ func has_front_line_allies() -> bool:
 
 
 ## Returns the next ready ability based on priority ordering.
-## Full implementation in Phase 3 (FR-7).
+## Iterates behavior_module.ability_priority categories and checks
+## each ability (part_abilities + combo_ability) for category match
+## and cooldown status via AbilityComponent (FR-7, TDD Section 7).
 func get_next_ready_ability() -> AbilityData:
+	if behavior_module == null or combat_state == null:
+		return null
+	if entity == null or entity.ability_component == null:
+		return null
+	var chimera_data: ChimeraData = combat_state.chimera_data
+	if chimera_data == null:
+		return null
+	var all_abilities: Array[AbilityData] = chimera_data.part_abilities.duplicate()
+	if chimera_data.combo_ability != null:
+		all_abilities.append(chimera_data.combo_ability)
+	for category in behavior_module.ability_priority:
+		for ability in all_abilities:
+			if ability.category == category and entity.ability_component.is_off_cooldown(ability):
+				return ability
 	return null
 
 
