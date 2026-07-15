@@ -103,14 +103,14 @@
     - [x] Read `conductor/tracks/ai_system_fsm_20260715/spec.md` (FR-7, FR-8, acceptance criteria)
     - [x] Read `conductor/workflow.md` (TDD rules, Phase Completion Verification Protocol)
 
-- [ ] Task: Implement get_next_ready_ability() with priority ordering
-    - [ ] Write failing tests: returns first off-cooldown ability in priority order, returns null when none ready, respects behavior_module.ability_priority ordering, checks part_abilities + combo_ability
-    - [ ] Implement `get_next_ready_ability() -> AbilityData` on AIController — iterates ability_priority, delegates to AbilityComponent.get_next_ready_ability(priority)
-    - [ ] Run tests — confirm green
-    - [ ] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
-    - [ ] Commit: `feat(ai): Implement ability priority ordering via get_next_ready_ability`
-    - [ ] Attach git note with task summary
-    - [ ] Update plan.md: mark task complete with commit SHA
+- [x] Task: Implement get_next_ready_ability() with priority ordering [72eddfa]
+    - [x] Write failing tests: returns first off-cooldown ability in priority order, returns null when none ready, respects behavior_module.ability_priority ordering, checks part_abilities + combo_ability
+    - [x] Implement `get_next_ready_ability() -> AbilityData` on AIController — iterates ability_priority, delegates to AbilityComponent.get_next_ready_ability(priority)
+    - [x] Run tests — confirm green
+    - [x] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
+    - [x] Commit: `feat(ai): Implement ability priority ordering via get_next_ready_ability`
+    - [x] Attach git note with task summary
+    - [x] Update plan.md: mark task complete with commit SHA
 
 - [ ] Task: Implement berserk check system (timer, probability, modifiers)
     - [ ] Write failing tests: purebreds never berserk (instability=0), base probabilities match GDD (STABLE=3%, VOLATILE=8%, CHAOTIC=15%), berserk_check_timer accumulates and triggers roll at 5.0s, event modifiers accumulate in dict, modifiers cleared after roll, HP<30% adds +0.15, disruption adds +0.10, killing blow adds +0.05, chance = base + sum(modifiers)
