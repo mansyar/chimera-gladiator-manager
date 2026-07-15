@@ -71,7 +71,7 @@
 
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Foundation & FSM Framework' (Protocol in workflow.md) [e6b7103]
 
-## Phase 2: Positioning & Targeting
+## Phase 2: Positioning & Targeting [checkpoint: f252b21]
 
 - [x] Task: Read spec.md and workflow.md to refresh context for Phase 2
     - [x] Read `conductor/tracks/ai_system_fsm_20260715/spec.md` (FR-5, FR-6, acceptance criteria)
@@ -95,7 +95,7 @@
     - [x] Attach git note with task summary
     - [x] Update plan.md: mark task complete with commit SHA
 
-- [~] Task: Conductor - User Manual Verification 'Phase 2: Positioning & Targeting' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Positioning & Targeting' (Protocol in workflow.md) [f252b21]
 
 ## Phase 3: Ability Priority & Berserk System
 
