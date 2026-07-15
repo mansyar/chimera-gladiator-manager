@@ -49,9 +49,9 @@
 
 ## Phase 2: Movement & Damage
 
-- [ ] Task: Read spec.md and workflow.md to refresh context before starting Phase 2 implementation
+- [x] Task: Read spec.md and workflow.md to refresh context before starting Phase 2 implementation
 
-- [ ] Task: Implement movement system
+- [x] Task: Implement movement system [0032ebf]
     - [ ] Write failing tests: `move_toward_target()` sets `velocity` to `direction * speed` without multiplying by delta
     - [ ] Implement: `move_toward_target(target_position: Vector2)` in `chimera_entity.gd` — calls `move_and_slide()`
     - [ ] Run tests and verify pass
