@@ -122,15 +122,15 @@
     - [x] Attach git note with task summary
     - [x] Update plan.md: mark task complete with commit SHA
 
-- [ ] Task: Implement enter_berserk() and berserk state lifecycle
-    - [ ] Write failing tests: enter_berserk sets is_berserk=true, sets berserk_timer=BERSERK_DURATION, changes state to BERSERK, emits EventBus.berserk_triggered; BERSERK state decrements timer, transitions to ACQUIRE_TARGET at 0, sets is_berserk=false on exit; BERSERK_DURATION constant = 5.0; ally death triggers immediate roll with accumulated modifiers then clears
-    - [ ] Implement `enter_berserk()` on AIController — sets is_berserk, berserk_timer, change_state("BERSERK"), emits signal
-    - [ ] Update `scripts/ai/states/berserk_state.gd` — full lifecycle: decrement timer, clear is_berserk, ->ACQUIRE_TARGET on expiry
-    - [ ] Run tests — confirm green
-    - [ ] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
-    - [ ] Commit: `feat(ai): Implement berserk state lifecycle with 5s duration and signal emission`
-    - [ ] Attach git note with task summary
-    - [ ] Update plan.md: mark task complete with commit SHA
+- [x] Task: Implement enter_berserk() and berserk state lifecycle [002f006]
+    - [x] Write failing tests: enter_berserk sets is_berserk=true, sets berserk_timer=BERSERK_DURATION, changes state to BERSERK, emits EventBus.berserk_triggered; BERSERK state decrements timer, transitions to ACQUIRE_TARGET at 0, sets is_berserk=false on exit; BERSERK_DURATION constant = 5.0; ally death triggers immediate roll with accumulated modifiers then clears
+    - [x] Implement `enter_berserk()` on AIController — sets is_berserk, berserk_timer, change_state("BERSERK"), emits signal
+    - [x] Update `scripts/ai/states/berserk_state.gd` — full lifecycle: decrement timer, clear is_berserk, ->ACQUIRE_TARGET on expiry
+    - [x] Run tests — confirm green
+    - [x] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
+    - [x] Commit: `feat(ai): Implement berserk state lifecycle with 5s duration and signal emission`
+    - [x] Attach git note with task summary
+    - [x] Update plan.md: mark task complete with commit SHA
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Ability Priority & Berserk System' (Protocol in workflow.md)
 </protect>
