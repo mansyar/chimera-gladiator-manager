@@ -73,18 +73,18 @@
 
 ## Phase 3: Arena & Formation Grid
 
-- [ ] Task: Read spec.md and workflow.md to refresh context before starting Phase 3 implementation
+- [x] Task: Read spec.md and workflow.md to refresh context before starting Phase 3 implementation
 
-- [ ] Task: Configure arena dimensions and background
-    - [ ] Set arena play area to 640x360px (TileMap size, boundary walls)
-    - [ ] Configure TileMap background with TRACK-001 Roguelike RPG TileSet (floor + wall tiles)
-    - [ ] Add arena boundary StaticBody2D walls on layer 3
+- [x] Task: Configure arena dimensions and background [56a248a]
+    - [x] Set arena play area to 640x360px (TileMap size, boundary walls)
+    - [x] Configure TileMap background with TRACK-001 Roguelike RPG TileSet (floor + wall tiles)
+    - [x] Add arena boundary StaticBody2D walls on layer 3
 
-- [ ] Task: Implement formation grid mapping
-    - [ ] Write failing tests: `grid_to_world()` returns correct Vector2 for all 9 player cells (BACK/MID/FRONT × LEFT/CENTER/RIGHT) and all 9 enemy cells (18 total positions)
-    - [ ] Implement: `grid_to_world(row: int, col: int, is_player: bool) -> Vector2` as a static/pure function in `arena_controller.gd` (testable without scene instantiation)
-    - [ ] Run tests and verify pass
-    - [ ] Verify coverage >= 80%
+- [x] Task: Implement formation grid mapping [56a248a]
+    - [x] Write failing tests: `grid_to_world()` returns correct Vector2 for all 9 player cells (BACK/MID/FRONT × LEFT/CENTER/RIGHT) and all 9 enemy cells (18 total positions)
+    - [x] Implement: `grid_to_world(row: int, col: int, is_player: bool) -> Vector2` as a static/pure function in `arena_controller.gd` (testable without scene instantiation)
+    - [x] Run tests and verify pass
+    - [x] Verify coverage >= 80%
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Arena & Formation Grid' (Protocol in workflow.md)
 
