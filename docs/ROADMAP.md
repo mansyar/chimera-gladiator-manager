@@ -227,7 +227,7 @@ Before initializing individual tracks, the following foundational context files 
 ---
 
 ### TRACK-006: AI System (FSM)
-*   **Status:** `Pending`
+*   **Status:** `Complete`
 *   **Dependencies:** TRACK-005
 *   **Estimated Effort:** 4-5 Days
 
@@ -257,9 +257,9 @@ Before initializing individual tracks, the following foundational context files 
 *   **Phase 3 (Berserk):** Implement check_berserk() with timer, probability, modifiers. Implement berserk state. Verify purebreds immune, probabilities match GDD, modifiers reset after roll.
 
 #### Verification & Definition of Done (DoD)
-*   [ ] **Manual Checkpoint:** 3 chimeras with different modules show distinct behavior (Charger rushes, Caster maintains distance, Guardian holds position). Each acquires targets per its mode. Berserk triggers on unstable chimeras (not purebreds), lasts 5s, applies +50% atk/-30% def. Stalker flanks to reach lowest-HP target.
-*   [ ] **Automated Tests:** `gd-tools test --coverage --min 80` exits 0. Tests verify: (1) FSM transitions correctly, (2) ACQUIRE_TARGET returns null->IDLE when no enemies, (3-5) get_move_position for FRONT melee/ranged and BACK ranged, (6) all 6 targeting functions return correct entity, (7) berserk probability matches GDD table, (8) event modifiers accumulate+reset, (9) purebreds never berserk, (10) berserk->ACQUIRE_TARGET after 5s, (11) ability priority respects ordering.
-*   [ ] **Conductor Review:** FSM matches TDD Section 7 flow diagram. Positioning tendencies match GDD Section 2.4 table. Berserk probabilities/modifiers match GDD exactly. `gd-tools lint` and `gd-tools format --check` pass.
+*   [x] **Manual Checkpoint:** 3 chimeras with different modules show distinct behavior (Charger rushes, Caster maintains distance, Guardian holds position). Each acquires targets per its mode. Berserk triggers on unstable chimeras (not purebreds), lasts 5s, applies +50% atk/-30% def. Stalker flanks to reach lowest-HP target.
+*   [x] **Automated Tests:** `gd-tools test --coverage --min 80` exits 0. Tests verify: (1) FSM transitions correctly, (2) ACQUIRE_TARGET returns null->IDLE when no enemies, (3-5) get_move_position for FRONT melee/ranged and BACK ranged, (6) all 6 targeting functions return correct entity, (7) berserk probability matches GDD table, (8) event modifiers accumulate+reset, (9) purebreds never berserk, (10) berserk->ACQUIRE_TARGET after 5s, (11) ability priority respects ordering.
+*   [x] **Conductor Review:** FSM matches TDD Section 7 flow diagram. Positioning tendencies match GDD Section 2.4 table. Berserk probabilities/modifiers match GDD exactly. `gd-tools lint` and `gd-tools format --check` pass.
 
 ---
 
@@ -639,7 +639,7 @@ The following GDD features are distributed across multiple tracks rather than ha
 
 ### Test Coverage Initiative (Conductor Track)
 *   **Scope:** Maximized test coverage across all implemented source files (Milestone 2). Added integration tests, edge case tests, and autoload mocking.
-*   **Status:** Complete — 484 tests at completion. Current totals (post-TRACK-005): 517 tests, 98.8% line coverage (589/596), 100% branch coverage (162/162).
+*   **Status:** Complete — 484 tests at completion. Current totals (post-TRACK-006): 632 tests, 97.3% line coverage, 98.0% branch coverage.
 *   **Coverage addon:** Reconfigured for autoload instrumentation support (`_GDTCoverage` registered first in `project.godot`, before game autoloads).
 
 ### Godot Version Alignment

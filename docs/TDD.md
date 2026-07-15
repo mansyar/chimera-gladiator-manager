@@ -1,7 +1,7 @@
 # Chimera Gladiator Manager
 ## Technical Architecture Document
 
-> **Status:** Draft v2 — 7 significant gaps + 6 minor issues resolved. Implementation in progress (TRACK-001 through TRACK-005 complete).
+> **Status:** Draft v2 — 7 significant gaps + 6 minor issues resolved. Implementation in progress (TRACK-001 through TRACK-006 complete).
 > Last updated: 2026-07-15
 
 ---
@@ -124,6 +124,7 @@ res://
 │   │       ├── idle_state.gd
 │   │       ├── acquire_target_state.gd
 │   │       ├── move_to_target_state.gd
+│   │       ├── in_range_state.gd
 │   │       ├── attack_state.gd
 │   │       ├── use_ability_state.gd
 │   │       ├── berserk_state.gd
@@ -764,12 +765,18 @@ AIController (Node)
 ├── current_state: AIState
 ├── behavior_module: BehaviorModuleData  # Configuration
 ├── combat_state: CombatState           # Transient combat data (HP, cooldowns, effects)
+├── combat_context: CombatContext        # Shared entity registry (enemies/allies lookup)
 ├── target: ChimeraEntity               # Current target
 ├── states: Dictionary                  # {state_name: AIState instance}
+├── entity: ChimeraEntity               # @onready ref to parent entity
 └── methods:
     ├── change_state(new_state: String)
-    ├── _process(delta)  # Delegates to current_state.update()
-    └── acquire_target() -> ChimeraEntity
+    ├── _process(delta)  # Delegates to current_state.update(), then check_berserk()
+    ├── acquire_target() -> ChimeraEntity
+    ├── get_move_position(target: ChimeraEntity) -> Vector2
+    ├── get_next_ready_ability() -> AbilityData
+    ├── check_berserk(delta: float)
+    └── enter_berserk()
 ```
 
 ### State Flow
@@ -847,7 +854,7 @@ The behavior module's `targeting` field determines which function is called duri
 
 ```gdscript
 func acquire_target() -> ChimeraEntity:
-    var enemies = combat_manager.get_enemies_of(combat_state.team)
+    var enemies = combat_context.get_enemies_of(team)
     match behavior_module.targeting:
         GameEnums.TargetingMode.NEAREST:
             return find_nearest(enemies)
@@ -872,7 +879,7 @@ During `IN_RANGE` and `USE_ABILITY` states, the AI checks abilities in the order
 func get_next_ready_ability() -> AbilityData:
     for category in behavior_module.ability_priority:
         for ability in combat_state.chimera_data.part_abilities + [combat_state.chimera_data.combo_ability]:
-            if ability and ability.category == category and is_off_cooldown(ability.id):
+            if ability and ability.category == category and is_off_cooldown(ability):
                 return ability
     return null  # No ability ready
 ```
@@ -885,19 +892,27 @@ Checked every 5 seconds (or on immediate triggers). When triggered, the FSM over
 func check_berserk(delta: float) -> void:
     if combat_state.chimera_data.instability == 0:  # Purebreds immune
         return
+    if combat_state.is_berserk:  # Don't roll while already berserk
+        return
     
     combat_state.berserk_check_timer += delta
     if combat_state.berserk_check_timer >= 5.0:
         combat_state.berserk_check_timer = 0.0
         var chance = get_berserk_chance()
+        combat_state.berserk_modifiers.clear()  # Reset after roll
         if randf() < chance:
             enter_berserk()
-    
-    # Immediate triggers
-    if ally_just_died:
-        var chance = get_berserk_chance()
-        if randf() < chance:
-            enter_berserk()
+
+# Immediate trigger — called when an ally dies
+func on_ally_death() -> void:
+    if combat_state.chimera_data.instability == 0:  # Purebreds immune
+        return
+    if combat_state.is_berserk:  # Don't roll while already berserk
+        return
+    var chance = get_berserk_chance()
+    combat_state.berserk_modifiers.clear()
+    if randf() < chance:
+        enter_berserk()
 ```
 
 Berserk chance is calculated from the base probability (by instability level) plus any accumulated event modifiers (HP < 30%, hit by disruption, killing blow). Modifiers apply to the next check and reset after rolling.

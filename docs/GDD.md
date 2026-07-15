@@ -1,7 +1,7 @@
 # Chimera Gladiator Manager
 ## Game Design Document (DRAFT)
 
-> **Status:** Draft v2 — combat model specified, evaluation gaps resolved. Implementation in progress (TRACK-001 through TRACK-005 complete).
+> **Status:** Draft v2 — combat model specified, evaluation gaps resolved. Implementation in progress (TRACK-001 through TRACK-006 complete).
 > Last updated: 2026-07-15
 
 ---
