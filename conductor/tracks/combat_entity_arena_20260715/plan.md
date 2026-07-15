@@ -57,7 +57,7 @@
     - [ ] Run tests and verify pass
     - [ ] Verify coverage >= 80%
 
-- [ ] Task: Implement damage resolution
+- [x] Task: Implement damage resolution [ea8b70d]
     - [ ] Write failing tests: `calculate_damage()` normal case (atk - def, min 1); berserk attacker (+50% atk); berserk defender (-30% def); both berserk; EffectComponent modifiers applied to both attack and defense
     - [ ] Implement: `calculate_damage(attacker: ChimeraEntity, defender: ChimeraEntity) -> float` in `chimera_entity.gd`
     - [ ] Run tests and verify pass
