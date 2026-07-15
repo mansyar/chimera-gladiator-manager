@@ -134,4 +134,7 @@
     - [x] If below 95%, add targeted tests for remaining uncovered branches
     - [x] Re-run coverage to confirm 95%+ achieved (or document why 95% is impractical for specific modules)
 - [x] Task: Conductor - User Manual Verification 'Final Verification & Coverage Gate' (Protocol in workflow.md)
+
+## Phase: Review Fixes
+- [x] Task: Apply review suggestions 136c6c0
 </protect>
