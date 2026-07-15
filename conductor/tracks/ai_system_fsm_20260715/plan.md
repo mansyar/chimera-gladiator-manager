@@ -133,4 +133,8 @@
     - [x] Update plan.md: mark task complete with commit SHA
 
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Ability Priority & Berserk System' (Protocol in workflow.md) [2b14ad6]
+
+## Phase: Review Fixes
+
+- [x] Task: Apply review suggestions [3f297cc]
 </protect>
