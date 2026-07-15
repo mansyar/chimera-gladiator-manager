@@ -99,7 +99,7 @@
     - [x] Run test and verify it passes
 - [ ] Task: Conductor - User Manual Verification 'Integration Tests' (Protocol in workflow.md)
 
-## Phase 6: Edge Case Tests
+## Phase 6: Edge Case Tests [checkpoint: a626555]
 
 - [x] Task: Read `spec.md` and `workflow.md` to re-establish context before starting this phase
 - [x] Task: Write berserk edge case tests (in relevant test files or `tests/edge/test_berserk_edge_cases.gd`) [a248d23]
