@@ -1,7 +1,7 @@
 <protect>
 # Implementation Plan: AI System (FSM)
 
-## Phase 1: Foundation & FSM Framework
+## Phase 1: Foundation & FSM Framework [checkpoint: e6b7103]
 
 - [x] Task: Read spec.md and workflow.md to refresh context for Phase 1
     - [x] Read `conductor/tracks/ai_system_fsm_20260715/spec.md` (FRs, acceptance criteria)
@@ -69,7 +69,7 @@
     - [x] Attach git note with task summary
     - [x] Update plan.md: mark task complete with commit SHA
 
-- [~] Task: Conductor - User Manual Verification 'Phase 1: Foundation & FSM Framework' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Foundation & FSM Framework' (Protocol in workflow.md) [e6b7103]
 
 ## Phase 2: Positioning & Targeting
 
