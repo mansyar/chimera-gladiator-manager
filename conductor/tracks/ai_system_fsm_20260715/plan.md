@@ -36,40 +36,40 @@
     - [x] Update plan.md: mark task complete with commit SHA
 
 - [x] Task: Update ChimeraEntity with AI/AbilityComponent/CombatContext references [eb91018]
-    - [ ] Write failing tests for ChimeraEntity: ai_controller @onready reference, ability_component @onready reference, team property, combat_context property, died signal
-    - [ ] Add to `scripts/combat/chimera_entity.gd`: @onready ai_controller, @onready ability_component, var team, var combat_context, signal died(entity)
-    - [ ] Run tests — confirm green
-    - [ ] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
-    - [ ] Commit: `feat(combat): Add AI/AbilityComponent/CombatContext references to ChimeraEntity`
-    - [ ] Attach git note with task summary
-    - [ ] Update plan.md: mark task complete with commit SHA
+    - [x] Write failing tests for ChimeraEntity: ai_controller @onready reference, ability_component @onready reference, team property, combat_context property, died signal
+    - [x] Add to `scripts/combat/chimera_entity.gd`: @onready ai_controller, @onready ability_component, var team, var combat_context, signal died(entity)
+    - [x] Run tests — confirm green
+    - [x] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
+    - [x] Commit: `feat(combat): Add AI/AbilityComponent/CombatContext references to ChimeraEntity`
+    - [x] Attach git note with task summary
+    - [x] Update plan.md: mark task complete with commit SHA
 
 - [x] Task: Implement AIController FSM core (states dictionary, change_state, _process, setup_ai) [0ea823a]
-    - [ ] Write failing tests for AIController: setup_ai sets behavior_module/combat_state/combat_context, change_state calls exit/enter, _process delegates to current_state.update, initial state is IDLE
-    - [ ] Implement `scripts/ai/ai_controller.gd`: fields (current_state, behavior_module, combat_state, target, states dict, entity @onready), setup_ai(), change_state(), _process() (delegates to state + ticks berserk check stub)
-    - [ ] Run tests — confirm green
-    - [ ] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
-    - [ ] Commit: `feat(ai): Implement AIController FSM core with state management`
-    - [ ] Attach git note with task summary
-    - [ ] Update plan.md: mark task complete with commit SHA
+    - [x] Write failing tests for AIController: setup_ai sets behavior_module/combat_state/combat_context, change_state calls exit/enter, _process delegates to current_state.update, initial state is IDLE
+    - [x] Implement `scripts/ai/ai_controller.gd`: fields (current_state, behavior_module, combat_state, target, states dict, entity @onready), setup_ai(), change_state(), _process() (delegates to state + ticks berserk check stub)
+    - [x] Run tests — confirm green
+    - [x] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
+    - [x] Commit: `feat(ai): Implement AIController FSM core with state management`
+    - [x] Attach git note with task summary
+    - [x] Update plan.md: mark task complete with commit SHA
 
 - [x] Task: Create 8 state scripts with transition logic [99ac59c]
-    - [ ] Write failing tests for FSM transition flow: IDLE->ACQUIRE_TARGET, ACQUIRE_TARGET null target->IDLE, ACQUIRE_TARGET found->MOVE_TO_TARGET, MOVE_TO_TARGET in range->IN_RANGE, IN_RANGE ability ready->USE_ABILITY, IN_RANGE no ability->ATTACK, ATTACK target dead->ACQUIRE_TARGET, ATTACK target alive->IN_RANGE, USE_ABILITY->ATTACK, BERSERK timer expired->ACQUIRE_TARGET, DEAD is terminal
-    - [ ] Create `scripts/ai/states/idle_state.gd` — brief pause then ->ACQUIRE_TARGET
-    - [ ] Create `scripts/ai/states/acquire_target_state.gd` — calls acquire_target(), ->MOVE_TO_TARGET or ->IDLE
-    - [ ] Create `scripts/ai/states/move_to_target_state.gd` — calls move_toward_target(get_move_position()), ->IN_RANGE when in range
-    - [ ] Create `scripts/ai/states/in_range_state.gd` — checks get_next_ready_ability(), ->USE_ABILITY or ->ATTACK
-    - [ ] Create `scripts/ai/states/attack_state.gd` — executes attack, resets timer, ->ACQUIRE_TARGET or ->IN_RANGE
-    - [ ] Create `scripts/ai/states/use_ability_state.gd` — delegates to AbilityComponent stub, ->ATTACK or ->ACQUIRE_TARGET
-    - [ ] Create `scripts/ai/states/berserk_state.gd` — decrements berserk_timer, ->ACQUIRE_TARGET when expired
-    - [ ] Create `scripts/ai/states/dead_state.gd` — terminal, no transitions
-    - [ ] Run tests — confirm green
-    - [ ] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
-    - [ ] Commit: `feat(ai): Implement 8 FSM state scripts with transition logic`
-    - [ ] Attach git note with task summary
-    - [ ] Update plan.md: mark task complete with commit SHA
+    - [x] Write failing tests for FSM transition flow: IDLE->ACQUIRE_TARGET, ACQUIRE_TARGET null target->IDLE, ACQUIRE_TARGET found->MOVE_TO_TARGET, MOVE_TO_TARGET in range->IN_RANGE, IN_RANGE ability ready->USE_ABILITY, IN_RANGE no ability->ATTACK, ATTACK target dead->ACQUIRE_TARGET, ATTACK target alive->IN_RANGE, USE_ABILITY->ATTACK, BERSERK timer expired->ACQUIRE_TARGET, DEAD is terminal
+    - [x] Create `scripts/ai/states/idle_state.gd` — brief pause then ->ACQUIRE_TARGET
+    - [x] Create `scripts/ai/states/acquire_target_state.gd` — calls acquire_target(), ->MOVE_TO_TARGET or ->IDLE
+    - [x] Create `scripts/ai/states/move_to_target_state.gd` — calls move_toward_target(get_move_position()), ->IN_RANGE when in range
+    - [x] Create `scripts/ai/states/in_range_state.gd` — checks get_next_ready_ability(), ->USE_ABILITY or ->ATTACK
+    - [x] Create `scripts/ai/states/attack_state.gd` — executes attack, resets timer, ->ACQUIRE_TARGET or ->IN_RANGE
+    - [x] Create `scripts/ai/states/use_ability_state.gd` — delegates to AbilityComponent stub, ->ATTACK or ->ACQUIRE_TARGET
+    - [x] Create `scripts/ai/states/berserk_state.gd` — decrements berserk_timer, ->ACQUIRE_TARGET when expired
+    - [x] Create `scripts/ai/states/dead_state.gd` — terminal, no transitions
+    - [x] Run tests — confirm green
+    - [x] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
+    - [x] Commit: `feat(ai): Implement 8 FSM state scripts with transition logic`
+    - [x] Attach git note with task summary
+    - [x] Update plan.md: mark task complete with commit SHA
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Foundation & FSM Framework' (Protocol in workflow.md)
+- [~] Task: Conductor - User Manual Verification 'Phase 1: Foundation & FSM Framework' (Protocol in workflow.md)
 
 ## Phase 2: Positioning & Targeting
 
