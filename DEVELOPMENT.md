@@ -44,7 +44,13 @@ chimera-gladiator-manager/
 │   ├── data/                # Data model classes (PartData, AbilityData, etc.)
 │   ├── systems/             # Static utility classes (PartDatabase, economy, market, etc.)
 │   └── ui/                  # UI screens (TRACK-009+)
-└── tests/                   # GUT test suites (mirrors scripts/ structure)
+└── tests/                   # GUT test suites
+    ├── autoload/            # Autoload singleton tests
+    ├── combat/              # Combat state/effect tests
+    ├── data/                # Data model tests
+    ├── edge/                # Edge case tests (decay, berserk, combos, etc.)
+    ├── integration/         # Cross-system integration tests
+    └── systems/             # System utility tests
 ```
 
 ## Setup
@@ -79,6 +85,8 @@ gd-tools test --coverage --min 80
 
 Verification order per track DoD: `lint` -> `format --check` -> `test --coverage --min 80`.
 
+Current status: 484 tests, 98.8% line coverage (560/567), 100% branch coverage (156/156).
+
 ## Development Workflow
 
 This project follows the [Conductor methodology](conductor/workflow.md) for context-driven development. Implementation happens track-by-track per the [ROADMAP](docs/ROADMAP.md). Each track has:
@@ -94,6 +102,7 @@ This project follows the [Conductor methodology](conductor/workflow.md) for cont
 | TRACK-002 | Data Models & Enums | Complete |
 | TRACK-003 | Part Database & Data Definitions | Complete |
 | TRACK-004 | Singleton Architecture, Signals & Save System | Complete |
+| — | Test Coverage Initiative (Conductor) | Complete |
 | TRACK-005–008 | Combat Core | Pending |
 | TRACK-009–012 | UI & Management Screens | Pending |
 | TRACK-013–014 | Arena & Match Flow | Pending |
@@ -107,3 +116,4 @@ See [docs/ROADMAP.md](docs/ROADMAP.md) for the full 16-track roadmap across 6 mi
 - **Data models** (TRACK-002): GameEnums, PartData, AbilityData, AbilityEffect, BehaviorModuleData, ChimeraData, CombatState, ActiveEffect, EffectComponent — all Resource/RefCounted classes with tested stat calculation, instability, and combat state logic.
 - **Part database** (TRACK-003): PartDatabase static class with 74 `.tres` data files (23 part abilities, 18 strain combo abilities, 7 behavior modules, 23 part templates, 3 starter chimeras). Full rarity modifier system, sprite path construction, random part generation. 102 tests, 95.1% line coverage, 98.5% branch coverage.
 - **Singleton architecture & save system** (TRACK-004): EventBus with all 13 global signals, GameState with full campaign state (gold, infamy, roster, inventory, market, research, ascension), SaveManager with JSON serialization (save-by-reference, 6 save triggers, migration stub), CombatManager stub. 4 static utility classes: economy.gd, market.gd, decay.gd, research.gd. 372 tests, 93.8% line coverage, 96.5% branch coverage.
+- **Test coverage initiative** (Conductor track `test_coverage_20260715`): Expanded the test suite from 372 to 484 tests across 6 test directories (unit, integration, edge cases, autoload mocking). Coverage addon reconfigured for autoload instrumentation support. 98.8% line coverage (560/567), 100% branch coverage (156/156).

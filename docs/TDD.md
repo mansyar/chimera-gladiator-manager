@@ -43,7 +43,8 @@
   - `gd-tools format --check` — verifies gdformat compliance without modifying files.
   - `gd-tools doctor` — verifies environment (Godot path, GUT install, coverage addon, config files, etc.).
 - **Godot version mapping:** Godot 4.5 → GUT 9.5.0, 4.6 → 9.6.0, 4.7 → 9.7.0.
-- Test files live in `res://tests/` alongside the source they validate.
+- Test files live in `res://tests/` with subdirectories mirroring `scripts/` structure, plus `integration/` (cross-system flow tests) and `edge/` (boundary condition tests).
+- **Coverage addon:** The `_GDTCoverage` autoload (deployed by `gd-tools init`) is registered first in `project.godot` — before the four game autoloads — so it can instrument autoloads during their `_ready()`. Coverage is configured in `gd-tools.toml` with `min_percent = 80` and excludes data/enum files with no testable logic.
 
 ### Input Map
 
@@ -155,12 +156,15 @@ res://
 │   │   └── combos/                  # 6 strains × 3 tiers = 18 combo abilities
 │   ├── behaviors/                   # 7 BehaviorModuleData .tres files
 │   └── starters/                    # Starter chimera definitions
-├── tests/                            # GUT test files (mirror scripts/ structure)
-│   ├── data/
+├── tests/                            # GUT test files
+│   ├── autoload/                     # Autoload singleton tests
 │   ├── combat/
-│   ├── ai/
+│   ├── data/
+│   ├── ai/                           # (TRACK-006)
 │   ├── systems/
-│   └── ui/
+│   ├── ui/                           # (TRACK-009+)
+│   ├── integration/                  # Cross-system flow tests
+│   └── edge/                         # Boundary condition tests
 ├── saves/                           # Save files (runtime — actually in user://saves/, not res://)
 └── docs/
     ├── GDD.md

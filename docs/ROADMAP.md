@@ -637,6 +637,11 @@ The following GDD features are distributed across multiple tracks rather than ha
 *   Gap 13 (Drag-and-drop): TRACK-011 (Assembly) + TRACK-013 (Pre-Match)
 *   Gap 14 (Sprite z-order/resolution): TRACK-005 + TRACK-011
 
+### Test Coverage Initiative (Conductor Track)
+*   **Scope:** Maximized test coverage across all implemented source files (Milestone 2). Added integration tests, edge case tests, and autoload mocking.
+*   **Status:** Complete — 484 tests, 98.8% line coverage (560/567), 100% branch coverage (156/156).
+*   **Coverage addon:** Reconfigured for autoload instrumentation support (`_GDTCoverage` registered first in `project.godot`, before game autoloads).
+
 ### Godot Version Alignment
 *   TDD Section 1 specifies Godot 4.5+ (updated to match gd-tools requirements — GUT 9.5.0)
 *   ROADMAP uses Godot 4.5+ throughout
