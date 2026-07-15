@@ -112,15 +112,15 @@
     - [x] Attach git note with task summary
     - [x] Update plan.md: mark task complete with commit SHA
 
-- [ ] Task: Implement berserk check system (timer, probability, modifiers)
-    - [ ] Write failing tests: purebreds never berserk (instability=0), base probabilities match GDD (STABLE=3%, VOLATILE=8%, CHAOTIC=15%), berserk_check_timer accumulates and triggers roll at 5.0s, event modifiers accumulate in dict, modifiers cleared after roll, HP<30% adds +0.15, disruption adds +0.10, killing blow adds +0.05, chance = base + sum(modifiers)
-    - [ ] Implement `check_berserk(delta: float) -> void` on AIController — early return for purebreds, timer accumulation, probability calculation, modifier accumulation/reset, enter_berserk() call
-    - [ ] Implement event modifier helper methods: on_hp_low(), on_disrupted(), on_killing_blow(), on_ally_death() (immediate roll)
-    - [ ] Run tests — confirm green
-    - [ ] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
-    - [ ] Commit: `feat(ai): Implement berserk check with timer, probability, and event modifiers`
-    - [ ] Attach git note with task summary
-    - [ ] Update plan.md: mark task complete with commit SHA
+- [x] Task: Implement berserk check system (timer, probability, modifiers) [7adc5c0]
+    - [x] Write failing tests: purebreds never berserk (instability=0), base probabilities match GDD (STABLE=3%, VOLATILE=8%, CHAOTIC=15%), berserk_check_timer accumulates and triggers roll at 5.0s, event modifiers accumulate in dict, modifiers cleared after roll, HP<30% adds +0.15, disruption adds +0.10, killing blow adds +0.05, chance = base + sum(modifiers)
+    - [x] Implement `check_berserk(delta: float) -> void` on AIController — early return for purebreds, timer accumulation, probability calculation, modifier accumulation/reset, enter_berserk() call
+    - [x] Implement event modifier helper methods: on_hp_low(), on_disrupted(), on_killing_blow(), on_ally_death() (immediate roll)
+    - [x] Run tests — confirm green
+    - [x] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
+    - [x] Commit: `feat(ai): Implement berserk check with timer, probability, and event modifiers`
+    - [x] Attach git note with task summary
+    - [x] Update plan.md: mark task complete with commit SHA
 
 - [ ] Task: Implement enter_berserk() and berserk state lifecycle
     - [ ] Write failing tests: enter_berserk sets is_berserk=true, sets berserk_timer=BERSERK_DURATION, changes state to BERSERK, emits EventBus.berserk_triggered; BERSERK state decrements timer, transitions to ACQUIRE_TARGET at 0, sets is_berserk=false on exit; BERSERK_DURATION constant = 5.0; ally death triggers immediate roll with accumulated modifiers then clears
