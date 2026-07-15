@@ -23,7 +23,7 @@ func _ready() -> void:
 
 
 func init_formation_grids() -> void:
-	pass  # Phase 3: Implement grid_to_world mapping (FR-10)
+	pass  # Scene-level formation grid initialization (to be wired in TRACK-006)
 
 
 ## Returns the world-space center of a formation grid cell.

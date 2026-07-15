@@ -139,6 +139,33 @@ func test_calculate_damage_with_effect_modifiers():
 	assert_eq(ChimeraEntity.calculate_damage(attacker, defender), 45.0)
 
 
+func test_calculate_damage_berserk_and_effect_modifiers_combined():
+	var attacker := _make_entity(50.0, 30.0)
+	attacker.combat_state.is_berserk = true
+	# Add +10 attack buff (applied AFTER berserk)
+	var atk_buff := ActiveEffect.new()
+	atk_buff.effect_type = AbilityEffect.EffectType.BUFF_STAT
+	atk_buff.stat_name = "attack"
+	atk_buff.amount = 10.0
+	atk_buff.duration = 5.0
+	attacker.effect_component.add_effect(atk_buff)
+
+	var defender := _make_entity(40.0, 20.0)
+	defender.combat_state.is_berserk = true
+	# Add -5 defense debuff (applied AFTER berserk)
+	var def_debuff := ActiveEffect.new()
+	def_debuff.effect_type = AbilityEffect.EffectType.DEBUFF_STAT
+	def_debuff.stat_name = "defense"
+	def_debuff.amount = -5.0
+	def_debuff.duration = 5.0
+	defender.effect_component.add_effect(def_debuff)
+
+	# berserk first: attack 50 * 1.5 = 75, then +10 buff → 85
+	# berserk first: defense 20 * 0.7 = 14, then -5 debuff → 9
+	# damage = max(1.0, 85 - 9) = 76
+	assert_eq(ChimeraEntity.calculate_damage(attacker, defender), 76.0)
+
+
 # --- Attack Cadence Tests (FR-7) ---
 
 

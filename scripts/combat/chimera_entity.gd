@@ -43,8 +43,10 @@ static func calculate_damage(attacker: ChimeraEntity, defender: ChimeraEntity) -
 	var defense: float = defender.combat_state.defense
 	if defender.combat_state.is_berserk:
 		defense *= 0.7
-	base_damage = attacker.effect_component.get_modified_stat("attack", base_damage)
-	defense = defender.effect_component.get_modified_stat("defense", defense)
+	if attacker.effect_component:
+		base_damage = attacker.effect_component.get_modified_stat("attack", base_damage)
+	if defender.effect_component:
+		defense = defender.effect_component.get_modified_stat("defense", defense)
 	return maxf(1.0, base_damage - defense)
 
 

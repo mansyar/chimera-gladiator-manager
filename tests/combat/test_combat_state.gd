@@ -1,6 +1,6 @@
 extends GutTest
 
-## Tests for CombatState (FR-7).
+## Tests for CombatState (FR-8).
 ## Verifies stat snapshotting, damage, and healing.
 
 
