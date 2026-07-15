@@ -78,24 +78,24 @@
     - [x] Read `conductor/workflow.md` (TDD rules, Phase Completion Verification Protocol)
 
 - [x] Task: Implement get_move_position() with 3 positioning modes [6e7af18]
-    - [ ] Write failing tests: FRONT melee returns target position, FRONT ranged kites away when too close, MID ranged holds at range, MID melee approaches, BACK ranged flees when approached, BACK ranged holds when safe, BACK melee holds if front-line allies exist, BACK melee approaches if no front-line allies
-    - [ ] Implement `get_move_position(target: ChimeraEntity) -> Vector2` on AIController with FRONT/MID/BACK logic, melee/ranged distinction via MELEE_THRESHOLD, has_front_line_allies() helper
-    - [ ] Run tests — confirm green
-    - [ ] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
-    - [ ] Commit: `feat(ai): Implement positioning behavior with 3 modes and melee/ranged logic`
-    - [ ] Attach git note with task summary
-    - [ ] Update plan.md: mark task complete with commit SHA
+    - [x] Write failing tests: FRONT melee returns target position, FRONT ranged kites away when too close, MID ranged holds at range, MID melee approaches, BACK ranged flees when approached, BACK ranged holds when safe, BACK melee holds if front-line allies exist, BACK melee approaches if no front-line allies
+    - [x] Implement `get_move_position(target: ChimeraEntity) -> Vector2` on AIController with FRONT/MID/BACK logic, melee/ranged distinction via MELEE_THRESHOLD, has_front_line_allies() helper
+    - [x] Run tests — confirm green
+    - [x] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
+    - [x] Commit: `feat(ai): Implement positioning behavior with 3 modes and melee/ranged logic`
+    - [x] Attach git note with task summary
+    - [x] Update plan.md: mark task complete with commit SHA
 
 - [x] Task: Implement 6 targeting functions [a2b98f6]
-    - [ ] Write failing tests: find_nearest returns closest, find_lowest_hp_in_range returns lowest HP in range, find_highest_attack returns highest attack, find_highest_attack_targeting_ally returns highest-attack enemy targeting ally, find_enemy_attacking_ally returns enemy attacking any ally, find_lowest_hp returns lowest HP overall, all return null for empty list
-    - [ ] Implement 6 targeting functions on AIController, wire acquire_target() to dispatch via behavior_module.targeting match
-    - [ ] Run tests — confirm green
-    - [ ] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
-    - [ ] Commit: `feat(ai): Implement 6 targeting functions and acquire_target dispatch`
-    - [ ] Attach git note with task summary
-    - [ ] Update plan.md: mark task complete with commit SHA
+    - [x] Write failing tests: find_nearest returns closest, find_lowest_hp_in_range returns lowest HP in range, find_highest_attack returns highest attack, find_highest_attack_targeting_ally returns highest-attack enemy targeting ally, find_enemy_attacking_ally returns enemy attacking any ally, find_lowest_hp returns lowest HP overall, all return null for empty list
+    - [x] Implement 6 targeting functions on AIController, wire acquire_target() to dispatch via behavior_module.targeting match
+    - [x] Run tests — confirm green
+    - [x] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
+    - [x] Commit: `feat(ai): Implement 6 targeting functions and acquire_target dispatch`
+    - [x] Attach git note with task summary
+    - [x] Update plan.md: mark task complete with commit SHA
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Positioning & Targeting' (Protocol in workflow.md)
+- [~] Task: Conductor - User Manual Verification 'Phase 2: Positioning & Targeting' (Protocol in workflow.md)
 
 ## Phase 3: Ability Priority & Berserk System
 
