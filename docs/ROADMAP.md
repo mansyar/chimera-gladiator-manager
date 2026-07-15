@@ -187,7 +187,7 @@ Before initializing individual tracks, the following foundational context files 
 ## Milestone 3: Combat Core
 
 ### TRACK-005: Combat Entity & Arena Foundation
-*   **Status:** `Pending`
+*   **Status:** `Complete`
 *   **Dependencies:** TRACK-002
 *   **Estimated Effort:** 3-4 Days
 
@@ -220,9 +220,9 @@ Before initializing individual tracks, the following foundational context files 
 *   **Phase 3 (Arena & Grid):** Define arena dimensions, tile background, implement formation grid-to-world mapping.
 
 #### Verification & Definition of Done (DoD)
-*   [ ] **Manual Checkpoint:** 2 test ChimeraEntities render with correct 8-layer sprite composition. One moves toward the other at speed-based velocity. Damage calculation correct (Atk-Def, min 1). Berserk modifiers apply. Collision layers prevent friendly fire. Formation grid cells map to correct world positions.
-*   [ ] **Automated Tests:** `gd-tools test --coverage --min 80` exits 0. Tests verify: (1) calculate_damage normal, (2) calculate_damage with berserk modifiers, (3) EffectComponent.get_modified_stat, (4) CombatState.take_damage/heal, (5) move_toward_target sets velocity without double-delta, (6) all 9 grid cells map to correct Vector2.
-*   [ ] **Conductor Review:** Scene trees match TDD Section 6. No delta bug. Arena dimensions defined. `gd-tools lint` and `gd-tools format --check` pass.
+*   [x] **Manual Checkpoint:** 2 test ChimeraEntities render with correct 8-layer sprite composition. One moves toward the other at speed-based velocity. Damage calculation correct (Atk-Def, min 1). Berserk modifiers apply. Collision layers prevent friendly fire. Formation grid cells map to correct world positions.
+*   [x] **Automated Tests:** `gd-tools test --coverage --min 80` exits 0. Tests verify: (1) calculate_damage normal, (2) calculate_damage with berserk modifiers, (3) EffectComponent.get_modified_stat, (4) CombatState.take_damage/heal, (5) move_toward_target sets velocity without double-delta, (6) all 9 grid cells map to correct Vector2.
+*   [x] **Conductor Review:** Scene trees match TDD Section 6. No delta bug. Arena dimensions defined. `gd-tools lint` and `gd-tools format --check` pass.
 
 ---
 
@@ -639,7 +639,7 @@ The following GDD features are distributed across multiple tracks rather than ha
 
 ### Test Coverage Initiative (Conductor Track)
 *   **Scope:** Maximized test coverage across all implemented source files (Milestone 2). Added integration tests, edge case tests, and autoload mocking.
-*   **Status:** Complete — 484 tests, 98.8% line coverage (560/567), 100% branch coverage (156/156).
+*   **Status:** Complete — 484 tests at completion. Current totals (post-TRACK-005): 517 tests, 98.8% line coverage (589/596), 100% branch coverage (162/162).
 *   **Coverage addon:** Reconfigured for autoload instrumentation support (`_GDTCoverage` registered first in `project.godot`, before game autoloads).
 
 ### Godot Version Alignment

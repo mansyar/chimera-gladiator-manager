@@ -1,7 +1,7 @@
 # Chimera Gladiator Manager
 ## Technical Architecture Document
 
-> **Status:** Draft v2 — 7 significant gaps + 6 minor issues resolved. Ready for implementation planning.
+> **Status:** Draft v2 — 7 significant gaps + 6 minor issues resolved. Implementation in progress (TRACK-001 through TRACK-005 complete).
 > Last updated: 2026-07-15
 
 ---
@@ -353,6 +353,7 @@ var max_hp: float                # Snapshot at combat start (includes passive mo
 var attack: float                # Snapshot (includes passive modifiers)
 var defense: float               # Snapshot
 var speed: float                 # Snapshot
+var attack_range: float          # Snapshot from ChimeraData (melee vs ranged)
 var is_berserk: bool = false
 var berserk_timer: float = 0.0
 var berserk_check_timer: float = 0.0
@@ -370,6 +371,7 @@ func initialize(data: ChimeraData, team_id: int) -> void:
     attack = data.attack
     defense = data.defense
     speed = data.speed
+    attack_range = data.attack_range
     # Passive modifiers applied after initialize by AbilityComponent
 
 func take_damage(amount: float) -> void:
@@ -680,7 +682,7 @@ func cleanse() -> void:
 Simple direct movement — no NavigationAgent2D needed for initial implementation. Arena is an open field.
 
 ```gdscript
-func move_toward_target(target_position: Vector2, delta: float) -> void:
+func move_toward_target(target_position: Vector2) -> void:
     var direction = (target_position - global_position).normalized()
     velocity = direction * speed  # move_and_slide() applies delta internally
     move_and_slide()
@@ -709,9 +711,11 @@ func calculate_damage(attacker: ChimeraEntity, defender: ChimeraEntity) -> float
     var defense = defender.combat_state.defense
     if defender.combat_state.is_berserk:
         defense *= 0.7  # -30% defense while berserk
-    # Apply active effect modifiers
-    base_damage = attacker.effect_component.get_modified_stat("attack", base_damage)
-    defense = defender.effect_component.get_modified_stat("defense", defense)
+    # Apply active effect modifiers (null-check for entities without EffectComponent)
+    if attacker.effect_component:
+        base_damage = attacker.effect_component.get_modified_stat("attack", base_damage)
+    if defender.effect_component:
+        defense = defender.effect_component.get_modified_stat("defense", defense)
     return max(1.0, base_damage - defense)
 ```
 
