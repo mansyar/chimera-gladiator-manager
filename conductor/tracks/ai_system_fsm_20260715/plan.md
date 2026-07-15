@@ -26,14 +26,14 @@
     - [x] Attach git note with task summary
     - [x] Update plan.md: mark task complete with commit SHA
 
-- [ ] Task: Adjust AbilityComponent stub interface for AI integration
-    - [ ] Write failing tests for new stub interface: is_off_cooldown(AbilityData) returns false, get_next_ready_ability(priority) returns null
-    - [ ] Update `scripts/combat/ability_component.gd`: change is_off_cooldown to accept AbilityData, add get_next_ready_ability(priority: Array) -> AbilityData
-    - [ ] Run tests — confirm green
-    - [ ] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
-    - [ ] Commit: `refactor(combat): Adjust AbilityComponent stub interface for AI`
-    - [ ] Attach git note with task summary
-    - [ ] Update plan.md: mark task complete with commit SHA
+- [x] Task: Adjust AbilityComponent stub interface for AI integration [e1c250f]
+    - [x] Write failing tests for new stub interface: is_off_cooldown(AbilityData) returns false, get_next_ready_ability(priority) returns null
+    - [x] Update `scripts/combat/ability_component.gd`: change is_off_cooldown to accept AbilityData, add get_next_ready_ability(priority: Array) -> AbilityData
+    - [x] Run tests — confirm green
+    - [x] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
+    - [x] Commit: `refactor(combat): Adjust AbilityComponent stub interface for AI`
+    - [x] Attach git note with task summary
+    - [x] Update plan.md: mark task complete with commit SHA
 
 - [ ] Task: Update ChimeraEntity with AI/AbilityComponent/CombatContext references
     - [ ] Write failing tests for ChimeraEntity: ai_controller @onready reference, ability_component @onready reference, team property, combat_context property, died signal
