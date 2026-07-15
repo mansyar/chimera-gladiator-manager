@@ -63,7 +63,7 @@
     - [ ] Run tests and verify pass
     - [ ] Verify coverage >= 80%
 
-- [ ] Task: Implement attack cadence
+- [x] Task: Implement attack cadence [63017fa]
     - [ ] Write failing tests: interval = `1.0 / (speed * ATTACK_RATE_CONSTANT)` with RATE=0.1; timer resets after firing
     - [ ] Implement: attack cadence timer in `chimera_entity.gd` with `ATTACK_RATE_CONSTANT = 0.1` and `MELEE_THRESHOLD = 48.0` constants
     - [ ] Run tests and verify pass
