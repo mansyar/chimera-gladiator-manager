@@ -45,7 +45,7 @@
     - [x] Configure TileMap with TRACK-001 Roguelike RPG TileSet
     - [x] Implement: `scripts/combat/arena_controller.gd` (scene-level setup, grid init placeholder)
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Scenes & ChimeraSprite Composition' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Scenes & ChimeraSprite Composition' (Protocol in workflow.md) [4774662]
 
 ## Phase 2: Movement & Damage
 
