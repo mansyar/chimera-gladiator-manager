@@ -99,9 +99,9 @@
 
 ## Phase 3: Ability Priority & Berserk System
 
-- [ ] Task: Read spec.md and workflow.md to refresh context for Phase 3
-    - [ ] Read `conductor/tracks/ai_system_fsm_20260715/spec.md` (FR-7, FR-8, acceptance criteria)
-    - [ ] Read `conductor/workflow.md` (TDD rules, Phase Completion Verification Protocol)
+- [x] Task: Read spec.md and workflow.md to refresh context for Phase 3
+    - [x] Read `conductor/tracks/ai_system_fsm_20260715/spec.md` (FR-7, FR-8, acceptance criteria)
+    - [x] Read `conductor/workflow.md` (TDD rules, Phase Completion Verification Protocol)
 
 - [ ] Task: Implement get_next_ready_ability() with priority ordering
     - [ ] Write failing tests: returns first off-cooldown ability in priority order, returns null when none ready, respects behavior_module.ability_priority ordering, checks part_abilities + combo_ability
