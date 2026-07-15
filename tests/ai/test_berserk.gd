@@ -36,6 +36,16 @@ func test_check_berserk_roll_at_interval_clears_modifiers() -> void:
 	assert_true(controller.combat_state.berserk_modifiers.is_empty())
 
 
+func test_check_berserk_skipped_when_already_berserk() -> void:
+	var controller: AIController = _create_controller(1)
+	controller.combat_state.is_berserk = true
+	controller.combat_state.berserk_modifiers["hp_low"] = 0.15
+	controller.check_berserk(5.0)
+	# Timer should not accumulate, modifiers should not be cleared
+	assert_eq(controller.combat_state.berserk_check_timer, 0.0)
+	assert_true(controller.combat_state.berserk_modifiers.has("hp_low"))
+
+
 func test_get_berserk_chance_pure() -> void:
 	var controller: AIController = _create_controller(0)
 	assert_eq(controller.get_berserk_chance(), 0.0)
@@ -95,6 +105,16 @@ func test_on_ally_death_purebreds_immune() -> void:
 	controller.on_ally_death()
 	assert_true(controller.combat_state.berserk_modifiers.has("hp_low"))
 	assert_false(controller.combat_state.is_berserk)
+
+
+func test_on_ally_death_skipped_when_already_berserk() -> void:
+	var controller: AIController = _create_controller(1)
+	controller.combat_state.is_berserk = true
+	controller.combat_state.berserk_modifiers["hp_low"] = 0.15
+	controller.on_ally_death()
+	# Modifiers should not be cleared, timer should not be reset
+	assert_true(controller.combat_state.berserk_modifiers.has("hp_low"))
+	assert_eq(controller.combat_state.berserk_timer, 0.0)
 
 
 func test_enter_berserk_sets_is_berserk() -> void:

@@ -245,6 +245,9 @@ func check_berserk(delta: float) -> void:
 	var chimera_data: ChimeraData = combat_state.chimera_data
 	if chimera_data == null:
 		return
+	# Do not roll while already berserk — duration must expire deterministically
+	if combat_state.is_berserk:
+		return
 	if chimera_data.instability == 0:
 		return
 	combat_state.berserk_check_timer += delta
@@ -302,6 +305,9 @@ func on_ally_death() -> void:
 		return
 	var chimera_data: ChimeraData = combat_state.chimera_data
 	if chimera_data == null or chimera_data.instability == 0:
+		return
+	# Do not roll while already berserk — duration must expire deterministically
+	if combat_state.is_berserk:
 		return
 	var chance: float = get_berserk_chance()
 	combat_state.berserk_modifiers.clear()
