@@ -44,7 +44,7 @@
     - [ ] Attach git note with task summary
     - [ ] Update plan.md: mark task complete with commit SHA
 
-- [ ] Task: Implement AIController FSM core (states dictionary, change_state, _process, setup_ai)
+- [x] Task: Implement AIController FSM core (states dictionary, change_state, _process, setup_ai) [0ea823a]
     - [ ] Write failing tests for AIController: setup_ai sets behavior_module/combat_state/combat_context, change_state calls exit/enter, _process delegates to current_state.update, initial state is IDLE
     - [ ] Implement `scripts/ai/ai_controller.gd`: fields (current_state, behavior_module, combat_state, target, states dict, entity @onready), setup_ai(), change_state(), _process() (delegates to state + ticks berserk check stub)
     - [ ] Run tests — confirm green
