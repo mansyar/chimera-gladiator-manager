@@ -309,8 +309,12 @@ func on_ally_death() -> void:
 		enter_berserk()
 
 
-## Enters berserk state, setting is_berserk flag.
-## Full lifecycle (timer, state change, signal) implemented in Task 4 (FR-8).
+## Enters berserk state: sets is_berserk, berserk_timer, transitions to BERSERK
+## state, and emits EventBus.berserk_triggered (FR-8, GDD Section 2.4).
 func enter_berserk() -> void:
-	if combat_state != null:
-		combat_state.is_berserk = true
+	if combat_state == null:
+		return
+	combat_state.is_berserk = true
+	combat_state.berserk_timer = BERSERK_DURATION
+	change_state("BERSERK")
+	EventBus.berserk_triggered.emit(combat_state.chimera_data)

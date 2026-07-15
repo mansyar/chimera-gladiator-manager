@@ -98,9 +98,32 @@ func test_on_ally_death_purebreds_immune() -> void:
 
 
 func test_enter_berserk_sets_is_berserk() -> void:
-	var controller: AIController = _create_controller(1)
+	var controller: AIController = _create_controller_with_berserk_state(1)
 	controller.enter_berserk()
 	assert_true(controller.combat_state.is_berserk)
+
+
+func test_enter_berserk_sets_berserk_timer() -> void:
+	var controller: AIController = _create_controller_with_berserk_state(1)
+	controller.enter_berserk()
+	assert_eq(controller.combat_state.berserk_timer, 5.0)
+
+
+func test_enter_berserk_changes_state_to_berserk() -> void:
+	var controller: AIController = _create_controller_with_berserk_state(1)
+	controller.enter_berserk()
+	assert_eq(controller.current_state, controller.states["BERSERK"])
+
+
+func test_enter_berserk_emits_berserk_triggered_signal() -> void:
+	var controller: AIController = _create_controller_with_berserk_state(1)
+	watch_signals(EventBus)
+	controller.enter_berserk()
+	assert_signal_emitted(EventBus, "berserk_triggered")
+
+
+func test_berserk_duration_constant_is_5_seconds() -> void:
+	assert_eq(AIController.BERSERK_DURATION, 5.0)
 
 
 # --- Helpers ---
@@ -115,4 +138,11 @@ func _create_controller(instability: int = 1) -> AIController:
 	var controller: AIController = AIController.new()
 	controller.combat_state = combat_state
 	autofree(controller)
+	return controller
+
+
+func _create_controller_with_berserk_state(instability: int = 1) -> AIController:
+	var controller: AIController = _create_controller(instability)
+	var berserk_state: BerserkState = BerserkState.new()
+	controller.register_state("BERSERK", berserk_state)
 	return controller

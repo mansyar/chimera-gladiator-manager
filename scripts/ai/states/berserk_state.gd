@@ -5,8 +5,6 @@ extends AIState
 ## Lasts BERSERK_DURATION seconds, then transitions to ACQUIRE_TARGET.
 ## (FR-4: State Flow, FR-8: Berserk System)
 
-const BERSERK_DURATION: float = 5.0
-
 
 func update(delta: float) -> void:
 	ai_controller.combat_state.berserk_timer -= delta
