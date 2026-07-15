@@ -1,6 +1,10 @@
+<protect>
+
 # Implementation Plan: TRACK-005 — Combat Entity & Arena Foundation
 
 ## Phase 1: Scenes & ChimeraSprite Composition
+
+- [ ] Task: Read spec.md and workflow.md to refresh context before starting Phase 1 implementation
 
 - [ ] Task: Extend CombatState with attack_range property
     - [ ] Write failing test: `initialize()` snapshots `attack_range` from `ChimeraData.attack_range`
@@ -45,6 +49,8 @@
 
 ## Phase 2: Movement & Damage
 
+- [ ] Task: Read spec.md and workflow.md to refresh context before starting Phase 2 implementation
+
 - [ ] Task: Implement movement system
     - [ ] Write failing tests: `move_toward_target()` sets `velocity` to `direction * speed` without multiplying by delta
     - [ ] Implement: `move_toward_target(target_position: Vector2)` in `chimera_entity.gd` — calls `move_and_slide()`
@@ -67,6 +73,8 @@
 
 ## Phase 3: Arena & Formation Grid
 
+- [ ] Task: Read spec.md and workflow.md to refresh context before starting Phase 3 implementation
+
 - [ ] Task: Configure arena dimensions and background
     - [ ] Set arena play area to 640x360px (TileMap size, boundary walls)
     - [ ] Configure TileMap background with TRACK-001 Roguelike RPG TileSet (floor + wall tiles)
@@ -79,3 +87,5 @@
     - [ ] Verify coverage >= 80%
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Arena & Formation Grid' (Protocol in workflow.md)
+
+</protect>

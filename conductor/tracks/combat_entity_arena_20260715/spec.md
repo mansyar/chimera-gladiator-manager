@@ -1,3 +1,5 @@
+<protect>
+
 # Track Specification: TRACK-005 — Combat Entity & Arena Foundation
 
 ## Overview
@@ -135,3 +137,5 @@ CharacterBody2D with composited nodes:
 - Enemy generation — TRACK-008
 - Pre-match formation UI — TRACK-013
 - Specific ability/effect values — deferred to balancing
+
+</protect>
