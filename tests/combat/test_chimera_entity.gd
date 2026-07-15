@@ -57,3 +57,83 @@ func test_move_toward_target_sets_velocity_diagonal():
 	# velocity = (0.707, 0.707) * 200 ≈ (141.42, 141.42)
 	assert_almost_eq(entity.velocity.x, 141.42, 0.1)
 	assert_almost_eq(entity.velocity.y, 141.42, 0.1)
+
+
+# --- Damage Resolution Tests (FR-6) ---
+
+
+func _make_entity(attack: float, defense: float) -> ChimeraEntity:
+	var entity := ChimeraEntity.new()
+	entity.combat_state = CombatState.new()
+	entity.combat_state.attack = attack
+	entity.combat_state.defense = defense
+	entity.effect_component = EffectComponent.new()
+	return entity
+
+
+func test_calculate_damage_normal():
+	var attacker := _make_entity(50.0, 30.0)
+	var defender := _make_entity(40.0, 20.0)
+	# damage = max(1.0, 50 - 20) = 30
+	assert_eq(ChimeraEntity.calculate_damage(attacker, defender), 30.0)
+
+
+func test_calculate_damage_min_one():
+	var attacker := _make_entity(10.0, 5.0)
+	var defender := _make_entity(5.0, 50.0)
+	# damage = max(1.0, 10 - 50) = 1.0
+	assert_eq(ChimeraEntity.calculate_damage(attacker, defender), 1.0)
+
+
+func test_calculate_damage_berserk_attacker():
+	var attacker := _make_entity(50.0, 30.0)
+	attacker.combat_state.is_berserk = true
+	var defender := _make_entity(40.0, 20.0)
+	# berserk: +50% attack → 50 * 1.5 = 75
+	# damage = max(1.0, 75 - 20) = 55
+	assert_eq(ChimeraEntity.calculate_damage(attacker, defender), 55.0)
+
+
+func test_calculate_damage_berserk_defender():
+	var attacker := _make_entity(50.0, 30.0)
+	var defender := _make_entity(40.0, 20.0)
+	defender.combat_state.is_berserk = true
+	# berserk: -30% defense → 20 * 0.7 = 14
+	# damage = max(1.0, 50 - 14) = 36
+	assert_eq(ChimeraEntity.calculate_damage(attacker, defender), 36.0)
+
+
+func test_calculate_damage_both_berserk():
+	var attacker := _make_entity(50.0, 30.0)
+	attacker.combat_state.is_berserk = true
+	var defender := _make_entity(40.0, 20.0)
+	defender.combat_state.is_berserk = true
+	# attacker: 50 * 1.5 = 75
+	# defender: 20 * 0.7 = 14
+	# damage = max(1.0, 75 - 14) = 61
+	assert_eq(ChimeraEntity.calculate_damage(attacker, defender), 61.0)
+
+
+func test_calculate_damage_with_effect_modifiers():
+	var attacker := _make_entity(50.0, 30.0)
+	# Add +10 attack buff
+	var atk_buff := ActiveEffect.new()
+	atk_buff.effect_type = AbilityEffect.EffectType.BUFF_STAT
+	atk_buff.stat_name = "attack"
+	atk_buff.amount = 10.0
+	atk_buff.duration = 5.0
+	attacker.effect_component.add_effect(atk_buff)
+
+	var defender := _make_entity(40.0, 20.0)
+	# Add -5 defense debuff
+	var def_debuff := ActiveEffect.new()
+	def_debuff.effect_type = AbilityEffect.EffectType.DEBUFF_STAT
+	def_debuff.stat_name = "defense"
+	def_debuff.amount = -5.0
+	def_debuff.duration = 5.0
+	defender.effect_component.add_effect(def_debuff)
+
+	# base_damage = 50 (no berserk), +10 buff → 60
+	# defense = 20 (no berserk), -5 debuff → 15
+	# damage = max(1.0, 60 - 15) = 45
+	assert_eq(ChimeraEntity.calculate_damage(attacker, defender), 45.0)
