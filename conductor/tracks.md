@@ -4,5 +4,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: TRACK-006: AI System (FSM)**
+- [~] **Track: TRACK-006: AI System (FSM)**
 *Link: [./tracks/ai_system_fsm_20260715/](./tracks/ai_system_fsm_20260715/)*

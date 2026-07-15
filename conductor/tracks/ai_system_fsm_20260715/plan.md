@@ -3,19 +3,19 @@
 
 ## Phase 1: Foundation & FSM Framework
 
-- [ ] Task: Read spec.md and workflow.md to refresh context for Phase 1
-    - [ ] Read `conductor/tracks/ai_system_fsm_20260715/spec.md` (FRs, acceptance criteria)
-    - [ ] Read `conductor/workflow.md` (TDD rules, Phase Completion Verification Protocol)
+- [x] Task: Read spec.md and workflow.md to refresh context for Phase 1
+    - [x] Read `conductor/tracks/ai_system_fsm_20260715/spec.md` (FRs, acceptance criteria)
+    - [x] Read `conductor/workflow.md` (TDD rules, Phase Completion Verification Protocol)
 
-- [ ] Task: Move AIController to scripts/ai/ and create AIState base class
-    - [ ] Move `scripts/combat/ai_controller.gd` to `scripts/ai/ai_controller.gd` (update class_name, keep stub signatures)
-    - [ ] Update `chimera_entity.tscn` to reference new AIController script path
-    - [ ] Create `scripts/ai/ai_state.gd` — AIState base class with virtual `enter()`, `update(delta)`, `exit()` and `ai_controller` reference
-    - [ ] Write tests for AIState base class (virtual method calls, ai_controller reference)
-    - [ ] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
-    - [ ] Commit: `refactor(ai): Move AIController to scripts/ai/, create AIState base class`
-    - [ ] Attach git note with task summary
-    - [ ] Update plan.md: mark task complete with commit SHA
+- [x] Task: Move AIController to scripts/ai/ and create AIState base class [e82dd42]
+    - [x] Move `scripts/combat/ai_controller.gd` to `scripts/ai/ai_controller.gd` (update class_name, keep stub signatures)
+    - [x] Update `chimera_entity.tscn` to reference new AIController script path
+    - [x] Create `scripts/ai/ai_state.gd` — AIState base class with virtual `enter()`, `update(delta)`, `exit()` and `ai_controller` reference
+    - [x] Write tests for AIState base class (virtual method calls, ai_controller reference)
+    - [x] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
+    - [x] Commit: `refactor(ai): Move AIController to scripts/ai/, create AIState base class`
+    - [x] Attach git note with task summary
+    - [x] Update plan.md: mark task complete with commit SHA
 
 - [ ] Task: Create CombatContext entity registry
     - [ ] Write failing tests for CombatContext: register_entity, unregister_entity, get_enemies_of (filters by team, excludes dead), get_allies_of (filters by team, excludes dead)
