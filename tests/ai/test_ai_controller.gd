@@ -117,11 +117,11 @@ func test_entity_null_when_parent_not_chimera() -> void:
 	assert_eq(controller.entity, null, "entity should be null when parent is not ChimeraEntity")
 
 
-func test_acquire_target_returns_null_stub() -> void:
+func test_acquire_target_returns_null_without_setup() -> void:
 	var controller: AIController = AIController.new()
 	add_child_autofree(controller)
 	var target: Variant = controller.acquire_target()
-	assert_eq(target, null, "acquire_target should return null (stub)")
+	assert_eq(target, null, "acquire_target should return null without setup")
 
 
 func test_get_move_position_returns_zero_for_null_target() -> void:

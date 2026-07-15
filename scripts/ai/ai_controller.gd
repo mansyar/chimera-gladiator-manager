@@ -53,9 +53,93 @@ func change_state(new_state: String) -> void:
 
 
 ## Acquires a target based on the behavior module's targeting mode.
-## Full implementation in Phase 2 (FR-6).
+## Dispatches to one of 6 targeting functions (FR-6, TDD Section 7).
 func acquire_target() -> ChimeraEntity:
+	var target_found: ChimeraEntity = null
+	if combat_context != null and behavior_module != null and entity != null:
+		var enemies: Array[ChimeraEntity] = combat_context.get_enemies_of(combat_state.team)
+		match behavior_module.targeting:
+			GameEnums.TargetingMode.NEAREST:
+				target_found = find_nearest(enemies)
+			GameEnums.TargetingMode.WEAKEST_ACCESSIBLE:
+				target_found = find_lowest_hp_in_range(enemies, combat_state.attack_range)
+			GameEnums.TargetingMode.HIGHEST_THREAT:
+				target_found = find_highest_attack(enemies)
+			GameEnums.TargetingMode.OPTIMAL_DISRUPT:
+				target_found = find_highest_attack_targeting_ally(enemies)
+			GameEnums.TargetingMode.ATTACKING_ALLIES:
+				target_found = find_enemy_attacking_ally(enemies)
+			GameEnums.TargetingMode.LOWEST_HP:
+				target_found = find_lowest_hp(enemies)
+	return target_found
+
+
+## Finds the nearest enemy by distance to this entity.
+func find_nearest(enemies: Array[ChimeraEntity]) -> ChimeraEntity:
+	var nearest: ChimeraEntity = null
+	var nearest_dist: float = INF
+	for enemy in enemies:
+		var dist: float = entity.global_position.distance_to(enemy.global_position)
+		if dist < nearest_dist:
+			nearest_dist = dist
+			nearest = enemy
+	return nearest
+
+
+## Finds the enemy with the lowest HP within the given range.
+func find_lowest_hp_in_range(enemies: Array[ChimeraEntity], p_range: float) -> ChimeraEntity:
+	var weakest: ChimeraEntity = null
+	var lowest_hp: float = INF
+	for enemy in enemies:
+		if entity.global_position.distance_to(enemy.global_position) <= p_range:
+			if enemy.combat_state.current_hp < lowest_hp:
+				lowest_hp = enemy.combat_state.current_hp
+				weakest = enemy
+	return weakest
+
+
+## Finds the enemy with the highest Attack stat.
+func find_highest_attack(enemies: Array[ChimeraEntity]) -> ChimeraEntity:
+	var strongest: ChimeraEntity = null
+	var highest_atk: float = -1.0
+	for enemy in enemies:
+		if enemy.combat_state.attack > highest_atk:
+			highest_atk = enemy.combat_state.attack
+			strongest = enemy
+	return strongest
+
+
+## Finds the highest-Attack enemy currently targeting an ally.
+func find_highest_attack_targeting_ally(enemies: Array[ChimeraEntity]) -> ChimeraEntity:
+	var best: ChimeraEntity = null
+	var highest_atk: float = -1.0
+	for enemy in enemies:
+		if enemy.ai_controller and enemy.ai_controller.target:
+			if enemy.ai_controller.target.team == combat_state.team:
+				if enemy.combat_state.attack > highest_atk:
+					highest_atk = enemy.combat_state.attack
+					best = enemy
+	return best
+
+
+## Finds an enemy currently attacking (targeting) an ally.
+func find_enemy_attacking_ally(enemies: Array[ChimeraEntity]) -> ChimeraEntity:
+	for enemy in enemies:
+		if enemy.ai_controller and enemy.ai_controller.target:
+			if enemy.ai_controller.target.team == combat_state.team:
+				return enemy
 	return null
+
+
+## Finds the enemy with the lowest current HP overall.
+func find_lowest_hp(enemies: Array[ChimeraEntity]) -> ChimeraEntity:
+	var weakest: ChimeraEntity = null
+	var lowest_hp: float = INF
+	for enemy in enemies:
+		if enemy.combat_state.current_hp < lowest_hp:
+			lowest_hp = enemy.combat_state.current_hp
+			weakest = enemy
+	return weakest
 
 
 ## Returns the move position for the given target based on positioning mode.
