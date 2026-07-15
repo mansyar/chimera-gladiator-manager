@@ -40,10 +40,10 @@
     - [x] Attach scripts to appropriate nodes
     - [x] Implement: `scripts/combat/chimera_entity.gd` with CombatState reference, EffectComponent tick in `_process`
 
-- [ ] Task: Create arena.tscn scene (`scenes/combat/arena.tscn`)
-    - [ ] Build Arena (Node2D) scene tree per FR-1: TileMap, FormationGridPlayer, FormationGridEnemy, Entities, CombatHUD (CanvasLayer), ArenaController
-    - [ ] Configure TileMap with TRACK-001 Roguelike RPG TileSet
-    - [ ] Implement: `scripts/combat/arena_controller.gd` (scene-level setup, grid init placeholder)
+- [x] Task: Create arena.tscn scene (`scenes/combat/arena.tscn`) [36a0a79]
+    - [x] Build Arena (Node2D) scene tree per FR-1: TileMap, FormationGridPlayer, FormationGridEnemy, Entities, CombatHUD (CanvasLayer), ArenaController
+    - [x] Configure TileMap with TRACK-001 Roguelike RPG TileSet
+    - [x] Implement: `scripts/combat/arena_controller.gd` (scene-level setup, grid init placeholder)
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Scenes & ChimeraSprite Composition' (Protocol in workflow.md)
 
