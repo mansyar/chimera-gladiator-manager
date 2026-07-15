@@ -5,7 +5,11 @@ extends CharacterBody2D
 ## Orchestrates components and ticks EffectComponent each frame.
 ## (FR-2: Chimera entity scene)
 
+const ATTACK_RATE_CONSTANT: float = 0.1
+const MELEE_THRESHOLD: float = 48.0
+
 var combat_state: CombatState
+var attack_timer: float = 0.0
 
 @onready var effect_component: EffectComponent = get_node_or_null("EffectComponent")
 
@@ -13,6 +17,8 @@ var combat_state: CombatState
 func _process(delta: float) -> void:
 	if effect_component:
 		effect_component.tick(delta)
+	if combat_state and attack_timer > 0.0:
+		attack_timer -= delta
 
 
 ## Moves toward [param target_position] at [member CombatState.speed].
@@ -40,3 +46,22 @@ static func calculate_damage(attacker: ChimeraEntity, defender: ChimeraEntity) -
 	base_damage = attacker.effect_component.get_modified_stat("attack", base_damage)
 	defense = defender.effect_component.get_modified_stat("defense", defense)
 	return maxf(1.0, base_damage - defense)
+
+
+## Returns the attack interval in seconds for a given [param speed].
+## Formula: 1.0 / (speed * ATTACK_RATE_CONSTANT).
+## (FR-7: Attack Cadence)
+static func get_attack_interval(speed: float) -> float:
+	return 1.0 / (speed * ATTACK_RATE_CONSTANT)
+
+
+## Returns true when the attack timer has elapsed and the entity can attack.
+## (FR-7: Attack Cadence)
+func can_attack() -> bool:
+	return attack_timer <= 0.0
+
+
+## Resets the attack timer to the interval based on [member CombatState.speed].
+## (FR-7: Attack Cadence)
+func reset_attack_timer() -> void:
+	attack_timer = get_attack_interval(combat_state.speed)

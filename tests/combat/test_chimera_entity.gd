@@ -137,3 +137,37 @@ func test_calculate_damage_with_effect_modifiers():
 	# defense = 20 (no berserk), -5 debuff → 15
 	# damage = max(1.0, 60 - 15) = 45
 	assert_eq(ChimeraEntity.calculate_damage(attacker, defender), 45.0)
+
+
+# --- Attack Cadence Tests (FR-7) ---
+
+
+func test_get_attack_interval():
+	# speed=10 → interval = 1.0 / (10 * 0.1) = 1.0
+	assert_eq(ChimeraEntity.get_attack_interval(10.0), 1.0)
+	# speed=20 → interval = 1.0 / (20 * 0.1) = 0.5
+	assert_eq(ChimeraEntity.get_attack_interval(20.0), 0.5)
+	# speed=5 → interval = 1.0 / (5 * 0.1) = 2.0
+	assert_eq(ChimeraEntity.get_attack_interval(5.0), 2.0)
+
+
+func test_can_attack_initially_true():
+	var entity := ChimeraEntity.new()
+	assert_true(entity.can_attack())
+
+
+func test_reset_attack_timer_makes_can_attack_false():
+	var entity := _make_entity(50.0, 30.0)
+	entity.combat_state.speed = 10.0
+	entity.reset_attack_timer()
+	assert_false(entity.can_attack())
+
+
+func test_attack_timer_resets_after_interval():
+	var entity := _make_entity(50.0, 30.0)
+	entity.combat_state.speed = 10.0
+	entity.reset_attack_timer()
+	# interval = 1.0 / (10 * 0.1) = 1.0
+	# tick for 1.0 seconds
+	entity._process(1.0)
+	assert_true(entity.can_attack())
