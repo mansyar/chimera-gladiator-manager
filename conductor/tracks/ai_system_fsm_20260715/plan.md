@@ -17,14 +17,14 @@
     - [x] Attach git note with task summary
     - [x] Update plan.md: mark task complete with commit SHA
 
-- [ ] Task: Create CombatContext entity registry
-    - [ ] Write failing tests for CombatContext: register_entity, unregister_entity, get_enemies_of (filters by team, excludes dead), get_allies_of (filters by team, excludes dead)
-    - [ ] Create `scripts/combat/combat_context.gd` (RefCounted) with entities array, register/unregister/get_enemies_of/get_allies_of
-    - [ ] Run tests — confirm green
-    - [ ] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
-    - [ ] Commit: `feat(combat): Create CombatContext entity registry`
-    - [ ] Attach git note with task summary
-    - [ ] Update plan.md: mark task complete with commit SHA
+- [x] Task: Create CombatContext entity registry [2802eec]
+    - [x] Write failing tests for CombatContext: register_entity, unregister_entity, get_enemies_of (filters by team, excludes dead), get_allies_of (filters by team, excludes dead)
+    - [x] Create `scripts/combat/combat_context.gd` (RefCounted) with entities array, register/unregister/get_enemies_of/get_allies_of
+    - [x] Run tests — confirm green
+    - [x] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
+    - [x] Commit: `feat(combat): Create CombatContext entity registry`
+    - [x] Attach git note with task summary
+    - [x] Update plan.md: mark task complete with commit SHA
 
 - [ ] Task: Adjust AbilityComponent stub interface for AI integration
     - [ ] Write failing tests for new stub interface: is_off_cooldown(AbilityData) returns false, get_next_ready_ability(priority) returns null
