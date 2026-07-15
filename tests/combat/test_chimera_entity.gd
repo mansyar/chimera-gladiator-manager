@@ -1,3 +1,4 @@
+# gdlint:ignore=max-public-methods
 extends GutTest
 
 ## Tests for ChimeraEntity combat state and effect ticking.
@@ -198,3 +199,70 @@ func test_attack_timer_resets_after_interval():
 	# tick for 1.0 seconds
 	entity._process(1.0)
 	assert_true(entity.can_attack())
+
+
+# --- AI/AbilityComponent/CombatContext References (FR-11) ---
+
+
+func test_ai_controller_onready_reference():
+	var entity := ChimeraEntity.new()
+	var ai := AIController.new()
+	ai.name = "AIController"
+	entity.add_child(ai)
+	add_child_autofree(entity)
+	assert_not_null(entity.ai_controller, "ai_controller should be set via @onready")
+	assert_eq(entity.ai_controller, ai)
+
+
+func test_ai_controller_null_when_no_node():
+	var entity := ChimeraEntity.new()
+	add_child_autofree(entity)
+	assert_null(
+		entity.ai_controller, "ai_controller should be null when no AIController child exists"
+	)
+
+
+func test_ability_component_onready_reference():
+	var entity := ChimeraEntity.new()
+	var ability := AbilityComponent.new()
+	ability.name = "AbilityComponent"
+	entity.add_child(ability)
+	add_child_autofree(entity)
+	assert_not_null(entity.ability_component, "ability_component should be set via @onready")
+	assert_eq(entity.ability_component, ability)
+
+
+func test_ability_component_null_when_no_node():
+	var entity := ChimeraEntity.new()
+	add_child_autofree(entity)
+	assert_null(entity.ability_component, "ability_component should be null when no child exists")
+
+
+func test_team_property_can_be_set():
+	var entity := ChimeraEntity.new()
+	add_child_autofree(entity)
+	entity.team = 1
+	assert_eq(entity.team, 1)
+
+
+func test_team_default_zero():
+	var entity := ChimeraEntity.new()
+	add_child_autofree(entity)
+	assert_eq(entity.team, 0, "team should default to 0")
+
+
+func test_combat_context_property_can_be_set():
+	var entity := ChimeraEntity.new()
+	add_child_autofree(entity)
+	var ctx := CombatContext.new()
+	entity.combat_context = ctx
+	assert_eq(entity.combat_context, ctx)
+
+
+func test_died_signal_emitted():
+	var entity := ChimeraEntity.new()
+	add_child_autofree(entity)
+	var signal_received := false
+	entity.died.connect(func(_e: ChimeraEntity) -> void: signal_received = true)
+	entity.died.emit(entity)
+	assert_true(signal_received, "died signal should be emitted and received")

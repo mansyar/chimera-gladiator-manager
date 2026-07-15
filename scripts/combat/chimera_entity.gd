@@ -5,13 +5,19 @@ extends CharacterBody2D
 ## Orchestrates components and ticks EffectComponent each frame.
 ## (FR-2: Chimera entity scene)
 
+signal died(entity: ChimeraEntity)
+
 const ATTACK_RATE_CONSTANT: float = 0.1
 const MELEE_THRESHOLD: float = 48.0
 
 var combat_state: CombatState
 var attack_timer: float = 0.0
+var team: int = 0
+var combat_context: CombatContext
 
 @onready var effect_component: EffectComponent = get_node_or_null("EffectComponent")
+@onready var ai_controller: AIController = get_node_or_null("AIController")
+@onready var ability_component: AbilityComponent = get_node_or_null("AbilityComponent")
 
 
 func _process(delta: float) -> void:
