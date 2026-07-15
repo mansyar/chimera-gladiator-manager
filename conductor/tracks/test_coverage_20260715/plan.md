@@ -129,9 +129,9 @@
     - [x] Run `gd-tools lint` and confirm exit 0
     - [x] Run `gd-tools format --check` and confirm exit 0
     - [x] Run `gd-tools test --coverage --min 80` and confirm exit 0
-- [ ] Task: Verify stretch goal (95%+ coverage on testable files)
-    - [ ] Review coverage report and identify any remaining gaps
-    - [ ] If below 95%, add targeted tests for remaining uncovered branches
-    - [ ] Re-run coverage to confirm 95%+ achieved (or document why 95% is impractical for specific modules)
+- [x] Task: Verify stretch goal (95%+ coverage on testable files)
+    - [x] Review coverage report and identify any remaining gaps
+    - [x] If below 95%, add targeted tests for remaining uncovered branches
+    - [x] Re-run coverage to confirm 95%+ achieved (or document why 95% is impractical for specific modules)
 - [ ] Task: Conductor - User Manual Verification 'Final Verification & Coverage Gate' (Protocol in workflow.md)
 </protect>
