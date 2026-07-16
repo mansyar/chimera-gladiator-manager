@@ -80,6 +80,8 @@ func _resolve_targets(
 		"TARGET":
 			if primary_target != null:
 				targets = [primary_target]
+			else:
+				push_warning("AbilityComponent: TARGET resolution with null primary_target")
 		"AOE_ENEMIES":
 			if entity.combat_context != null:
 				var enemies := entity.combat_context.get_enemies_of(entity.combat_state.team)
