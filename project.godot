@@ -25,6 +25,7 @@ window/size/min_height=540
 
 [gui]
 
+theme/custom="res://scenes/ui/default_theme.tres"
 theme/default_font="res://assets/kenney-ui-pack/Font/Kenney Future.ttf"
 
 [input]
