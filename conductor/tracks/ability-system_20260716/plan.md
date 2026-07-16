@@ -31,7 +31,7 @@ Focus: Replace the TRACK-005 stub with a working AbilityComponent — initializa
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: AbilityComponent Foundation' (Protocol in workflow.md)
 
-## Phase 2: AbilitySystem Static Class — All 11 Effect Types
+## Phase 2: AbilitySystem Static Class — All 11 Effect Types [checkpoint: f452fa6]
 
 Focus: Create the `AbilitySystem` static utility class with `execute_effect()` handling all 11 EffectType variants.
 
