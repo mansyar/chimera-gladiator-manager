@@ -38,7 +38,7 @@
 
 - [x] Task: Conductor - User Manual Verification 'Phase 1' (Protocol in workflow.md)
 
-## Phase 2: Reusable Widgets
+## Phase 2: Reusable Widgets [checkpoint: b403120]
 
 - [x] Task: Read spec.md and workflow.md to refresh context before implementation
     - [x] Read `conductor/tracks/ui_framework_20260717/spec.md`
@@ -72,7 +72,7 @@
     - [x] Run `gd-tools test --coverage --min 80` and confirm all widget scripts ≥ 80% coverage
     - [x] Refactor if needed (deduplicate, clarify names) — rerun tests
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 2' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2' (Protocol in workflow.md)
 
 ## Phase 3: TopBar & UI Sounds
 
