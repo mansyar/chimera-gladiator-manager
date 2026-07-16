@@ -28,7 +28,7 @@ Focus: Transform the CombatManager stub into the central match orchestrator — 
     - [x] Implement: `start_match(player_roster, enemy_roster, formations, match_type, tournament_tier)` — instantiate chimera_entity.tscn per chimera, initialize CombatState, apply passives via AbilityComponent, place at grid positions, register in CombatContext, connect signals, set state
     - [x] Verify: all tests pass, `gd-tools test --coverage --min 80`
 
-- [ ] Task: Implement `_process()` timer decrement and win condition check
+- [x] Task: Implement `_process()` timer decrement and win condition check (2a01069)
     - [ ] Write failing test: `_process()` returns early when `match_active == false` (idle state)
     - [ ] Write failing test: `_process()` decrements `timer` by delta when active
     - [ ] Write failing test: `_process()` calls `check_win_condition()` every frame when active
