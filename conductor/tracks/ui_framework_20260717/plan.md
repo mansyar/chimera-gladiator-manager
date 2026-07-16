@@ -44,33 +44,33 @@
     - [x] Read `conductor/tracks/ui_framework_20260717/spec.md`
     - [x] Read `conductor/workflow.md`
 
-- [ ] Task: Write failing tests for all 4 widgets (TDD Red phase)
-    - [ ] Create `tests/ui/test_part_slot.gd`: test `part_data` set → correct sprite path via `PartDatabase.get_sprite_path()`, slot label displays correct slot name
-    - [ ] Create `tests/ui/test_stat_display.gd`: test `stat_name` + `stat_value` render as "Name: Value"
-    - [ ] Create `tests/ui/test_chimera_card.gd`: test `chimera` set → nickname + HP/Atk/Def/Spd displayed, instability label mapping (0=Pure, 1=Stable Hybrid, 2=Volatile Hybrid, 3=Chaotic)
-    - [ ] Create `tests/ui/test_formation_grid.gd`: test 9 cells rendered in 3×3 layout, occupied cells highlighted when `grid_data` set
-    - [ ] Run all widget tests and confirm they fail (Red phase)
+- [x] Task: Write failing tests for all 4 widgets (TDD Red phase) [commit: 7db165c]
+    - [x] Create `tests/ui/test_part_slot.gd`: test `part_data` set → correct sprite path via `PartDatabase.get_sprite_path()`, slot label displays correct slot name
+    - [x] Create `tests/ui/test_stat_display.gd`: test `stat_name` + `stat_value` render as "Name: Value"
+    - [x] Create `tests/ui/test_chimera_card.gd`: test `chimera` set → nickname + HP/Atk/Def/Spd displayed, instability label mapping (0=Pure, 1=Stable Hybrid, 2=Volatile Hybrid, 3=Chaotic)
+    - [x] Create `tests/ui/test_formation_grid.gd`: test 9 cells rendered in 3×3 layout, occupied cells highlighted when `grid_data` set
+    - [x] Run all widget tests and confirm they fail (Red phase)
 
-- [ ] Task: Implement part_slot widget (TDD Green phase)
-    - [ ] Create `scenes/ui/widgets/part_slot.tscn` + `scripts/ui/widgets/part_slot.gd` with `@export var part_data: PartData`, TextureRect for sprite, Label for slot type
-    - [ ] Run `test_part_slot.gd` and confirm pass
+- [x] Task: Implement part_slot widget (TDD Green phase) [commit: 7db165c]
+    - [x] Create `scenes/ui/widgets/part_slot.tscn` + `scripts/ui/widgets/part_slot.gd` with `@export var part_data: PartData`, TextureRect for sprite, Label for slot type
+    - [x] Run `test_part_slot.gd` and confirm pass
 
-- [ ] Task: Implement stat_display widget (TDD Green phase)
-    - [ ] Create `scenes/ui/widgets/stat_display.tscn` + `scripts/ui/widgets/stat_display.gd` with `@export var stat_name: String`, `@export var stat_value: float`, renders as "Name: Value"
-    - [ ] Run `test_stat_display.gd` and confirm pass
+- [x] Task: Implement stat_display widget (TDD Green phase) [commit: 7db165c]
+    - [x] Create `scenes/ui/widgets/stat_display.tscn` + `scripts/ui/widgets/stat_display.gd` with `@export var stat_name: String`, `@export var stat_value: float`, renders as "Name: Value"
+    - [x] Run `test_stat_display.gd` and confirm pass
 
-- [ ] Task: Implement chimera_card widget (TDD Green phase)
-    - [ ] Create `scenes/ui/widgets/chimera_card.tscn` + `scripts/ui/widgets/chimera_card.gd` with `@export var chimera: ChimeraData`, displays nickname + HP/Atk/Def/Spd + instability label
-    - [ ] Implement instability label helper: 0→"Pure", 1→"Stable Hybrid", 2→"Volatile Hybrid", 3→"Chaotic" (per GDD Section 2.2)
-    - [ ] Run `test_chimera_card.gd` and confirm pass
+- [x] Task: Implement chimera_card widget (TDD Green phase) [commit: 7db165c]
+    - [x] Create `scenes/ui/widgets/chimera_card.tscn` + `scripts/ui/widgets/chimera_card.gd` with `@export var chimera: ChimeraData`, displays nickname + HP/Atk/Def/Spd + instability label
+    - [x] Implement instability label helper: 0→"Pure", 1→"Stable Hybrid", 2→"Volatile Hybrid", 3→"Chaotic" (per GDD Section 2.2)
+    - [x] Run `test_chimera_card.gd` and confirm pass
 
-- [ ] Task: Implement formation_grid widget (TDD Green phase)
-    - [ ] Create `scenes/ui/widgets/formation_grid.tscn` + `scripts/ui/widgets/formation_grid.gd` with `@export var grid_data: Array`, renders 9 cells in 3×3 GridContainer, highlights occupied cells
-    - [ ] Run `test_formation_grid.gd` and confirm pass
+- [x] Task: Implement formation_grid widget (TDD Green phase) [commit: 7db165c]
+    - [x] Create `scenes/ui/widgets/formation_grid.tscn` + `scripts/ui/widgets/formation_grid.gd` with `@export var grid_data: Array`, renders 9 cells in 3×3 GridContainer, highlights occupied cells
+    - [x] Run `test_formation_grid.gd` and confirm pass
 
-- [ ] Task: Verify widget coverage and refactor
-    - [ ] Run `gd-tools test --coverage --min 80` and confirm all widget scripts ≥ 80% coverage
-    - [ ] Refactor if needed (deduplicate, clarify names) — rerun tests
+- [x] Task: Verify widget coverage and refactor [commit: 7db165c]
+    - [x] Run `gd-tools test --coverage --min 80` and confirm all widget scripts ≥ 80% coverage
+    - [x] Refactor if needed (deduplicate, clarify names) — rerun tests
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 2' (Protocol in workflow.md)
 
