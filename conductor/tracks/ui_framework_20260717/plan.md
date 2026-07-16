@@ -36,7 +36,7 @@
     - [x] Configure layout: TopBar anchored to top, ScreenManager fills remaining space
     - [x] Set `scenes/main.tscn` as project main scene in `project.godot`
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 1' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1' (Protocol in workflow.md)
 
 ## Phase 2: Reusable Widgets
 
