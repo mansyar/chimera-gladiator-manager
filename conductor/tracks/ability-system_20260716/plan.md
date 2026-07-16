@@ -104,7 +104,7 @@ Focus: Wire AbilityComponent to AbilitySystem via `execute_ability()`, implement
 
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Integration' (Protocol in workflow.md)
 
-## Phase 4: Passives & SHIELD Damage Absorption
+## Phase 4: Passives & SHIELD Damage Absorption [checkpoint: 1deda67]
 
 Focus: Implement passive ability application at combat start, verify berserk persistence, and add SHIELD damage absorption to EffectComponent.
 
