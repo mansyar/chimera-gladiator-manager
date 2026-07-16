@@ -116,7 +116,7 @@ Focus: Create `enemy_generator.gd` static utility class with rubber-band difficu
 
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Enemy Generation' (Protocol in workflow.md)
 
-## Phase 3: Economy Integration & Post-Match Flow
+## Phase 3: Economy Integration & Post-Match Flow [checkpoint: 0dd702e]
 
 Focus: Add `GameState.record_match_result()`, wire CombatManager.end_match to calculate rewards via Economy, trigger market refresh and save.
 
@@ -149,5 +149,5 @@ Focus: Add `GameState.record_match_result()`, wire CombatManager.end_match to ca
     - [ ] Write integration test: Timer expiry scenario — HP% determines winner
     - [ ] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
 
-- [~] Task: Conductor - User Manual Verification 'Phase 3: Economy Integration & Post-Match Flow' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Economy Integration & Post-Match Flow' (Protocol in workflow.md)
 </protect>
