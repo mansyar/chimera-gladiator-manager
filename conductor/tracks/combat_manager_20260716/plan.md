@@ -86,7 +86,7 @@ Focus: Create `enemy_generator.gd` static utility class with rubber-band difficu
     - [ ] Implement: Create `scripts/systems/enemy_generator.gd` as static class with `class_name EnemyGenerator`, define `DIFFICULTY_WEIGHTS` Dictionary constant
     - [ ] Verify: `gd-tools lint && gd-tools format --check`
 
-- [~] Task: Implement `_get_difficulty_tier()` difficulty selection logic
+- [x] Task: Implement `_get_difficulty_tier()` difficulty selection logic (04b9ee5)
     - [ ] Write failing test: Regular match with losing_streak < 3 returns "normal"
     - [ ] Write failing test: Regular match with losing_streak >= 3 returns "weak" (rubber-band per GDD 4.6)
     - [ ] Write failing test: Tournament tier 1 returns "tough"
@@ -96,7 +96,7 @@ Focus: Create `enemy_generator.gd` static utility class with rubber-band difficu
     - [ ] Implement: `_get_difficulty_tier(match_type, losing_streak, tournament_tier) -> String`
     - [ ] Verify: tests pass
 
-- [ ] Task: Implement `_generate_enemy_chimera()` single enemy creation
+- [~] Task: Implement `_generate_enemy_chimera()` single enemy creation
     - [ ] Write failing test: Generated chimera has 4 parts (head, torso, arms, legs) — all non-null
     - [ ] Write failing test: Each part's slot matches its position (head=HEAD, torso=TORSO, etc.)
     - [ ] Write failing test: Part rarities follow the difficulty tier weight distribution (statistical or spot-check)
