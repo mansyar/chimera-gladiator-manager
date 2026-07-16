@@ -13,16 +13,16 @@
     - [x] Configure Grey NinePatchRect StyleBoxTexture for Panel using UI Pack grey panel sprites
     - [x] Assign Theme as default project theme in `project.godot` (`gui/theme/custom`)
 
-- [ ] Task: Create 9 screen stub scenes and scripts
-    - [ ] Create `scenes/ui/screens/lab_hub.tscn` + `scripts/ui/screens/lab_hub.gd` (centered "Lab Hub" label + 8 navigation buttons calling `ScreenManager.change_screen`)
-    - [ ] Create `scenes/ui/screens/assembly.tscn` + `scripts/ui/screens/assembly.gd` (label + "Back to Lab Hub" button)
-    - [ ] Create `scenes/ui/screens/black_market.tscn` + `scripts/ui/screens/black_market.gd` (label + back button)
-    - [ ] Create `scenes/ui/screens/arena_pre_match.tscn` + `scripts/ui/screens/arena_pre_match.gd` (label + back button)
-    - [ ] Create `scenes/ui/screens/arena_combat.tscn` + `scripts/ui/screens/arena_combat.gd` (label + back button)
-    - [ ] Create `scenes/ui/screens/roster.tscn` + `scripts/ui/screens/roster.gd` (label + back button)
-    - [ ] Create `scenes/ui/screens/clinic.tscn` + `scripts/ui/screens/clinic.gd` (label + back button)
-    - [ ] Create `scenes/ui/screens/tournament.tscn` + `scripts/ui/screens/tournament.gd` (label + back button)
-    - [ ] Create `scenes/ui/screens/hall_of_fame.tscn` + `scripts/ui/screens/hall_of_fame.gd` (label + back button)
+- [x] Task: Create 9 screen stub scenes and scripts (commit: 1609703)
+    - [x] Create `scenes/ui/screens/lab_hub.tscn` + `scripts/ui/screens/lab_hub.gd` (centered "Lab Hub" label + 8 navigation buttons calling `ScreenManager.change_screen`)
+    - [x] Create `scenes/ui/screens/assembly.tscn` + `scripts/ui/screens/assembly.gd` (label + "Back to Lab Hub" button)
+    - [x] Create `scenes/ui/screens/black_market.tscn` + `scripts/ui/screens/black_market.gd` (label + back button)
+    - [x] Create `scenes/ui/screens/arena_pre_match.tscn` + `scripts/ui/screens/arena_pre_match.gd` (label + back button)
+    - [x] Create `scenes/ui/screens/arena_combat.tscn` + `scripts/ui/screens/arena_combat.gd` (label + back button)
+    - [x] Create `scenes/ui/screens/roster.tscn` + `scripts/ui/screens/roster.gd` (label + back button)
+    - [x] Create `scenes/ui/screens/clinic.tscn` + `scripts/ui/screens/clinic.gd` (label + back button)
+    - [x] Create `scenes/ui/screens/tournament.tscn` + `scripts/ui/screens/tournament.gd` (label + back button)
+    - [x] Create `scenes/ui/screens/hall_of_fame.tscn` + `scripts/ui/screens/hall_of_fame.gd` (label + back button)
 
 - [ ] Task: Implement ScreenManager (TDD)
     - [ ] Write failing tests in `tests/ui/test_screen_manager.gd`: (1) `change_screen` loads correct PackedScene for all 9 screen names, (2) `change_screen` frees previous screen via `queue_free`, (3) Lab Hub is default initial screen on `_ready`
