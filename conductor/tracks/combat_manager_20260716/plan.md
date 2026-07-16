@@ -135,14 +135,14 @@ Focus: Add `GameState.record_match_result()`, wire CombatManager.end_match to ca
     - [ ] Implement: `record_match_result(won: bool, match_type: String, rewards: Dictionary) -> void` on GameState
     - [ ] Verify: tests pass
 
-- [~] Task: Wire `end_match()` to calculate rewards and call `GameState.record_match_result()`
+- [x] Task: Wire `end_match()` to calculate rewards and call `GameState.record_match_result()` (74dd54c)
     - [ ] Write failing test: `end_match()` calls `Economy.calculate_match_reward()` with stored match_type, won, tournament_tier, losing_streak
     - [ ] Write failing test: `end_match()` result dict includes `gold_earned` and `infamy_earned` from Economy calculation
     - [ ] Write failing test: `end_match()` calls `GameState.record_match_result()` with won, match_type, rewards
     - [ ] Implement: Update `end_match()` — calculate rewards via Economy, build full result dict, call GameState.record_match_result before clearing state
     - [ ] Verify: tests pass
 
-- [ ] Task: Full match lifecycle integration test
+- [~] Task: Full match lifecycle integration test
     - [ ] Write integration test: Complete match flow — `start_match()` -> simulate deaths/timer -> `end_match()` -> verify rewards applied to GameState, market refreshed, save triggered, CombatManager idle
     - [ ] Write integration test: Player-win scenario (all enemies die) — rewards applied, losing_streak reset
     - [ ] Write integration test: Player-loss scenario (all players die) — consolation rewards, losing_streak incremented
