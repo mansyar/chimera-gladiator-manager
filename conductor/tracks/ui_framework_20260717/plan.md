@@ -40,9 +40,9 @@
 
 ## Phase 2: Reusable Widgets
 
-- [ ] Task: Read spec.md and workflow.md to refresh context before implementation
-    - [ ] Read `conductor/tracks/ui_framework_20260717/spec.md`
-    - [ ] Read `conductor/workflow.md`
+- [x] Task: Read spec.md and workflow.md to refresh context before implementation
+    - [x] Read `conductor/tracks/ui_framework_20260717/spec.md`
+    - [x] Read `conductor/workflow.md`
 
 - [ ] Task: Write failing tests for all 4 widgets (TDD Red phase)
     - [ ] Create `tests/ui/test_part_slot.gd`: test `part_data` set → correct sprite path via `PartDatabase.get_sprite_path()`, slot label displays correct slot name
