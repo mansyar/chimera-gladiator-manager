@@ -58,3 +58,20 @@ static func _get_difficulty_tier(
 	if losing_streak >= 3:
 		return "weak"
 	return "normal"
+
+
+# --- Enemy Chimera Generation (FR-5) ---
+
+
+## Generates a single enemy chimera with 4 parts at the given rarity distribution.
+## Assembles a ChimeraData and recalculates stats.
+## (FR-5: Enemy Generation — each enemy gets 4 parts, recalculate_stats after assembly)
+static func _generate_enemy_chimera(rarity_weights: Dictionary) -> ChimeraData:
+	var chimera := ChimeraData.new()
+	chimera.head = PartDatabase.generate_random_part(GameEnums.PartSlot.HEAD, rarity_weights)
+	chimera.torso = PartDatabase.generate_random_part(GameEnums.PartSlot.TORSO, rarity_weights)
+	chimera.arms = PartDatabase.generate_random_part(GameEnums.PartSlot.ARMS, rarity_weights)
+	chimera.legs = PartDatabase.generate_random_part(GameEnums.PartSlot.LEGS, rarity_weights)
+	chimera.calculate_instability()
+	chimera.recalculate_stats()
+	return chimera

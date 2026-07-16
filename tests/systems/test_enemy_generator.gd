@@ -90,3 +90,39 @@ func test_get_difficulty_tier_tournament_tier_3_returns_strong() -> void:
 func test_get_difficulty_tier_tournament_tier_4_returns_strong() -> void:
 	var tier: String = EnemyGenerator._get_difficulty_tier("tournament", 0, 4)
 	assert_eq(tier, "strong", "Tournament tier 4 should return 'strong'")
+
+
+# --- _generate_enemy_chimera ---
+
+
+func test_generate_enemy_chimera_returns_chimera_data() -> void:
+	var weights: Dictionary = EnemyGenerator.DIFFICULTY_WEIGHTS["normal"]
+	var chimera: ChimeraData = EnemyGenerator._generate_enemy_chimera(weights)
+	assert_not_null(chimera, "Should return a non-null ChimeraData")
+	assert_true(chimera is ChimeraData, "Should be a ChimeraData instance")
+
+
+func test_generate_enemy_chimera_has_four_parts() -> void:
+	var weights: Dictionary = EnemyGenerator.DIFFICULTY_WEIGHTS["normal"]
+	var chimera: ChimeraData = EnemyGenerator._generate_enemy_chimera(weights)
+	assert_not_null(chimera.head, "Should have a head part")
+	assert_not_null(chimera.torso, "Should have a torso part")
+	assert_not_null(chimera.arms, "Should have an arms part")
+	assert_not_null(chimera.legs, "Should have a legs part")
+
+
+func test_generate_enemy_chimera_parts_have_correct_slots() -> void:
+	var weights: Dictionary = EnemyGenerator.DIFFICULTY_WEIGHTS["normal"]
+	var chimera: ChimeraData = EnemyGenerator._generate_enemy_chimera(weights)
+	assert_eq(chimera.head.slot, GameEnums.PartSlot.HEAD, "Head part slot should be HEAD")
+	assert_eq(chimera.torso.slot, GameEnums.PartSlot.TORSO, "Torso part slot should be TORSO")
+	assert_eq(chimera.arms.slot, GameEnums.PartSlot.ARMS, "Arms part slot should be ARMS")
+	assert_eq(chimera.legs.slot, GameEnums.PartSlot.LEGS, "Legs part slot should be LEGS")
+
+
+func test_generate_enemy_chimera_recalculates_stats() -> void:
+	var weights: Dictionary = EnemyGenerator.DIFFICULTY_WEIGHTS["normal"]
+	var chimera: ChimeraData = EnemyGenerator._generate_enemy_chimera(weights)
+	# After recalculate_stats, max_hp should be > 0 (parts contribute hp bonuses)
+	assert_gt(chimera.max_hp, 0.0, "max_hp should be positive after recalculate_stats")
+	assert_gt(chimera.attack, 0.0, "attack should be positive after recalculate_stats")
