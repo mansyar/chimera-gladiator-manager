@@ -128,5 +128,5 @@ Focus: Implement passive ability application at combat start, verify berserk per
     - [x] Integrate into damage flow: update `AbilitySystem._execute_damage()` and `AttackState.update()` to call `absorb_damage()` before `take_damage()` (both call sites guard on `target.effect_component != null`)
     - [x] Verify: all tests pass, `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Passives & SHIELD Damage Absorption' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Passives & SHIELD Damage Absorption' (Protocol in workflow.md)
 </protect>
