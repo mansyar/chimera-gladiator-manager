@@ -217,6 +217,111 @@ func test_on_timer_expired_player_wins_tie() -> void:
 	)
 
 
+# --- end_match tests ---
+
+
+func test_end_match_clears_combat_entities() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	CombatManager.end_match(
+		{
+			"winner": 0,
+			"won": true,
+			"surviving_hp": 100.0,
+			"duration": 30.0,
+			"gold_earned": 0,
+			"infamy_earned": 0
+		}
+	)
+	assert_eq(
+		CombatManager.combat_entities.size(), 0, "combat_entities should be cleared after end_match"
+	)
+
+
+func test_end_match_clears_formations() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	CombatManager.end_match(
+		{
+			"winner": 0,
+			"won": true,
+			"surviving_hp": 100.0,
+			"duration": 30.0,
+			"gold_earned": 0,
+			"infamy_earned": 0
+		}
+	)
+	assert_eq(CombatManager.player_formation, [], "player_formation should be cleared")
+	assert_eq(CombatManager.enemy_formation, [], "enemy_formation should be cleared")
+
+
+func test_end_match_clears_combat_context() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	CombatManager.end_match(
+		{
+			"winner": 0,
+			"won": true,
+			"surviving_hp": 100.0,
+			"duration": 30.0,
+			"gold_earned": 0,
+			"infamy_earned": 0
+		}
+	)
+	assert_null(CombatManager.combat_context, "combat_context should be null after end_match")
+
+
+func test_end_match_frees_entities() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	var entity_refs: Array = CombatManager.combat_entities.duplicate()
+	CombatManager.end_match(
+		{
+			"winner": 0,
+			"won": true,
+			"surviving_hp": 100.0,
+			"duration": 30.0,
+			"gold_earned": 0,
+			"infamy_earned": 0
+		}
+	)
+	for entity in entity_refs:
+		assert_true(
+			is_instance_valid(entity), "Entity should still be valid (queue_free defers deletion)"
+		)
+		assert_true(entity.is_queued_for_deletion(), "Entity should be queued for deletion")
+
+
+func test_end_match_emits_match_ended() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	watch_signals(EventBus)
+	var result := {
+		"winner": 0,
+		"won": true,
+		"surviving_hp": 100.0,
+		"duration": 30.0,
+		"gold_earned": 30,
+		"infamy_earned": 2
+	}
+	CombatManager.end_match(result)
+	assert_signal_emitted(EventBus, "match_ended", "match_ended signal should be emitted")
+	var params = get_signal_parameters(EventBus, "match_ended")
+	assert_eq(params[0]["winner"], 0, "Result should contain winner")
+	assert_eq(params[0]["won"], true, "Result should contain won")
+	assert_eq(params[0]["gold_earned"], 30, "Result should contain gold_earned")
+
+
 # --- _find_or_create_entities_container tests ---
 
 
@@ -402,6 +507,8 @@ func after_each() -> void:
 	CombatManager.enemy_formation.clear()
 	CombatManager.timer = 0.0
 	CombatManager.match_result = {}
+	CombatManager.match_type = ""
+	CombatManager.tournament_tier = 0
 	# Free any temp entities containers (frees child entities recursively)
 	for child in CombatManager.get_children():
 		CombatManager.remove_child(child)

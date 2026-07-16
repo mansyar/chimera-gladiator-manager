@@ -97,12 +97,22 @@ func _build_result(winner: int, surviving_hp: float) -> Dictionary:
 	}
 
 
-## Ends the current match, stores the result, and clears match-active flag.
-## Full cleanup (clearing arrays, freeing entities, emitting signal) in Task 6.
-## (FR-1: end_match)
+## Ends the current match. Emits match_ended signal, frees all spawned
+## entities, and clears all combat state to return CombatManager to idle.
+## (FR-1: end_match, FR-4: Idle State)
 func end_match(result: Dictionary) -> void:
 	match_active = false
 	match_result = result
+	EventBus.match_ended.emit(result)
+	# Free all spawned entities (deferred via queue_free)
+	for entity in combat_entities:
+		if is_instance_valid(entity):
+			entity.queue_free()
+	combat_entities.clear()
+	player_formation.clear()
+	enemy_formation.clear()
+	combat_context = null
+	timer = 0.0
 
 
 ## Handles timer expiry — determines winner by total HP%.
