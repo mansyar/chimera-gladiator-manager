@@ -142,12 +142,12 @@ Focus: Add `GameState.record_match_result()`, wire CombatManager.end_match to ca
     - [ ] Implement: Update `end_match()` — calculate rewards via Economy, build full result dict, call GameState.record_match_result before clearing state
     - [ ] Verify: tests pass
 
-- [~] Task: Full match lifecycle integration test
+- [x] Task: Full match lifecycle integration test (98a1cd8)
     - [ ] Write integration test: Complete match flow — `start_match()` -> simulate deaths/timer -> `end_match()` -> verify rewards applied to GameState, market refreshed, save triggered, CombatManager idle
     - [ ] Write integration test: Player-win scenario (all enemies die) — rewards applied, losing_streak reset
     - [ ] Write integration test: Player-loss scenario (all players die) — consolation rewards, losing_streak incremented
     - [ ] Write integration test: Timer expiry scenario — HP% determines winner
     - [ ] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Economy Integration & Post-Match Flow' (Protocol in workflow.md)
+- [~] Task: Conductor - User Manual Verification 'Phase 3: Economy Integration & Post-Match Flow' (Protocol in workflow.md)
 </protect>
