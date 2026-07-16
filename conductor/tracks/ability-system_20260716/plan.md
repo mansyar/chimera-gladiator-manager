@@ -119,14 +119,14 @@ Focus: Implement passive ability application at combat start, verify berserk per
     - [x] Implement: `apply_passives()` iterates PASSIVE abilities, calls `AbilitySystem.execute_effect()` with source=self, targets=[self]
     - [x] Verify: tests pass, coverage >=80%
 
-- [~] Task: Implement `EffectComponent.absorb_damage()` and integrate into damage flow
-    - [ ] Write failing test: `absorb_damage(amount)` reduces SHIELD ActiveEffect amounts, returns remaining damage after shields consumed
-    - [ ] Write failing test: `absorb_damage()` removes shields that reach 0 amount
-    - [ ] Write failing test: `absorb_damage()` with no shields returns full amount unchanged
-    - [ ] Write failing test: SHIELD effects are NOT removed by `cleanse()` (only DEBUFF_STAT removed)
-    - [ ] Implement: `absorb_damage(amount: float) -> float` on EffectComponent — iterates SHIELD effects, reduces amounts, removes depleted shields
-    - [ ] Integrate into damage flow: update `CombatState.take_damage()` or `ChimeraEntity.calculate_damage()` to call `absorb_damage()` before HP reduction
-    - [ ] Verify: all tests pass, `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
+- [x] Task: Implement `EffectComponent.absorb_damage()` and integrate into damage flow [2de4960]
+    - [x] Write failing test: `absorb_damage(amount)` reduces SHIELD ActiveEffect amounts, returns remaining damage after shields consumed
+    - [x] Write failing test: `absorb_damage()` removes shields that reach 0 amount
+    - [x] Write failing test: `absorb_damage()` with no shields returns full amount unchanged
+    - [x] Write failing test: SHIELD effects are NOT removed by `cleanse()` (only DEBUFF_STAT removed)
+    - [x] Implement: `absorb_damage(amount: float) -> float` on EffectComponent — iterates SHIELD effects, reduces amounts, removes depleted shields
+    - [x] Integrate into damage flow: update `AbilitySystem._execute_damage()` and `AttackState.update()` to call `absorb_damage()` before `take_damage()` (both call sites guard on `target.effect_component != null`)
+    - [x] Verify: all tests pass, `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: Passives & SHIELD Damage Absorption' (Protocol in workflow.md)
 </protect>
