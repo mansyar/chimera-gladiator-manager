@@ -44,13 +44,13 @@ Focus: Transform the CombatManager stub into the central match orchestrator — 
     - [ ] Implement: `check_win_condition()` — count alive per team, trigger end_match on all-dead condition
     - [ ] Verify: tests pass
 
-- [ ] Task: Implement `_on_entity_died()` and `_on_timer_expired()`
-    - [ ] Write failing test: `_on_entity_died()` unregisters entity from CombatContext
-    - [ ] Write failing test: `_on_entity_died()` calls `check_win_condition()` immediately
-    - [ ] Write failing test: `_on_timer_expired()` calculates total HP% per team, winner = higher HP%
-    - [ ] Write failing test: `_on_timer_expired()` handles tie (equal HP%) — player wins ties
-    - [ ] Implement: `_on_entity_died(entity)` — unregister, check win. `_on_timer_expired()` — HP% calc, end_match
-    - [ ] Verify: tests pass
+- [x] Task: Implement `_on_entity_died()` and `_on_timer_expired()` (54e4cdf)
+    - [x] Write failing test: `_on_entity_died()` unregisters entity from CombatContext
+    - [x] Write failing test: `_on_entity_died()` calls `check_win_condition()` immediately
+    - [x] Write failing test: `_on_timer_expired()` calculates total HP% per team, winner = higher HP%
+    - [x] Write failing test: `_on_timer_expired()` handles tie (equal HP%) — player wins ties
+    - [x] Implement: `_on_entity_died(entity)` — unregister, check win. `_on_timer_expired()` — HP% calc, end_match
+    - [x] Verify: tests pass
 
 - [ ] Task: Implement `end_match()` — state clear, emit signal
     - [ ] Write failing test: `end_match()` sets `match_active = false`
