@@ -1,3 +1,4 @@
+<protect>
 # Track Specification: UI Framework & Screen Manager (TRACK-009)
 
 ## Overview
@@ -126,3 +127,4 @@ Four reusable widget scenes in `scenes/ui/widgets/`, each using `@export` data i
 - Market purchasing logic, clinic repair logic, tournament bracket logic (TRACK-012, TRACK-015)
 - Pre-match formation interaction (TRACK-013 — `formation_grid` widget exists but click-to-place deferred)
 - Specific balancing values, prices, or stat numbers
+</protect>

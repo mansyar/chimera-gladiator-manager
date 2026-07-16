@@ -1,6 +1,11 @@
+<protect>
 # Implementation Plan: UI Framework & Screen Manager (TRACK-009)
 
 ## Phase 1: UI Framework (ScreenManager, main.tscn, Theme, Stubs)
+
+- [ ] Task: Read spec.md and workflow.md to refresh context before implementation
+    - [ ] Read `conductor/tracks/ui_framework_20260717/spec.md`
+    - [ ] Read `conductor/workflow.md`
 
 - [ ] Task: Create Theme resource
     - [ ] Create `scenes/ui/default_theme.tres` with Kenney Future Regular font as default for all Control types
@@ -35,6 +40,10 @@
 
 ## Phase 2: Reusable Widgets
 
+- [ ] Task: Read spec.md and workflow.md to refresh context before implementation
+    - [ ] Read `conductor/tracks/ui_framework_20260717/spec.md`
+    - [ ] Read `conductor/workflow.md`
+
 - [ ] Task: Write failing tests for all 4 widgets (TDD Red phase)
     - [ ] Create `tests/ui/test_part_slot.gd`: test `part_data` set → correct sprite path via `PartDatabase.get_sprite_path()`, slot label displays correct slot name
     - [ ] Create `tests/ui/test_stat_display.gd`: test `stat_name` + `stat_value` render as "Name: Value"
@@ -67,6 +76,10 @@
 
 ## Phase 3: TopBar & UI Sounds
 
+- [ ] Task: Read spec.md and workflow.md to refresh context before implementation
+    - [ ] Read `conductor/tracks/ui_framework_20260717/spec.md`
+    - [ ] Read `conductor/workflow.md`
+
 - [ ] Task: Write failing tests for TopBar (TDD Red phase)
     - [ ] Create `tests/ui/test_top_bar.gd`: (1) Gold label updates when `EventBus.gold_changed` fires, (2) Infamy label updates when `EventBus.infamy_changed` fires, (3) initial values read from `GameState.gold` (200) and `GameState.infamy` (0) on `_ready`
     - [ ] Run tests and confirm they fail (Red phase)
@@ -91,3 +104,4 @@
     - [ ] Verify all 9 screens transition correctly, TopBar updates live, sounds play
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 3' (Protocol in workflow.md)
+</protect>
