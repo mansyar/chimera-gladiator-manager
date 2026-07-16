@@ -6,7 +6,7 @@ extends Node
 ##
 ## Phase 1 (TRACK-007): initialization, cooldown tracking, ready-ability querying.
 ## Phase 3 (TRACK-007): target resolution and effect execution via AbilitySystem.
-## Phase 4 will add passive ability application.
+## Phase 4 (TRACK-007): passive ability application at combat start.
 
 ## All abilities available to this entity (part abilities + combo).
 var abilities: Array[AbilityData] = []
@@ -106,9 +106,17 @@ func _filter_by_range(
 
 
 ## Applies passive abilities at combat start.
-## Full implementation in Phase 4.
+## Iterates PASSIVE-type abilities, executing each effect with source=self,
+## targets=[self]. Passive effects modify the CombatState snapshot directly
+## (e.g., STAT_MUTATION) or add persistent ActiveEffects (e.g., BUFF_STAT).
+## Called once during initialize(), after CombatState snapshots base stats.
 func apply_passives(_combat_state: CombatState) -> void:
-	pass
+	if entity == null:
+		return
+	for ability in abilities:
+		if ability.type == GameEnums.AbilityType.PASSIVE:
+			for effect in ability.effects:
+				AbilitySystem.execute_effect(effect, entity, [entity], ability.effects)
 
 
 ## Decrements all cooldown values by delta, floored at 0.0.

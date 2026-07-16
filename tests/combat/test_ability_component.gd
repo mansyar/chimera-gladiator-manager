@@ -456,3 +456,99 @@ func test_execute_ability_executes_multiple_effects() -> void:
 	assert_eq(target.combat_state.current_hp, 60.0, "Should deal damage")
 	assert_eq(target.effect_component.active_effects.size(), 1, "Should apply debuff")
 	assert_eq(target.effect_component.active_effects[0].stat_name, "attack")
+
+
+# --- apply_passives() tests (Phase 4) ---
+
+
+func _make_entity_with_abilities(abilities: Array[AbilityData], team: int = 0) -> ChimeraEntity:
+	var entity := ChimeraEntity.new()
+	var chimera := ChimeraData.new()
+	chimera.part_abilities = abilities
+	chimera.max_hp = 100.0
+	chimera.attack = 10.0
+	chimera.defense = 5.0
+	chimera.speed = 20.0
+	chimera.attack_range = 32.0
+	chimera.head = _make_part(GameEnums.PartSlot.HEAD, GameEnums.Strain.UNDEAD)
+	chimera.torso = _make_part(GameEnums.PartSlot.TORSO, GameEnums.Strain.ROBOTIC)
+	chimera.arms = _make_part(GameEnums.PartSlot.ARMS, GameEnums.Strain.DRACONIC)
+	chimera.legs = _make_part(GameEnums.PartSlot.LEGS, GameEnums.Strain.BEAST)
+	entity.combat_state = CombatState.new()
+	entity.combat_state.initialize(chimera, team)
+	entity.team = team
+	entity.global_position = Vector2.ZERO
+	var ec := EffectComponent.new()
+	ec.name = "EffectComponent"
+	entity.add_child(ec)
+	var ac := AbilityComponent.new()
+	ac.name = "AbilityComponent"
+	entity.add_child(ac)
+	add_child_autofree(entity)
+	return entity
+
+
+func test_apply_passives_modifies_combat_state() -> void:
+	var passive := _make_ability("atk_boost", GameEnums.AbilityType.PASSIVE, 0.0)
+	var effect := AbilityEffect.new()
+	effect.effect_type = AbilityEffect.EffectType.STAT_MUTATION
+	effect.params = {"stat": "attack", "amount": 10.0}
+	passive.effects = [effect]
+	var entity := _make_entity_with_abilities([passive])
+	var base_attack := entity.combat_state.attack
+	entity.ability_component.initialize(entity.combat_state)
+	assert_eq(
+		entity.combat_state.attack,
+		base_attack + 10.0,
+		"Passive STAT_MUTATION should increase attack by 10.0"
+	)
+
+
+func test_apply_passives_only_processes_passive_abilities() -> void:
+	var active := _make_ability("fire_blast", GameEnums.AbilityType.ACTIVE, 5.0)
+	var active_effect := AbilityEffect.new()
+	active_effect.effect_type = AbilityEffect.EffectType.STAT_MUTATION
+	active_effect.params = {"stat": "attack", "amount": 99.0}
+	active.effects = [active_effect]
+	var passive := _make_ability("def_boost", GameEnums.AbilityType.PASSIVE, 0.0)
+	var passive_effect := AbilityEffect.new()
+	passive_effect.effect_type = AbilityEffect.EffectType.STAT_MUTATION
+	passive_effect.params = {"stat": "defense", "amount": 5.0}
+	passive.effects = [passive_effect]
+	var entity := _make_entity_with_abilities([active, passive])
+	var base_attack := entity.combat_state.attack
+	var base_defense := entity.combat_state.defense
+	entity.ability_component.initialize(entity.combat_state)
+	assert_eq(
+		entity.combat_state.attack,
+		base_attack,
+		"ACTIVE ability should NOT be applied by apply_passives"
+	)
+	assert_eq(
+		entity.combat_state.defense,
+		base_defense + 5.0,
+		"PASSIVE ability should increase defense by 5.0"
+	)
+
+
+func test_apply_passives_persists_during_berserk() -> void:
+	var passive := _make_ability("atk_buff", GameEnums.AbilityType.PASSIVE, 0.0)
+	var effect := AbilityEffect.new()
+	effect.effect_type = AbilityEffect.EffectType.BUFF_STAT
+	effect.params = {"stat": "attack", "amount": 10.0, "duration": 10.0}
+	passive.effects = [effect]
+	var entity := _make_entity_with_abilities([passive])
+	entity.ability_component.initialize(entity.combat_state)
+	# Simulate entering berserk
+	entity.combat_state.is_berserk = true
+	# Passive buff should still be active
+	assert_eq(
+		entity.effect_component.active_effects.size(),
+		1,
+		"Passive BUFF_STAT should persist during berserk"
+	)
+	assert_eq(
+		entity.effect_component.get_modified_stat("attack", 0.0),
+		10.0,
+		"Passive buff modifier should still apply during berserk"
+	)
