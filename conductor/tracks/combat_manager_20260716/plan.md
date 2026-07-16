@@ -96,7 +96,7 @@ Focus: Create `enemy_generator.gd` static utility class with rubber-band difficu
     - [ ] Implement: `_get_difficulty_tier(match_type, losing_streak, tournament_tier) -> String`
     - [ ] Verify: tests pass
 
-- [~] Task: Implement `_generate_enemy_chimera()` single enemy creation
+- [x] Task: Implement `_generate_enemy_chimera()` single enemy creation (f08362a)
     - [ ] Write failing test: Generated chimera has 4 parts (head, torso, arms, legs) — all non-null
     - [ ] Write failing test: Each part's slot matches its position (head=HEAD, torso=TORSO, etc.)
     - [ ] Write failing test: Part rarities follow the difficulty tier weight distribution (statistical or spot-check)
@@ -105,7 +105,7 @@ Focus: Create `enemy_generator.gd` static utility class with rubber-band difficu
     - [ ] Implement: `_generate_enemy_chimera(rarity_weights: Dictionary) -> ChimeraData` — generate 4 parts via `PartDatabase.generate_random_part()`, assemble into ChimeraData, recalculate stats
     - [ ] Verify: tests pass
 
-- [ ] Task: Implement `generate_enemy_roster()` public API
+- [~] Task: Implement `generate_enemy_roster()` public API
     - [ ] Write failing test: Returns array of exactly 3 ChimeraData
     - [ ] Write failing test: Regular match (losing_streak=0) produces enemies with "normal" difficulty parts
     - [ ] Write failing test: Regular match (losing_streak=5) produces weaker enemies ("weak" difficulty — higher common ratio)
