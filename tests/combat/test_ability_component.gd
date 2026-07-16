@@ -312,3 +312,147 @@ func test_execute_ability_sets_current_ability_id() -> void:
 		"fire_blast",
 		"current_ability_id should match executed ability"
 	)
+
+
+# --- _resolve_targets() tests (Phase 3) ---
+
+
+func _make_entity_with_component(team: int = 0, pos: Vector2 = Vector2.ZERO) -> ChimeraEntity:
+	var entity := ChimeraEntity.new()
+	entity.combat_state = CombatState.new()
+	entity.combat_state.team = team
+	entity.combat_state.chimera_data = ChimeraData.new()
+	entity.team = team
+	entity.global_position = pos
+	var ec := EffectComponent.new()
+	ec.name = "EffectComponent"
+	entity.add_child(ec)
+	var ac := AbilityComponent.new()
+	ac.name = "AbilityComponent"
+	entity.add_child(ac)
+	add_child_autofree(entity)
+	return entity
+
+
+func test_resolve_targets_self_returns_source() -> void:
+	var source := _make_entity_with_component(0, Vector2(0, 0))
+	source.ability_component.initialize(source.combat_state)
+	var targets := source.ability_component._resolve_targets("SELF", null, 0.0)
+	assert_eq(targets.size(), 1, "SELF should return 1 target")
+	assert_eq(targets[0], source, "SELF target should be the source entity")
+
+
+func test_resolve_targets_target_returns_primary() -> void:
+	var source := _make_entity_with_component(0, Vector2(0, 0))
+	var target := _make_entity_with_component(1, Vector2(100, 0))
+	source.ability_component.initialize(source.combat_state)
+	var targets := source.ability_component._resolve_targets("TARGET", target, 0.0)
+	assert_eq(targets.size(), 1, "TARGET should return 1 target")
+	assert_eq(targets[0], target, "TARGET should return the primary target")
+
+
+func test_resolve_targets_aoe_enemies_within_range() -> void:
+	var source := _make_entity_with_component(0, Vector2(0, 0))
+	var enemy_a := _make_entity_with_component(1, Vector2(50, 0))
+	var enemy_b := _make_entity_with_component(1, Vector2(200, 0))
+	var ally := _make_entity_with_component(0, Vector2(30, 0))
+	var ctx := CombatContext.new()
+	ctx.register_entity(source)
+	ctx.register_entity(enemy_a)
+	ctx.register_entity(enemy_b)
+	ctx.register_entity(ally)
+	source.combat_context = ctx
+	source.ability_component.initialize(source.combat_state)
+	# Range 100 from primary_target (source at 0,0): enemy_a at 50 is in, enemy_b at 200 is out
+	var targets := source.ability_component._resolve_targets("AOE_ENEMIES", source, 100.0)
+	assert_eq(targets.size(), 1, "Should return 1 enemy within range")
+	assert_eq(targets[0], enemy_a, "Should return enemy_a (within range)")
+
+
+func test_resolve_targets_aoe_allies_within_range() -> void:
+	var source := _make_entity_with_component(0, Vector2(0, 0))
+	var ally := _make_entity_with_component(0, Vector2(30, 0))
+	var enemy := _make_entity_with_component(1, Vector2(50, 0))
+	var ctx := CombatContext.new()
+	ctx.register_entity(source)
+	ctx.register_entity(ally)
+	ctx.register_entity(enemy)
+	source.combat_context = ctx
+	source.ability_component.initialize(source.combat_state)
+	# Range 100 from primary_target (source at 0,0): source + ally within range
+	var targets := source.ability_component._resolve_targets("AOE_ALLIES", source, 100.0)
+	assert_eq(targets.size(), 2, "Should return source + ally within range")
+	assert_true(targets.has(source), "Should include source")
+	assert_true(targets.has(ally), "Should include ally")
+
+
+func test_resolve_targets_all_enemies_no_range_limit() -> void:
+	var source := _make_entity_with_component(0, Vector2(0, 0))
+	var enemy_a := _make_entity_with_component(1, Vector2(50, 0))
+	var enemy_b := _make_entity_with_component(1, Vector2(500, 0))
+	var ctx := CombatContext.new()
+	ctx.register_entity(source)
+	ctx.register_entity(enemy_a)
+	ctx.register_entity(enemy_b)
+	source.combat_context = ctx
+	source.ability_component.initialize(source.combat_state)
+	var targets := source.ability_component._resolve_targets("ALL_ENEMIES", null, 0.0)
+	assert_eq(targets.size(), 2, "Should return all enemies regardless of range")
+
+
+# --- execute_ability() integration tests (Phase 3) ---
+
+
+func test_execute_ability_resolves_targets_and_executes_effects() -> void:
+	var source := _make_entity_with_component(0, Vector2(0, 0))
+	source.combat_state.attack = 20.0
+	var target := _make_entity_with_component(1, Vector2(100, 0))
+	target.combat_state.max_hp = 100.0
+	target.combat_state.current_hp = 100.0
+	var ctx := CombatContext.new()
+	ctx.register_entity(source)
+	ctx.register_entity(target)
+	source.combat_context = ctx
+	source.ability_component.initialize(source.combat_state)
+	var ability := _make_ability("fire_blast")
+	ability.targeting = "TARGET"
+	ability.range = 100.0
+	var effect := AbilityEffect.new()
+	effect.effect_type = AbilityEffect.EffectType.DAMAGE
+	effect.params = {"amount": 2.0}
+	ability.effects = [effect]
+	source.ability_component.execute_ability(ability, target)
+	# damage = 2.0 * 20.0 = 40.0
+	assert_eq(target.combat_state.current_hp, 60.0, "execute_ability should deal damage to target")
+	assert_eq(
+		source.ability_component.current_ability_id, "fire_blast", "Should set current_ability_id"
+	)
+	assert_false(source.ability_component.is_off_cooldown(ability), "Ability should be on cooldown")
+
+
+func test_execute_ability_executes_multiple_effects() -> void:
+	var source := _make_entity_with_component(0, Vector2(0, 0))
+	source.combat_state.attack = 20.0
+	var target := _make_entity_with_component(1, Vector2(100, 0))
+	target.combat_state.max_hp = 100.0
+	target.combat_state.current_hp = 100.0
+	var ctx := CombatContext.new()
+	ctx.register_entity(source)
+	ctx.register_entity(target)
+	source.combat_context = ctx
+	source.ability_component.initialize(source.combat_state)
+	var ability := _make_ability("combo_strike")
+	ability.targeting = "TARGET"
+	ability.range = 100.0
+	var damage_effect := AbilityEffect.new()
+	damage_effect.effect_type = AbilityEffect.EffectType.DAMAGE
+	damage_effect.params = {"amount": 2.0}
+	var debuff_effect := AbilityEffect.new()
+	debuff_effect.effect_type = AbilityEffect.EffectType.DEBUFF_STAT
+	debuff_effect.params = {"stat": "attack", "amount": 5.0, "duration": 3.0}
+	ability.effects = [damage_effect, debuff_effect]
+	source.ability_component.execute_ability(ability, target)
+	# damage = 2.0 * 20.0 = 40.0
+	assert_eq(target.combat_state.current_hp, 60.0, "Should deal damage")
+	assert_eq(target.effect_component.active_effects.size(), 1, "Should apply debuff")
+	assert_eq(target.effect_component.active_effects[0].stat_name, "attack")

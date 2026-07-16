@@ -5,7 +5,7 @@ extends Node
 ## Initialized from CombatState at combat start; tracks cooldowns per ability.
 ##
 ## Phase 1 (TRACK-007): initialization, cooldown tracking, ready-ability querying.
-## Phase 3 will add target resolution and effect execution via AbilitySystem.
+## Phase 3 (TRACK-007): target resolution and effect execution via AbilitySystem.
 ## Phase 4 will add passive ability application.
 
 ## All abilities available to this entity (part abilities + combo).
@@ -17,10 +17,14 @@ var cooldowns: Dictionary = {}
 ## ID of the currently executing ability (for ActiveEffect source tracking).
 var current_ability_id: String = ""
 
+## Reference to the parent ChimeraEntity (for combat_context, team, position).
+var entity: ChimeraEntity = null
+
 
 ## Initializes abilities from the combat state's chimera data.
 ## Collects part abilities + combo ability, initializes cooldowns, applies passives.
 func initialize(combat_state: CombatState) -> void:
+	entity = get_parent() as ChimeraEntity
 	var chimera_data: ChimeraData = combat_state.chimera_data
 	abilities.clear()
 	cooldowns.clear()
@@ -52,12 +56,53 @@ func get_ready_abilities() -> Array[AbilityData]:
 	return ready
 
 
-## Executes an ability: sets current_ability_id, starts cooldown.
-## Target resolution and effect execution are added in Phase 3.
-func execute_ability(ability: AbilityData, _primary_target: ChimeraEntity) -> void:
+## Executes an ability: sets current_ability_id, starts cooldown, resolves targets,
+## and calls AbilitySystem.execute_effect() for each effect.
+func execute_ability(ability: AbilityData, primary_target: ChimeraEntity) -> void:
 	current_ability_id = ability.id
 	cooldowns[ability.id] = ability.cooldown
-	# Phase 3: resolve targets and call AbilitySystem.execute_effect()
+	if entity == null:
+		return
+	var targets := _resolve_targets(ability.targeting, primary_target, ability.range)
+	for effect in ability.effects:
+		AbilitySystem.execute_effect(effect, entity, targets, ability.effects)
+
+
+## Resolves targets based on the ability's targeting pattern.
+## Uses combat_context for AOE expansion and range filtering.
+func _resolve_targets(
+	targeting: String, primary_target: ChimeraEntity, ability_range: float
+) -> Array[ChimeraEntity]:
+	var targets: Array[ChimeraEntity] = []
+	match targeting:
+		"SELF":
+			targets = [entity]
+		"TARGET":
+			if primary_target != null:
+				targets = [primary_target]
+		"AOE_ENEMIES":
+			if entity.combat_context != null:
+				var enemies := entity.combat_context.get_enemies_of(entity.combat_state.team)
+				targets = _filter_by_range(enemies, primary_target, ability_range)
+		"AOE_ALLIES":
+			if entity.combat_context != null:
+				var allies := entity.combat_context.get_allies_of(entity.combat_state.team)
+				targets = _filter_by_range(allies, primary_target, ability_range)
+		"ALL_ENEMIES":
+			if entity.combat_context != null:
+				targets = entity.combat_context.get_enemies_of(entity.combat_state.team)
+	return targets
+
+
+## Filters entities to those within ability_range of the primary_target.
+func _filter_by_range(
+	entities: Array[ChimeraEntity], primary_target: ChimeraEntity, ability_range: float
+) -> Array[ChimeraEntity]:
+	var in_range: Array[ChimeraEntity] = []
+	for e in entities:
+		if primary_target.global_position.distance_to(e.global_position) <= ability_range:
+			in_range.append(e)
+	return in_range
 
 
 ## Applies passive abilities at combat start.

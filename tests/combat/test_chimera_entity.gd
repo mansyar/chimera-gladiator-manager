@@ -33,6 +33,22 @@ func test_process_without_effect_component_does_not_error():
 	assert_true(is_instance_valid(entity), "_process should not crash without EffectComponent")
 
 
+func test_process_calls_ability_component_update_cooldowns():
+	var entity := ChimeraEntity.new()
+	var ability_comp := AbilityComponent.new()
+	ability_comp.name = "AbilityComponent"
+	entity.add_child(ability_comp)
+	add_child_autofree(entity)
+	ability_comp.cooldowns["test_ability"] = 5.0
+	entity._process(2.0)
+	assert_almost_eq(
+		ability_comp.cooldowns["test_ability"],
+		3.0,
+		0.01,
+		"Cooldown should decrement by delta via _process"
+	)
+
+
 func test_move_toward_target_sets_velocity_horizontal():
 	var entity := ChimeraEntity.new()
 	add_child_autofree(entity)

@@ -23,6 +23,8 @@ var combat_context: CombatContext
 func _process(delta: float) -> void:
 	if effect_component:
 		effect_component.tick(delta)
+	if ability_component:
+		ability_component.update_cooldowns(delta)
 	if combat_state and attack_timer > 0.0:
 		attack_timer -= delta
 
