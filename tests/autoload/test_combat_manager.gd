@@ -150,6 +150,73 @@ func test_check_win_condition_result_dict_player_win() -> void:
 	)
 
 
+# --- _on_entity_died tests ---
+
+
+func test_on_entity_died_unregisters_from_context() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	var entity: ChimeraEntity = CombatManager.combat_entities[3]
+	CombatManager._on_entity_died(entity)
+	assert_false(
+		CombatManager.combat_context.entities.has(entity),
+		"Entity should be unregistered from CombatContext after death"
+	)
+
+
+func test_on_entity_died_calls_check_win_condition() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	_kill_team(1)
+	var last_enemy: ChimeraEntity = CombatManager.combat_entities[5]
+	CombatManager._on_entity_died(last_enemy)
+	assert_false(
+		CombatManager.match_active,
+		"Match should end after _on_entity_died triggers check_win_condition"
+	)
+
+
+# --- _on_timer_expired tests ---
+
+
+func test_on_timer_expired_winner_by_hp_percent() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	# Set player team to full HP, enemy team to half HP
+	for entity in CombatManager.combat_entities:
+		if entity.combat_state.team == 0:
+			entity.combat_state.current_hp = entity.combat_state.max_hp
+			entity.combat_state.is_dead = false
+		else:
+			entity.combat_state.current_hp = entity.combat_state.max_hp * 0.5
+			entity.combat_state.is_dead = false
+	CombatManager._on_timer_expired()
+	assert_false(CombatManager.match_active, "Match should end on timer expiry")
+	assert_eq(CombatManager.match_result.get("winner", -1), 0, "Player should win with higher HP%")
+	assert_true(CombatManager.match_result.get("won", false), "won should be true when player wins")
+
+
+func test_on_timer_expired_player_wins_tie() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	# Set both teams to equal HP (50%)
+	for entity in CombatManager.combat_entities:
+		entity.combat_state.current_hp = entity.combat_state.max_hp * 0.5
+		entity.combat_state.is_dead = false
+	CombatManager._on_timer_expired()
+	assert_eq(
+		CombatManager.match_result.get("winner", -1), 0, "Player should win ties on timer expiry"
+	)
+
+
 # --- _find_or_create_entities_container tests ---
 
 

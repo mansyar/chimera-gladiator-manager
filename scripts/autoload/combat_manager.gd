@@ -106,9 +106,20 @@ func end_match(result: Dictionary) -> void:
 
 
 ## Handles timer expiry — determines winner by total HP%.
-## Full implementation in a later task.
+## Player wins ties (equal HP%).
+## (FR-3: Timer Expiry Handling)
 func _on_timer_expired() -> void:
-	pass
+	var player_hp := _calc_team_hp_percent(0)
+	var enemy_hp := _calc_team_hp_percent(1)
+	var winner: int
+	var surviving_hp: float
+	if player_hp >= enemy_hp:
+		winner = 0
+		surviving_hp = player_hp
+	else:
+		winner = 1
+		surviving_hp = enemy_hp
+	end_match(_build_result(winner, surviving_hp))
 
 
 ## Find the arena's Entities node via the 'arena_entities' scene tree group.
@@ -174,6 +185,7 @@ func _spawn_entity(
 
 
 ## Handles entity death. Unregisters from context and checks win condition.
-## (FR-3: Entity Death Handling — full implementation in a later task)
-func _on_entity_died(_entity: ChimeraEntity) -> void:
-	pass
+## (FR-3: Entity Death Handling)
+func _on_entity_died(entity: ChimeraEntity) -> void:
+	combat_context.unregister_entity(entity)
+	check_win_condition()
