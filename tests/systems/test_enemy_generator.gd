@@ -126,3 +126,44 @@ func test_generate_enemy_chimera_recalculates_stats() -> void:
 	# After recalculate_stats, max_hp should be > 0 (parts contribute hp bonuses)
 	assert_gt(chimera.max_hp, 0.0, "max_hp should be positive after recalculate_stats")
 	assert_gt(chimera.attack, 0.0, "attack should be positive after recalculate_stats")
+
+
+# --- generate_enemy_roster ---
+
+
+func test_generate_enemy_roster_returns_three_chimeras() -> void:
+	var roster: Array = PartDatabase.get_starter_chimeras()
+	var enemies: Array = EnemyGenerator.generate_enemy_roster(roster, "regular", 0, 0)
+	assert_eq(enemies.size(), 3, "Should return exactly 3 enemy chimeras")
+
+
+func test_generate_enemy_roster_returns_chimera_data_instances() -> void:
+	var roster: Array = PartDatabase.get_starter_chimeras()
+	var enemies: Array = EnemyGenerator.generate_enemy_roster(roster, "regular", 0, 0)
+	for i in range(enemies.size()):
+		assert_true(enemies[i] is ChimeraData, "Enemy %d should be a ChimeraData instance" % i)
+
+
+func test_generate_enemy_roster_each_chimera_has_four_parts() -> void:
+	var roster: Array = PartDatabase.get_starter_chimeras()
+	var enemies: Array = EnemyGenerator.generate_enemy_roster(roster, "regular", 0, 0)
+	for i in range(enemies.size()):
+		assert_not_null(enemies[i].head, "Enemy %d should have a head part" % i)
+		assert_not_null(enemies[i].torso, "Enemy %d should have a torso part" % i)
+		assert_not_null(enemies[i].arms, "Enemy %d should have an arms part" % i)
+		assert_not_null(enemies[i].legs, "Enemy %d should have a legs part" % i)
+
+
+func test_generate_enemy_roster_each_chimera_has_recalculated_stats() -> void:
+	var roster: Array = PartDatabase.get_starter_chimeras()
+	var enemies: Array = EnemyGenerator.generate_enemy_roster(roster, "regular", 0, 0)
+	for i in range(enemies.size()):
+		assert_gt(enemies[i].max_hp, 0.0, "Enemy %d should have positive max_hp" % i)
+
+
+func test_generate_enemy_roster_tournament_tier_4() -> void:
+	var roster: Array = PartDatabase.get_starter_chimeras()
+	var enemies: Array = EnemyGenerator.generate_enemy_roster(roster, "tournament", 0, 4)
+	assert_eq(enemies.size(), 3, "Should return 3 enemies for tournament tier 4")
+	for i in range(enemies.size()):
+		assert_gt(enemies[i].max_hp, 0.0, "Tournament enemy %d should have positive max_hp" % i)

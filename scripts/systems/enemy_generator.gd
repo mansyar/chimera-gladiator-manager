@@ -75,3 +75,20 @@ static func _generate_enemy_chimera(rarity_weights: Dictionary) -> ChimeraData:
 	chimera.calculate_instability()
 	chimera.recalculate_stats()
 	return chimera
+
+
+# --- Enemy Roster Generation (FR-5) ---
+
+
+## Generates a roster of 3 enemy chimeras with difficulty scaled by match parameters.
+## Uses rubber-band difficulty for regular matches and tier-based scaling for tournaments.
+## (FR-5: Enemy Generation — GDD 4.6 Rubber-band difficulty)
+static func generate_enemy_roster(
+	_player_roster: Array[ChimeraData], match_type: String, losing_streak: int, tournament_tier: int
+) -> Array[ChimeraData]:
+	var tier: String = _get_difficulty_tier(match_type, losing_streak, tournament_tier)
+	var rarity_weights: Dictionary = DIFFICULTY_WEIGHTS[tier]
+	var roster: Array[ChimeraData] = []
+	for i in 3:
+		roster.append(_generate_enemy_chimera(rarity_weights))
+	return roster
