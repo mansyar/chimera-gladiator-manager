@@ -52,14 +52,14 @@ Focus: Transform the CombatManager stub into the central match orchestrator — 
     - [x] Implement: `_on_entity_died(entity)` — unregister, check win. `_on_timer_expired()` — HP% calc, end_match
     - [x] Verify: tests pass
 
-- [ ] Task: Implement `end_match()` — state clear, emit signal
-    - [ ] Write failing test: `end_match()` sets `match_active = false`
-    - [ ] Write failing test: `end_match()` clears `combat_entities`, `player_formation`, `enemy_formation` arrays
-    - [ ] Write failing test: `end_match()` clears `CombatContext.entities`
-    - [ ] Write failing test: `end_match()` frees all spawned ChimeraEntity nodes
-    - [ ] Write failing test: `end_match()` emits `EventBus.match_ended` with result dictionary containing winner, won, surviving_hp, duration, gold_earned, infamy_earned
-    - [ ] Implement: `end_match(result)` — set inactive, clear arrays, clear context, free entities, emit match_ended
-    - [ ] Verify: tests pass, coverage >=80%
+- [x] Task: Implement `end_match()` — state clear, emit signal (8555301)
+    - [x] Write failing test: `end_match()` sets `match_active = false`
+    - [x] Write failing test: `end_match()` clears `combat_entities`, `player_formation`, `enemy_formation` arrays
+    - [x] Write failing test: `end_match()` clears `CombatContext.entities`
+    - [x] Write failing test: `end_match()` frees all spawned ChimeraEntity nodes
+    - [x] Write failing test: `end_match()` emits `EventBus.match_ended` with result dictionary containing winner, won, surviving_hp, duration, gold_earned, infamy_earned
+    - [x] Implement: `end_match(result)` — set inactive, clear arrays, clear context, free entities, emit match_ended
+    - [x] Verify: tests pass, coverage >=80%
 
 - [ ] Task: Implement `get_enemies_of()` helper
     - [ ] Write failing test: `get_enemies_of(0)` returns all alive enemy (team=1) entities
