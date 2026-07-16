@@ -16,17 +16,17 @@ Focus: Transform the CombatManager stub into the central match orchestrator — 
     - [x] Implement: `_find_or_create_entities_container()` — searches for node in `arena_entities` group, falls back to creating Node2D
     - [x] Verify: `gd-tools lint && gd-tools format --check`
 
-- [ ] Task: Implement `start_match()` — entity creation, placement, initialization
-    - [ ] Write failing test: `start_match()` creates 6 ChimeraEntity instances (3 player team=0, 3 enemy team=1)
-    - [ ] Write failing test: Each entity has initialized CombatState (HP=max_hp, stats snapshotted from ChimeraData)
-    - [ ] Write failing test: Each entity placed at correct world position via `ArenaController.grid_to_world()`
-    - [ ] Write failing test: All entities registered in CombatContext
-    - [ ] Write failing test: Each entity's `died` signal connected to `_on_entity_died`
-    - [ ] Write failing test: `match_active` set to true, `timer` set to 60.0
-    - [ ] Write failing test: `EventBus.match_started` emitted with player_roster and enemy_roster
-    - [ ] Write failing test: `match_type` and `tournament_tier` stored on CombatManager
-    - [ ] Implement: `start_match(player_roster, enemy_roster, formations, match_type, tournament_tier)` — instantiate chimera_entity.tscn per chimera, initialize CombatState, apply passives via AbilityComponent, place at grid positions, register in CombatContext, connect signals, set state
-    - [ ] Verify: all tests pass, `gd-tools test --coverage --min 80`
+- [x] Task: Implement `start_match()` — entity creation, placement, initialization (8254daa)
+    - [x] Write failing test: `start_match()` creates 6 ChimeraEntity instances (3 player team=0, 3 enemy team=1)
+    - [x] Write failing test: Each entity has initialized CombatState (HP=max_hp, stats snapshotted from ChimeraData)
+    - [x] Write failing test: Each entity placed at correct world position via `ArenaController.grid_to_world()`
+    - [x] Write failing test: All entities registered in CombatContext
+    - [x] Write failing test: Each entity's `died` signal connected to `_on_entity_died`
+    - [x] Write failing test: `match_active` set to true, `timer` set to 60.0
+    - [x] Write failing test: `EventBus.match_started` emitted with player_roster and enemy_roster
+    - [x] Write failing test: `match_type` and `tournament_tier` stored on CombatManager
+    - [x] Implement: `start_match(player_roster, enemy_roster, formations, match_type, tournament_tier)` — instantiate chimera_entity.tscn per chimera, initialize CombatState, apply passives via AbilityComponent, place at grid positions, register in CombatContext, connect signals, set state
+    - [x] Verify: all tests pass, `gd-tools test --coverage --min 80`
 
 - [ ] Task: Implement `_process()` timer decrement and win condition check
     - [ ] Write failing test: `_process()` returns early when `match_active == false` (idle state)
