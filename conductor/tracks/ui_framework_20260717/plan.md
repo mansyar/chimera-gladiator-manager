@@ -1,7 +1,7 @@
 <protect>
 # Implementation Plan: UI Framework & Screen Manager (TRACK-009)
 
-## Phase 1: UI Framework (ScreenManager, main.tscn, Theme, Stubs)
+## Phase 1: UI Framework (ScreenManager, main.tscn, Theme, Stubs) [checkpoint: b267438]
 
 - [x] Task: Read spec.md and workflow.md to refresh context before implementation
     - [x] Read `conductor/tracks/ui_framework_20260717/spec.md`
