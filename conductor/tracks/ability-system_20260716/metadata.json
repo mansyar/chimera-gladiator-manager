@@ -1,0 +1,8 @@
+{
+  "track_id": "ability-system_20260716",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-07-16T12:49:00Z",
+  "updated_at": "2026-07-16T12:49:00Z",
+  "description": "TRACK-007: Ability & Effect System — Implement ability execution engine, AbilitySystem static class with all 11 effect types, cooldown management, passive application, and SHIELD damage absorption."
+}
