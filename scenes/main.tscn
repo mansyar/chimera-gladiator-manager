@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bnpu5cm66tb5x"]
+[gd_scene load_steps=3 format=3 uid="uid://bnpu5cm66tb5x"]
 
 [ext_resource type="Script" path="res://scripts/ui/screen_manager.gd" id="1_sm"]
+[ext_resource type="Script" path="res://scripts/ui/top_bar.gd" id="2_tb"]
 
 [node name="Main" type="Control"]
 anchors_preset = 15
@@ -14,6 +15,7 @@ anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 custom_minimum_size = Vector2(0, 40)
+script = ExtResource("2_tb")
 
 [node name="ScreenManager" type="Control" parent="."]
 anchors_preset = 15
