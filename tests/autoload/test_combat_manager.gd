@@ -140,13 +140,13 @@ func test_check_win_condition_result_dict_player_win() -> void:
 	)
 	assert_eq(
 		CombatManager.match_result.get("gold_earned", -1),
-		0,
-		"gold_earned should be 0 (Economy integration in Phase 3)"
+		30,
+		"gold_earned should be 30 for regular win (Economy integration)"
 	)
 	assert_eq(
 		CombatManager.match_result.get("infamy_earned", -1),
-		0,
-		"infamy_earned should be 0 (Economy integration in Phase 3)"
+		2,
+		"infamy_earned should be 2 for regular win (Economy integration)"
 	)
 
 
@@ -320,6 +320,94 @@ func test_end_match_emits_match_ended() -> void:
 	assert_eq(params[0]["winner"], 0, "Result should contain winner")
 	assert_eq(params[0]["won"], true, "Result should contain won")
 	assert_eq(params[0]["gold_earned"], 30, "Result should contain gold_earned")
+
+
+# --- Economy integration tests ---
+
+
+func _revive_team(team_id: int) -> void:
+	for entity in CombatManager.combat_entities:
+		if entity.combat_state.team == team_id:
+			entity.combat_state.is_dead = false
+			entity.combat_state.current_hp = entity.combat_state.max_hp
+
+
+func test_end_match_calculates_gold_reward_for_regular_win() -> void:
+	_reset_game_state()
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 0)
+	_revive_team(0)
+	_kill_team(1)
+	CombatManager.check_win_condition()
+	assert_eq(
+		CombatManager.match_result.get("gold_earned", -1), 30, "Regular win should yield 30 gold"
+	)
+
+
+func test_end_match_calculates_infamy_reward_for_regular_win() -> void:
+	_reset_game_state()
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 0)
+	_revive_team(0)
+	_kill_team(1)
+	CombatManager.check_win_condition()
+	assert_eq(
+		CombatManager.match_result.get("infamy_earned", -1), 2, "Regular win should yield 2 infamy"
+	)
+
+
+func test_end_match_updates_game_state_gold() -> void:
+	_reset_game_state()
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 0)
+	_revive_team(0)
+	_kill_team(1)
+	CombatManager.check_win_condition()
+	assert_eq(GameState.gold, 230, "GameState.gold should increase by 30 (200 + 30 reward)")
+
+
+func test_end_match_updates_game_state_history() -> void:
+	_reset_game_state()
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 0)
+	_revive_team(0)
+	_kill_team(1)
+	CombatManager.check_win_condition()
+	assert_eq(GameState.match_history.size(), 1, "match_history should have 1 entry")
+	assert_eq(
+		GameState.match_history[0].get("result", ""),
+		"win",
+		"match_history entry should record a win"
+	)
+
+
+func test_end_match_tournament_tier_3_rewards() -> void:
+	_reset_game_state()
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "tournament", 3)
+	_revive_team(0)
+	_kill_team(1)
+	CombatManager.check_win_condition()
+	assert_eq(
+		CombatManager.match_result.get("gold_earned", -1),
+		200,
+		"Tournament tier 3 win should yield 200 gold (50 * 4)"
+	)
+	assert_eq(
+		CombatManager.match_result.get("infamy_earned", -1),
+		40,
+		"Tournament tier 3 win should yield 40 infamy (10 * 4)"
+	)
 
 
 # --- _find_or_create_entities_container tests ---
@@ -533,6 +621,13 @@ func test_get_enemies_of_one_returns_alive_players() -> void:
 # --- Cleanup ---
 
 
+func _reset_game_state() -> void:
+	GameState.gold = 200
+	GameState.infamy = 0
+	GameState.match_history.clear()
+	GameState.losing_streak = 0
+
+
 func after_each() -> void:
 	# Reset CombatManager state
 	CombatManager.match_active = false
@@ -548,3 +643,6 @@ func after_each() -> void:
 	for child in CombatManager.get_children():
 		CombatManager.remove_child(child)
 		child.free()
+	# Reset GameState to prevent cross-test side effects from economy integration
+	_reset_game_state()
+	SaveManager.delete_save()

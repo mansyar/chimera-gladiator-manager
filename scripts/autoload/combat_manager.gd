@@ -85,7 +85,8 @@ func _calc_team_hp_percent(team: int) -> float:
 
 
 ## Builds the match result dictionary.
-## Rewards (gold_earned, infamy_earned) are 0 here — populated in Phase 3.
+## Rewards (gold_earned, infamy_earned) are 0 here — populated by end_match
+## via Economy.calculate_match_reward.
 func _build_result(winner: int, surviving_hp: float) -> Dictionary:
 	return {
 		"winner": winner,
@@ -97,11 +98,21 @@ func _build_result(winner: int, surviving_hp: float) -> Dictionary:
 	}
 
 
-## Ends the current match. Emits match_ended signal, frees all spawned
-## entities, and clears all combat state to return CombatManager to idle.
-## (FR-1: end_match, FR-4: Idle State)
+## Ends the current match. Calculates rewards via Economy, updates GameState,
+## emits match_ended signal, frees all spawned entities, and clears all
+## combat state to return CombatManager to idle.
+## (FR-1: end_match, FR-4: Idle State, FR-6: Post-Match Economy Integration)
 func end_match(result: Dictionary) -> void:
 	match_active = false
+	# Calculate rewards and update result dict
+	var won: bool = result.get("won", false)
+	var rewards: Dictionary = Economy.calculate_match_reward(
+		match_type, won, tournament_tier, GameState.losing_streak
+	)
+	result["gold_earned"] = rewards["gold"]
+	result["infamy_earned"] = rewards["infamy"]
+	# Update GameState with match result (gold, infamy, history, market, save)
+	GameState.record_match_result(won, match_type, rewards)
 	match_result = result
 	EventBus.match_ended.emit(result)
 	# Free all spawned entities (deferred via queue_free)
