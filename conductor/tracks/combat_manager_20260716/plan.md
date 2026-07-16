@@ -73,11 +73,11 @@ Focus: Transform the CombatManager stub into the central match orchestrator — 
 
 Focus: Create `enemy_generator.gd` static utility class with rubber-band difficulty for Regular matches and tier-based scaling for Tournaments.
 
-- [ ] Task: Read `spec.md` and `workflow.md` to establish context for this phase
-    - [ ] Read the confirmed track specification
-    - [ ] Read `conductor/workflow.md` TDD and checkpointing protocols
+- [x] Task: Read `spec.md` and `workflow.md` to establish context for this phase
+    - [x] Read the confirmed track specification
+    - [x] Read `conductor/workflow.md` TDD and checkpointing protocols
 
-- [ ] Task: Create `enemy_generator.gd` with difficulty tier rarity tables
+- [x] Task: Create `enemy_generator.gd` with difficulty tier rarity tables (5baf5c2)
     - [ ] Write failing test: `EnemyGenerator.DIFFICULTY_WEIGHTS` contains 4 tiers: weak, normal, tough, strong
     - [ ] Write failing test: weak tier weights = {COMMON: 80, UNCOMMON: 18, RARE: 2, LEGENDARY: 0}
     - [ ] Write failing test: normal tier weights = {COMMON: 60, UNCOMMON: 30, RARE: 9, LEGENDARY: 1}
@@ -86,7 +86,7 @@ Focus: Create `enemy_generator.gd` static utility class with rubber-band difficu
     - [ ] Implement: Create `scripts/systems/enemy_generator.gd` as static class with `class_name EnemyGenerator`, define `DIFFICULTY_WEIGHTS` Dictionary constant
     - [ ] Verify: `gd-tools lint && gd-tools format --check`
 
-- [ ] Task: Implement `_get_difficulty_tier()` difficulty selection logic
+- [~] Task: Implement `_get_difficulty_tier()` difficulty selection logic
     - [ ] Write failing test: Regular match with losing_streak < 3 returns "normal"
     - [ ] Write failing test: Regular match with losing_streak >= 3 returns "weak" (rubber-band per GDD 4.6)
     - [ ] Write failing test: Tournament tier 1 returns "tough"
