@@ -1,8 +1,13 @@
+<protect>
 # Implementation Plan: TRACK-007 — Ability & Effect System
 
 ## Phase 1: AbilityComponent Foundation
 
 Focus: Replace the TRACK-005 stub with a working AbilityComponent — initialization, cooldown tracking, and ready-ability querying.
+
+- [ ] Task: Read `spec.md` and `workflow.md` to establish context for this phase
+    - [ ] Read `conductor/tracks/ability-system_20260716/spec.md`
+    - [ ] Read `conductor/workflow.md`
 
 - [ ] Task: Remove unused stub and add `current_ability_id` property
     - [ ] Remove `get_next_ready_ability(_priority: Array)` stub method (AIController has its own; this is dead code)
@@ -29,6 +34,10 @@ Focus: Replace the TRACK-005 stub with a working AbilityComponent — initializa
 ## Phase 2: AbilitySystem Static Class — All 11 Effect Types
 
 Focus: Create the `AbilitySystem` static utility class with `execute_effect()` handling all 11 EffectType variants.
+
+- [ ] Task: Read `spec.md` and `workflow.md` to establish context for this phase
+    - [ ] Read `conductor/tracks/ability-system_20260716/spec.md`
+    - [ ] Read `conductor/workflow.md`
 
 - [ ] Task: Create `ability_system.gd` and implement DAMAGE + HEAL
     - [ ] Write failing test: DAMAGE reduces target HP by `params["amount"] * source.combat_state.attack`
@@ -68,6 +77,10 @@ Focus: Create the `AbilitySystem` static utility class with `execute_effect()` h
 
 Focus: Wire AbilityComponent to AbilitySystem via `execute_ability()`, implement target resolution, and update all callers.
 
+- [ ] Task: Read `spec.md` and `workflow.md` to establish context for this phase
+    - [ ] Read `conductor/tracks/ability-system_20260716/spec.md`
+    - [ ] Read `conductor/workflow.md`
+
 - [ ] Task: Implement target resolution in AbilityComponent
     - [ ] Write failing test: `"SELF"` targeting returns `[source_entity]`
     - [ ] Write failing test: `"TARGET"` targeting returns `[primary_target]`
@@ -95,6 +108,10 @@ Focus: Wire AbilityComponent to AbilitySystem via `execute_ability()`, implement
 
 Focus: Implement passive ability application at combat start, verify berserk persistence, and add SHIELD damage absorption to EffectComponent.
 
+- [ ] Task: Read `spec.md` and `workflow.md` to establish context for this phase
+    - [ ] Read `conductor/tracks/ability-system_20260716/spec.md`
+    - [ ] Read `conductor/workflow.md`
+
 - [ ] Task: Implement `apply_passives(combat_state)`
     - [ ] Write failing test: apply_passives modifies CombatState snapshot (e.g., passive that buffs attack increases `combat_state.attack`)
     - [ ] Write failing test: apply_passives only processes abilities where `type == PASSIVE`
@@ -112,3 +129,4 @@ Focus: Implement passive ability application at combat start, verify berserk per
     - [ ] Verify: all tests pass, `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: Passives & SHIELD Damage Absorption' (Protocol in workflow.md)
+</protect>

@@ -1,3 +1,4 @@
+<protect>
 # Track Specification: TRACK-007 — Ability & Effect System
 
 ## Overview
@@ -145,3 +146,4 @@ The `AbilitySystem` static class provides `execute_effect(effect: AbilityEffect,
 - CombatManager match lifecycle (TRACK-008)
 - Specific ability values, cooldowns, and balancing (deferred to .tres data files)
 - Enemy generation (TRACK-008)
+</protect>
