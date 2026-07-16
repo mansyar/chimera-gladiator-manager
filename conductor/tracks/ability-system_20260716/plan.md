@@ -5,29 +5,29 @@
 
 Focus: Replace the TRACK-005 stub with a working AbilityComponent — initialization, cooldown tracking, and ready-ability querying.
 
-- [ ] Task: Read `spec.md` and `workflow.md` to establish context for this phase
-    - [ ] Read `conductor/tracks/ability-system_20260716/spec.md`
-    - [ ] Read `conductor/workflow.md`
+- [x] Task: Read `spec.md` and `workflow.md` to establish context for this phase
+    - [x] Read `conductor/tracks/ability-system_20260716/spec.md`
+    - [x] Read `conductor/workflow.md`
 
-- [ ] Task: Remove unused stub and add `current_ability_id` property
-    - [ ] Remove `get_next_ready_ability(_priority: Array)` stub method (AIController has its own; this is dead code)
-    - [ ] Add `var current_ability_id: String` property to AbilityComponent (for ActiveEffect source tracking per TDD)
-    - [ ] Add `var abilities: Array[AbilityData] = []` and `var cooldowns: Dictionary = {}` properties
-    - [ ] Verify: `gd-tools lint` passes with no unused function warnings
+- [x] Task: Remove unused stub and add `current_ability_id` property [5a6142d]
+    - [x] Remove `get_next_ready_ability(_priority: Array)` stub method (AIController has its own; this is dead code)
+    - [x] Add `var current_ability_id: String` property to AbilityComponent (for ActiveEffect source tracking per TDD)
+    - [x] Add `var abilities: Array[AbilityData] = []` and `var cooldowns: Dictionary = {}` properties
+    - [x] Verify: `gd-tools lint` passes with no unused function warnings
 
-- [ ] Task: Implement `initialize(combat_state: CombatState)`
-    - [ ] Write failing tests: test that initialize populates `abilities` from `chimera_data.part_abilities`, adds combo ability via `get_combo_ability()`, initializes `cooldowns` dict with all ability IDs set to 0.0
-    - [ ] Write failing test: test that combo ability is null when all 4 parts are different strains (all-different case)
-    - [ ] Implement: `initialize()` collects part abilities + combo, populates cooldowns dict, calls `apply_passives(combat_state)`
-    - [ ] Verify: all tests pass, `gd-tools test --coverage --min 80`
+- [x] Task: Implement `initialize(combat_state: CombatState)` [5a6142d]
+    - [x] Write failing tests: test that initialize populates `abilities` from `chimera_data.part_abilities`, adds combo ability via `get_combo_ability()`, initializes `cooldowns` dict with all ability IDs set to 0.0
+    - [x] Write failing test: test that combo ability is null when all 4 parts are different strains (all-different case)
+    - [x] Implement: `initialize()` collects part abilities + combo, populates cooldowns dict, calls `apply_passives(combat_state)`
+    - [x] Verify: all tests pass, `gd-tools test --coverage --min 80`
 
-- [ ] Task: Implement cooldown management methods
-    - [ ] Write failing test: `is_off_cooldown()` returns true for fresh ability (cooldown 0.0), false after `execute_ability()` sets cooldown
-    - [ ] Write failing test: `is_off_cooldown()` returns true after cooldown expires via `update_cooldowns(delta)`
-    - [ ] Write failing test: `update_cooldowns(delta)` decrements all cooldowns, floors at 0.0
-    - [ ] Write failing test: `get_ready_abilities()` returns only ACTIVE-type abilities (not PASSIVE) that are off cooldown
-    - [ ] Implement: `is_off_cooldown(ability)`, `update_cooldowns(delta)`, `get_ready_abilities()`
-    - [ ] Verify: all tests pass, coverage >=80%
+- [x] Task: Implement cooldown management methods [5a6142d]
+    - [x] Write failing test: `is_off_cooldown()` returns true for fresh ability (cooldown 0.0), false after `execute_ability()` sets cooldown
+    - [x] Write failing test: `is_off_cooldown()` returns true after cooldown expires via `update_cooldowns(delta)`
+    - [x] Write failing test: `update_cooldowns(delta)` decrements all cooldowns, floors at 0.0
+    - [x] Write failing test: `get_ready_abilities()` returns only ACTIVE-type abilities (not PASSIVE) that are off cooldown
+    - [x] Implement: `is_off_cooldown(ability)`, `update_cooldowns(delta)`, `get_ready_abilities()`
+    - [x] Verify: all tests pass, coverage >=80%
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: AbilityComponent Foundation' (Protocol in workflow.md)
 
