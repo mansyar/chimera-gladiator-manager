@@ -35,41 +35,41 @@ Focus: Replace the TRACK-005 stub with a working AbilityComponent — initializa
 
 Focus: Create the `AbilitySystem` static utility class with `execute_effect()` handling all 11 EffectType variants.
 
-- [ ] Task: Read `spec.md` and `workflow.md` to establish context for this phase
-    - [ ] Read `conductor/tracks/ability-system_20260716/spec.md`
-    - [ ] Read `conductor/workflow.md`
+- [x] Task: Read `spec.md` and `workflow.md` to establish context for this phase
+    - [x] Read `conductor/tracks/ability-system_20260716/spec.md`
+    - [x] Read `conductor/workflow.md`
 
-- [ ] Task: Create `ability_system.gd` and implement DAMAGE + HEAL
-    - [ ] Write failing test: DAMAGE reduces target HP by `params["amount"] * source.combat_state.attack`
-    - [ ] Write failing test: HEAL increases HP, capped at max_hp (existing `heal()` handles cap)
-    - [ ] Implement: Create `scripts/systems/ability_system.gd` as static class, `execute_effect()` with match statement, DAMAGE and HEAL branches
-    - [ ] Verify: tests pass
+- [x] Task: Create `ability_system.gd` and implement DAMAGE + HEAL [e37d97b]
+    - [x] Write failing test: DAMAGE reduces target HP by `params["amount"] * source.combat_state.attack`
+    - [x] Write failing test: HEAL increases HP, capped at max_hp (existing `heal()` handles cap)
+    - [x] Implement: Create `scripts/systems/ability_system.gd` as static class, `execute_effect()` with match statement, DAMAGE and HEAL branches
+    - [x] Verify: tests pass
 
-- [ ] Task: Implement BUFF_STAT + DEBUFF_STAT
-    - [ ] Write failing test: BUFF_STAT creates ActiveEffect with positive amount, visible in `effect_component.active_effects`
-    - [ ] Write failing test: DEBUFF_STAT creates ActiveEffect with negative amount, `source_id` matches `current_ability_id`
-    - [ ] Implement: BUFF_STAT and DEBUFF_STAT branches — create ActiveEffect, add via `target.effect_component.add_effect()`
-    - [ ] Verify: tests pass
+- [x] Task: Implement BUFF_STAT + DEBUFF_STAT [e37d97b]
+    - [x] Write failing test: BUFF_STAT creates ActiveEffect with positive amount, visible in `effect_component.active_effects`
+    - [x] Write failing test: DEBUFF_STAT creates ActiveEffect with negative amount, `source_id` matches `current_ability_id`
+    - [x] Implement: BUFF_STAT and DEBUFF_STAT branches — create ActiveEffect, add via `target.effect_component.add_effect()`
+    - [x] Verify: tests pass
 
-- [ ] Task: Implement SHIELD + CLEANSE
-    - [ ] Write failing test: SHIELD creates ActiveEffect with `effect_type=SHIELD`, amount from params, added to effect_component
-    - [ ] Write failing test: CLEANSE calls `target.effect_component.cleanse()`, removes all DEBUFF_STAT effects but leaves BUFF_STAT and SHIELD intact
-    - [ ] Implement: SHIELD and CLEANSE branches
-    - [ ] Verify: tests pass
+- [x] Task: Implement SHIELD + CLEANSE [e37d97b]
+    - [x] Write failing test: SHIELD creates ActiveEffect with `effect_type=SHIELD`, amount from params, added to effect_component
+    - [x] Write failing test: CLEANSE calls `target.effect_component.cleanse()`, removes all DEBUFF_STAT effects but leaves BUFF_STAT and SHIELD intact
+    - [x] Implement: SHIELD and CLEANSE branches
+    - [x] Verify: tests pass
 
-- [ ] Task: Implement REVIVE + ENRAGE
-    - [ ] Write failing test: REVIVE sets `is_dead=false`, `current_hp = max_hp * params["hp_percent"]` on dead target; no effect on living
-    - [ ] Write failing test: ENRAGE calls `target.ai_controller.enter_berserk()`, overrides `berserk_timer` to `params["duration"]`
-    - [ ] Implement: REVIVE and ENRAGE branches
-    - [ ] Verify: tests pass
+- [x] Task: Implement REVIVE + ENRAGE [e37d97b]
+    - [x] Write failing test: REVIVE sets `is_dead=false`, `current_hp = max_hp * params["hp_percent"]` on dead target; no effect on living
+    - [x] Write failing test: ENRAGE calls `target.ai_controller.enter_berserk()`, overrides `berserk_timer` to `params["duration"]`
+    - [x] Implement: REVIVE and ENRAGE branches
+    - [x] Verify: tests pass
 
-- [ ] Task: Implement REPOSITION + STAT_MUTATION + RANDOM_EFFECT
-    - [ ] Write failing test: REPOSITION displaces target by `params["distance"]` pixels along source-to-target direction vector
-    - [ ] Write failing test: REPOSITION with SELF targeting pushes along source-to-nearest-enemy direction
-    - [ ] Write failing test: STAT_MUTATION permanently modifies `combat_state` stat (e.g., attack += amount), no ActiveEffect created, not removable by cleanse
-    - [ ] Write failing test: RANDOM_EFFECT picks a random effect from the ability's `effects` array (excluding itself) and executes it with same source/targets
-    - [ ] Implement: REPOSITION, STAT_MUTATION, RANDOM_EFFECT branches. RANDOM_EFFECT requires passing the parent ability's effects array.
-    - [ ] Verify: all 11 effect types tested, coverage >=80%
+- [x] Task: Implement REPOSITION + STAT_MUTATION + RANDOM_EFFECT [e37d97b]
+    - [x] Write failing test: REPOSITION displaces target by `params["distance"]` pixels along source-to-target direction vector
+    - [x] Write failing test: REPOSITION with SELF targeting pushes along source-to-nearest-enemy direction
+    - [x] Write failing test: STAT_MUTATION permanently modifies `combat_state` stat (e.g., attack += amount), no ActiveEffect created, not removable by cleanse
+    - [x] Write failing test: RANDOM_EFFECT picks a random effect from the ability's `effects` array (excluding itself) and executes it with same source/targets
+    - [x] Implement: REPOSITION, STAT_MUTATION, RANDOM_EFFECT branches. RANDOM_EFFECT requires passing the parent ability's effects array.
+    - [x] Verify: all 11 effect types tested, coverage >=80%
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: AbilitySystem Static Class' (Protocol in workflow.md)
 
