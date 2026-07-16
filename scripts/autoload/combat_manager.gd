@@ -199,3 +199,10 @@ func _spawn_entity(
 func _on_entity_died(entity: ChimeraEntity) -> void:
 	combat_context.unregister_entity(entity)
 	check_win_condition()
+
+
+## Returns all alive enemy entities of the given team.
+## Delegates to CombatContext for AI states referencing CombatManager directly.
+## (FR-7: get_enemies_of Helper)
+func get_enemies_of(team: int) -> Array[ChimeraEntity]:
+	return combat_context.get_enemies_of(team)

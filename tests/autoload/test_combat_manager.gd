@@ -495,6 +495,41 @@ func test_start_match_stores_match_type_and_tier() -> void:
 	assert_eq(CombatManager.tournament_tier, 3, "tournament_tier should be stored")
 
 
+# --- get_enemies_of tests ---
+
+
+func test_get_enemies_of_zero_returns_alive_enemies() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	# Ensure all entities are alive for deterministic test
+	for entity in CombatManager.combat_entities:
+		entity.combat_state.is_dead = false
+	# get_enemies_of(0) should return all alive enemy (team=1) entities
+	var enemies: Array = CombatManager.get_enemies_of(0)
+	assert_eq(enemies.size(), 3, "Should return 3 alive enemy entities for team 0")
+	for entity in enemies:
+		assert_eq(entity.combat_state.team, 1, "Returned entity should be on team 1")
+		assert_false(entity.combat_state.is_dead, "Returned entity should be alive")
+
+
+func test_get_enemies_of_one_returns_alive_players() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	# Ensure all entities are alive for deterministic test
+	for entity in CombatManager.combat_entities:
+		entity.combat_state.is_dead = false
+	# get_enemies_of(1) should return all alive player (team=0) entities
+	var enemies: Array = CombatManager.get_enemies_of(1)
+	assert_eq(enemies.size(), 3, "Should return 3 alive player entities for team 1")
+	for entity in enemies:
+		assert_eq(entity.combat_state.team, 0, "Returned entity should be on team 0")
+		assert_false(entity.combat_state.is_dead, "Returned entity should be alive")
+
+
 # --- Cleanup ---
 
 
