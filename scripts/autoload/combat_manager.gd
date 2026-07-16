@@ -103,6 +103,8 @@ func _build_result(winner: int, surviving_hp: float) -> Dictionary:
 ## combat state to return CombatManager to idle.
 ## (FR-1: end_match, FR-4: Idle State, FR-6: Post-Match Economy Integration)
 func end_match(result: Dictionary) -> void:
+	if not match_active:
+		return
 	match_active = false
 	# Calculate rewards and update result dict
 	var won: bool = result.get("won", false)
@@ -208,6 +210,8 @@ func _spawn_entity(
 ## Handles entity death. Unregisters from context and checks win condition.
 ## (FR-3: Entity Death Handling)
 func _on_entity_died(entity: ChimeraEntity) -> void:
+	if combat_context == null:
+		return
 	combat_context.unregister_entity(entity)
 	check_win_condition()
 
