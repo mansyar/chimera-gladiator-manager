@@ -4,7 +4,7 @@ extends GutTest
 ## Tests for CombatManager autoload (TRACK-008).
 ##
 ## Verifies properties, entity container resolution,
-## and basic _process behavior.
+## _process behavior, and start_match lifecycle.
 
 # --- Property default tests ---
 
@@ -73,11 +73,172 @@ func test_find_or_create_finds_existing_group_node() -> void:
 	assert_eq(container, test_node, "Should find existing arena_entities node")
 
 
+# --- start_match tests ---
+
+
+func _setup_roster() -> Array[ChimeraData]:
+	var starters := PartDatabase.get_starter_chimeras()
+	var roster: Array[ChimeraData] = []
+	for starter in starters:
+		var dup := starter.duplicate()
+		dup.calculate_instability()
+		dup.recalculate_stats()
+		roster.append(dup)
+	return roster
+
+
+func _setup_formations() -> Array:
+	return [
+		[Vector2i(0, 0), Vector2i(1, 1), Vector2i(2, 2)],
+		[Vector2i(0, 2), Vector2i(1, 1), Vector2i(2, 0)],
+	]
+
+
+func test_start_match_creates_six_entities() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	assert_eq(CombatManager.combat_entities.size(), 6, "Should create 6 entities")
+	var player_count := 0
+	var enemy_count := 0
+	for entity in CombatManager.combat_entities:
+		if entity.team == 0:
+			player_count += 1
+		elif entity.team == 1:
+			enemy_count += 1
+	assert_eq(player_count, 3, "Should have 3 player entities (team 0)")
+	assert_eq(enemy_count, 3, "Should have 3 enemy entities (team 1)")
+
+
+func test_start_match_initializes_combat_state() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	# Player entities (indices 0-2) should have team=0 and snapshotted stats
+	for i in range(3):
+		var entity: ChimeraEntity = CombatManager.combat_entities[i]
+		assert_not_null(entity.combat_state, "Player entity %d should have CombatState" % i)
+		assert_eq(entity.combat_state.team, 0, "Player entity %d should be team 0" % i)
+		assert_not_null(
+			entity.combat_state.chimera_data, "Player entity %d should have chimera_data set" % i
+		)
+		assert_eq(
+			entity.combat_state.max_hp,
+			player_roster[i].max_hp,
+			"Player entity %d max_hp should match ChimeraData" % i
+		)
+		assert_eq(
+			entity.combat_state.attack,
+			player_roster[i].attack,
+			"Player entity %d attack should match ChimeraData" % i
+		)
+		assert_gt(entity.combat_state.max_hp, 0.0, "Player entity %d max_hp should be > 0" % i)
+	# Enemy entities (indices 3-5) should have team=1 and snapshotted stats
+	for i in range(3, 6):
+		var entity: ChimeraEntity = CombatManager.combat_entities[i]
+		assert_eq(entity.combat_state.team, 1, "Enemy entity %d should be team 1" % i)
+		assert_eq(
+			entity.combat_state.max_hp,
+			enemy_roster[i - 3].max_hp,
+			"Enemy entity %d max_hp should match ChimeraData" % i
+		)
+
+
+func test_start_match_places_entities_at_grid_positions() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	# Player entity 0 at Vector2i(0, 0) -> grid_to_world(0, 0, true)
+	var expected_pos := ArenaController.grid_to_world(0, 0, true)
+	assert_eq(
+		CombatManager.combat_entities[0].position,
+		expected_pos,
+		"Player entity 0 should be at grid (row=0, col=0)"
+	)
+	# Player entity 1 at Vector2i(1, 1) -> grid_to_world(1, 1, true)
+	expected_pos = ArenaController.grid_to_world(1, 1, true)
+	assert_eq(
+		CombatManager.combat_entities[1].position,
+		expected_pos,
+		"Player entity 1 should be at grid (row=1, col=1)"
+	)
+	# Enemy entity 0 at Vector2i(0, 2) -> grid_to_world(0, 2, false)
+	expected_pos = ArenaController.grid_to_world(0, 2, false)
+	assert_eq(
+		CombatManager.combat_entities[3].position,
+		expected_pos,
+		"Enemy entity 0 should be at grid (row=0, col=2)"
+	)
+
+
+func test_start_match_registers_entities_in_context() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	assert_not_null(CombatManager.combat_context, "CombatContext should be created")
+	assert_eq(
+		CombatManager.combat_context.entities.size(),
+		6,
+		"All 6 entities should be registered in CombatContext"
+	)
+
+
+func test_start_match_connects_died_signals() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	for entity in CombatManager.combat_entities:
+		assert_true(
+			entity.died.is_connected(CombatManager._on_entity_died),
+			"Each entity's died signal should be connected to _on_entity_died"
+		)
+
+
+func test_start_match_sets_active_and_timer() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	assert_true(CombatManager.match_active, "match_active should be true after start_match")
+	assert_eq(CombatManager.timer, 60.0, "timer should be set to 60.0")
+
+
+func test_start_match_emits_match_started() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	watch_signals(EventBus)
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	assert_signal_emitted(EventBus, "match_started", "match_started signal should be emitted")
+
+
+func test_start_match_stores_match_type_and_tier() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "tournament", 3)
+	assert_eq(CombatManager.match_type, "tournament", "match_type should be stored")
+	assert_eq(CombatManager.tournament_tier, 3, "tournament_tier should be stored")
+
+
 # --- Cleanup ---
 
 
 func after_each() -> void:
-	# Free any temp entities containers created during tests
+	# Reset CombatManager state
+	CombatManager.match_active = false
+	CombatManager.combat_entities.clear()
+	CombatManager.combat_context = null
+	CombatManager.player_formation.clear()
+	CombatManager.enemy_formation.clear()
+	CombatManager.timer = 0.0
+	CombatManager.match_result = {}
+	# Free any temp entities containers (frees child entities recursively)
 	for child in CombatManager.get_children():
 		CombatManager.remove_child(child)
 		child.free()
