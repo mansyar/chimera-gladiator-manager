@@ -67,7 +67,7 @@ Focus: Transform the CombatManager stub into the central match orchestrator — 
     - [x] Implement: `get_enemies_of(team)` — delegates to `combat_context.get_enemies_of(team)`
     - [x] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: CombatManager Match Lifecycle' (Protocol in workflow.md)
+- [~] Task: Conductor - User Manual Verification 'Phase 1: CombatManager Match Lifecycle' (Protocol in workflow.md)
 
 ## Phase 2: Enemy Generation
 
