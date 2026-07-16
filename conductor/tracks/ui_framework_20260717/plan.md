@@ -76,19 +76,19 @@
 
 ## Phase 3: TopBar & UI Sounds
 
-- [ ] Task: Read spec.md and workflow.md to refresh context before implementation
-    - [ ] Read `conductor/tracks/ui_framework_20260717/spec.md`
-    - [ ] Read `conductor/workflow.md`
+- [x] Task: Read spec.md and workflow.md to refresh context before implementation
+    - [x] Read `conductor/tracks/ui_framework_20260717/spec.md`
+    - [x] Read `conductor/workflow.md`
 
-- [ ] Task: Write failing tests for TopBar (TDD Red phase)
-    - [ ] Create `tests/ui/test_top_bar.gd`: (1) Gold label updates when `EventBus.gold_changed` fires, (2) Infamy label updates when `EventBus.infamy_changed` fires, (3) initial values read from `GameState.gold` (200) and `GameState.infamy` (0) on `_ready`
-    - [ ] Run tests and confirm they fail (Red phase)
+- [x] Task: Write failing tests for TopBar (TDD Red phase)
+    - [x] Create `tests/ui/test_top_bar.gd`: (1) Gold label updates when `EventBus.gold_changed` fires, (2) Infamy label updates when `EventBus.infamy_changed` fires, (3) initial values read from `GameState.gold` (200) and `GameState.infamy` (0) on `_ready`
+    - [x] Run tests and confirm they fail (Red phase)
 
-- [ ] Task: Implement TopBar (TDD Green phase)
-    - [ ] Create `scripts/ui/top_bar.gd`: Gold and Infamy Labels, connect to `EventBus.gold_changed` and `EventBus.infamy_changed` in `_ready()`, read initial values from `GameState`
-    - [ ] Add TopBar node to `scenes/main.tscn` (replace placeholder)
-    - [ ] Run `test_top_bar.gd` and confirm pass
-    - [ ] Verify coverage ≥ 80% for `top_bar.gd`
+- [x] Task: Implement TopBar (TDD Green phase) [commit: b2387cc]
+    - [x] Create `scripts/ui/top_bar.gd`: Gold and Infamy Labels, connect to `EventBus.gold_changed` and `EventBus.infamy_changed` in `_ready()`, read initial values from `GameState`
+    - [x] Add TopBar node to `scenes/main.tscn` (replace placeholder)
+    - [x] Run `test_top_bar.gd` and confirm pass
+    - [x] Verify coverage ≥ 80% for `top_bar.gd`
 
 - [ ] Task: Implement UI sound system
     - [ ] Create `scripts/ui/ui_sounds.gd` utility: load 6 OGG files (click ×2, switch ×2, tap ×2) from `assets/kenney-ui-pack/Sounds/` as AudioStream resources, `play_sound(sound_name: String)` method using an AudioStreamPlayer
