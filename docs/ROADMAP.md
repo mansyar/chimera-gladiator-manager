@@ -300,7 +300,7 @@ Before initializing individual tracks, the following foundational context files 
 ---
 
 ### TRACK-008: Combat Manager & Match Flow
-*   **Status:** `Pending`
+*   **Status:** `Complete`
 *   **Dependencies:** TRACK-005, TRACK-006, TRACK-007, TRACK-004
 *   **Estimated Effort:** 2-3 Days
 
@@ -330,9 +330,9 @@ Before initializing individual tracks, the following foundational context files 
 *   **Phase 3 (Economy Integration):** Implement post-match rewards via economy.gd. Trigger market refresh and save.
 
 #### Verification & Definition of Done (DoD)
-*   [ ] **Manual Checkpoint:** Match starts with 6 entities at correct positions. 60s timer counts down. Chimeras fight using AI+abilities. Match ends on all-dead or timer. Result shows winner, HP, duration. Gold/Infamy awarded. Market refreshes. CombatManager goes idle. Save triggers.
-*   [ ] **Automated Tests:** `gd-tools test --coverage --min 80` exits 0. Tests verify: (1) start_match creates 6 entities with CombatState, (2) timer decrements, (3) win on all-enemies-dead, (4) win on all-players-dead, (5) win on timer+HP%, (6) enemy_generator produces 3 appropriate chimeras (weaker on losing streak), (7) end_match clears state, (8) rewards correct, (9) market refresh triggers, (10) save triggers.
-*   [ ] **Conductor Review:** CombatManager idle between matches. Win conditions match GDD Section 2.4. Rubber-band matches GDD Section 4.6. Rewards match GDD Section 4.4. `gd-tools lint` and `gd-tools format --check` pass.
+*   [x] **Manual Checkpoint:** Match starts with 6 entities at correct positions. 60s timer counts down. Chimeras fight using AI+abilities. Match ends on all-dead or timer. Result shows winner, HP, duration. Gold/Infamy awarded. Market refreshes. CombatManager goes idle. Save triggers.
+*   [x] **Automated Tests:** `gd-tools test --coverage --min 80` exits 0. Tests verify: (1) start_match creates 6 entities with CombatState, (2) timer decrements, (3) win on all-enemies-dead, (4) win on all-players-dead, (5) win on timer+HP%, (6) enemy_generator produces 3 appropriate chimeras (weaker on losing streak), (7) end_match clears state, (8) rewards correct, (9) market refresh triggers, (10) save triggers.
+*   [x] **Conductor Review:** CombatManager idle between matches. Win conditions match GDD Section 2.4. Rubber-band matches GDD Section 4.6. Rewards match GDD Section 4.4. `gd-tools lint` and `gd-tools format --check` pass.
 
 ---
 
@@ -639,7 +639,7 @@ The following GDD features are distributed across multiple tracks rather than ha
 
 ### Test Coverage Initiative (Conductor Track)
 *   **Scope:** Maximized test coverage across all implemented source files (Milestone 2). Added integration tests, edge case tests, and autoload mocking.
-*   **Status:** Complete — 484 tests at completion. Current totals (post-TRACK-007): 677 tests, 96.4% line coverage, 98.1% branch coverage.
+*   **Status:** Complete — 484 tests at completion. Current totals (post-TRACK-008): 747 tests, 94.4% line coverage, 94.4% branch coverage.
 *   **Coverage addon:** Reconfigured for autoload instrumentation support (`_GDTCoverage` registered first in `project.godot`, before game autoloads).
 
 ### Godot Version Alignment

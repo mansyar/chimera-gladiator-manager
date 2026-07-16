@@ -1,8 +1,8 @@
 # Chimera Gladiator Manager
 ## Technical Architecture Document
 
-> **Status:** Draft v2 — 7 significant gaps + 6 minor issues resolved. Implementation in progress (TRACK-001 through TRACK-007 complete).
-> Last updated: 2026-07-16
+> **Status:** Draft v2 — 7 significant gaps + 6 minor issues resolved. Implementation in progress (TRACK-001 through TRACK-008 complete).
+> Last updated: 2026-07-17
 
 ---
 
@@ -499,29 +499,43 @@ GameState
     ├── can_ascend(chimera) -> bool
     ├── ascend_chimera(chimera) -> int  # returns research points, fills slot with free common-rarity starter
     ├── get_research_level(branch, node) -> int
-    └── spend_research_point(branch, node) -> bool  # validates via research.gd, deducts RP, emits research_unlocked
+    ├── spend_research_point(branch, node) -> bool  # validates via research.gd, deducts RP, emits research_unlocked
+    └── record_match_result(won: bool, match_type: String, rewards: Dictionary)  # Updates losing_streak, appends to match_history, adds gold/infamy, refreshes market, triggers save
 ```
 
 ### CombatManager (`scripts/autoload/combat_manager.gd`)
 
-Transient — only active during a match. As an autoload, it remains loaded but idle between matches (`match_active = false`). `_process()` returns early when not in combat. This avoids scene-switching overhead while keeping combat state accessible to all combat entities. All combat state is cleared in `end_match()`.
+Transient — only active during a match. As an autoload, it remains loaded but idle between matches (`match_active = false`). `_process()` returns early when not in combat. This avoids scene-switching overhead while keeping combat state accessible to all combat entities. All combat state is cleared in `end_match()`. The `end_match()` method is guarded with `if not match_active: return` to prevent double-calling (e.g., when a win condition and timer expiry occur in the same frame).
 
 ```
 CombatManager
-├── player_formation: Array[Dictionary]   # [{chimera, grid_pos}, ...]
-├── enemy_formation: Array[Dictionary]
-├── combat_entities: Array[ChimeraEntity]  # All active entities (both sides)
+├── player_formation: Array               # Grid positions for player side
+├── enemy_formation: Array                # Grid positions for enemy side
+├── combat_entities: Array[ChimeraEntity] # All active entities (both sides)
+├── combat_context: CombatContext          # Shared entity registry (null when idle)
 ├── timer: float                           # 60-second countdown
 ├── match_active: bool
-├── match_result: Dictionary               # {winner, surviving_hp, duration}
+├── match_result: Dictionary               # {winner, won, surviving_hp, duration, gold_earned, infamy_earned}
+├── match_type: String                     # "regular" or "tournament"
+├── tournament_tier: int                   # 1-4 for tournaments, 0 for regular
 └── methods:
-    ├── start_match(player_roster: Array[ChimeraData], enemy_roster: Array[ChimeraData], formations: Array) -> void
-    │     # Creates ChimeraEntity per chimera, initializes CombatState from ChimeraData, places on grid
+    ├── start_match(player_roster: Array[ChimeraData], enemy_roster: Array[ChimeraData],
+    │               formations: Array, match_type: String, tournament_tier: int) -> void
+    │     # Creates ChimeraEntity per chimera, initializes CombatState, places on grid,
+    │     # connects died signal, begins 60s timer, emits match_started
     ├── _process(delta)  # Returns early if !match_active; otherwise tick timer, check win condition
-    ├── _on_entity_died(entity)
-    ├── _on_timer_expired()
-    ├── end_match(result)  # Clears all combat state, emits match_ended
-    └── get_enemies_of(team: int) -> Array[ChimeraEntity]
+    ├── check_win_condition()  # Checks alive counts; ends match when one side is wiped
+    ├── _on_entity_died(entity)  # Unregisters from context, checks win condition
+    ├── _on_timer_expired()  # Determines winner by total HP%; player wins ties
+    ├── end_match(result)  # Guarded against double-call. Calculates rewards via Economy,
+    │                       # calls GameState.record_match_result, emits match_ended,
+    │                       # frees all entities, clears all state
+    ├── get_enemies_of(team: int) -> Array[ChimeraEntity]  # Delegates to CombatContext
+    ├── _spawn_entity(chimera_data, team_id, grid_pos, container)  # Instantiates entity, initializes combat state
+    ├── _find_or_create_entities_container() -> Node2D  # Finds 'arena_entities' group or creates temp
+    ├── _count_alive(team: int) -> int
+    ├── _calc_team_hp_percent(team: int) -> float
+    └── _build_result(winner: int, surviving_hp: float) -> Dictionary
 ```
 
 ### EventBus (`scripts/autoload/event_bus.gd`)
@@ -764,11 +778,12 @@ func check_win_condition() -> void:
 
 ### Enemy Generation (`scripts/systems/enemy_generator.gd`)
 
-Enemy chimeras are generated procedurally for Regular Matches and Tournaments:
-- **Regular Matches:** Opponent strength scales to player roster + losing streak modifier (rubber-band)
-- **Tournaments:** Opponents scale to tournament tier
-- Generation creates 3 chimeras with parts appropriate to the difficulty tier
-- Parts are generated via `PartDatabase.generate_random_part()` with rarity weights matching the difficulty
+`class_name EnemyGenerator` — a static utility class with pure functions (no state). Enemy chimeras are generated procedurally for Regular Matches and Tournaments:
+
+- **Difficulty tiers:** Four tiers (`weak`, `normal`, `tough`, `strong`), each with a weighted rarity distribution (`DIFFICULTY_WEIGHTS` constant). Higher tiers shift rarity toward Uncommon/Rare/Legendary.
+- **Regular Matches:** Default tier is `normal`. Rubber-band: if `losing_streak >= 3`, tier drops to `weak` (GDD Section 4.6).
+- **Tournaments:** Tier 1-2 → `tough`, Tier 3-4 → `strong`.
+- **Generation:** `generate_enemy_roster(player_roster, match_type, losing_streak, tournament_tier)` produces 3 enemy chimeras. Each enemy gets 4 parts via `PartDatabase.generate_random_part()` with the tier's rarity weights, then `calculate_instability()` and `recalculate_stats()` are called.
 
 ---
 
