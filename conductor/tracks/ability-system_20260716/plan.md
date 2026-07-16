@@ -129,4 +129,8 @@ Focus: Implement passive ability application at combat start, verify berserk per
     - [x] Verify: all tests pass, `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
 
 - [x] Task: Conductor - User Manual Verification 'Phase 4: Passives & SHIELD Damage Absorption' (Protocol in workflow.md)
+
+## Phase: Review Fixes
+
+- [x] Task: Apply review suggestions 117634f
 </protect>
