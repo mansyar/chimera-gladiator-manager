@@ -4,5 +4,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: TRACK-007: Ability & Effect System**
+- [~] **Track: TRACK-007: Ability & Effect System**
 *Link: [./tracks/ability-system_20260716/](./tracks/ability-system_20260716/)*
