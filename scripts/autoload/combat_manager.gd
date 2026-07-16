@@ -35,9 +35,26 @@ var match_type: String = ""
 var tournament_tier: int = 0
 
 
-func _process(delta: float) -> void:  # gdlint:ignore=unused-argument
+func _process(delta: float) -> void:
 	if not match_active:
 		return
+	timer -= delta
+	check_win_condition()
+	if timer <= 0.0:
+		timer = 0.0
+		_on_timer_expired()
+
+
+## Checks win conditions every frame and on entity death.
+## Full implementation in a later task (all-dead + HP% evaluation).
+func check_win_condition() -> void:
+	pass
+
+
+## Handles timer expiry — determines winner by total HP%.
+## Full implementation in a later task.
+func _on_timer_expired() -> void:
+	pass
 
 
 ## Find the arena's Entities node via the 'arena_entities' scene tree group.

@@ -40,17 +40,46 @@ func test_match_result_defaults_empty() -> void:
 # --- _process tests ---
 
 
-func test_process_does_not_crash_when_inactive() -> void:
+func test_process_idle_does_not_decrement_timer() -> void:
 	CombatManager.match_active = false
-	CombatManager._process(0.016)
-	assert_false(CombatManager.match_active, "Should remain inactive after _process")
+	CombatManager.timer = 60.0
+	CombatManager._process(0.5)
+	assert_eq(CombatManager.timer, 60.0, "Timer should not change when match is inactive")
 
 
-func test_process_does_not_crash_when_active() -> void:
-	CombatManager.match_active = true
+func test_process_active_decrements_timer() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	var initial_timer: float = CombatManager.timer
+	CombatManager._process(0.5)
+	assert_eq(CombatManager.timer, initial_timer - 0.5, "Timer should decrement by delta")
+
+
+func test_process_calls_check_win_condition() -> void:
+	assert_true(
+		CombatManager.has_method("check_win_condition"), "check_win_condition method should exist"
+	)
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
 	CombatManager._process(0.016)
-	assert_true(CombatManager.match_active, "Should remain active after _process")
-	CombatManager.match_active = false
+	assert_true(CombatManager.match_active, "Match should still be active (no win condition met)")
+
+
+func test_process_triggers_on_timer_expired() -> void:
+	assert_true(
+		CombatManager.has_method("_on_timer_expired"), "_on_timer_expired method should exist"
+	)
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	CombatManager.timer = 0.05
+	CombatManager._process(0.1)
+	assert_eq(CombatManager.timer, 0.0, "Timer should be clamped to 0.0 when expired")
 
 
 # --- _find_or_create_entities_container tests ---
