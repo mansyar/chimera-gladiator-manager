@@ -73,7 +73,7 @@ Focus: Create the `AbilitySystem` static utility class with `execute_effect()` h
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: AbilitySystem Static Class' (Protocol in workflow.md)
 
-## Phase 3: Integration — Target Resolution & Execution
+## Phase 3: Integration — Target Resolution & Execution [checkpoint: c355918]
 
 Focus: Wire AbilityComponent to AbilitySystem via `execute_ability()`, implement target resolution, and update all callers.
 
@@ -102,7 +102,7 @@ Focus: Wire AbilityComponent to AbilitySystem via `execute_ability()`, implement
     - [x] Update `use_ability_state.gd`: change `execute_ability(ability.id)` to `execute_ability(ability, target)`
     - [x] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Integration' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Integration' (Protocol in workflow.md)
 
 ## Phase 4: Passives & SHIELD Damage Absorption
 
