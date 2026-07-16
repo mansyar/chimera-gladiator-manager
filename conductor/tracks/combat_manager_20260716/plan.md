@@ -5,16 +5,16 @@
 
 Focus: Transform the CombatManager stub into the central match orchestrator — entity spawning, timer management, win condition evaluation, and match end cleanup.
 
-- [ ] Task: Read `spec.md` and `workflow.md` to establish context for this phase
-    - [ ] Read the confirmed track specification
-    - [ ] Read `conductor/workflow.md` TDD and checkpointing protocols
+- [x] Task: Read `spec.md` and `workflow.md` to establish context for this phase
+    - [x] Read the confirmed track specification
+    - [x] Read `conductor/workflow.md` TDD and checkpointing protocols
 
-- [ ] Task: Implement CombatManager properties and entity container resolution
-    - [ ] Write failing test: CombatManager has `match_active`, `timer`, `combat_entities`, `combat_context`, `player_formation`, `enemy_formation`, `match_result` properties
-    - [ ] Write failing test: `_find_or_create_entities_container()` finds arena Entities node via scene tree group; creates temp Node2D if not found (test mode)
-    - [ ] Implement: Add all CombatManager properties per TDD Section 4
-    - [ ] Implement: `_find_or_create_entities_container()` — searches for node in `arena_entities` group, falls back to creating Node2D
-    - [ ] Verify: `gd-tools lint && gd-tools format --check`
+- [x] Task: Implement CombatManager properties and entity container resolution (e2ea334)
+    - [x] Write failing test: CombatManager has `match_active`, `timer`, `combat_entities`, `combat_context`, `player_formation`, `enemy_formation`, `match_result` properties
+    - [x] Write failing test: `_find_or_create_entities_container()` finds arena Entities node via scene tree group; creates temp Node2D if not found (test mode)
+    - [x] Implement: Add all CombatManager properties per TDD Section 4
+    - [x] Implement: `_find_or_create_entities_container()` — searches for node in `arena_entities` group, falls back to creating Node2D
+    - [x] Verify: `gd-tools lint && gd-tools format --check`
 
 - [ ] Task: Implement `start_match()` — entity creation, placement, initialization
     - [ ] Write failing test: `start_match()` creates 6 ChimeraEntity instances (3 player team=0, 3 enemy team=1)
