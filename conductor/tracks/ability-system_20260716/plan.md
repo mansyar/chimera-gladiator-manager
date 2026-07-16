@@ -108,18 +108,18 @@ Focus: Wire AbilityComponent to AbilitySystem via `execute_ability()`, implement
 
 Focus: Implement passive ability application at combat start, verify berserk persistence, and add SHIELD damage absorption to EffectComponent.
 
-- [ ] Task: Read `spec.md` and `workflow.md` to establish context for this phase
-    - [ ] Read `conductor/tracks/ability-system_20260716/spec.md`
-    - [ ] Read `conductor/workflow.md`
+- [x] Task: Read `spec.md` and `workflow.md` to establish context for this phase
+    - [x] Read `conductor/tracks/ability-system_20260716/spec.md`
+    - [x] Read `conductor/workflow.md`
 
-- [ ] Task: Implement `apply_passives(combat_state)`
-    - [ ] Write failing test: apply_passives modifies CombatState snapshot (e.g., passive that buffs attack increases `combat_state.attack`)
-    - [ ] Write failing test: apply_passives only processes abilities where `type == PASSIVE`
-    - [ ] Write failing test: passive effects persist when `is_berserk == true` (passive stat modifiers still apply during berserk)
-    - [ ] Implement: `apply_passives()` iterates PASSIVE abilities, calls `AbilitySystem.execute_effect()` with source=self, targets=[self]
-    - [ ] Verify: tests pass, coverage >=80%
+- [x] Task: Implement `apply_passives(combat_state)` [ad8e42e]
+    - [x] Write failing test: apply_passives modifies CombatState snapshot (e.g., passive that buffs attack increases `combat_state.attack`)
+    - [x] Write failing test: apply_passives only processes abilities where `type == PASSIVE`
+    - [x] Write failing test: passive effects persist when `is_berserk == true` (passive stat modifiers still apply during berserk)
+    - [x] Implement: `apply_passives()` iterates PASSIVE abilities, calls `AbilitySystem.execute_effect()` with source=self, targets=[self]
+    - [x] Verify: tests pass, coverage >=80%
 
-- [ ] Task: Implement `EffectComponent.absorb_damage()` and integrate into damage flow
+- [~] Task: Implement `EffectComponent.absorb_damage()` and integrate into damage flow
     - [ ] Write failing test: `absorb_damage(amount)` reduces SHIELD ActiveEffect amounts, returns remaining damage after shields consumed
     - [ ] Write failing test: `absorb_damage()` removes shields that reach 0 amount
     - [ ] Write failing test: `absorb_damage()` with no shields returns full amount unchanged
