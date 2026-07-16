@@ -97,11 +97,11 @@
     - [x] Wire 'click' sound to button presses (via `play_click()` helper on ScreenManager, called from 9 screen scripts)
     - [x] Run tests and confirm pass
 
-- [ ] Task: Final verification and integration
-    - [ ] Run `gd-tools lint` — must exit 0
-    - [ ] Run `gd-tools format --check` — must exit 0
-    - [ ] Run `gd-tools test --coverage --min 80` — must exit 0
-    - [ ] Verify all 9 screens transition correctly, TopBar updates live, sounds play
+- [x] Task: Final verification and integration
+    - [x] Run `gd-tools lint` — must exit 0
+    - [x] Run `gd-tools format --check` — must exit 0
+    - [x] Run `gd-tools test --coverage --min 80` — must exit 0
+    - [x] Verify all 9 screens transition correctly, TopBar updates live, sounds play
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 3' (Protocol in workflow.md)
 </protect>
