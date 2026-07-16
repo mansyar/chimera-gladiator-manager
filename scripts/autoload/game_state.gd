@@ -256,3 +256,25 @@ func spend_research_point(branch: String, node: String) -> bool:
 	EventBus.research_unlocked.emit(branch, node, new_level)
 	SaveManager.save_game()
 	return true
+
+
+# --- Match Results ---
+
+
+## Record the outcome of a completed match.[br]
+## Updates losing streak, appends to match history, applies rewards,[br]
+## refreshes the market, and triggers a save.[br]
+## [param won] Whether the player won the match.[br]
+## [param match_type] The match type ("regular" or "tournament").[br]
+## [param rewards] Dictionary with "gold" and "infamy" keys from Economy.
+## (FR-6: Post-Match Economy Integration)
+func record_match_result(won: bool, _match_type: String, rewards: Dictionary) -> void:
+	if won:
+		losing_streak = 0
+	else:
+		losing_streak += 1
+	match_history.append({"result": "win" if won else "loss", "gold": rewards["gold"]})
+	add_gold(rewards["gold"])
+	add_infamy(rewards["infamy"])
+	refresh_market()
+	SaveManager.save_game()
