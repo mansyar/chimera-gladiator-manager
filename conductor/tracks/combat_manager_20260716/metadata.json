@@ -1,0 +1,8 @@
+{
+  "track_id": "combat_manager_20260716",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-07-16T16:46:01Z",
+  "updated_at": "2026-07-16T16:46:01Z",
+  "description": "TRACK-008: Combat Manager & Match Flow — implements full match lifecycle, win conditions, enemy generation, and post-match economy integration"
+}
