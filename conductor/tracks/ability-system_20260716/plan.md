@@ -1,7 +1,7 @@
 <protect>
 # Implementation Plan: TRACK-007 — Ability & Effect System
 
-## Phase 1: AbilityComponent Foundation
+## Phase 1: AbilityComponent Foundation [checkpoint: 02211ea]
 
 Focus: Replace the TRACK-005 stub with a working AbilityComponent — initialization, cooldown tracking, and ready-ability querying.
 
