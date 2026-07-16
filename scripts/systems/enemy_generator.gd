@@ -40,3 +40,21 @@ const DIFFICULTY_WEIGHTS: Dictionary = {
 		GameEnums.Rarity.LEGENDARY: 5,
 	},
 }
+
+# --- Difficulty Tier Selection (FR-5) ---
+
+
+## Returns the difficulty tier string for the given match parameters.
+## Regular: "normal" (default) or "weak" if losing_streak >= 3 (rubber-band).
+## Tournament: "tough" for tiers 1-2, "strong" for tiers 3-4.
+## (FR-5: Enemy Generation — GDD 4.6 Rubber-band difficulty)
+static func _get_difficulty_tier(
+	match_type: String, losing_streak: int, tournament_tier: int
+) -> String:
+	if match_type == "tournament":
+		if tournament_tier >= 3:
+			return "strong"
+		return "tough"
+	if losing_streak >= 3:
+		return "weak"
+	return "normal"

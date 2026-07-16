@@ -47,3 +47,46 @@ func test_strong_tier_weights() -> void:
 	assert_eq(weights[GameEnums.Rarity.UNCOMMON], 40, "Strong UNCOMMON weight should be 40")
 	assert_eq(weights[GameEnums.Rarity.RARE], 25, "Strong RARE weight should be 25")
 	assert_eq(weights[GameEnums.Rarity.LEGENDARY], 5, "Strong LEGENDARY weight should be 5")
+
+
+# --- _get_difficulty_tier ---
+
+
+func test_get_difficulty_tier_regular_low_streak_returns_normal() -> void:
+	var tier: String = EnemyGenerator._get_difficulty_tier("regular", 0, 0)
+	assert_eq(tier, "normal", "Regular with losing_streak < 3 should return 'normal'")
+
+
+func test_get_difficulty_tier_regular_streak_2_returns_normal() -> void:
+	var tier: String = EnemyGenerator._get_difficulty_tier("regular", 2, 0)
+	assert_eq(tier, "normal", "Regular with losing_streak = 2 should return 'normal'")
+
+
+func test_get_difficulty_tier_regular_streak_3_returns_weak() -> void:
+	var tier: String = EnemyGenerator._get_difficulty_tier("regular", 3, 0)
+	assert_eq(tier, "weak", "Regular with losing_streak >= 3 should return 'weak' (rubber-band)")
+
+
+func test_get_difficulty_tier_regular_streak_5_returns_weak() -> void:
+	var tier: String = EnemyGenerator._get_difficulty_tier("regular", 5, 0)
+	assert_eq(tier, "weak", "Regular with losing_streak > 3 should return 'weak' (rubber-band)")
+
+
+func test_get_difficulty_tier_tournament_tier_1_returns_tough() -> void:
+	var tier: String = EnemyGenerator._get_difficulty_tier("tournament", 0, 1)
+	assert_eq(tier, "tough", "Tournament tier 1 should return 'tough'")
+
+
+func test_get_difficulty_tier_tournament_tier_2_returns_tough() -> void:
+	var tier: String = EnemyGenerator._get_difficulty_tier("tournament", 0, 2)
+	assert_eq(tier, "tough", "Tournament tier 2 should return 'tough'")
+
+
+func test_get_difficulty_tier_tournament_tier_3_returns_strong() -> void:
+	var tier: String = EnemyGenerator._get_difficulty_tier("tournament", 0, 3)
+	assert_eq(tier, "strong", "Tournament tier 3 should return 'strong'")
+
+
+func test_get_difficulty_tier_tournament_tier_4_returns_strong() -> void:
+	var tier: String = EnemyGenerator._get_difficulty_tier("tournament", 0, 4)
+	assert_eq(tier, "strong", "Tournament tier 4 should return 'strong'")
