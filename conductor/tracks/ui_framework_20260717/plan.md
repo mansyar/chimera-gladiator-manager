@@ -3,15 +3,15 @@
 
 ## Phase 1: UI Framework (ScreenManager, main.tscn, Theme, Stubs)
 
-- [ ] Task: Read spec.md and workflow.md to refresh context before implementation
-    - [ ] Read `conductor/tracks/ui_framework_20260717/spec.md`
-    - [ ] Read `conductor/workflow.md`
+- [x] Task: Read spec.md and workflow.md to refresh context before implementation
+    - [x] Read `conductor/tracks/ui_framework_20260717/spec.md`
+    - [x] Read `conductor/workflow.md`
 
-- [ ] Task: Create Theme resource
-    - [ ] Create `scenes/ui/default_theme.tres` with Kenney Future Regular font as default for all Control types
-    - [ ] Configure Grey NinePatchRect StyleBoxTexture for Button (normal, hover, pressed states) using UI Pack grey button sprites
-    - [ ] Configure Grey NinePatchRect StyleBoxTexture for Panel using UI Pack grey panel sprites
-    - [ ] Assign Theme as default project theme in `project.godot` (`gui/theme/custom`)
+- [x] Task: Create Theme resource (commit: 8088120)
+    - [x] Create `scenes/ui/default_theme.tres` with Kenney Future Regular font as default for all Control types
+    - [x] Configure Grey NinePatchRect StyleBoxTexture for Button (normal, hover, pressed states) using UI Pack grey button sprites
+    - [x] Configure Grey NinePatchRect StyleBoxTexture for Panel using UI Pack grey panel sprites
+    - [x] Assign Theme as default project theme in `project.godot` (`gui/theme/custom`)
 
 - [ ] Task: Create 9 screen stub scenes and scripts
     - [ ] Create `scenes/ui/screens/lab_hub.tscn` + `scripts/ui/screens/lab_hub.gd` (centered "Lab Hub" label + 8 navigation buttons calling `ScreenManager.change_screen`)
