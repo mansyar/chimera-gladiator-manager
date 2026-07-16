@@ -74,7 +74,7 @@
 
 - [x] Task: Conductor - User Manual Verification 'Phase 2' (Protocol in workflow.md)
 
-## Phase 3: TopBar & UI Sounds [checkpoint: pending]
+## Phase 3: TopBar & UI Sounds [checkpoint: 5442fc3]
 
 - [x] Task: Read spec.md and workflow.md to refresh context before implementation
     - [x] Read `conductor/tracks/ui_framework_20260717/spec.md`
