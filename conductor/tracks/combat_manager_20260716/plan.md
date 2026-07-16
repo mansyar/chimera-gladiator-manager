@@ -105,7 +105,7 @@ Focus: Create `enemy_generator.gd` static utility class with rubber-band difficu
     - [ ] Implement: `_generate_enemy_chimera(rarity_weights: Dictionary) -> ChimeraData` — generate 4 parts via `PartDatabase.generate_random_part()`, assemble into ChimeraData, recalculate stats
     - [ ] Verify: tests pass
 
-- [~] Task: Implement `generate_enemy_roster()` public API
+- [x] Task: Implement `generate_enemy_roster()` public API (3d622a1)
     - [ ] Write failing test: Returns array of exactly 3 ChimeraData
     - [ ] Write failing test: Regular match (losing_streak=0) produces enemies with "normal" difficulty parts
     - [ ] Write failing test: Regular match (losing_streak=5) produces weaker enemies ("weak" difficulty — higher common ratio)
@@ -114,7 +114,7 @@ Focus: Create `enemy_generator.gd` static utility class with rubber-band difficu
     - [ ] Implement: `generate_enemy_roster(player_roster, match_type, losing_streak, tournament_tier) -> Array[ChimeraData]` — select difficulty, generate 3 enemies
     - [ ] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Enemy Generation' (Protocol in workflow.md)
+- [~] Task: Conductor - User Manual Verification 'Phase 2: Enemy Generation' (Protocol in workflow.md)
 
 ## Phase 3: Economy Integration & Post-Match Flow
 
