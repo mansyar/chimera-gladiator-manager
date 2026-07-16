@@ -1,8 +1,8 @@
 # Chimera Gladiator Manager
 ## Technical Architecture Document
 
-> **Status:** Draft v2 — 7 significant gaps + 6 minor issues resolved. Implementation in progress (TRACK-001 through TRACK-006 complete).
-> Last updated: 2026-07-15
+> **Status:** Draft v2 — 7 significant gaps + 6 minor issues resolved. Implementation in progress (TRACK-001 through TRACK-007 complete).
+> Last updated: 2026-07-16
 
 ---
 
@@ -676,6 +676,22 @@ func cleanse() -> void:
     # Remove all debuffs (called by CLEANSE effect type)
     active_effects = active_effects.filter(func(e): return e.effect_type != AbilityEffect.EffectType.DEBUFF_STAT)
     recalculate_modifiers()
+
+func absorb_damage(amount: float) -> float:
+    # Absorb damage through SHIELD effects, removing depleted shields.
+    # Returns remaining damage not absorbed. Called by attack_state.gd
+    # and AbilitySystem before CombatState.take_damage().
+    var remaining_damage = amount
+    for effect in active_effects:
+        if effect.effect_type == AbilityEffect.EffectType.SHIELD and remaining_damage > 0.0:
+            if effect.amount > remaining_damage:
+                effect.amount -= remaining_damage
+                remaining_damage = 0.0
+            else:
+                remaining_damage -= effect.amount
+                # Shield depleted — will be removed
+    active_effects = active_effects.filter(func(e): return e.effect_type != AbilityEffect.EffectType.SHIELD or e.amount > 0.0)
+    return remaining_damage
 ```
 
 ### Movement
@@ -719,6 +735,8 @@ func calculate_damage(attacker: ChimeraEntity, defender: ChimeraEntity) -> float
         defense = defender.effect_component.get_modified_stat("defense", defense)
     return max(1.0, base_damage - defense)
 ```
+
+**SHIELD Damage Absorption:** Before `CombatState.take_damage()` is called, incoming damage is first routed through `EffectComponent.absorb_damage()`. This method consumes SHIELD-type ActiveEffects, reducing the damage by the shield's remaining amount. Any damage exceeding the total shield value passes through to `take_damage()`. This applies to both basic attacks (in `attack_state.gd`) and ability DAMAGE effects (in `AbilitySystem`). Ability DAMAGE uses `params["amount"] * source.combat_state.attack` and intentionally bypasses defense calculation and berserk modifiers per spec FR-6.
 
 ### Attack Cadence
 

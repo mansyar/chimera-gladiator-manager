@@ -43,7 +43,7 @@ A continuous campaign — no roguelike runs, no permadeath. Your lab persists as
 
 ## Contributing
 
-The codebase has 632 automated tests with 97.3% line coverage. Interested in contributing or setting up a development environment? See [DEVELOPMENT.md](DEVELOPMENT.md).
+The codebase has 677 automated tests with 96.4% line coverage. Interested in contributing or setting up a development environment? See [DEVELOPMENT.md](DEVELOPMENT.md).
 
 ## License
 

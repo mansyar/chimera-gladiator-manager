@@ -264,7 +264,7 @@ Before initializing individual tracks, the following foundational context files 
 ---
 
 ### TRACK-007: Ability & Effect System
-*   **Status:** `Pending`
+*   **Status:** `Complete`
 *   **Dependencies:** TRACK-002, TRACK-003, TRACK-005
 *   **Estimated Effort:** 2-3 Days
 
@@ -293,9 +293,9 @@ Before initializing individual tracks, the following foundational context files 
 *   **Phase 3 (Passives & Combos):** Implement apply_passives() at combat start. Implement strain combo lookup. Verify passives persist during berserk, combos unlock at correct thresholds.
 
 #### Verification & Definition of Done (DoD)
-*   [ ] **Manual Checkpoint:** Chimera uses abilities in priority order during combat. Active abilities go on cooldown. Passives apply at combat start and persist. Strain combo unlocks at 2+ same-strain. Combo tier upgrades at 3/4 same-strain. BUFF_STAT creates visible modifier that expires.
-*   [ ] **Automated Tests:** `gd-tools test --coverage --min 80` exits 0. Tests verify: (1) DAMAGE reduces HP, (2) HEAL caps at max_hp, (3) BUFF_STAT creates ActiveEffect, (4) DEBUFF_STAT creates negative ActiveEffect, (5) SHIELD creates SHIELD effect, (6) CLEANSE removes debuffs, (7) apply_passives modifies CombatState, (8) passives persist when is_berserk, (9) combo tiers: 2=Basic, 3=Enhanced, 4=Ultimate, null for all-different, (10) is_off_cooldown false after execute, true after expiry, (11) get_ready_abilities respects priority.
-*   [ ] **Conductor Review:** All 11 EffectTypes handled. Passives persist during berserk (GDD). Combo tiers match GDD Section 2.3. `gd-tools lint` and `gd-tools format --check` pass.
+*   [x] **Manual Checkpoint:** Chimera uses abilities in priority order during combat. Active abilities go on cooldown. Passives apply at combat start and persist. Strain combo unlocks at 2+ same-strain. Combo tier upgrades at 3/4 same-strain. BUFF_STAT creates visible modifier that expires.
+*   [x] **Automated Tests:** `gd-tools test --coverage --min 80` exits 0. Tests verify: (1) DAMAGE reduces HP, (2) HEAL caps at max_hp, (3) BUFF_STAT creates ActiveEffect, (4) DEBUFF_STAT creates negative ActiveEffect, (5) SHIELD creates SHIELD effect, (6) CLEANSE removes debuffs, (7) apply_passives modifies CombatState, (8) passives persist when is_berserk, (9) combo tiers: 2=Basic, 3=Enhanced, 4=Ultimate, null for all-different, (10) is_off_cooldown false after execute, true after expiry, (11) get_ready_abilities respects priority.
+*   [x] **Conductor Review:** All 11 EffectTypes handled. Passives persist during berserk (GDD). Combo tiers match GDD Section 2.3. `gd-tools lint` and `gd-tools format --check` pass.
 
 ---
 
@@ -639,7 +639,7 @@ The following GDD features are distributed across multiple tracks rather than ha
 
 ### Test Coverage Initiative (Conductor Track)
 *   **Scope:** Maximized test coverage across all implemented source files (Milestone 2). Added integration tests, edge case tests, and autoload mocking.
-*   **Status:** Complete — 484 tests at completion. Current totals (post-TRACK-006): 632 tests, 97.3% line coverage, 98.0% branch coverage.
+*   **Status:** Complete — 484 tests at completion. Current totals (post-TRACK-007): 677 tests, 96.4% line coverage, 98.1% branch coverage.
 *   **Coverage addon:** Reconfigured for autoload instrumentation support (`_GDTCoverage` registered first in `project.godot`, before game autoloads).
 
 ### Godot Version Alignment
