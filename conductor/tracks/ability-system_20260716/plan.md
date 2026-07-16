@@ -77,30 +77,30 @@ Focus: Create the `AbilitySystem` static utility class with `execute_effect()` h
 
 Focus: Wire AbilityComponent to AbilitySystem via `execute_ability()`, implement target resolution, and update all callers.
 
-- [ ] Task: Read `spec.md` and `workflow.md` to establish context for this phase
-    - [ ] Read `conductor/tracks/ability-system_20260716/spec.md`
-    - [ ] Read `conductor/workflow.md`
+- [x] Task: Read `spec.md` and `workflow.md` to establish context for this phase
+    - [x] Read `conductor/tracks/ability-system_20260716/spec.md`
+    - [x] Read `conductor/workflow.md`
 
-- [ ] Task: Implement target resolution in AbilityComponent
-    - [ ] Write failing test: `"SELF"` targeting returns `[source_entity]`
-    - [ ] Write failing test: `"TARGET"` targeting returns `[primary_target]`
-    - [ ] Write failing test: `"AOE_ENEMIES"` returns all living enemies within `ability.range` of primary_target
-    - [ ] Write failing test: `"AOE_ALLIES"` returns all living allies within `ability.range` of primary_target
-    - [ ] Write failing test: `"ALL_ENEMIES"` returns all living enemies regardless of range
-    - [ ] Implement: `_resolve_targets(targeting: String, primary_target: ChimeraEntity) -> Array[ChimeraEntity]` using `combat_context`
-    - [ ] Verify: all tests pass
+- [x] Task: Implement target resolution in AbilityComponent [34040f0]
+    - [x] Write failing test: `"SELF"` targeting returns `[source_entity]`
+    - [x] Write failing test: `"TARGET"` targeting returns `[primary_target]`
+    - [x] Write failing test: `"AOE_ENEMIES"` returns all living enemies within `ability.range` of primary_target
+    - [x] Write failing test: `"AOE_ALLIES"` returns all living allies within `ability.range` of primary_target
+    - [x] Write failing test: `"ALL_ENEMIES"` returns all living enemies regardless of range
+    - [x] Implement: `_resolve_targets(targeting: String, primary_target: ChimeraEntity) -> Array[ChimeraEntity]` using `combat_context`
+    - [x] Verify: all tests pass
 
-- [ ] Task: Implement `execute_ability(ability, primary_target)`
-    - [ ] Write failing test: execute_ability sets `current_ability_id`, sets `cooldowns[ability.id] = ability.cooldown`, calls `AbilitySystem.execute_effect()` for each effect
-    - [ ] Write failing test: execute_ability with multiple effects executes all of them
-    - [ ] Implement: `execute_ability()` — sets current_ability_id, sets cooldown, resolves targets, iterates effects calling AbilitySystem
-    - [ ] Verify: tests pass, coverage >=80%
+- [x] Task: Implement `execute_ability(ability, primary_target)` [34040f0]
+    - [x] Write failing test: execute_ability sets `current_ability_id`, sets `cooldowns[ability.id] = ability.cooldown`, calls `AbilitySystem.execute_effect()` for each effect
+    - [x] Write failing test: execute_ability with multiple effects executes all of them
+    - [x] Implement: `execute_ability()` — sets current_ability_id, sets cooldown, resolves targets, iterates effects calling AbilitySystem
+    - [x] Verify: tests pass, coverage >=80%
 
-- [ ] Task: Update ChimeraEntity and UseAbilityState callers
-    - [ ] Write failing test: ChimeraEntity._process() calls `ability_component.update_cooldowns(delta)` (verify cooldown decrements over frames)
-    - [ ] Update `chimera_entity.gd` `_process()`: add `ability_component.update_cooldowns(delta)` call
-    - [ ] Update `use_ability_state.gd`: change `execute_ability(ability.id)` to `execute_ability(ability, target)`
-    - [ ] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
+- [x] Task: Update ChimeraEntity and UseAbilityState callers [34040f0]
+    - [x] Write failing test: ChimeraEntity._process() calls `ability_component.update_cooldowns(delta)` (verify cooldown decrements over frames)
+    - [x] Update `chimera_entity.gd` `_process()`: add `ability_component.update_cooldowns(delta)` call
+    - [x] Update `use_ability_state.gd`: change `execute_ability(ability.id)` to `execute_ability(ability, target)`
+    - [x] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Integration' (Protocol in workflow.md)
 
