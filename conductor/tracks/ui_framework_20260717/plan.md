@@ -24,12 +24,12 @@
     - [x] Create `scenes/ui/screens/tournament.tscn` + `scripts/ui/screens/tournament.gd` (label + back button)
     - [x] Create `scenes/ui/screens/hall_of_fame.tscn` + `scripts/ui/screens/hall_of_fame.gd` (label + back button)
 
-- [ ] Task: Implement ScreenManager (TDD)
-    - [ ] Write failing tests in `tests/ui/test_screen_manager.gd`: (1) `change_screen` loads correct PackedScene for all 9 screen names, (2) `change_screen` frees previous screen via `queue_free`, (3) Lab Hub is default initial screen on `_ready`
-    - [ ] Run tests and confirm they fail (Red phase)
-    - [ ] Implement `scripts/ui/screen_manager.gd`: `screens` Dictionary with 9 preloaded PackedScenes, `change_screen(screen_name)` method (free old, instantiate new, emit `screen_change_requested`), `current_screen` property, Lab Hub as initial screen
-    - [ ] Run tests and confirm they pass (Green phase)
-    - [ ] Verify coverage ≥ 80% for `screen_manager.gd`
+- [x] Task: Implement ScreenManager (TDD) (commit: 90fd563)
+    - [x] Write failing tests in `tests/ui/test_screen_manager.gd`: (1) `change_screen` loads correct PackedScene for all 9 screen names, (2) `change_screen` frees previous screen via `queue_free`, (3) Lab Hub is default initial screen on `_ready`
+    - [x] Run tests and confirm they fail (Red phase)
+    - [x] Implement `scripts/ui/screen_manager.gd`: `screens` Dictionary with 9 preloaded PackedScenes, `change_screen(screen_name)` method (free old, instantiate new, emit `screen_change_requested`), `current_screen` property, Lab Hub as initial screen
+    - [x] Run tests and confirm they pass (Green phase)
+    - [x] Verify coverage ≥ 80% for `screen_manager.gd`
 
 - [ ] Task: Create main.tscn scene structure
     - [ ] Create `scenes/main.tscn`: root `Main` (Control) with `ScreenManager` (Control) and `TopBar` (Control) children
