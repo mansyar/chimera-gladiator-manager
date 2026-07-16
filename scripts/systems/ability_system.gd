@@ -51,6 +51,8 @@ static func _execute_damage(
 	effect: AbilityEffect, source: ChimeraEntity, target: ChimeraEntity
 ) -> void:
 	var amount: float = effect.params.get("amount", 0.0) * source.combat_state.attack
+	if target.effect_component:
+		amount = target.effect_component.absorb_damage(amount)
 	target.combat_state.take_damage(amount)
 
 

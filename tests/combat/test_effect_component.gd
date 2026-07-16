@@ -1,3 +1,4 @@
+# gdlint:ignore=max-public-methods
 extends GutTest
 
 ## Tests for EffectComponent — tracks, ticks, and cleans up ActiveEffects.
@@ -143,3 +144,70 @@ func test_cleanse_with_no_effects() -> void:
 	_effect_component.cleanse()
 	assert_eq(_effect_component.active_effects.size(), 0, "Should have no effects after cleanse")
 	assert_eq(_effect_component.stat_modifiers.size(), 0, "stat_modifiers should be empty")
+
+
+func test_cleanse_does_not_remove_shield_effects() -> void:
+	var shield := _make_effect(AbilityEffect.EffectType.SHIELD, "", 30.0, 5.0)
+	var debuff := _make_effect(AbilityEffect.EffectType.DEBUFF_STAT, "defense", -5.0, 5.0)
+	_effect_component.add_effect(shield)
+	_effect_component.add_effect(debuff)
+	_effect_component.cleanse()
+	assert_eq(_effect_component.active_effects.size(), 1, "Only SHIELD should remain")
+	assert_eq(
+		_effect_component.active_effects[0].effect_type,
+		AbilityEffect.EffectType.SHIELD,
+		"Remaining effect should be SHIELD"
+	)
+
+
+# --- absorb_damage tests ---
+
+
+func test_absorb_damage_no_shields_returns_full_amount() -> void:
+	var remaining: float = _effect_component.absorb_damage(50.0)
+	assert_eq(remaining, 50.0, "No shields should return full damage")
+
+
+func test_absorb_damage_reduces_shield_amounts() -> void:
+	var shield := _make_effect(AbilityEffect.EffectType.SHIELD, "", 30.0, 5.0)
+	_effect_component.add_effect(shield)
+	var remaining: float = _effect_component.absorb_damage(20.0)
+	assert_eq(remaining, 0.0, "Shield should absorb all damage")
+	assert_eq(
+		_effect_component.active_effects[0].amount,
+		10.0,
+		"Shield amount should be reduced by absorbed damage"
+	)
+
+
+func test_absorb_damage_removes_depleted_shields() -> void:
+	var shield := _make_effect(AbilityEffect.EffectType.SHIELD, "", 20.0, 5.0)
+	_effect_component.add_effect(shield)
+	var remaining: float = _effect_component.absorb_damage(30.0)
+	assert_eq(remaining, 10.0, "Excess damage beyond shield should be returned")
+	assert_eq(_effect_component.active_effects.size(), 0, "Depleted shield should be removed")
+
+
+func test_absorb_damage_multiple_shields() -> void:
+	var shield1 := _make_effect(AbilityEffect.EffectType.SHIELD, "", 15.0, 5.0)
+	var shield2 := _make_effect(AbilityEffect.EffectType.SHIELD, "", 25.0, 5.0)
+	_effect_component.add_effect(shield1)
+	_effect_component.add_effect(shield2)
+	var remaining: float = _effect_component.absorb_damage(30.0)
+	assert_eq(remaining, 0.0, "Two shields should absorb 40 total damage")
+	assert_eq(_effect_component.active_effects.size(), 1, "First shield depleted, second remains")
+	assert_eq(_effect_component.active_effects[0].amount, 10.0, "Second shield reduced by 15")
+
+
+func test_absorb_damage_preserves_non_shield_effects() -> void:
+	var shield := _make_effect(AbilityEffect.EffectType.SHIELD, "", 20.0, 5.0)
+	var buff := _make_effect(AbilityEffect.EffectType.BUFF_STAT, "attack", 10.0, 5.0)
+	_effect_component.add_effect(shield)
+	_effect_component.add_effect(buff)
+	_effect_component.absorb_damage(25.0)
+	assert_eq(_effect_component.active_effects.size(), 1, "Only buff should remain")
+	assert_eq(
+		_effect_component.active_effects[0].effect_type,
+		AbilityEffect.EffectType.BUFF_STAT,
+		"Remaining effect should be the buff"
+	)

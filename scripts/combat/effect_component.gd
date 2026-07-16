@@ -55,3 +55,22 @@ func cleanse() -> void:
 			remaining.append(effect)
 	active_effects = remaining
 	recalculate_modifiers()
+
+
+## Absorbs [param amount] damage through SHIELD effects, removing depleted shields.
+## Returns the remaining damage not absorbed.
+func absorb_damage(amount: float) -> float:
+	var remaining_damage := amount
+	var remaining: Array[ActiveEffect] = []
+	for effect in active_effects:
+		if effect.effect_type == AbilityEffect.EffectType.SHIELD and remaining_damage > 0.0:
+			if effect.amount > remaining_damage:
+				effect.amount -= remaining_damage
+				remaining_damage = 0.0
+				remaining.append(effect)
+			else:
+				remaining_damage -= effect.amount
+		else:
+			remaining.append(effect)
+	active_effects = remaining
+	return remaining_damage

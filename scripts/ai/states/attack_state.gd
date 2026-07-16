@@ -12,6 +12,8 @@ func update(_delta: float) -> void:
 		return
 	if ai_controller.entity.can_attack():
 		var damage: float = ChimeraEntity.calculate_damage(ai_controller.entity, target)
+		if target.effect_component:
+			damage = target.effect_component.absorb_damage(damage)
 		target.combat_state.take_damage(damage)
 		ai_controller.entity.reset_attack_timer()
 	ai_controller.change_state("IN_RANGE")
