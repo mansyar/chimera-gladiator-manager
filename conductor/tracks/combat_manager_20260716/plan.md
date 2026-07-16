@@ -36,7 +36,7 @@ Focus: Transform the CombatManager stub into the central match orchestrator — 
     - [ ] Implement: `_process(delta)` — early return guard, timer decrement, win condition check, timer expiry trigger
     - [ ] Verify: tests pass
 
-- [ ] Task: Implement `check_win_condition()` — all-dead and HP% evaluation
+- [x] Task: Implement `check_win_condition()` — all-dead and HP% evaluation (5473784)
     - [ ] Write failing test: Win for player when all enemy entities are dead (is_dead == true)
     - [ ] Write failing test: Win for enemy when all player entities are dead
     - [ ] Write failing test: No win triggered when both sides have alive entities
