@@ -31,10 +31,10 @@
     - [x] Run tests and confirm they pass (Green phase)
     - [x] Verify coverage ≥ 80% for `screen_manager.gd`
 
-- [ ] Task: Create main.tscn scene structure
-    - [ ] Create `scenes/main.tscn`: root `Main` (Control) with `ScreenManager` (Control) and `TopBar` (Control) children
-    - [ ] Configure layout: TopBar anchored to top, ScreenManager fills remaining space
-    - [ ] Set `scenes/main.tscn` as project main scene in `project.godot`
+- [x] Task: Create main.tscn scene structure (commit: 6075424)
+    - [x] Create `scenes/main.tscn`: root `Main` (Control) with `ScreenManager` (Control) and `TopBar` (Control) children
+    - [x] Configure layout: TopBar anchored to top, ScreenManager fills remaining space
+    - [x] Set `scenes/main.tscn` as project main scene in `project.godot`
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 1' (Protocol in workflow.md)
 
