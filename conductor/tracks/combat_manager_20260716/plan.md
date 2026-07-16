@@ -120,11 +120,11 @@ Focus: Create `enemy_generator.gd` static utility class with rubber-band difficu
 
 Focus: Add `GameState.record_match_result()`, wire CombatManager.end_match to calculate rewards via Economy, trigger market refresh and save.
 
-- [ ] Task: Read `spec.md` and `workflow.md` to establish context for this phase
-    - [ ] Read the confirmed track specification
-    - [ ] Read `conductor/workflow.md` TDD and checkpointing protocols
+- [x] Task: Read `spec.md` and `workflow.md` to establish context for this phase
+    - [x] Read the confirmed track specification
+    - [x] Read `conductor/workflow.md` TDD and checkpointing protocols
 
-- [ ] Task: Implement `GameState.record_match_result()`
+- [x] Task: Implement `GameState.record_match_result()` (a02059d)
     - [ ] Write failing test: Winning a match resets `losing_streak` to 0
     - [ ] Write failing test: Losing a match increments `losing_streak` by 1
     - [ ] Write failing test: Appends to `match_history` with `{"result": "win"/"loss", "gold": rewards["gold"]}`
@@ -135,7 +135,7 @@ Focus: Add `GameState.record_match_result()`, wire CombatManager.end_match to ca
     - [ ] Implement: `record_match_result(won: bool, match_type: String, rewards: Dictionary) -> void` on GameState
     - [ ] Verify: tests pass
 
-- [ ] Task: Wire `end_match()` to calculate rewards and call `GameState.record_match_result()`
+- [~] Task: Wire `end_match()` to calculate rewards and call `GameState.record_match_result()`
     - [ ] Write failing test: `end_match()` calls `Economy.calculate_match_reward()` with stored match_type, won, tournament_tier, losing_streak
     - [ ] Write failing test: `end_match()` result dict includes `gold_earned` and `infamy_earned` from Economy calculation
     - [ ] Write failing test: `end_match()` calls `GameState.record_match_result()` with won, match_type, rewards
