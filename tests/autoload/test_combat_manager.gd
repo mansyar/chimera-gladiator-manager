@@ -82,6 +82,74 @@ func test_process_triggers_on_timer_expired() -> void:
 	assert_eq(CombatManager.timer, 0.0, "Timer should be clamped to 0.0 when expired")
 
 
+# --- check_win_condition tests ---
+
+
+func _kill_team(team_id: int) -> void:
+	for entity in CombatManager.combat_entities:
+		if entity.combat_state.team == team_id:
+			entity.combat_state.is_dead = true
+
+
+func test_check_win_condition_player_wins_when_all_enemies_dead() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	_kill_team(1)
+	CombatManager.check_win_condition()
+	assert_false(CombatManager.match_active, "Match should end when all enemies are dead")
+
+
+func test_check_win_condition_enemy_wins_when_all_players_dead() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	_kill_team(0)
+	CombatManager.check_win_condition()
+	assert_false(CombatManager.match_active, "Match should end when all players are dead")
+
+
+func test_check_win_condition_no_win_when_both_sides_alive() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	CombatManager.check_win_condition()
+	assert_true(CombatManager.match_active, "Match should continue when both sides have alive")
+
+
+func test_check_win_condition_result_dict_player_win() -> void:
+	var player_roster := _setup_roster()
+	var enemy_roster := _setup_roster()
+	var formations := _setup_formations()
+	CombatManager.start_match(player_roster, enemy_roster, formations, "regular", 1)
+	_kill_team(1)
+	CombatManager.check_win_condition()
+	assert_eq(
+		CombatManager.match_result.get("winner", -1),
+		0,
+		"Winner should be 0 (player) when all enemies dead"
+	)
+	assert_true(CombatManager.match_result.get("won", false), "won should be true when player wins")
+	assert_gt(
+		CombatManager.match_result.get("surviving_hp", -1.0),
+		0.0,
+		"Surviving HP should be > 0 for winning side"
+	)
+	assert_eq(
+		CombatManager.match_result.get("gold_earned", -1),
+		0,
+		"gold_earned should be 0 (Economy integration in Phase 3)"
+	)
+	assert_eq(
+		CombatManager.match_result.get("infamy_earned", -1),
+		0,
+		"infamy_earned should be 0 (Economy integration in Phase 3)"
+	)
+
+
 # --- _find_or_create_entities_container tests ---
 
 

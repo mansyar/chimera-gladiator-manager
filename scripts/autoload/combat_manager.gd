@@ -46,9 +46,63 @@ func _process(delta: float) -> void:
 
 
 ## Checks win conditions every frame and on entity death.
-## Full implementation in a later task (all-dead + HP% evaluation).
+## Ends match when all entities on one team are dead.
+## (FR-2: Win Condition Evaluation)
 func check_win_condition() -> void:
-	pass
+	if not match_active:
+		return
+	var player_alive := _count_alive(0)
+	var enemy_alive := _count_alive(1)
+	if player_alive == 0 and enemy_alive == 0:
+		# Both teams wiped simultaneously — player wins ties
+		end_match(_build_result(0, 0.0))
+	elif player_alive == 0:
+		end_match(_build_result(1, _calc_team_hp_percent(1)))
+	elif enemy_alive == 0:
+		end_match(_build_result(0, _calc_team_hp_percent(0)))
+
+
+## Counts alive entities on the given team.
+func _count_alive(team: int) -> int:
+	var count := 0
+	for entity in combat_entities:
+		if entity.combat_state.team == team and not entity.combat_state.is_dead:
+			count += 1
+	return count
+
+
+## Calculates total HP percentage for a team across all its entities.
+func _calc_team_hp_percent(team: int) -> float:
+	var total_hp := 0.0
+	var total_max_hp := 0.0
+	for entity in combat_entities:
+		if entity.combat_state.team == team:
+			total_hp += entity.combat_state.current_hp
+			total_max_hp += entity.combat_state.max_hp
+	if total_max_hp <= 0.0:
+		return 0.0
+	return (total_hp / total_max_hp) * 100.0
+
+
+## Builds the match result dictionary.
+## Rewards (gold_earned, infamy_earned) are 0 here — populated in Phase 3.
+func _build_result(winner: int, surviving_hp: float) -> Dictionary:
+	return {
+		"winner": winner,
+		"won": winner == 0,
+		"surviving_hp": surviving_hp,
+		"duration": 60.0 - timer,
+		"gold_earned": 0,
+		"infamy_earned": 0,
+	}
+
+
+## Ends the current match, stores the result, and clears match-active flag.
+## Full cleanup (clearing arrays, freeing entities, emitting signal) in Task 6.
+## (FR-1: end_match)
+func end_match(result: Dictionary) -> void:
+	match_active = false
+	match_result = result
 
 
 ## Handles timer expiry — determines winner by total HP%.
