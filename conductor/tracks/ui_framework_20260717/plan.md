@@ -74,7 +74,7 @@
 
 - [x] Task: Conductor - User Manual Verification 'Phase 2' (Protocol in workflow.md)
 
-## Phase 3: TopBar & UI Sounds
+## Phase 3: TopBar & UI Sounds [checkpoint: pending]
 
 - [x] Task: Read spec.md and workflow.md to refresh context before implementation
     - [x] Read `conductor/tracks/ui_framework_20260717/spec.md`
@@ -103,5 +103,5 @@
     - [x] Run `gd-tools test --coverage --min 80` — must exit 0
     - [x] Verify all 9 screens transition correctly, TopBar updates live, sounds play
 
-- [ ] Task: Conductor - User Manual Verification 'Phase 3' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3' (Protocol in workflow.md)
 </protect>
