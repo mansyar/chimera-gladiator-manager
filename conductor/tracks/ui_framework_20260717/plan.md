@@ -90,12 +90,12 @@
     - [x] Run `test_top_bar.gd` and confirm pass
     - [x] Verify coverage ≥ 80% for `top_bar.gd`
 
-- [ ] Task: Implement UI sound system
-    - [ ] Create `scripts/ui/ui_sounds.gd` utility: load 6 OGG files (click ×2, switch ×2, tap ×2) from `assets/kenney-ui-pack/Sounds/` as AudioStream resources, `play_sound(sound_name: String)` method using an AudioStreamPlayer
-    - [ ] Write tests for `ui_sounds.gd`: verify sound loading, verify `play_sound` calls AudioStreamPlayer
-    - [ ] Wire 'switch' sound to `ScreenManager.change_screen()`
-    - [ ] Wire 'click' sound to button presses (via Theme default or shared helper)
-    - [ ] Run tests and confirm pass
+- [x] Task: Implement UI sound system
+    - [x] Create `scripts/ui/ui_sounds.gd` utility: load 6 OGG files (click ×2, switch ×2, tap ×2) from `assets/kenney-ui-pack/Sounds/` as AudioStream resources, `play_sound(sound_name: String)` method using an AudioStreamPlayer
+    - [x] Write tests for `ui_sounds.gd`: verify sound loading, verify `play_sound` calls AudioStreamPlayer
+    - [x] Wire 'switch' sound to `ScreenManager.change_screen()` — via EventBus.screen_change_requested signal listener in UISounds
+    - [x] Wire 'click' sound to button presses (via `play_click()` helper on ScreenManager, called from 9 screen scripts)
+    - [x] Run tests and confirm pass
 
 - [ ] Task: Final verification and integration
     - [ ] Run `gd-tools lint` — must exit 0

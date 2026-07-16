@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnpu5cm66tb5x"]
+[gd_scene load_steps=4 format=3 uid="uid://bnpu5cm66tb5x"]
 
 [ext_resource type="Script" path="res://scripts/ui/screen_manager.gd" id="1_sm"]
 [ext_resource type="Script" path="res://scripts/ui/top_bar.gd" id="2_tb"]
+[ext_resource type="Script" path="res://scripts/ui/ui_sounds.gd" id="3_us"]
 
 [node name="Main" type="Control"]
 anchors_preset = 15
@@ -25,3 +26,6 @@ offset_top = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sm")
+
+[node name="UISounds" type="Node" parent="."]
+script = ExtResource("3_us")

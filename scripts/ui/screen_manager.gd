@@ -40,3 +40,11 @@ func change_screen(screen_name: String) -> void:
 	add_child(screen_instance)
 	current_screen = screen_instance
 	EventBus.screen_change_requested.emit(screen_name)
+
+
+## Plays the 'click' UI sound if a UISounds sibling node is available.
+## Called by screen button handlers before navigation.
+func play_click() -> void:
+	var ui_sounds: Node = get_parent().get_node_or_null("UISounds")
+	if ui_sounds and ui_sounds.has_method("play_sound"):
+		ui_sounds.play_sound("click")

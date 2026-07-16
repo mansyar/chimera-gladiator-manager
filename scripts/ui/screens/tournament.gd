@@ -5,4 +5,5 @@ extends Control
 
 
 func _on_back_button_pressed() -> void:
+	get_parent().call("play_click")
 	get_parent().call("change_screen", "lab_hub")
