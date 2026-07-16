@@ -69,7 +69,7 @@ Focus: Transform the CombatManager stub into the central match orchestrator — 
 
 - [x] Task: Conductor - User Manual Verification 'Phase 1: CombatManager Match Lifecycle' (Protocol in workflow.md)
 
-## Phase 2: Enemy Generation
+## Phase 2: Enemy Generation [checkpoint: d8258ca]
 
 Focus: Create `enemy_generator.gd` static utility class with rubber-band difficulty for Regular matches and tier-based scaling for Tournaments.
 
@@ -114,7 +114,7 @@ Focus: Create `enemy_generator.gd` static utility class with rubber-band difficu
     - [ ] Implement: `generate_enemy_roster(player_roster, match_type, losing_streak, tournament_tier) -> Array[ChimeraData]` — select difficulty, generate 3 enemies
     - [ ] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
 
-- [~] Task: Conductor - User Manual Verification 'Phase 2: Enemy Generation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Enemy Generation' (Protocol in workflow.md)
 
 ## Phase 3: Economy Integration & Post-Match Flow
 
