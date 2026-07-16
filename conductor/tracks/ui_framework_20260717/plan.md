@@ -90,7 +90,7 @@
     - [x] Run `test_top_bar.gd` and confirm pass
     - [x] Verify coverage ≥ 80% for `top_bar.gd`
 
-- [x] Task: Implement UI sound system
+- [x] Task: Implement UI sound system [commit: ea0ff5b]
     - [x] Create `scripts/ui/ui_sounds.gd` utility: load 6 OGG files (click ×2, switch ×2, tap ×2) from `assets/kenney-ui-pack/Sounds/` as AudioStream resources, `play_sound(sound_name: String)` method using an AudioStreamPlayer
     - [x] Write tests for `ui_sounds.gd`: verify sound loading, verify `play_sound` calls AudioStreamPlayer
     - [x] Wire 'switch' sound to `ScreenManager.change_screen()` — via EventBus.screen_change_requested signal listener in UISounds
