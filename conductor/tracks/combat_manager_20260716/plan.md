@@ -61,11 +61,11 @@ Focus: Transform the CombatManager stub into the central match orchestrator — 
     - [x] Implement: `end_match(result)` — set inactive, clear arrays, clear context, free entities, emit match_ended
     - [x] Verify: tests pass, coverage >=80%
 
-- [ ] Task: Implement `get_enemies_of()` helper
-    - [ ] Write failing test: `get_enemies_of(0)` returns all alive enemy (team=1) entities
-    - [ ] Write failing test: `get_enemies_of(1)` returns all alive player (team=0) entities
-    - [ ] Implement: `get_enemies_of(team)` — delegates to `combat_context.get_enemies_of(team)`
-    - [ ] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
+- [x] Task: Implement `get_enemies_of()` helper (b2021f0)
+    - [x] Write failing test: `get_enemies_of(0)` returns all alive enemy (team=1) entities
+    - [x] Write failing test: `get_enemies_of(1)` returns all alive player (team=0) entities
+    - [x] Implement: `get_enemies_of(team)` — delegates to `combat_context.get_enemies_of(team)`
+    - [x] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: CombatManager Match Lifecycle' (Protocol in workflow.md)
 
