@@ -1,3 +1,4 @@
+<protect>
 # Track Specification: Combat Manager & Match Flow (TRACK-008)
 
 ## Overview
@@ -179,3 +180,4 @@ Called after every entity death AND every frame in `_process()`:
 - Decay application post-match (decay risk roll happens in a future track or GameState.record_match_result extension)
 - Scene loading / ScreenManager integration (TRACK-009)
 - Pause / speed toggle functionality (TRACK-014)
+</protect>

@@ -1,3 +1,4 @@
+<protect>
 # Implementation Plan: TRACK-008 — Combat Manager & Match Flow
 
 ## Phase 1: CombatManager Match Lifecycle
@@ -149,3 +150,4 @@ Focus: Add `GameState.record_match_result()`, wire CombatManager.end_match to ca
     - [ ] Verify: `gd-tools lint && gd-tools format --check && gd-tools test --coverage --min 80`
 
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Economy Integration & Post-Match Flow' (Protocol in workflow.md)
+</protect>
