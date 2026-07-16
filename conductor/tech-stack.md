@@ -44,7 +44,7 @@
 - **Data Models:** Godot Resource subclasses (PartData, AbilityData, ChimeraData, etc.)
 - **Combat Entities:** CharacterBody2D with composite nodes (AIController, AbilityComponent, EffectComponent, VFXSpawner)
 - **AI:** Custom FSM pattern (AIState base class + state scripts)
-- **System Utilities:** Static classes with pure functions (economy.gd, market.gd, decay.gd, research.gd)
+- **System Utilities:** Static classes with pure functions (economy.gd, market.gd, decay.gd, research.gd, ability_system.gd)
 - **Signal System:** Two-tier (EventBus global + direct local signals)
 - **UI:** Control nodes, ScreenManager, NinePatchRect, Theme system
 
