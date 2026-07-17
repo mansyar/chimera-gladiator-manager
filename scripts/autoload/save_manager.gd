@@ -8,6 +8,10 @@ const SAVE_DIR := "user://saves"
 const SAVE_PATH := "user://saves/save_default.json"
 const CURRENT_VERSION := 1
 
+## When true, _exit_tree() skips the auto-save to prevent test runs
+## from corrupting the real save file. Set by the GUT pre_run_hook.
+var _skip_exit_save: bool = false
+
 # --- Public API ---
 
 
@@ -69,8 +73,11 @@ func delete_save() -> void:
 
 
 ## Save game on exit.[br]
-## Called by the engine when the SaveManager node is removed from the tree.
+## Called by the engine when the SaveManager node is removed from the tree.[br]
+## Skipped when [member _skip_exit_save] is set (e.g. during GUT test runs).
 func _exit_tree() -> void:
+	if _skip_exit_save:
+		return
 	save_game()
 
 

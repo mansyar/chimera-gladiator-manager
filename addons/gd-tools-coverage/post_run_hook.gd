@@ -31,6 +31,7 @@ func run() -> void:
 		return
 
 	_log_summary(hits, output_path)
+	SaveManager.delete_save()
 
 
 func _get_tracker() -> Node:

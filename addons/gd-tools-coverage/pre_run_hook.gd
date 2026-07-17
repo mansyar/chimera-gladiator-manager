@@ -8,3 +8,5 @@ extends GutHookScript
 
 func run() -> void:
 	_GDTCoverage.set_active(true)
+	SaveManager._skip_exit_save = true
+	SaveManager.delete_save()

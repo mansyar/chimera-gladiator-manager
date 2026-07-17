@@ -335,16 +335,31 @@ func test_migrate_returns_data_unchanged_for_version_1() -> void:
 func test_exit_tree_saves_game() -> void:
 	_setup_test_state()
 	assert_false(SaveManager.has_save())
+	var prev_skip: bool = SaveManager._skip_exit_save
+	SaveManager._skip_exit_save = false
 	SaveManager._exit_tree()
+	SaveManager._skip_exit_save = prev_skip
 	assert_true(SaveManager.has_save())
 
 
 func test_exit_tree_creates_valid_save() -> void:
 	_setup_test_state()
+	var prev_skip: bool = SaveManager._skip_exit_save
+	SaveManager._skip_exit_save = false
 	SaveManager._exit_tree()
+	SaveManager._skip_exit_save = prev_skip
 	var data := _read_save_file()
 	assert_eq(data["version"], SaveManager.CURRENT_VERSION)
 	assert_eq(data["game_state"]["gold"], 500)
+
+
+func test_exit_tree_skipped_when_skip_flag_set() -> void:
+	_setup_test_state()
+	var prev_skip: bool = SaveManager._skip_exit_save
+	SaveManager._skip_exit_save = true
+	SaveManager._exit_tree()
+	SaveManager._skip_exit_save = prev_skip
+	assert_false(SaveManager.has_save())
 
 
 # --- load_game: error handling ---
