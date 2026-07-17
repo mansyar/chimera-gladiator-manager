@@ -37,29 +37,29 @@
 
 *Main navigation hub. Independent of ChimeraSprite. Uses existing `chimera_card` widget + `GameState.roster`.*
 
-- [ ] Task: Read [./spec.md](./spec.md) and [../../workflow.md](../../workflow.md) to refresh context before starting this phase
-- [ ] Task: Write failing tests for Lab Hub (Red)
-    - [ ] Test Lab Hub populates exactly 3 `chimera_card` widgets from `GameState.roster`
-    - [ ] Test each card displays nickname + HP/Atk/Def/Spd + instability label matching its `ChimeraData`
-    - [ ] Test all 7 navigation buttons call `change_screen()` with the correct screen name
-    - [ ] Test Quick Match button calls `change_screen("arena_pre_match")`
-    - [ ] Test Lab Hub does NOT instantiate its own Gold/Infamy labels (relies on TopBar)
-    - [ ] Test navigation plays click sound (mock/verify `play_click` invoked)
-- [ ] Task: Implement Lab Hub screen (Green)
-    - [ ] Build full `scenes/ui/screens/lab_hub.tscn`: 3 chimera card slots, 7 nav buttons (Assembly, Black Market, Roster, Clinic, Tournament, Hall of Fame, Arena Pre-Match), Quick Match button
-    - [ ] Implement `scripts/ui/screens/lab_hub.gd`: populate 3 `chimera_card` widgets from `GameState.roster` on `_ready()`
-    - [ ] Wire each nav button's `pressed` signal → `play_click()` + `change_screen(<name>)`
-    - [ ] Wire Quick Match → `change_screen("arena_pre_match")`
-    - [ ] Run tests, confirm Green
-- [ ] Task: Refactor Lab Hub for clarity (Optional)
-    - [ ] Extract navigation button→screen mapping into a constant Dictionary
-    - [ ] Rerun tests, confirm still Green
-- [ ] Task: Verify coverage for Lab Hub
-    - [ ] Run `gd-tools test --coverage --min 80`, confirm Lab Hub ≥ 80%
-- [ ] Task: Commit & attach git note for Lab Hub
-    - [ ] Stage changes, commit `feat(ui): Implement Lab Hub screen with roster cards and navigation`
-    - [ ] Attach task summary git note to commit
-    - [ ] Mark task `[x]` with commit SHA in plan.md, commit plan update
+- [x] Task: Read [./spec.md](./spec.md) and [../../workflow.md](../../workflow.md) to refresh context before starting this phase
+- [x] Task: Write failing tests for Lab Hub (Red) [c6f7a65]
+    - [x] Test Lab Hub populates exactly 3 `chimera_card` widgets from `GameState.roster`
+    - [x] Test each card displays nickname + HP/Atk/Def/Spd + instability label matching its `ChimeraData`
+    - [x] Test all 7 navigation buttons call `change_screen()` with the correct screen name
+    - [x] Test Quick Match button calls `change_screen("arena_pre_match")`
+    - [x] Test Lab Hub does NOT instantiate its own Gold/Infamy labels (relies on TopBar)
+    - [x] Test navigation plays click sound (mock/verify `play_click` invoked)
+- [x] Task: Implement Lab Hub screen (Green) [c6f7a65]
+    - [x] Build full `scenes/ui/screens/lab_hub.tscn`: 3 chimera card slots, 7 nav buttons (Assembly, Black Market, Roster, Clinic, Tournament, Hall of Fame, Arena Pre-Match), Quick Match button
+    - [x] Implement `scripts/ui/screens/lab_hub.gd`: populate 3 `chimera_card` widgets from `GameState.roster` on `_ready()`
+    - [x] Wire each nav button's `pressed` signal → `play_click()` + `change_screen(<name>)`
+    - [x] Wire Quick Match → `change_screen("arena_pre_match")`
+    - [x] Run tests, confirm Green
+- [x] Task: Refactor Lab Hub for clarity (Optional) [c6f7a65]
+    - [x] Skipped — nav button→screen mapping is in .tscn signal bindings, no code constant needed (DRY)
+    - [x] Rerun tests, confirm still Green
+- [x] Task: Verify coverage for Lab Hub [c6f7a65]
+    - [x] Run `gd-tools test --coverage --min 80`, confirm Lab Hub ≥ 80% (89.9% lines, 92.5% branches)
+- [x] Task: Commit & attach git note for Lab Hub [c6f7a65]
+    - [x] Stage changes, commit `feat(ui): Implement Lab Hub screen with roster cards and navigation`
+    - [x] Attach task summary git note to commit
+    - [x] Mark task `[x]` with commit SHA in plan.md, commit plan update
 - [ ] Task: Conductor - User Manual Verification 'Lab Hub Screen' (Protocol in workflow.md)
 
 ## Phase 3: Roster Screen
