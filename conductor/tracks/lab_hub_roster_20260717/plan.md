@@ -62,7 +62,7 @@
     - [x] Mark task `[x]` with commit SHA in plan.md, commit plan update
 - [x] Task: Conductor - User Manual Verification 'Lab Hub Screen' (Protocol in workflow.md)
 
-## Phase 3: Roster Screen
+## Phase 3: Roster Screen [checkpoint: 20af3a6]
 
 *Detailed read-only chimera viewer. Depends on ChimeraSprite (Phase 1) + `GameState.roster`.*
 
