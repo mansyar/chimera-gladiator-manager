@@ -5,7 +5,7 @@
 > **Spec:** [./spec.md](./spec.md)
 > **Workflow:** Conductor TDD (Red → Green → Refactor → Verify Coverage → Commit → Git Notes)
 
-## Phase 1: ChimeraSprite Composition Node
+## Phase 1: ChimeraSprite Composition Node [checkpoint: c7ea495]
 
 *Foundational reusable visual node. Roster (Phase 3) depends on it. Built first.*
 
