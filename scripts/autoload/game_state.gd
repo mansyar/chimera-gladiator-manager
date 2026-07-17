@@ -143,7 +143,10 @@ func _init_new_game() -> void:
 	roster.clear()
 	var starters := PartDatabase.get_starter_chimeras()
 	for starter in starters:
-		roster.append(starter.duplicate())
+		var chimera := starter.duplicate()
+		chimera.calculate_instability()
+		chimera.recalculate_stats()
+		roster.append(chimera)
 	inventory = []
 	market_stock = Market.generate_initial_stock()
 	research_progress = {}
@@ -211,7 +214,10 @@ func ascend_chimera(chimera: ChimeraData) -> int:
 	hall_of_fame.append(chimera)
 	research_points += 1
 	var starters := PartDatabase.get_starter_chimeras()
-	roster[slot_index] = starters[randi() % starters.size()].duplicate()
+	var replacement := starters[randi() % starters.size()].duplicate()
+	replacement.calculate_instability()
+	replacement.recalculate_stats()
+	roster[slot_index] = replacement
 	EventBus.chimera_ascended.emit(chimera)
 	SaveManager.save_game()
 	return 1

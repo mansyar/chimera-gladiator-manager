@@ -322,6 +322,26 @@ func test_init_new_game_roster_contains_chimera_data() -> void:
 		assert_not_null(GameState.roster[i])
 
 
+func test_init_new_game_starters_have_nonzero_stats() -> void:
+	GameState.roster = []
+	GameState._init_new_game()
+	for i in range(GameState.roster.size()):
+		var c: ChimeraData = GameState.roster[i]
+		assert_true(c.max_hp > 0.0, "Starter %d max_hp should be > 0" % i)
+		assert_true(c.attack > 0.0, "Starter %d attack should be > 0" % i)
+		assert_true(c.defense > 0.0, "Starter %d defense should be > 0" % i)
+		assert_true(c.speed > 0.0, "Starter %d speed should be > 0" % i)
+
+
+func test_init_new_game_starters_have_instability_calculated() -> void:
+	GameState.roster = []
+	GameState._init_new_game()
+	for i in range(GameState.roster.size()):
+		var c: ChimeraData = GameState.roster[i]
+		assert_true(c.instability >= 0, "Starter %d instability should be set" % i)
+		assert_true(c.strain_count >= 1, "Starter %d strain_count should be >= 1" % i)
+
+
 func test_init_new_game_sets_empty_inventory() -> void:
 	var part := PartData.new()
 	GameState.inventory = [part]
@@ -612,6 +632,18 @@ func test_ascend_chimera_replacement_is_chimera_data() -> void:
 	GameState.roster = [chimera]
 	GameState.ascend_chimera(chimera)
 	assert_true(GameState.roster[0] is ChimeraData)
+
+
+func test_ascend_chimera_replacement_has_nonzero_stats() -> void:
+	var chimera := ChimeraData.new()
+	chimera.match_wins = 10
+	GameState.roster = [chimera]
+	GameState.ascend_chimera(chimera)
+	var replacement: ChimeraData = GameState.roster[0]
+	assert_true(replacement.max_hp > 0.0, "Replacement max_hp should be > 0")
+	assert_true(replacement.attack > 0.0, "Replacement attack should be > 0")
+	assert_true(replacement.defense > 0.0, "Replacement defense should be > 0")
+	assert_true(replacement.speed > 0.0, "Replacement speed should be > 0")
 
 
 func test_ascend_chimera_emits_chimera_ascended() -> void:
