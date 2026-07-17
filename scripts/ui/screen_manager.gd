@@ -33,6 +33,7 @@ func _preload_screens() -> void:
 ## name is not found in the preloaded screens dictionary.
 func change_screen(screen_name: String) -> void:
 	if not screens.has(screen_name):
+		push_warning("ScreenManager: unknown screen '%s'" % screen_name)
 		return
 	if current_screen:
 		current_screen.queue_free()

@@ -1,25 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnpu5cm66tb5x"]
+[gd_scene format=3 uid="uid://bnpu5cm66tb5x"]
 
-[ext_resource type="Script" path="res://scripts/ui/screen_manager.gd" id="1_sm"]
-[ext_resource type="Script" path="res://scripts/ui/top_bar.gd" id="2_tb"]
-[ext_resource type="Script" path="res://scripts/ui/ui_sounds.gd" id="3_us"]
+[ext_resource type="Script" uid="uid://chloon03dttj7" path="res://scripts/ui/screen_manager.gd" id="1_sm"]
+[ext_resource type="Script" uid="uid://cl752a4vb6p5y" path="res://scripts/ui/top_bar.gd" id="2_tb"]
+[ext_resource type="Script" uid="uid://dgfyshxmrgejt" path="res://scripts/ui/ui_sounds.gd" id="3_us"]
 
-[node name="Main" type="Control"]
+[node name="Main" type="Control" unique_id=94637225]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TopBar" type="Control" parent="."]
-anchors_preset = 10
+[node name="TopBar" type="Control" parent="." unique_id=504027886]
+custom_minimum_size = Vector2(0, 40)
+anchors_preset = 0
 anchor_right = 1.0
 grow_horizontal = 2
-custom_minimum_size = Vector2(0, 40)
 script = ExtResource("2_tb")
 
-[node name="ScreenManager" type="Control" parent="."]
-anchors_preset = 15
+[node name="ScreenManager" type="Control" parent="." unique_id=95284560]
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 40.0
@@ -27,5 +28,5 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sm")
 
-[node name="UISounds" type="Node" parent="."]
+[node name="UISounds" type="Node" parent="." unique_id=366413034]
 script = ExtResource("3_us")

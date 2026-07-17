@@ -7,7 +7,7 @@ const HIGHLIGHT_COLOR: Color = Color(0.3, 0.8, 0.3)
 const DEFAULT_COLOR: Color = Color(0.15, 0.15, 0.15)
 
 ## Array of booleans (9 elements). true = cell is occupied/highlighted.
-@export var grid_data: Array:
+@export var grid_data: Array[bool] = []:
 	set(value):
 		grid_data = value
 		if _is_ready:

@@ -10,13 +10,17 @@ var _infamy_label: Label
 
 
 func _ready() -> void:
+	var container := HBoxContainer.new()
+	container.name = "StatsContainer"
+	add_child(container)
+
 	_gold_label = Label.new()
 	_gold_label.name = "GoldLabel"
-	add_child(_gold_label)
+	container.add_child(_gold_label)
 
 	_infamy_label = Label.new()
 	_infamy_label.name = "InfamyLabel"
-	add_child(_infamy_label)
+	container.add_child(_infamy_label)
 
 	_update_gold(GameState.gold)
 	_update_infamy(GameState.infamy)

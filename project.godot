@@ -14,6 +14,14 @@ config/name="Chimera Gladiator Manager"
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
+[autoload]
+
+_GDTCoverage="*res://addons/gd-tools-coverage/coverage.gd"
+EventBus="*res://scripts/autoload/event_bus.gd"
+GameState="*res://scripts/autoload/game_state.gd"
+SaveManager="*res://scripts/autoload/save_manager.gd"
+CombatManager="*res://scripts/autoload/combat_manager.gd"
+
 [display]
 
 window/size/viewport_width=1280
@@ -22,6 +30,10 @@ window/stretch/mode="canvas_items"
 window/stretch/aspect="keep"
 window/size/min_width=960
 window/size/min_height=540
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.gd")
 
 [gui]
 
@@ -84,15 +96,3 @@ renderer/rendering_method.mobile="gl_compatibility"
 textures/lossless_compression/force_png=true
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/gut/plugin.gd")
-
-[autoload]
-
-_GDTCoverage="*res://addons/gd-tools-coverage/coverage.gd"
-EventBus="*res://scripts/autoload/event_bus.gd"
-GameState="*res://scripts/autoload/game_state.gd"
-SaveManager="*res://scripts/autoload/save_manager.gd"
-CombatManager="*res://scripts/autoload/combat_manager.gd"
