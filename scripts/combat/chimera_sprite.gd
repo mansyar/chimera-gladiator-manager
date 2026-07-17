@@ -29,6 +29,14 @@ const Z_MOUTH := 5
 const Z_NOSE := 6
 const Z_EYEBROWS := 7
 
+## Position offset for each part layer relative to the body center.
+const POSITION_OFFSETS := {
+	"Body": Vector2(0, 0),
+	"Legs": Vector2(0, 100),
+	"Arms": Vector2(90, 0),
+	"Detail": Vector2(0, -80),
+}
+
 
 func _ready() -> void:
 	_create_layer("Body", Z_BODY)
@@ -54,10 +62,16 @@ func _create_layer(layer_name: String, z_order: int) -> Sprite2D:
 ## Body←TORSO, Legs←LEGS, Arms←ARMS, Detail←HEAD.
 ## Cosmetic layers (Eyes/Mouth/Nose/Eyebrows) are left empty (set in a future track).
 func set_from_parts(chimera_data: ChimeraData) -> void:
-	_set_layer_texture("Body", chimera_data.torso)
-	_set_layer_texture("Legs", chimera_data.legs)
-	_set_layer_texture("Arms", chimera_data.arms)
-	_set_layer_texture("Detail", chimera_data.head)
+	_set_layer("Body", chimera_data.torso)
+	_set_layer("Legs", chimera_data.legs)
+	_set_layer("Arms", chimera_data.arms)
+	_set_layer("Detail", chimera_data.head)
+
+
+## Set texture and position for a named layer from a part.
+func _set_layer(layer_name: String, part: PartData) -> void:
+	_set_layer_texture(layer_name, part)
+	_set_layer_position(layer_name)
 
 
 ## Load and assign a texture to a named layer based on a part's shape_id and strain.
@@ -76,6 +90,14 @@ func _set_layer_texture(layer_name: String, part: PartData) -> void:
 		layer.texture = null
 		return
 	layer.texture = load(path)
+
+
+## Apply the configured position offset for a named layer.
+func _set_layer_position(layer_name: String) -> void:
+	var layer: Sprite2D = get_node_or_null(layer_name)
+	if layer == null:
+		return
+	layer.position = POSITION_OFFSETS.get(layer_name, Vector2.ZERO)
 
 
 ## Construct the sprite path for a shape and strain.

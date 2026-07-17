@@ -221,9 +221,9 @@ func test_cards_display_correct_nicknames() -> void:
 	_create_roster_with_chimeras(parent)
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
-	assert_eq(cards[0].get_node("NicknameLabel").text, "Alpha")
-	assert_eq(cards[1].get_node("NicknameLabel").text, "Beta")
-	assert_eq(cards[2].get_node("NicknameLabel").text, "Gamma")
+	assert_eq(cards[0].get_node("Content/NicknameLabel").text, "Alpha")
+	assert_eq(cards[1].get_node("Content/NicknameLabel").text, "Beta")
+	assert_eq(cards[2].get_node("Content/NicknameLabel").text, "Gamma")
 
 
 func test_card_has_chimera_sprite_preview() -> void:
@@ -233,7 +233,9 @@ func test_card_has_chimera_sprite_preview() -> void:
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
 	for i in cards.size():
-		var sprite: Node = cards[i].get_node_or_null("ChimeraSprite")
+		var sprite: Node = cards[i].get_node_or_null(
+			"Content/SpriteContainer/SubViewport/ChimeraSprite"
+		)
 		assert_not_null(sprite, "Card %d should have a ChimeraSprite preview" % i)
 		assert_true(
 			sprite is ChimeraSprite, "Card %d ChimeraSprite should be ChimeraSprite type" % i
@@ -247,7 +249,9 @@ func test_chimera_sprite_preview_has_textures() -> void:
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
 	for i in cards.size():
-		var sprite := cards[i].get_node("ChimeraSprite") as ChimeraSprite
+		var sprite := (
+			cards[i].get_node("Content/SpriteContainer/SubViewport/ChimeraSprite") as ChimeraSprite
+		)
 		var body := sprite.get_node("Body") as Sprite2D
 		assert_not_null(
 			body.texture, "Card %d Body layer should have a texture after set_from_parts" % i
@@ -264,7 +268,7 @@ func test_card_displays_correct_hp() -> void:
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
 	for i in cards.size():
-		var label := cards[i].get_node("StatsContainer/HPLabel") as Label
+		var label := cards[i].get_node("Content/StatsContainer/HPLabel") as Label
 		assert_eq(
 			label.text,
 			str(int(GameState.roster[i].max_hp)),
@@ -279,7 +283,7 @@ func test_card_displays_correct_attack() -> void:
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
 	for i in cards.size():
-		var label := cards[i].get_node("StatsContainer/AttackLabel") as Label
+		var label := cards[i].get_node("Content/StatsContainer/AttackLabel") as Label
 		assert_eq(label.text, str(int(GameState.roster[i].attack)), "Card %d attack mismatch" % i)
 
 
@@ -290,7 +294,7 @@ func test_card_displays_correct_defense() -> void:
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
 	for i in cards.size():
-		var label := cards[i].get_node("StatsContainer/DefenseLabel") as Label
+		var label := cards[i].get_node("Content/StatsContainer/DefenseLabel") as Label
 		assert_eq(label.text, str(int(GameState.roster[i].defense)), "Card %d defense mismatch" % i)
 
 
@@ -301,7 +305,7 @@ func test_card_displays_correct_speed() -> void:
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
 	for i in cards.size():
-		var label := cards[i].get_node("StatsContainer/SpeedLabel") as Label
+		var label := cards[i].get_node("Content/StatsContainer/SpeedLabel") as Label
 		assert_eq(label.text, str(int(GameState.roster[i].speed)), "Card %d speed mismatch" % i)
 
 
@@ -312,7 +316,7 @@ func test_card_displays_correct_attack_range() -> void:
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
 	for i in cards.size():
-		var label := cards[i].get_node("StatsContainer/RangeLabel") as Label
+		var label := cards[i].get_node("Content/StatsContainer/RangeLabel") as Label
 		assert_eq(
 			label.text, str(int(GameState.roster[i].attack_range)), "Card %d range mismatch" % i
 		)
@@ -328,7 +332,7 @@ func test_instability_label_pure() -> void:
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
 	# Alpha: 4 BEAST → 1 distinct strain → Pure
-	var label := cards[0].get_node("InstabilityLabel") as Label
+	var label := cards[0].get_node("Content/InstabilityLabel") as Label
 	assert_eq(label.text, "Pure", "Alpha (1 strain) should be Pure")
 
 
@@ -339,7 +343,7 @@ func test_instability_label_stable_hybrid() -> void:
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
 	# Beta: 3 UNDEAD + 1 DRACONIC → 2 distinct strains → Stable Hybrid
-	var label := cards[1].get_node("InstabilityLabel") as Label
+	var label := cards[1].get_node("Content/InstabilityLabel") as Label
 	assert_eq(label.text, "Stable Hybrid", "Beta (2 strains) should be Stable Hybrid")
 
 
@@ -361,7 +365,7 @@ func test_instability_label_volatile_hybrid() -> void:
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
 	# 3 distinct strains → Volatile Hybrid
-	var label := cards[0].get_node("InstabilityLabel") as Label
+	var label := cards[0].get_node("Content/InstabilityLabel") as Label
 	assert_eq(label.text, "Volatile Hybrid", "Delta (3 strains) should be Volatile Hybrid")
 
 
@@ -372,7 +376,7 @@ func test_instability_label_chaotic() -> void:
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
 	# Gamma: UNDEAD, ROBOTIC, DRACONIC, BEAST → 4 distinct strains → Chaotic
-	var label := cards[2].get_node("InstabilityLabel") as Label
+	var label := cards[2].get_node("Content/InstabilityLabel") as Label
 	assert_eq(label.text, "Chaotic", "Gamma (4 strains) should be Chaotic")
 
 
@@ -386,7 +390,7 @@ func test_combo_ability_displayed_when_present() -> void:
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
 	# Alpha has combo_ability set
-	var combo: Node = cards[0].get_node_or_null("AbilitiesContainer/ComboAbility")
+	var combo: Node = cards[0].get_node_or_null("Content/AbilitiesContainer/ComboAbility")
 	assert_not_null(combo, "Alpha should display combo ability")
 
 
@@ -397,7 +401,7 @@ func test_combo_ability_absent_when_null() -> void:
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
 	# Gamma has no combo_ability
-	var combo: Node = cards[2].get_node_or_null("AbilitiesContainer/ComboAbility")
+	var combo: Node = cards[2].get_node_or_null("Content/AbilitiesContainer/ComboAbility")
 	assert_null(combo, "Gamma should NOT display combo ability")
 
 
@@ -408,8 +412,10 @@ func test_combo_tier_label_ultimate() -> void:
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
 	# Alpha: combo_tier=3 → Ultimate
-	var label := cards[0].get_node("AbilitiesContainer/ComboAbility/ComboTierLabel") as Label
-	assert_eq(label.text, "Ultimate", "Alpha combo tier 3 should be Ultimate")
+	var label := (
+		cards[0].get_node("Content/AbilitiesContainer/ComboAbility/ComboTierLabel") as Label
+	)
+	assert_eq(label.text, "(Ultimate)", "Alpha combo tier 3 should be Ultimate")
 
 
 func test_combo_tier_label_enhanced() -> void:
@@ -419,8 +425,10 @@ func test_combo_tier_label_enhanced() -> void:
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
 	# Beta: combo_tier=2 → Enhanced
-	var label := cards[1].get_node("AbilitiesContainer/ComboAbility/ComboTierLabel") as Label
-	assert_eq(label.text, "Enhanced", "Beta combo tier 2 should be Enhanced")
+	var label := (
+		cards[1].get_node("Content/AbilitiesContainer/ComboAbility/ComboTierLabel") as Label
+	)
+	assert_eq(label.text, "(Enhanced)", "Beta combo tier 2 should be Enhanced")
 
 
 func test_combo_tier_label_basic() -> void:
@@ -441,8 +449,10 @@ func test_combo_tier_label_basic() -> void:
 	_create_roster(parent)
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
-	var label := cards[0].get_node("AbilitiesContainer/ComboAbility/ComboTierLabel") as Label
-	assert_eq(label.text, "Basic", "combo tier 1 should be Basic")
+	var label := (
+		cards[0].get_node("Content/AbilitiesContainer/ComboAbility/ComboTierLabel") as Label
+	)
+	assert_eq(label.text, "(Basic)", "combo tier 1 should be Basic")
 
 
 # --- Strain chip tests ---
@@ -455,7 +465,7 @@ func test_strain_chips_count_is_4() -> void:
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
 	for i in cards.size():
-		var chips: Array = cards[i].get_node("StrainChipsContainer").get_children()
+		var chips: Array = cards[i].get_node("Content/StrainChipsContainer").get_children()
 		assert_eq(chips.size(), 4, "Card %d should have 4 strain chips" % i)
 
 
@@ -466,7 +476,7 @@ func test_strain_chips_colored_per_strain() -> void:
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
 	# Alpha: all 4 BEAST → all chips green
-	var alpha_chips: Array = cards[0].get_node("StrainChipsContainer").get_children()
+	var alpha_chips: Array = cards[0].get_node("Content/StrainChipsContainer").get_children()
 	for j in alpha_chips.size():
 		var chip := alpha_chips[j] as ColorRect
 		assert_eq(
@@ -475,7 +485,7 @@ func test_strain_chips_colored_per_strain() -> void:
 			"Alpha chip %d should be Beast color (green)" % j
 		)
 	# Gamma: UNDEAD, ROBOTIC, DRACONIC, BEAST → dark, white, red, green
-	var gamma_chips: Array = cards[2].get_node("StrainChipsContainer").get_children()
+	var gamma_chips: Array = cards[2].get_node("Content/StrainChipsContainer").get_children()
 	var gamma_strains := [
 		GameEnums.Strain.UNDEAD,
 		GameEnums.Strain.ROBOTIC,
@@ -501,7 +511,7 @@ func test_parts_listed_with_slot_strain_rarity() -> void:
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
 	# Check Alpha's 4 parts
-	var parts: Array = cards[0].get_node("PartsContainer").get_children()
+	var parts: Array = cards[0].get_node("Content/PartsContainer").get_children()
 	assert_eq(parts.size(), 4, "Should list 4 equipped parts")
 	var slot_names := ["HEAD", "TORSO", "ARMS", "LEGS"]
 	var strain_names := ["Beast", "Beast", "Beast", "Beast"]
@@ -523,11 +533,11 @@ func test_abilities_list_shows_4_part_abilities() -> void:
 	_create_roster_with_chimeras(parent)
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
-	var abilities: Array = cards[0].get_node("AbilitiesContainer").get_children()
+	var abilities: Array = cards[0].get_node("Content/AbilitiesContainer").get_children()
 	# 4 part abilities + 1 combo = 5 for Alpha
 	assert_eq(abilities.size(), 5, "Alpha should show 4 part abilities + 1 combo")
 	# Gamma: 4 part abilities, no combo
-	var gamma_abilities: Array = cards[2].get_node("AbilitiesContainer").get_children()
+	var gamma_abilities: Array = cards[2].get_node("Content/AbilitiesContainer").get_children()
 	assert_eq(gamma_abilities.size(), 4, "Gamma should show 4 part abilities (no combo)")
 
 
@@ -538,11 +548,11 @@ func test_ability_entries_show_name_and_type() -> void:
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
 	# Alpha's first ability: "Bite" (ACTIVE)
-	var ability0: Node = cards[0].get_node("AbilitiesContainer/Ability0")
+	var ability0: Node = cards[0].get_node("Content/AbilitiesContainer/Ability0")
 	var name_label := ability0.get_node("AbilityNameLabel") as Label
 	var type_label := ability0.get_node("AbilityTypeLabel") as Label
 	assert_eq(name_label.text, "Bite", "First ability name should be Bite")
-	assert_eq(type_label.text, "Active", "First ability type should be Active")
+	assert_eq(type_label.text, "[Active]", "First ability type should be Active")
 
 
 # --- Decay and wins tests ---
@@ -554,7 +564,7 @@ func test_decay_label_shows_decay_level() -> void:
 	_create_roster_with_chimeras(parent)
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
-	var label := cards[0].get_node("DecayLabel") as Label
+	var label := cards[0].get_node("Content/RecordRow/DecayLabel") as Label
 	assert_eq(label.text, "Decay: 0", "Fresh chimera should show decay 0")
 
 
@@ -564,7 +574,7 @@ func test_wins_label_shows_match_wins() -> void:
 	_create_roster_with_chimeras(parent)
 	var screen := parent.get_child(0) as RosterScreen
 	var cards := _get_cards(screen)
-	var label := cards[0].get_node("WinsLabel") as Label
+	var label := cards[0].get_node("Content/RecordRow/WinsLabel") as Label
 	assert_eq(label.text, "Wins: 0", "Fresh chimera should show 0 wins")
 
 
