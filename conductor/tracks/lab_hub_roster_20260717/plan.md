@@ -97,7 +97,7 @@
     - [x] Mark task `[x]` with commit SHA in plan.md, commit plan update
 - [x] Task: Conductor - User Manual Verification 'Roster Screen' (Protocol in workflow.md)
 
-## Phase 4: Track Verification & Definition of Done
+## Phase 4: Track Verification & Definition of Done [checkpoint: 8dffff9]
 
 *Cross-cutting quality gates across all new code for this track.*
 
@@ -108,5 +108,5 @@
     - [x] `gd-tools test --coverage --min 80` exits 0 (all track tests + existing suite)
 - [x] Task: Verify DoD acceptance criteria
     - [x] Confirm AC-1..AC-11 from spec.md are satisfied by tests/manual checks
-- [ ] Task: Conductor - User Manual Verification 'Track Verification & DoD' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Track Verification & DoD' (Protocol in workflow.md) [8dffff9]
 </protect>
