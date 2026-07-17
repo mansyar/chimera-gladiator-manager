@@ -95,18 +95,18 @@
     - [x] Stage changes, commit `feat(ui): Implement Roster screen with detailed chimera cards`
     - [x] Attach task summary git note to commit
     - [x] Mark task `[x]` with commit SHA in plan.md, commit plan update
-- [ ] Task: Conductor - User Manual Verification 'Roster Screen' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Roster Screen' (Protocol in workflow.md)
 
 ## Phase 4: Track Verification & Definition of Done
 
 *Cross-cutting quality gates across all new code for this track.*
 
-- [ ] Task: Read [./spec.md](./spec.md) and [../../workflow.md](../../workflow.md) to refresh context before starting this phase
-- [ ] Task: Run full quality gate suite
-    - [ ] `gd-tools lint` exits 0
-    - [ ] `gd-tools format --check` exits 0
-    - [ ] `gd-tools test --coverage --min 80` exits 0 (all track tests + existing suite)
-- [ ] Task: Verify DoD acceptance criteria
-    - [ ] Confirm AC-1..AC-11 from spec.md are satisfied by tests/manual checks
+- [x] Task: Read [./spec.md](./spec.md) and [../../workflow.md](../../workflow.md) to refresh context before starting this phase
+- [x] Task: Run full quality gate suite
+    - [x] `gd-tools lint` exits 0
+    - [x] `gd-tools format --check` exits 0
+    - [x] `gd-tools test --coverage --min 80` exits 0 (all track tests + existing suite)
+- [x] Task: Verify DoD acceptance criteria
+    - [x] Confirm AC-1..AC-11 from spec.md are satisfied by tests/manual checks
 - [ ] Task: Conductor - User Manual Verification 'Track Verification & DoD' (Protocol in workflow.md)
 </protect>
