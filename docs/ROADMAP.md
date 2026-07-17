@@ -339,7 +339,7 @@ Before initializing individual tracks, the following foundational context files 
 ## Milestone 4: UI & Management Screens
 
 ### TRACK-009: UI Framework & Screen Manager
-*   **Status:** `Pending`
+*   **Status:** `Complete`
 *   **Dependencies:** TRACK-001, TRACK-004
 *   **Estimated Effort:** 2-3 Days
 
@@ -371,9 +371,9 @@ Before initializing individual tracks, the following foundational context files 
 *   **Phase 3 (TopBar & Sounds):** Implement TopBar with EventBus listening. Add UI sounds. Verify live Gold/Infamy updates.
 
 #### Verification & Definition of Done (DoD)
-*   [ ] **Manual Checkpoint:** ScreenManager transitions between all 9 stubs. Lab Hub is default. TopBar shows Gold/Infamy (updates on EventBus). Theme applies Kenney Future + NinePatchRect consistently. Sounds play on interactions.
-*   [ ] **Automated Tests:** `gd-tools test --coverage --min 80` exits 0. Tests verify: (1) change_screen loads correct PackedScene, (2) frees previous screen, (3) TopBar updates on gold_changed, (4) TopBar updates on infamy_changed, (5) part_slot displays correct sprite, (6) chimera_card displays nickname+stats.
-*   [ ] **Conductor Review:** Screen flow matches TDD Section 10. Theme consistent. All 9 screens registered. `gd-tools lint` and `gd-tools format --check` pass.
+*   [x] **Manual Checkpoint:** ScreenManager transitions between all 9 stubs. Lab Hub is default. TopBar shows Gold/Infamy (updates on EventBus). Theme applies Kenney Future + NinePatchRect consistently. Sounds play on interactions.
+*   [x] **Automated Tests:** `gd-tools test --coverage --min 80` exits 0. Tests verify: (1) change_screen loads correct PackedScene, (2) frees previous screen, (3) TopBar updates on gold_changed, (4) TopBar updates on infamy_changed, (5) part_slot displays correct sprite, (6) chimera_card displays nickname+stats.
+*   [x] **Conductor Review:** Screen flow matches TDD Section 10. Theme consistent. All 9 screens registered. `gd-tools lint` and `gd-tools format --check` pass.
 
 ---
 
@@ -639,7 +639,7 @@ The following GDD features are distributed across multiple tracks rather than ha
 
 ### Test Coverage Initiative (Conductor Track)
 *   **Scope:** Maximized test coverage across all implemented source files (Milestone 2). Added integration tests, edge case tests, and autoload mocking.
-*   **Status:** Complete — 484 tests at completion. Current totals (post-TRACK-008): 747 tests, 94.4% line coverage, 94.4% branch coverage.
+*   **Status:** Complete — 484 tests at completion. Current totals (post-TRACK-009): 834 tests, 92.6% line coverage, 93.9% branch coverage.
 *   **Coverage addon:** Reconfigured for autoload instrumentation support (`_GDTCoverage` registered first in `project.godot`, before game autoloads).
 
 ### Godot Version Alignment

@@ -1,7 +1,7 @@
 # Chimera Gladiator Manager
 ## Technical Architecture Document
 
-> **Status:** Draft v2 — 7 significant gaps + 6 minor issues resolved. Implementation in progress (TRACK-001 through TRACK-008 complete).
+> **Status:** Draft v2 — 7 significant gaps + 6 minor issues resolved. Implementation in progress (TRACK-001 through TRACK-009 complete).
 > Last updated: 2026-07-17
 
 ---
@@ -163,7 +163,7 @@ res://
 │   ├── data/
 │   ├── ai/                           # (TRACK-006)
 │   ├── systems/
-│   ├── ui/                           # (TRACK-009+)
+│   ├── ui/                           # UI tests (TRACK-009)
 │   ├── integration/                  # Cross-system flow tests
 │   └── edge/                         # Boundary condition tests
 ├── saves/                           # Save files (runtime — actually in user://saves/, not res://)
