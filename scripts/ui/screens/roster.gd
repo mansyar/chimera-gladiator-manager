@@ -72,6 +72,11 @@ func _populate_roster_cards() -> void:
 		var chimera: ChimeraData = GameState.roster[i]
 		var card := _create_card(chimera, i)
 		container.add_child(card)
+		# set_from_parts must run after the card enters the SceneTree so
+		# ChimeraSprite._ready() has created the 8 Sprite2D layers.
+		var sprite := card.get_node_or_null("ChimeraSprite") as ChimeraSprite
+		if sprite != null:
+			sprite.set_from_parts(chimera)
 
 
 ## Create a detailed card for a single chimera.
@@ -87,11 +92,10 @@ func _create_card(chimera: ChimeraData, index: int) -> PanelContainer:
 	nickname.text = chimera.nickname
 	card.add_child(nickname)
 
-	# ChimeraSprite preview (part-derived layers populated)
+	# ChimeraSprite preview (textures set after card enters SceneTree)
 	var sprite := ChimeraSprite.new()
 	sprite.name = "ChimeraSprite"
 	card.add_child(sprite)
-	sprite.set_from_parts(chimera)
 
 	# Equipped parts list
 	var parts_container := VBoxContainer.new()
@@ -164,7 +168,10 @@ func _create_part_entry(part: PartData, index: int) -> HBoxContainer:
 	var part_sprite := TextureRect.new()
 	part_sprite.name = "PartSprite"
 	if not part.sprite_path.is_empty():
-		part_sprite.texture = load(part.sprite_path)
+		var tex := load(part.sprite_path)
+		if tex == null:
+			push_warning("Roster: failed to load part sprite at '%s'" % part.sprite_path)
+		part_sprite.texture = tex
 	entry.add_child(part_sprite)
 
 	var slot_label := Label.new()

@@ -240,6 +240,20 @@ func test_card_has_chimera_sprite_preview() -> void:
 		)
 
 
+func test_chimera_sprite_preview_has_textures() -> void:
+	var parent := _MockParent.new()
+	add_child_autofree(parent)
+	_create_roster_with_chimeras(parent)
+	var screen := parent.get_child(0) as RosterScreen
+	var cards := _get_cards(screen)
+	for i in cards.size():
+		var sprite := cards[i].get_node("ChimeraSprite") as ChimeraSprite
+		var body := sprite.get_node("Body") as Sprite2D
+		assert_not_null(
+			body.texture, "Card %d Body layer should have a texture after set_from_parts" % i
+		)
+
+
 # --- Stat label tests ---
 
 

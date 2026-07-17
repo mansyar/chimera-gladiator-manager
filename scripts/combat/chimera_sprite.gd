@@ -69,6 +69,12 @@ func _set_layer_texture(layer_name: String, part: PartData) -> void:
 		layer.texture = null
 		return
 	var path := get_sprite_path(part.shape_id, part.strain)
+	if path.is_empty():
+		push_warning(
+			"ChimeraSprite: could not resolve sprite path for shape_id '%s'" % part.shape_id
+		)
+		layer.texture = null
+		return
 	layer.texture = load(path)
 
 
