@@ -66,35 +66,35 @@
 
 *Detailed read-only chimera viewer. Depends on ChimeraSprite (Phase 1) + `GameState.roster`.*
 
-- [ ] Task: Read [./spec.md](./spec.md) and [../../workflow.md](../../workflow.md) to refresh context before starting this phase
-- [ ] Task: Write failing tests for Roster (Red)
-    - [ ] Test Roster populates exactly 3 detailed cards from `GameState.roster`
-    - [ ] Test each card's stat labels (HP/Atk/Def/Spd/Range) match `ChimeraData` derived stats
-    - [ ] Test instability label matches distinct-strain count (1→Pure, 2→Stable Hybrid, 3→Volatile Hybrid, 4→Chaotic)
-    - [ ] Test combo ability displayed when `ChimeraData.combo_ability != null` (2+ same-strain); absent otherwise
-    - [ ] Test combo tier label (Basic/Enhanced/Ultimate) matches `combo_tier`
-    - [ ] Test strain chips: exactly 4 chips, one per equipped part, colored per `STRAIN_TO_COLOR`
-    - [ ] Test 4 equipped parts listed with slot label + strain + rarity
-    - [ ] Test back button calls `change_screen("lab_hub")`
-    - [ ] Test Roster performs no mutation on `ChimeraData`/`GameState` (view-only)
-- [ ] Task: Implement Roster screen (Green)
-    - [ ] Build full `scenes/ui/screens/roster.tscn`: 3 detailed card containers, each with ChimeraSprite preview area, part list, stat grid, instability label, strain chip row, decay/wins, abilities list, back button
-    - [ ] Implement `scripts/ui/screens/roster.gd`: populate 3 cards from `GameState.roster` on `_ready()`
-    - [ ] Integrate `ChimeraSprite` preview per card via `set_from_parts()`
-    - [ ] Implement part list rendering (sprite + slot + strain + rarity per part)
-    - [ ] Implement strain chip generation (4 chips colored per strain)
-    - [ ] Implement abilities list (4 part abilities + combo if present, with tier label)
-    - [ ] Wire back button → `change_screen("lab_hub")` + `play_click()`
-    - [ ] Run tests, confirm Green
-- [ ] Task: Refactor Roster for clarity (Optional)
-    - [ ] Extract per-card population into a helper method; reuse instability label helper from `chimera_card`
-    - [ ] Rerun tests, confirm still Green
-- [ ] Task: Verify coverage for Roster
-    - [ ] Run `gd-tools test --coverage --min 80`, confirm Roster ≥ 80%
-- [ ] Task: Commit & attach git note for Roster
-    - [ ] Stage changes, commit `feat(ui): Implement Roster screen with detailed chimera cards`
-    - [ ] Attach task summary git note to commit
-    - [ ] Mark task `[x]` with commit SHA in plan.md, commit plan update
+- [x] Task: Read [./spec.md](./spec.md) and [../../workflow.md](../../workflow.md) to refresh context before starting this phase
+- [x] Task: Write failing tests for Roster (Red) [3e83460]
+    - [x] Test Roster populates exactly 3 detailed cards from `GameState.roster`
+    - [x] Test each card's stat labels (HP/Atk/Def/Spd/Range) match `ChimeraData` derived stats
+    - [x] Test instability label matches distinct-strain count (1→Pure, 2→Stable Hybrid, 3→Volatile Hybrid, 4→Chaotic)
+    - [x] Test combo ability displayed when `ChimeraData.combo_ability != null` (2+ same-strain); absent otherwise
+    - [x] Test combo tier label (Basic/Enhanced/Ultimate) matches `combo_tier`
+    - [x] Test strain chips: exactly 4 chips, one per equipped part, colored per `STRAIN_TO_COLOR`
+    - [x] Test 4 equipped parts listed with slot label + strain + rarity
+    - [x] Test back button calls `change_screen("lab_hub")`
+    - [x] Test Roster performs no mutation on `ChimeraData`/`GameState` (view-only)
+- [x] Task: Implement Roster screen (Green) [3e83460]
+    - [x] Build full `scenes/ui/screens/roster.tscn`: 3 detailed card containers, each with ChimeraSprite preview area, part list, stat grid, instability label, strain chip row, decay/wins, abilities list, back button
+    - [x] Implement `scripts/ui/screens/roster.gd`: populate 3 cards from `GameState.roster` on `_ready()`
+    - [x] Integrate `ChimeraSprite` preview per card via `set_from_parts()`
+    - [x] Implement part list rendering (sprite + slot + strain + rarity per part)
+    - [x] Implement strain chip generation (4 chips colored per strain)
+    - [x] Implement abilities list (4 part abilities + combo if present, with tier label)
+    - [x] Wire back button → `change_screen("lab_hub")` + `play_click()`
+    - [x] Run tests, confirm Green
+- [x] Task: Refactor Roster for clarity (Optional) [3e83460]
+    - [x] Extract per-card population into a helper method; reuse instability label helper from `chimera_card`
+    - [x] Rerun tests, confirm still Green
+- [x] Task: Verify coverage for Roster [3e83460]
+    - [x] Run `gd-tools test --coverage --min 80`, confirm Roster ≥ 80% (83.1% lines, 90.1% branches)
+- [x] Task: Commit & attach git note for Roster [3e83460]
+    - [x] Stage changes, commit `feat(ui): Implement Roster screen with detailed chimera cards`
+    - [x] Attach task summary git note to commit
+    - [x] Mark task `[x]` with commit SHA in plan.md, commit plan update
 - [ ] Task: Conductor - User Manual Verification 'Roster Screen' (Protocol in workflow.md)
 
 ## Phase 4: Track Verification & Definition of Done
