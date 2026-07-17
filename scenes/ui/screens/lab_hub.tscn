@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://be4wf2myes7ns"]
 
-[ext_resource type="Script" path="res://scripts/ui/screens/lab_hub.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://banavkp5kgxhr" path="res://scripts/ui/screens/lab_hub.gd" id="1_script"]
 
-[node name="LabHub" type="Control"]
+[node name="LabHub" type="Control" unique_id=1395771915]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -10,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="TitleLabel" type="Label" parent="."]
+[node name="TitleLabel" type="Label" parent="." unique_id=1202843524]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -20,11 +21,11 @@ offset_top = 20.0
 offset_right = 100.0
 offset_bottom = 60.0
 grow_horizontal = 2
+text = "Lab Hub"
 horizontal_alignment = 1
 vertical_alignment = 1
-text = "Lab Hub"
 
-[node name="RosterContainer" type="HBoxContainer" parent="."]
+[node name="RosterContainer" type="HBoxContainer" parent="." unique_id=745923062]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -35,7 +36,7 @@ offset_right = 300.0
 offset_bottom = 200.0
 grow_horizontal = 2
 
-[node name="NavContainer" type="VBoxContainer" parent="."]
+[node name="NavContainer" type="VBoxContainer" parent="." unique_id=445457537]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -49,35 +50,35 @@ offset_bottom = 130.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AssemblyButton" type="Button" parent="NavContainer"]
+[node name="AssemblyButton" type="Button" parent="NavContainer" unique_id=1183083185]
 layout_mode = 2
 text = "Assembly"
 
-[node name="BlackMarketButton" type="Button" parent="NavContainer"]
+[node name="BlackMarketButton" type="Button" parent="NavContainer" unique_id=657942522]
 layout_mode = 2
 text = "Black Market"
 
-[node name="RosterButton" type="Button" parent="NavContainer"]
+[node name="RosterButton" type="Button" parent="NavContainer" unique_id=300113707]
 layout_mode = 2
 text = "Roster"
 
-[node name="ClinicButton" type="Button" parent="NavContainer"]
+[node name="ClinicButton" type="Button" parent="NavContainer" unique_id=189742319]
 layout_mode = 2
 text = "Clinic"
 
-[node name="TournamentButton" type="Button" parent="NavContainer"]
+[node name="TournamentButton" type="Button" parent="NavContainer" unique_id=1688795328]
 layout_mode = 2
 text = "Tournament"
 
-[node name="HallOfFameButton" type="Button" parent="NavContainer"]
+[node name="HallOfFameButton" type="Button" parent="NavContainer" unique_id=708450415]
 layout_mode = 2
 text = "Hall of Fame"
 
-[node name="ArenaPreMatchButton" type="Button" parent="NavContainer"]
+[node name="ArenaPreMatchButton" type="Button" parent="NavContainer" unique_id=961888267]
 layout_mode = 2
 text = "Arena Pre-Match"
 
-[node name="QuickMatchButton" type="Button" parent="."]
+[node name="QuickMatchButton" type="Button" parent="." unique_id=1703325973]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -92,11 +93,11 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Quick Match"
 
-[connection signal="pressed" from="NavContainer/AssemblyButton" to="." method="_on_nav_button_pressed" binds=["assembly"]]
-[connection signal="pressed" from="NavContainer/BlackMarketButton" to="." method="_on_nav_button_pressed" binds=["black_market"]]
-[connection signal="pressed" from="NavContainer/RosterButton" to="." method="_on_nav_button_pressed" binds=["roster"]]
-[connection signal="pressed" from="NavContainer/ClinicButton" to="." method="_on_nav_button_pressed" binds=["clinic"]]
-[connection signal="pressed" from="NavContainer/TournamentButton" to="." method="_on_nav_button_pressed" binds=["tournament"]]
-[connection signal="pressed" from="NavContainer/HallOfFameButton" to="." method="_on_nav_button_pressed" binds=["hall_of_fame"]]
-[connection signal="pressed" from="NavContainer/ArenaPreMatchButton" to="." method="_on_nav_button_pressed" binds=["arena_pre_match"]]
-[connection signal="pressed" from="QuickMatchButton" to="." method="_on_nav_button_pressed" binds=["arena_pre_match"]]
+[connection signal="pressed" from="NavContainer/AssemblyButton" to="." method="_on_nav_button_pressed" binds= ["assembly"]]
+[connection signal="pressed" from="NavContainer/BlackMarketButton" to="." method="_on_nav_button_pressed" binds= ["black_market"]]
+[connection signal="pressed" from="NavContainer/RosterButton" to="." method="_on_nav_button_pressed" binds= ["roster"]]
+[connection signal="pressed" from="NavContainer/ClinicButton" to="." method="_on_nav_button_pressed" binds= ["clinic"]]
+[connection signal="pressed" from="NavContainer/TournamentButton" to="." method="_on_nav_button_pressed" binds= ["tournament"]]
+[connection signal="pressed" from="NavContainer/HallOfFameButton" to="." method="_on_nav_button_pressed" binds= ["hall_of_fame"]]
+[connection signal="pressed" from="NavContainer/ArenaPreMatchButton" to="." method="_on_nav_button_pressed" binds= ["arena_pre_match"]]
+[connection signal="pressed" from="QuickMatchButton" to="." method="_on_nav_button_pressed" binds= ["arena_pre_match"]]

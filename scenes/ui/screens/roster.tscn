@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://b87ii1yyeyajr"]
 
-[ext_resource type="Script" path="res://scripts/ui/screens/roster.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://bdydf3jdtlflm" path="res://scripts/ui/screens/roster.gd" id="1_script"]
 
-[node name="Roster" type="Control"]
+[node name="Roster" type="Control" unique_id=657067361]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -10,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="TitleLabel" type="Label" parent="."]
+[node name="TitleLabel" type="Label" parent="." unique_id=826024854]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -21,7 +22,7 @@ grow_horizontal = 2
 text = "Roster"
 horizontal_alignment = 1
 
-[node name="RosterContainer" type="HBoxContainer" parent="."]
+[node name="RosterContainer" type="HBoxContainer" parent="." unique_id=1938750698]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,7 +34,7 @@ offset_bottom = -80.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BackButton" type="Button" parent="."]
+[node name="BackButton" type="Button" parent="." unique_id=297685661]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
