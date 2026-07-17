@@ -1,3 +1,4 @@
+<protect>
 # Specification: TRACK-010 — Lab Hub & Roster Screens
 
 ## Overview
@@ -77,3 +78,4 @@ This is a **Feature** track. Dependencies: TRACK-009 (UI framework/widgets), TRA
 - Enemy generation (TRACK-008)
 - Cosmetic face customization UI (TRACK-011) — ChimeraSprite node supports cosmetic layers but TRACK-010 does not populate them
 - Lab Hub "available tournaments" panel (GDD mentions tournaments in Hub; tournament display deferred to TRACK-015)
+</protect>

@@ -1,3 +1,4 @@
+<protect>
 # Implementation Plan: TRACK-010 — Lab Hub & Roster Screens
 
 > **Status:** Pending
@@ -8,6 +9,7 @@
 
 *Foundational reusable visual node. Roster (Phase 3) depends on it. Built first.*
 
+- [ ] Task: Read [./spec.md](./spec.md) and [../../workflow.md](../../workflow.md) to refresh context before starting this phase
 - [ ] Task: Write failing tests for ChimeraSprite composition (Red)
     - [ ] Test `get_sprite_path()` returns correct path per strain (all 7 strains incl. NEUTRAL→grey)
     - [ ] Test `set_from_parts()` populates the 4 part-derived layers (Body←TORSO, Legs←LEGS, Arms←ARMS, Detail←HEAD) with the correct textures
@@ -35,6 +37,7 @@
 
 *Main navigation hub. Independent of ChimeraSprite. Uses existing `chimera_card` widget + `GameState.roster`.*
 
+- [ ] Task: Read [./spec.md](./spec.md) and [../../workflow.md](../../workflow.md) to refresh context before starting this phase
 - [ ] Task: Write failing tests for Lab Hub (Red)
     - [ ] Test Lab Hub populates exactly 3 `chimera_card` widgets from `GameState.roster`
     - [ ] Test each card displays nickname + HP/Atk/Def/Spd + instability label matching its `ChimeraData`
@@ -63,6 +66,7 @@
 
 *Detailed read-only chimera viewer. Depends on ChimeraSprite (Phase 1) + `GameState.roster`.*
 
+- [ ] Task: Read [./spec.md](./spec.md) and [../../workflow.md](../../workflow.md) to refresh context before starting this phase
 - [ ] Task: Write failing tests for Roster (Red)
     - [ ] Test Roster populates exactly 3 detailed cards from `GameState.roster`
     - [ ] Test each card's stat labels (HP/Atk/Def/Spd/Range) match `ChimeraData` derived stats
@@ -97,6 +101,7 @@
 
 *Cross-cutting quality gates across all new code for this track.*
 
+- [ ] Task: Read [./spec.md](./spec.md) and [../../workflow.md](../../workflow.md) to refresh context before starting this phase
 - [ ] Task: Run full quality gate suite
     - [ ] `gd-tools lint` exits 0
     - [ ] `gd-tools format --check` exits 0
@@ -104,3 +109,4 @@
 - [ ] Task: Verify DoD acceptance criteria
     - [ ] Confirm AC-1..AC-11 from spec.md are satisfied by tests/manual checks
 - [ ] Task: Conductor - User Manual Verification 'Track Verification & DoD' (Protocol in workflow.md)
+</protect>
