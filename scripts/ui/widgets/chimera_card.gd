@@ -1,6 +1,7 @@
 ## Widget that displays a chimera's nickname, stats, and instability.
+## Extends VBoxContainer so labels stack vertically with automatic sizing.
 class_name ChimeraCard
-extends Control
+extends VBoxContainer
 
 ## The chimera data to display. Setting it updates all labels.
 @export var chimera: ChimeraData:
