@@ -24,6 +24,17 @@ horizontal_alignment = 1
 vertical_alignment = 1
 text = "Lab Hub"
 
+[node name="RosterContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 70.0
+offset_right = 300.0
+offset_bottom = 200.0
+grow_horizontal = 2
+
 [node name="NavContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -32,9 +43,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -100.0
-offset_top = -180.0
+offset_top = -130.0
 offset_right = 100.0
-offset_bottom = 180.0
+offset_bottom = 130.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -45,14 +56,6 @@ text = "Assembly"
 [node name="BlackMarketButton" type="Button" parent="NavContainer"]
 layout_mode = 2
 text = "Black Market"
-
-[node name="ArenaPreMatchButton" type="Button" parent="NavContainer"]
-layout_mode = 2
-text = "Arena Pre-Match"
-
-[node name="ArenaCombatButton" type="Button" parent="NavContainer"]
-layout_mode = 2
-text = "Arena Combat"
 
 [node name="RosterButton" type="Button" parent="NavContainer"]
 layout_mode = 2
@@ -70,11 +73,30 @@ text = "Tournament"
 layout_mode = 2
 text = "Hall of Fame"
 
+[node name="ArenaPreMatchButton" type="Button" parent="NavContainer"]
+layout_mode = 2
+text = "Arena Pre-Match"
+
+[node name="QuickMatchButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -60.0
+offset_right = 100.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Quick Match"
+
 [connection signal="pressed" from="NavContainer/AssemblyButton" to="." method="_on_nav_button_pressed" binds=["assembly"]]
 [connection signal="pressed" from="NavContainer/BlackMarketButton" to="." method="_on_nav_button_pressed" binds=["black_market"]]
-[connection signal="pressed" from="NavContainer/ArenaPreMatchButton" to="." method="_on_nav_button_pressed" binds=["arena_pre_match"]]
-[connection signal="pressed" from="NavContainer/ArenaCombatButton" to="." method="_on_nav_button_pressed" binds=["arena_combat"]]
 [connection signal="pressed" from="NavContainer/RosterButton" to="." method="_on_nav_button_pressed" binds=["roster"]]
 [connection signal="pressed" from="NavContainer/ClinicButton" to="." method="_on_nav_button_pressed" binds=["clinic"]]
 [connection signal="pressed" from="NavContainer/TournamentButton" to="." method="_on_nav_button_pressed" binds=["tournament"]]
 [connection signal="pressed" from="NavContainer/HallOfFameButton" to="." method="_on_nav_button_pressed" binds=["hall_of_fame"]]
+[connection signal="pressed" from="NavContainer/ArenaPreMatchButton" to="." method="_on_nav_button_pressed" binds=["arena_pre_match"]]
+[connection signal="pressed" from="QuickMatchButton" to="." method="_on_nav_button_pressed" binds=["arena_pre_match"]]

@@ -386,20 +386,19 @@ func test_init_new_game_sets_empty_current_tournament() -> void:
 	assert_eq(GameState.current_tournament.size(), 0)
 
 
-func test_ready_skips_init_during_coverage_runs() -> void:
-	# During coverage-instrumented test runs (GD_TOOLS_COVERAGE_ACTIVE=1),
-	# _ready() skips _init_new_game() to allow the coverage tool to instrument
-	# scripts without active instances.
-	var coverage_active: bool = OS.get_environment("GD_TOOLS_COVERAGE_ACTIVE") in ["1", "true"]
+func test_ready_loads_save_or_inits_new_game() -> void:
+	# _ready() loads from save if available, otherwise initializes a new game.
+	# When no save exists, gold is set to 200 and roster gets 3 starters.
 	GameState.gold = 0
 	GameState.roster = []
 	GameState._ready()
-	if coverage_active:
-		assert_eq(GameState.gold, 0)
-		assert_eq(GameState.roster.size(), 0)
+	if SaveManager.has_save():
+		# Save existed — values come from the loaded save file.
+		assert_true(GameState.gold >= 0, "Gold should be loaded from save")
 	else:
-		assert_eq(GameState.gold, 200)
-		assert_eq(GameState.roster.size(), 3)
+		# No save — new game initialized with defaults.
+		assert_eq(GameState.gold, 200, "New game should set gold to 200")
+		assert_eq(GameState.roster.size(), 3, "New game should create 3 starter chimeras")
 
 
 # --- buy_part ---

@@ -128,12 +128,8 @@ func remove_part(part: PartData) -> void:
 
 
 ## Auto-initialize on boot.[br]
-## Attempts to load save game. If no save exists, starts a new game.[br]
-## Skips initialization during coverage-instrumented test runs to allow
-## the coverage tool to instrument scripts without active instances.
+## Attempts to load save game. If no save exists, starts a new game.
 func _ready() -> void:
-	if OS.get_environment("GD_TOOLS_COVERAGE_ACTIVE") in ["1", "true"]:
-		return
 	if not SaveManager.load_game():
 		_init_new_game()
 
