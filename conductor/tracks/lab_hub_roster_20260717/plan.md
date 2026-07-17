@@ -9,28 +9,28 @@
 
 *Foundational reusable visual node. Roster (Phase 3) depends on it. Built first.*
 
-- [ ] Task: Read [./spec.md](./spec.md) and [../../workflow.md](../../workflow.md) to refresh context before starting this phase
-- [ ] Task: Write failing tests for ChimeraSprite composition (Red)
-    - [ ] Test `get_sprite_path()` returns correct path per strain (all 7 strains incl. NEUTRAL→grey)
-    - [ ] Test `set_from_parts()` populates the 4 part-derived layers (Body←TORSO, Legs←LEGS, Arms←ARMS, Detail←HEAD) with the correct textures
-    - [ ] Test layer z-order: Body=0, Legs=1, Arms=2, Detail=3, Eyes=4, Mouth=5, Nose=6, Eyebrows=7
-    - [ ] Test cosmetic layers (Eyes/Mouth/Nose/Eyebrows) show no sprite when unset
-    - [ ] Test node works without `CombatState`/`ChimeraEntity` (pure visual, UI-usable)
-- [ ] Task: Implement ChimeraSprite composition node (Green)
-    - [ ] Extend `scripts/combat/chimera_sprite.gd` (existing stub) — keep `STRAIN_TO_COLOR` + `get_sprite_path()`
-    - [ ] Add 8 `Sprite2D` children with fixed z-order (Body/Legs/Arms/Detail/Eyes/Mouth/Nose/Eyebrows)
-    - [ ] Implement `set_from_parts(chimera_data: ChimeraData) -> void` — loads each part layer's texture via `get_sprite_path(shape_id, strain)`
-    - [ ] Create `scenes/lab/chimera_sprite.tscn` scene packaging the node (matches TDD Section 2 intended location)
-    - [ ] Run tests, confirm Green
-- [ ] Task: Refactor ChimeraSprite for clarity (Optional)
-    - [ ] Extract layer-name/z-order constants, deduplicate texture loading
-    - [ ] Rerun tests, confirm still Green
-- [ ] Task: Verify coverage for ChimeraSprite
-    - [ ] Run `gd-tools test --coverage --min 80`, confirm ChimeraSprite ≥ 80%
-- [ ] Task: Commit & attach git note for ChimeraSprite
-    - [ ] Stage changes, commit `feat(ui): Implement reusable ChimeraSprite composition node`
-    - [ ] Attach task summary git note to commit
-    - [ ] Mark task `[x]` with commit SHA in plan.md, commit plan update
+- [x] Task: Read [./spec.md](./spec.md) and [../../workflow.md](../../workflow.md) to refresh context before starting this phase
+- [x] Task: Write failing tests for ChimeraSprite composition (Red) [5464ed9]
+    - [x] Test `get_sprite_path()` returns correct path per strain (all 7 strains incl. NEUTRAL→dark)
+    - [x] Test `set_from_parts()` populates the 4 part-derived layers (Body←TORSO, Legs←LEGS, Arms←ARMS, Detail←HEAD) with the correct textures
+    - [x] Test layer z-order: Body=0, Legs=1, Arms=2, Detail=3, Eyes=4, Mouth=5, Nose=6, Eyebrows=7
+    - [x] Test cosmetic layers (Eyes/Mouth/Nose/Eyebrows) show no sprite when unset
+    - [x] Test node works without `CombatState`/`ChimeraEntity` (pure visual, UI-usable)
+- [x] Task: Implement ChimeraSprite composition node (Green) [5464ed9]
+    - [x] Extend `scripts/combat/chimera_sprite.gd` (existing stub) — keep `STRAIN_TO_COLOR` + `get_sprite_path()`
+    - [x] Add 8 `Sprite2D` children with fixed z-order (Body/Legs/Arms/Detail/Eyes/Mouth/Nose/Eyebrows)
+    - [x] Implement `set_from_parts(chimera_data: ChimeraData) -> void` — loads each part layer's texture via `get_sprite_path(shape_id, strain)`
+    - [x] Create `scenes/lab/chimera_sprite.tscn` scene packaging the node (matches TDD Section 2 intended location)
+    - [x] Run tests, confirm Green
+- [x] Task: Refactor ChimeraSprite for clarity (Optional) [5464ed9]
+    - [x] Extract layer-name/z-order constants, deduplicate texture loading
+    - [x] Rerun tests, confirm still Green
+- [x] Task: Verify coverage for ChimeraSprite [5464ed9]
+    - [x] Run `gd-tools test --coverage --min 80`, confirm ChimeraSprite ≥ 80%
+- [x] Task: Commit & attach git note for ChimeraSprite [5464ed9]
+    - [x] Stage changes, commit `feat(ui): Implement reusable ChimeraSprite composition node`
+    - [x] Attach task summary git note to commit
+    - [x] Mark task `[x]` with commit SHA in plan.md, commit plan update
 - [ ] Task: Conductor - User Manual Verification 'ChimeraSprite Composition Node' (Protocol in workflow.md)
 
 ## Phase 2: Lab Hub Screen
