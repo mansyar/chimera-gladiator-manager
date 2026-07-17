@@ -1,8 +1,8 @@
 # Chimera Gladiator Manager
 ## Technical Architecture Document
 
-> **Status:** Draft v2 — 7 significant gaps + 6 minor issues resolved. Implementation in progress (TRACK-001 through TRACK-009 complete).
-> Last updated: 2026-07-17
+> **Status:** Draft v2 — 7 significant gaps + 6 minor issues resolved. Implementation in progress (TRACK-001 through TRACK-010 complete).
+> Last updated: 2026-07-18
 
 ---
 
@@ -1187,21 +1187,26 @@ screens = {
 
 ### Chimera Sprite Composition
 
-The `ChimeraSprite` node composites multiple Sprite2D layers to display a chimera:
+The `ChimeraSprite` node composites multiple Sprite2D layers to display a chimera. The single leg, arm, and head parts from `ChimeraData` are mirrored into left and right side layers for a full-body silhouette:
 
 ```
 ChimeraSprite (Node2D)
-├── Body (Sprite2D)        # body sprite (includes head area)
-├── Arms (Sprite2D)        # arm sprite
-├── Legs (Sprite2D)        # leg sprite
-├── Detail (Sprite2D)      # head detail (horns/ears/antenna)
-├── Eyes (Sprite2D)        # cosmetic
-├── Mouth (Sprite2D)       # cosmetic
-├── Nose (Sprite2D)        # cosmetic
-└── Eyebrows (Sprite2D)    # cosmetic
+├── Body (Sprite2D)          # torso sprite (includes head area)
+├── LeftLeg (Sprite2D)       # left leg (mirrored)
+├── RightLeg (Sprite2D)      # right leg
+├── LeftArm (Sprite2D)       # left arm (mirrored)
+├── RightArm (Sprite2D)      # right arm
+├── LeftDetail (Sprite2D)    # left head detail (mirrored)
+├── RightDetail (Sprite2D)   # right head detail
+├── Eyes (Sprite2D)          # cosmetic
+├── Mouth (Sprite2D)         # cosmetic
+├── Nose (Sprite2D)          # cosmetic
+└── Eyebrows (Sprite2D)      # cosmetic
 ```
 
-Sprite paths are constructed from the part's shape_id and strain color:
+Z-order: `Body=0`, `LeftLeg=1`, `RightLeg=2`, `LeftArm=3`, `RightArm=4`, `LeftDetail=5`, `RightDetail=6`, `Eyes=7`, `Mouth=8`, `Nose=9`, `Eyebrows=10`. Each part layer is offset from the body center; left-side layers are horizontally flipped so they attach correctly to the body.
+
+Sprite paths are constructed from the part's shape_id and strain color. The implementation handles two Kenney naming patterns: detail parts use `detail_{color}_{variant}.png`, while body/arm/leg parts use `{category}_{color}{Variant}.png`.
 
 ```gdscript
 const STRAIN_TO_COLOR = {
@@ -1211,12 +1216,14 @@ const STRAIN_TO_COLOR = {
     GameEnums.Strain.BEAST: "green",
     GameEnums.Strain.ELEMENTAL: "blue",
     GameEnums.Strain.ABERRANT: "yellow",
-    GameEnums.Strain.NEUTRAL: "grey",  # Salvaged parts
+    GameEnums.Strain.NEUTRAL: "dark",  # No grey assets exist; salvaged parts use dark
 }
 
 func get_sprite_path(shape_id: String, strain: GameEnums.Strain) -> String:
     var color_name = STRAIN_TO_COLOR[strain]
-    return "res://assets/kenney-monster-builder-pack/PNG/Default/%s_%s.png" % [shape_id, color_name]
+    # detail_{color}_{variant}.png for HEAD details
+    # {category}_{color}{Variant}.png for body/arm/leg
+    return "res://assets/kenney-monster-builder-pack/PNG/Default/..."
 ```
 
 ---

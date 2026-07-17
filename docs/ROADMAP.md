@@ -193,7 +193,7 @@ Before initializing individual tracks, the following foundational context files 
 
 #### Context Anchors (Traceability)
 *   **GDD Reference:** `docs/GDD.md` Section 2.4 (Combat Model — real-time free movement, Speed-governed; Attack Range from ARMS; Damage = Atk - Def min 1; 60s timer; HP% win condition; 3x3 formation grid pre-match only), Section 2.1 (stat roles: HP from TORSO, Attack from ARMS, Speed from LEGS, Defense from TORSO+HEAD), Section 3.1 (body includes head area, detail layered on top)
-*   **TDD Reference:** `docs/TDD.md` Section 6 (Combat System — Arena scene, ChimeraEntity node structure, Movement, Collision Layers, Damage Resolution, Attack Cadence, Win Condition), Section 10 (ChimeraSprite Composition — 8 layers, STRAIN_TO_COLOR)
+*   **TDD Reference:** `docs/TDD.md` Section 6 (Combat System — Arena scene, ChimeraEntity node structure, Movement, Collision Layers, Damage Resolution, Attack Cadence, Win Condition), Section 10 (ChimeraSprite Composition — 11 layers, STRAIN_TO_COLOR)
 
 #### Track Tech Stack
 *   GDScript, CharacterBody2D, Area2D, Sprite2D, CollisionShape2D
@@ -202,7 +202,7 @@ Before initializing individual tracks, the following foundational context files 
 #### Scope Boundaries
 *   **In Scope:**
     *   `arena.tscn`: Arena (Node2D) with TileMap background, FormationGridPlayer/Enemy (Node2D), Entities container, CombatHUD stub, ArenaController script
-    *   `chimera_entity.tscn`: CharacterBody2D with ChimeraSprite (8 layered Sprite2Ds), AttackRange (Area2D), BodyCollision, HealthBar stub, StatusEffects stub, AIController stub, AbilityComponent stub, EffectComponent (full), VFXSpawner stub, CombatState ref
+    *   `chimera_entity.tscn`: CharacterBody2D with ChimeraSprite (11 layered Sprite2Ds), AttackRange (Area2D), BodyCollision, HealthBar stub, StatusEffects stub, AIController stub, AbilityComponent stub, EffectComponent (full), VFXSpawner stub, CombatState ref
     *   ChimeraSprite: sprite path construction from shape_id + STRAIN_TO_COLOR, z-order (Body=0, Legs=1, Arms=2, Detail=3, Eyes=4, Mouth=5, Nose=6, Eyebrows=7), Default resolution
     *   Movement: `velocity = direction * speed` (move_and_slide applies delta — no double-delta bug)
     *   Collision layers: 1=Player, 2=Enemy, 3=Boundaries, 4=Attack Hitboxes. Entity uses 1 or 2 by team. AttackRange uses 4, masks opposing.
@@ -220,7 +220,7 @@ Before initializing individual tracks, the following foundational context files 
 *   **Phase 3 (Arena & Grid):** Define arena dimensions, tile background, implement formation grid-to-world mapping.
 
 #### Verification & Definition of Done (DoD)
-*   [x] **Manual Checkpoint:** 2 test ChimeraEntities render with correct 8-layer sprite composition. One moves toward the other at speed-based velocity. Damage calculation correct (Atk-Def, min 1). Berserk modifiers apply. Collision layers prevent friendly fire. Formation grid cells map to correct world positions.
+*   [x] **Manual Checkpoint:** 2 test ChimeraEntities render with correct 11-layer sprite composition. One moves toward the other at speed-based velocity. Damage calculation correct (Atk-Def, min 1). Berserk modifiers apply. Collision layers prevent friendly fire. Formation grid cells map to correct world positions.
 *   [x] **Automated Tests:** `gd-tools test --coverage --min 80` exits 0. Tests verify: (1) calculate_damage normal, (2) calculate_damage with berserk modifiers, (3) EffectComponent.get_modified_stat, (4) CombatState.take_damage/heal, (5) move_toward_target sets velocity without double-delta, (6) all 9 grid cells map to correct Vector2.
 *   [x] **Conductor Review:** Scene trees match TDD Section 6. No delta bug. Arena dimensions defined. `gd-tools lint` and `gd-tools format --check` pass.
 
@@ -378,7 +378,7 @@ Before initializing individual tracks, the following foundational context files 
 ---
 
 ### TRACK-010: Lab Hub & Roster Screens
-*   **Status:** `Pending`
+*   **Status:** `Complete`
 *   **Dependencies:** TRACK-009, TRACK-004, TRACK-002
 *   **Estimated Effort:** 2-3 Days
 
@@ -402,9 +402,9 @@ Before initializing individual tracks, the following foundational context files 
 *   **Phase 2 (Roster):** Implement roster.tscn with detailed cards. Verify stats, instability labels, decay, wins, abilities display correctly.
 
 #### Verification & Definition of Done (DoD)
-*   [ ] **Manual Checkpoint:** Lab Hub shows 3 chimera cards with nicknames+stats. Gold=200G, Infamy=0 on new game. All 7 nav buttons work. Roster shows full detail: sprites, stats, instability labels, decay=0, abilities listed.
-*   [ ] **Automated Tests:** `gd-tools test --coverage --min 80` exits 0. Tests verify: (1) Lab Hub shows 3 cards from GameState.roster, (2) Gold/Infamy labels match GameState, (3) Roster stats match ChimeraData, (4) instability label matches strain count, (5) combo ability displayed when 2+ same-strain.
-*   [ ] **Conductor Review:** Lab Hub matches GDD Section 5. Roster shows exactly 3 (no bench). Instability labels match GDD Section 2.2. `gd-tools lint` and `gd-tools format --check` pass.
+*   [x] **Manual Checkpoint:** Lab Hub shows 3 chimera cards with nicknames+stats. Gold=200G, Infamy=0 on new game. All 7 nav buttons work. Roster shows full detail: sprites, stats, instability labels, decay=0, abilities listed.
+*   [x] **Automated Tests:** `gd-tools test --coverage --min 80` exits 0. Tests verify: (1) Lab Hub shows 3 cards from GameState.roster, (2) Gold/Infamy labels match GameState, (3) Roster stats match ChimeraData, (4) instability label matches strain count, (5) combo ability displayed when 2+ same-strain.
+*   [x] **Conductor Review:** Lab Hub matches GDD Section 5. Roster shows exactly 3 (no bench). Instability labels match GDD Section 2.2. `gd-tools lint` and `gd-tools format --check` pass.
 
 ---
 
@@ -415,7 +415,7 @@ Before initializing individual tracks, the following foundational context files 
 
 #### Context Anchors (Traceability)
 *   **GDD Reference:** `docs/GDD.md` Section 2.1 (Modular Fusion — 4 slots, face elements cosmetic, assembling updates visual+stats), Section 2.2 (Instability meter, strain count), Section 2.3 (Abilities — live preview), Section 3.1 (sprite composition: body includes head area, detail on top), Section 5 (Assembly screen — 4 slots, cosmetic, stat preview, instability meter)
-*   **TDD Reference:** `docs/TDD.md` Section 10 (ChimeraSprite — 8 layers, STRAIN_TO_COLOR, sprite path), Section 3 (Stat Calculation Flow — recalculate on part change)
+*   **TDD Reference:** `docs/TDD.md` Section 10 (ChimeraSprite — 11 layers, STRAIN_TO_COLOR, sprite path), Section 3 (Stat Calculation Flow — recalculate on part change)
 
 #### Track Tech Stack
 *   GDScript, Control nodes, drag-and-drop API
