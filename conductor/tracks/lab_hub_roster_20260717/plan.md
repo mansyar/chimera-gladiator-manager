@@ -33,7 +33,7 @@
     - [x] Mark task `[x]` with commit SHA in plan.md, commit plan update
 - [ ] Task: Conductor - User Manual Verification 'ChimeraSprite Composition Node' (Protocol in workflow.md)
 
-## Phase 2: Lab Hub Screen
+## Phase 2: Lab Hub Screen [checkpoint: 720fba4]
 
 *Main navigation hub. Independent of ChimeraSprite. Uses existing `chimera_card` widget + `GameState.roster`.*
 
@@ -60,7 +60,7 @@
     - [x] Stage changes, commit `feat(ui): Implement Lab Hub screen with roster cards and navigation`
     - [x] Attach task summary git note to commit
     - [x] Mark task `[x]` with commit SHA in plan.md, commit plan update
-- [ ] Task: Conductor - User Manual Verification 'Lab Hub Screen' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Lab Hub Screen' (Protocol in workflow.md)
 
 ## Phase 3: Roster Screen
 
