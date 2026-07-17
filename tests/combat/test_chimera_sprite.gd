@@ -163,9 +163,21 @@ func test_get_sprite_path_invalid_shape_returns_empty() -> void:
 # --- Layer z-order tests ---
 
 
-func test_has_eight_sprite_layers() -> void:
+func test_has_eleven_sprite_layers() -> void:
 	var sprite: ChimeraSprite = add_child_autofree(ChimeraSprite.new())
-	var expected_names := ["Body", "Legs", "Arms", "Detail", "Eyes", "Mouth", "Nose", "Eyebrows"]
+	var expected_names := [
+		"Body",
+		"LeftLeg",
+		"RightLeg",
+		"LeftArm",
+		"RightArm",
+		"LeftDetail",
+		"RightDetail",
+		"Eyes",
+		"Mouth",
+		"Nose",
+		"Eyebrows",
+	]
 	for layer_name in expected_names:
 		assert_not_null(
 			sprite.get_node_or_null(layer_name), "Layer '%s' should exist as a child" % layer_name
@@ -175,13 +187,16 @@ func test_has_eight_sprite_layers() -> void:
 func test_layer_z_order() -> void:
 	var sprite: ChimeraSprite = add_child_autofree(ChimeraSprite.new())
 	assert_eq(sprite.get_node("Body").z_index, 0, "Body z_index should be 0")
-	assert_eq(sprite.get_node("Legs").z_index, 1, "Legs z_index should be 1")
-	assert_eq(sprite.get_node("Arms").z_index, 2, "Arms z_index should be 2")
-	assert_eq(sprite.get_node("Detail").z_index, 3, "Detail z_index should be 3")
-	assert_eq(sprite.get_node("Eyes").z_index, 4, "Eyes z_index should be 4")
-	assert_eq(sprite.get_node("Mouth").z_index, 5, "Mouth z_index should be 5")
-	assert_eq(sprite.get_node("Nose").z_index, 6, "Nose z_index should be 6")
-	assert_eq(sprite.get_node("Eyebrows").z_index, 7, "Eyebrows z_index should be 7")
+	assert_eq(sprite.get_node("LeftLeg").z_index, 1, "LeftLeg z_index should be 1")
+	assert_eq(sprite.get_node("RightLeg").z_index, 2, "RightLeg z_index should be 2")
+	assert_eq(sprite.get_node("LeftArm").z_index, 3, "LeftArm z_index should be 3")
+	assert_eq(sprite.get_node("RightArm").z_index, 4, "RightArm z_index should be 4")
+	assert_eq(sprite.get_node("LeftDetail").z_index, 5, "LeftDetail z_index should be 5")
+	assert_eq(sprite.get_node("RightDetail").z_index, 6, "RightDetail z_index should be 6")
+	assert_eq(sprite.get_node("Eyes").z_index, 7, "Eyes z_index should be 7")
+	assert_eq(sprite.get_node("Mouth").z_index, 8, "Mouth z_index should be 8")
+	assert_eq(sprite.get_node("Nose").z_index, 9, "Nose z_index should be 9")
+	assert_eq(sprite.get_node("Eyebrows").z_index, 10, "Eyebrows z_index should be 10")
 
 
 # --- set_from_parts tests ---
@@ -201,38 +216,52 @@ func test_set_from_parts_populates_body_from_torso() -> void:
 	)
 
 
-func test_set_from_parts_populates_all_four_part_layers() -> void:
+func test_set_from_parts_populates_all_part_layers() -> void:
 	var sprite: ChimeraSprite = add_child_autofree(ChimeraSprite.new())
 	var chimera := _make_chimera_with_shapes("detail_ear", "body_a", "arm_a", "leg_a")
 	sprite.set_from_parts(chimera)
 	var body: Sprite2D = sprite.get_node("Body")
-	var legs: Sprite2D = sprite.get_node("Legs")
-	var arms: Sprite2D = sprite.get_node("Arms")
-	var detail: Sprite2D = sprite.get_node("Detail")
+	var left_leg: Sprite2D = sprite.get_node("LeftLeg")
+	var right_leg: Sprite2D = sprite.get_node("RightLeg")
+	var left_arm: Sprite2D = sprite.get_node("LeftArm")
+	var right_arm: Sprite2D = sprite.get_node("RightArm")
+	var left_detail: Sprite2D = sprite.get_node("LeftDetail")
+	var right_detail: Sprite2D = sprite.get_node("RightDetail")
 	assert_not_null(body.texture, "Body layer (TORSO) should have a texture")
-	assert_not_null(legs.texture, "Legs layer (LEGS) should have a texture")
-	assert_not_null(arms.texture, "Arms layer (ARMS) should have a texture")
-	assert_not_null(detail.texture, "Detail layer (HEAD) should have a texture")
+	assert_not_null(left_leg.texture, "LeftLeg layer should have a texture")
+	assert_not_null(right_leg.texture, "RightLeg layer should have a texture")
+	assert_not_null(left_arm.texture, "LeftArm layer should have a texture")
+	assert_not_null(right_arm.texture, "RightArm layer should have a texture")
+	assert_not_null(left_detail.texture, "LeftDetail layer should have a texture")
+	assert_not_null(right_detail.texture, "RightDetail layer should have a texture")
 	assert_eq(
 		body.texture.resource_path,
 		ChimeraSprite.get_sprite_path("body_a", GameEnums.Strain.UNDEAD),
 		"Body should use TORSO shape_id"
 	)
+	var leg_path := ChimeraSprite.get_sprite_path("leg_a", GameEnums.Strain.UNDEAD)
+	assert_eq(left_leg.texture.resource_path, leg_path, "LeftLeg should use LEGS shape_id")
+	assert_eq(right_leg.texture.resource_path, leg_path, "RightLeg should use LEGS shape_id")
+	var arm_path := ChimeraSprite.get_sprite_path("arm_a", GameEnums.Strain.UNDEAD)
+	assert_eq(left_arm.texture.resource_path, arm_path, "LeftArm should use ARMS shape_id")
+	assert_eq(right_arm.texture.resource_path, arm_path, "RightArm should use ARMS shape_id")
+	var detail_path := ChimeraSprite.get_sprite_path("detail_ear", GameEnums.Strain.UNDEAD)
+	assert_eq(left_detail.texture.resource_path, detail_path, "LeftDetail should use HEAD shape_id")
 	assert_eq(
-		legs.texture.resource_path,
-		ChimeraSprite.get_sprite_path("leg_a", GameEnums.Strain.UNDEAD),
-		"Legs should use LEGS shape_id"
+		right_detail.texture.resource_path, detail_path, "RightDetail should use HEAD shape_id"
 	)
-	assert_eq(
-		arms.texture.resource_path,
-		ChimeraSprite.get_sprite_path("arm_a", GameEnums.Strain.UNDEAD),
-		"Arms should use ARMS shape_id"
-	)
-	assert_eq(
-		detail.texture.resource_path,
-		ChimeraSprite.get_sprite_path("detail_ear", GameEnums.Strain.UNDEAD),
-		"Detail should use HEAD shape_id"
-	)
+
+
+func test_set_from_parts_mirrors_left_layers() -> void:
+	var sprite: ChimeraSprite = add_child_autofree(ChimeraSprite.new())
+	var chimera := _make_chimera_with_shapes("detail_ear", "body_a", "arm_a", "leg_a")
+	sprite.set_from_parts(chimera)
+	assert_true(sprite.get_node("LeftLeg").flip_h, "LeftLeg should be mirrored")
+	assert_false(sprite.get_node("RightLeg").flip_h, "RightLeg should not be mirrored")
+	assert_true(sprite.get_node("LeftArm").flip_h, "LeftArm should be mirrored")
+	assert_false(sprite.get_node("RightArm").flip_h, "RightArm should not be mirrored")
+	assert_true(sprite.get_node("LeftDetail").flip_h, "LeftDetail should be mirrored")
+	assert_false(sprite.get_node("RightDetail").flip_h, "RightDetail should not be mirrored")
 
 
 func test_set_from_parts_leaves_cosmetic_layers_empty() -> void:
